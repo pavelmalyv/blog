@@ -1,0 +1,49 @@
+@use '../../../styles/utils';
+
+.list {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 14px;
+
+	&-vertical {
+		flex-direction: column;
+		row-gap: 20px;
+	}
+}
+
+.link {
+	--padding: 8px;
+
+	@include utils.base-animation(color);
+
+	position: relative;
+	padding: var(--padding);
+	font-size: 20px;
+
+	&[aria-current='page'] {
+		display: inline-block;
+		font-weight: 700;
+
+		&::before {
+			content: '';
+			position: absolute;
+			bottom: var(--padding);
+			left: var(--padding);
+			right: var(--padding);
+			translate: 0 5px;
+			height: 1px;
+			background-color: currentcolor;
+		}
+	}
+
+	&:not(&[aria-current='page']) {
+		@include utils.hover {
+			color: rgb(var(--color-accent));
+		}
+	}
+
+	@include utils.tablet-l {
+		font-size: 18px;
+	}
+}
