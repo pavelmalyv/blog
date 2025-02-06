@@ -4,6 +4,7 @@
 	--container-width: 1216px;
 	--container-padding-x: 32px;
 	--section-padding-y: 30px;
+	--header-height: 100px;
 
 	// font
 
@@ -18,4 +19,12 @@
 	--color-accent: 105 65 198;
 	--color-background-primary-other-theme: 9, 13, 31;
 	--color-contrast-primary: 0, 0, 0;
+
+	@include utils.tablet-l {
+		--header-height: 80px;
+	}
+
+	@include utils.mobile-l {
+		--header-height: 72px;
+	}
 }
