@@ -1,0 +1,21 @@
+@use '../utils';
+
+:root {
+	--container-width: 1216px;
+	--container-padding-x: 32px;
+	--section-padding-y: 30px;
+
+	// font
+
+	--font-base: 'Inter', sans-serif;
+
+	// theme
+
+	--color-background-primary: 255, 255, 255;
+	--color-background-secondary: 248, 249, 252;
+	--color-text-primary: 26, 26, 26;
+	--color-text-secondary: 102, 112, 133;
+	--color-accent: 105 65 198;
+	--color-background-primary-other-theme: 9, 13, 31;
+	--color-contrast-primary: 0, 0, 0;
+}
