@@ -1,6 +1,7 @@
 import cl from './Header.module.scss';
 import Logo from '../UI/Logo/Logo';
 import Navigation from '../UI/Navigation/Navigation';
+import ThemeSwitch from '../UI/ThemeSwitch/ThemeSwitch';
 
 const navigationLinks = [
 	{
@@ -26,6 +27,7 @@ const Header = () => {
 						<Logo />
 						<div className={cl.panel}>
 							<Navigation links={navigationLinks} />
+							<ThemeSwitch />
 						</div>
 					</div>
 				</div>
