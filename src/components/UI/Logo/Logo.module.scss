@@ -1,0 +1,11 @@
+@use '../../../styles/utils';
+
+.logo {
+	font-size: 20px;
+	font-weight: 600;
+	line-height: 1.33;
+
+	@include utils.tablet-l {
+		font-size: 18px;
+	}
+}
