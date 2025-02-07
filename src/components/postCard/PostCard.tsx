@@ -7,6 +7,7 @@ import Skeleton from 'react-loading-skeleton';
 import Tags from '../UI/Tags/Tags';
 import { useLazyGetUserByIdQuery } from '../../api/usersSlice';
 import { useEffect } from 'react';
+import { getDisplayDate } from '../../utils/date';
 
 interface PostCardProps {
 	post: Post | null;
@@ -27,7 +28,13 @@ const PostCard = ({ post, style = 'small' }: PostCardProps) => {
 	const [getUserByIdQuery, { data: dataAuthor, isLoading: isLoadingAuthor }] =
 		useLazyGetUserByIdQuery();
 
-	console.log(dataAuthor);
+	let about: React.ReactNode;
+	if (!post || isLoadingAuthor) {
+		about = <Skeleton />;
+	} else if (dataAuthor) {
+		const authorName = dataAuthor.firstName + ' ' + dataAuthor.lastName;
+		about = authorName + ' • ' + getDisplayDate(post.createdAt);
+	}
 
 	useEffect(() => {
 		if (!post || isLoadingAuthor || dataAuthor) {
@@ -56,7 +63,7 @@ const PostCard = ({ post, style = 'small' }: PostCardProps) => {
 			</div>
 
 			<div className={cl.body}>
-				<div className={cl.about}>Demi WIlkinson • 1 Jan 2023</div>
+				<div className={cl.about}>{about}</div>
 				<div className={classNames('h3', cl.title)}>
 					{post ? (
 						<Link className={cl['title-link']} to="#">
