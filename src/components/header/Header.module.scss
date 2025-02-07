@@ -11,6 +11,16 @@
 	padding: 15px var(--container-padding-x);
 	background-color: rgb(var(--color-background-primary));
 	height: var(--header-height);
+
+	@include utils.tablet-l {
+		padding-left: 20px;
+		padding-right: 20px;
+	}
+
+	@include utils.mobile-l {
+		padding-top: 10px;
+		padding-bottom: 10px;
+	}
 }
 
 .body {
