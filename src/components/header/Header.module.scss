@@ -24,4 +24,16 @@
 	display: flex;
 	align-items: center;
 	gap: 14px;
+
+	@include utils.mobile-l {
+		display: none;
+	}
+}
+
+.burger {
+	display: none;
+
+	@include utils.mobile-l {
+		display: block;
+	}
 }

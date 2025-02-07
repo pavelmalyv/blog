@@ -2,6 +2,7 @@ import cl from './Header.module.scss';
 import Logo from '../UI/Logo/Logo';
 import Navigation from '../UI/Navigation/Navigation';
 import ThemeSwitch from '../UI/ThemeSwitch/ThemeSwitch';
+import ButtonIcon from '../UI/ButtonIcon/ButtonIcon';
 
 const navigationLinks = [
 	{
@@ -28,6 +29,9 @@ const Header = () => {
 						<div className={cl.panel}>
 							<Navigation links={navigationLinks} />
 							<ThemeSwitch />
+						</div>
+						<div className={cl.burger}>
+							<ButtonIcon icon="menu" hiddenName="Menu" />
 						</div>
 					</div>
 				</div>
