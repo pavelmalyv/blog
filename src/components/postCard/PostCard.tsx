@@ -5,6 +5,8 @@ import { Link } from 'react-router';
 import { truncate } from 'lodash';
 import Skeleton from 'react-loading-skeleton';
 import Tags from '../UI/Tags/Tags';
+import { useLazyGetUserByIdQuery } from '../../api/usersSlice';
+import { useEffect } from 'react';
 
 interface PostCardProps {
 	post: Post | null;
@@ -21,6 +23,19 @@ const PostCard = ({ post, style = 'small' }: PostCardProps) => {
 	} else {
 		description = <Skeleton count={2} />;
 	}
+
+	const [getUserByIdQuery, { data: dataAuthor, isLoading: isLoadingAuthor }] =
+		useLazyGetUserByIdQuery();
+
+	console.log(dataAuthor);
+
+	useEffect(() => {
+		if (!post || isLoadingAuthor || dataAuthor) {
+			return;
+		}
+
+		getUserByIdQuery(post.userId, true);
+	}, [post, isLoadingAuthor, dataAuthor, getUserByIdQuery]);
 
 	return (
 		<article className={classNames(cl.card, cl[`card-${style}`])}>
