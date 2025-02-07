@@ -4,7 +4,7 @@ import cl from './PostCard.module.scss';
 import { Link } from 'react-router';
 import { truncate } from 'lodash';
 import Skeleton from 'react-loading-skeleton';
-import Tags from '../UI/Tags/Tags';
+import Tags from '../UI/tags/Tags';
 import { useLazyGetUserByIdQuery } from '../../api/usersSlice';
 import { useEffect } from 'react';
 import { getDisplayDate } from '../../utils/date';

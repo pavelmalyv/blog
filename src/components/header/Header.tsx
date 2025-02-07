@@ -1,9 +1,9 @@
 import cl from './Header.module.scss';
-import Logo from '../UI/Logo/Logo';
-import Modal from '../UI/Modal/Modal';
-import Navigation from '../UI/Navigation/Navigation';
-import ThemeSwitch from '../UI/ThemeSwitch/ThemeSwitch';
-import ButtonIcon from '../UI/ButtonIcon/ButtonIcon';
+import Logo from '../UI/logo/Logo';
+import Modal from '../UI/modal/Modal';
+import Navigation from '../UI/navigation/Navigation';
+import ThemeSwitch from '../UI/themeSwitch/ThemeSwitch';
+import ButtonIcon from '../UI/buttonIcon/ButtonIcon';
 import { useState } from 'react';
 
 const navigationLinks = [

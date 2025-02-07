@@ -1,5 +1,5 @@
 import RecentPosts from '../components/recentPosts/RecentPosts';
-import Heading from '../components/UI/Heading/Heading';
+import Heading from '../components/UI/heading/Heading';
 
 const Home = () => {
 	return (

@@ -1,7 +1,7 @@
 import type { Posts } from '../../types/posts';
 import cl from './RecentPosts.module.scss';
 import { useGetPostsQuery } from '../../api/postsSlice';
-import Section from '../UI/Section/Section';
+import Section from '../UI/section/Section';
 import PostCard from '../postCard/PostCard';
 
 const RecentPosts = () => {
