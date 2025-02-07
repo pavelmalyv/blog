@@ -1,0 +1,61 @@
+@use '../../../styles/utils';
+
+.tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+.item {
+	font-weight: 500;
+	font-size: 14px;
+	white-space: nowrap;
+
+	&-tag {
+		@include utils.flex-center(true);
+
+		padding: 0 10px;
+		line-height: 1.4;
+		text-align: center;
+
+		&:nth-child(8n + 1) {
+			color: rgb(var(--color-highlight-text-first));
+			background-color: rgb(var(--color-highlight-background-first));
+		}
+
+		&:nth-child(8n + 2) {
+			color: rgb(var(--color-highlight-text-second));
+			background-color: rgb(var(--color-highlight-background-second));
+		}
+
+		&:nth-child(8n + 3) {
+			color: rgb(var(--color-highlight-text-third));
+			background-color: rgb(var(--color-highlight-background-third));
+		}
+
+		&:nth-child(8n + 4) {
+			color: rgb(var(--color-highlight-text-fourth));
+			background-color: rgb(var(--color-highlight-background-fourth));
+		}
+
+		&:nth-child(8n + 5) {
+			color: rgb(var(--color-highlight-text-fifth));
+			background-color: rgb(var(--color-highlight-background-fifth));
+		}
+
+		&:nth-child(8n + 6) {
+			color: rgb(var(--color-highlight-text-sixth));
+			background-color: rgb(var(--color-highlight-background-sixth));
+		}
+
+		&:nth-child(8n + 7) {
+			color: rgb(var(--color-highlight-text-seventh));
+			background-color: rgb(var(--color-highlight-background-seventh));
+		}
+
+		&:nth-child(8n + 8) {
+			color: rgb(var(--color-highlight-text-eighth));
+			background-color: rgb(var(--color-highlight-background-eighth));
+		}
+	}
+}

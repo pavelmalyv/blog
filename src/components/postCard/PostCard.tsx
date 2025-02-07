@@ -1,10 +1,10 @@
 import type { Post } from '../../types/posts';
 import classNames from 'classnames';
-
 import cl from './PostCard.module.scss';
 import { Link } from 'react-router';
 import { truncate } from 'lodash';
 import Skeleton from 'react-loading-skeleton';
+import Tags from '../UI/Tags/Tags';
 
 interface PostCardProps {
 	post: Post | null;
@@ -55,6 +55,9 @@ const PostCard = ({ post, style = 'small' }: PostCardProps) => {
 					)}
 				</div>
 				<div className={cl.description}>{description}</div>
+				<div className={cl.tags}>
+					<Tags tags={post ? post.tags : null} />
+				</div>
 			</div>
 		</article>
 	);

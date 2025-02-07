@@ -20,6 +20,28 @@
 	--color-background-primary-other-theme: 9, 13, 31;
 	--color-contrast-primary: 0, 0, 0;
 
+	// highlight-text
+
+	--color-highlight-text-first: 2, 106, 162;
+	--color-highlight-text-second: 193, 21, 116;
+	--color-highlight-text-third: 2, 122, 72;
+	--color-highlight-text-fourth: 105, 65, 198;
+	--color-highlight-text-fifth: 53, 56, 205;
+	--color-highlight-text-sixth: 54, 63, 114;
+	--color-highlight-text-seventh: 196, 50, 10;
+	--color-highlight-text-eighth: 192, 16, 72;
+
+	// highlight-background
+
+	--color-highlight-background-first: 240, 249, 255;
+	--color-highlight-background-second: 253, 242, 250;
+	--color-highlight-background-third: 236, 253, 243;
+	--color-highlight-background-fourth: 249, 245, 255;
+	--color-highlight-background-fifth: 238, 244, 255;
+	--color-highlight-background-sixth: 248, 249, 252;
+	--color-highlight-background-seventh: 255, 246, 237;
+	--color-highlight-background-eighth: 255, 241, 243;
+
 	@include utils.tablet-l {
 		--header-height: 80px;
 	}
