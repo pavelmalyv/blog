@@ -5,6 +5,7 @@ import Section from '../UI/section/Section';
 import PostCard from '../postCard/PostCard';
 import ErrorMessage from '../UI/errorMessage/ErrorMessage';
 import { ERROR_MESSAGES } from '../../constants/error';
+import HiddenLoadingMessage from '../UI/hiddenLoadingMessage/HiddenLoadingMessage';
 
 const RecentPosts = () => {
 	let posts: Posts | null[] = Array(6).fill(null);
@@ -20,17 +21,21 @@ const RecentPosts = () => {
 		body = <ErrorMessage message={ERROR_MESSAGES.postsLoad} />;
 	} else {
 		body = (
-			<ul className={cl.list} aria-busy={isLoading}>
-				{posts.map((post, i) => {
-					const key = post ? post.id : i;
+			<div aria-busy={isLoading}>
+				<HiddenLoadingMessage isLoading={isLoading} />
 
-					return (
-						<li key={key}>
-							<PostCard post={post} />
-						</li>
-					);
-				})}
-			</ul>
+				<ul className={cl.list}>
+					{posts.map((post, i) => {
+						const key = post ? post.id : i;
+
+						return (
+							<li key={key}>
+								<PostCard post={post} />
+							</li>
+						);
+					})}
+				</ul>
+			</div>
 		);
 	}
 
