@@ -37,3 +37,31 @@
 		display: block;
 	}
 }
+
+.menu {
+	height: 100%;
+	padding: 10px 0;
+
+	&-wrapper {
+		position: relative;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-direction: column;
+		min-height: 100%;
+		padding: 75px 0;
+	}
+
+	&-logo {
+		margin-bottom: 54px;
+	}
+
+	&-navigation {
+		margin-bottom: 20px;
+	}
+
+	&-close {
+		position: absolute;
+		bottom: 0;
+	}
+}

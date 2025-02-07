@@ -50,7 +50,20 @@ const Header = () => {
 			</header>
 
 			<Modal isOpen={isOpenMenu} onClose={handleMenuClose} aria={{ label: 'Menu' }}>
-				Modal
+				<div className={cl.menu}>
+					<div className={cl['menu-wrapper']}>
+						<div className={cl['menu-logo']}>
+							<Logo />
+						</div>
+						<div className={cl['menu-navigation']}>
+							<Navigation links={navigationLinks} direction="vertical" />
+						</div>
+						<ThemeSwitch />
+						<div className={cl['menu-close']}>
+							<ButtonIcon icon="close" hiddenName="Close" onClick={handleMenuClose} />
+						</div>
+					</div>
+				</div>
 			</Modal>
 		</>
 	);
