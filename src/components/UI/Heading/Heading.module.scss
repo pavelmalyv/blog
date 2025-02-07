@@ -1,0 +1,38 @@
+@use '../../../styles/utils';
+
+.heading {
+	overflow: hidden;
+	padding: 20px 0;
+
+	@include utils.tablet-l {
+		padding: 30px 0;
+	}
+
+	@include utils.mobile-l {
+		padding: 20px 0;
+	}
+}
+
+.title {
+	text-transform: uppercase;
+	font-weight: 700;
+}
+
+.text {
+	display: inline-block;
+	line-height: 1.205;
+	white-space: nowrap;
+	text-align: center;
+}
+
+.wrapper {
+	--border: 1px solid rgba(var(--color-contrast-primary), 0.34);
+
+	border-bottom: var(--border);
+
+	@include utils.tablet-l {
+		border-top: var(--border);
+		margin: 0 calc(var(--container-padding-x) * -1);
+		padding: 0 14px;
+	}
+}

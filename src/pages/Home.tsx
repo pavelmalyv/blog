@@ -1,5 +1,11 @@
+import Heading from '../components/UI/Heading/Heading';
+
 const Home = () => {
-	return 'Home';
+	return (
+		<>
+			<Heading title="The blog" />
+		</>
+	);
 };
 
 export default Home;
