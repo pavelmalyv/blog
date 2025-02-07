@@ -20,7 +20,7 @@ const RecentPosts = () => {
 		body = <ErrorMessage message={ERROR_MESSAGES.postsLoad} />;
 	} else {
 		body = (
-			<ul className={cl.list}>
+			<ul className={cl.list} aria-busy={isLoading}>
 				{posts.map((post, i) => {
 					const key = post ? post.id : i;
 
