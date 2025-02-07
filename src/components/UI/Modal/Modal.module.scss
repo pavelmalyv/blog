@@ -1,0 +1,39 @@
+@use '../../../styles/utils';
+
+.body-open {
+	overflow: hidden;
+}
+
+.overlay {
+	@include utils.flex-center;
+
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 10000;
+	overflow: auto;
+	background-color: rgba(var(--color-contrast-primary), 0.5);
+	opacity: 0;
+	transition: opacity 0.3s ease-out;
+	will-change: opacity;
+
+	&-after-open {
+		opacity: 1;
+	}
+
+	&-before-close {
+		opacity: 0;
+	}
+}
+
+.overlay-full {
+	.body {
+		width: 100%;
+		height: 100%;
+		background-color: rgb(var(--color-background-primary));
+		padding: 0 var(--container-padding-x);
+		overflow: auto;
+	}
+}
