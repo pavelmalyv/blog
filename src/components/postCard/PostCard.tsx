@@ -8,6 +8,9 @@ import Tags from '../UI/tags/Tags';
 import { useLazyGetUserByIdQuery } from '../../api/usersSlice';
 import { useEffect, useId } from 'react';
 import { getDisplayDate } from '../../utils/date';
+import ErrorMessage from '../UI/errorMessage/ErrorMessage';
+import { ERROR_MESSAGES } from '../../constants/error';
+import HiddenLoadingMessage from '../UI/hiddenLoadingMessage/HiddenLoadingMessage';
 
 interface PostCardProps {
 	post: Post | null;
@@ -27,15 +30,25 @@ const PostCard = ({ post, style = 'small' }: PostCardProps) => {
 		description = <Skeleton count={2} />;
 	}
 
-	const [getUserByIdQuery, { data: dataAuthor, isLoading: isLoadingAuthor }] =
-		useLazyGetUserByIdQuery();
+	const [
+		getUserByIdQuery,
+		{ data: dataAuthor, isLoading: isLoadingAuthor, isError: isErrorAuthor },
+	] = useLazyGetUserByIdQuery();
 
-	let about: React.ReactNode;
-	if (!post || isLoadingAuthor) {
-		about = <Skeleton />;
+	let author: React.ReactNode;
+	if (isErrorAuthor) {
+		author = <ErrorMessage message={ERROR_MESSAGES.userLoad} />;
 	} else if (dataAuthor) {
-		const authorName = dataAuthor.firstName + ' ' + dataAuthor.lastName;
-		about = authorName + ' • ' + getDisplayDate(post.createdAt);
+		author = dataAuthor.firstName + ' ' + dataAuthor.lastName;
+	} else {
+		author = <Skeleton width="4em" />;
+	}
+
+	let createdAt: React.ReactNode;
+	if (post) {
+		createdAt = <span className={cl['about-date']}>• {getDisplayDate(post.createdAt)}</span>;
+	} else {
+		createdAt = <Skeleton width="6em" />;
 	}
 
 	useEffect(() => {
@@ -65,7 +78,14 @@ const PostCard = ({ post, style = 'small' }: PostCardProps) => {
 			</div>
 
 			<div className={cl.body}>
-				<div className={cl.about}>{about}</div>
+				<div className={cl.about}>
+					<span aria-busy={isLoadingAuthor}>
+						<HiddenLoadingMessage isLoading={isLoadingAuthor} isRoleStatus={false} />
+
+						{author}
+					</span>
+					{createdAt}
+				</div>
 				<div className={classNames('h3', cl.title)}>
 					{post ? (
 						<Link className={cl['title-link']} to="#">
