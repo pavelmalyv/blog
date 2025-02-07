@@ -6,7 +6,7 @@ import { truncate } from 'lodash';
 import Skeleton from 'react-loading-skeleton';
 import Tags from '../UI/tags/Tags';
 import { useLazyGetUserByIdQuery } from '../../api/usersSlice';
-import { useEffect } from 'react';
+import { useEffect, useId } from 'react';
 import { getDisplayDate } from '../../utils/date';
 
 interface PostCardProps {
@@ -15,6 +15,8 @@ interface PostCardProps {
 }
 
 const PostCard = ({ post, style = 'small' }: PostCardProps) => {
+	const idTitle = useId();
+
 	let description: React.ReactNode;
 	if (post) {
 		description = truncate(post.body, {
@@ -45,7 +47,7 @@ const PostCard = ({ post, style = 'small' }: PostCardProps) => {
 	}, [post, isLoadingAuthor, dataAuthor, getUserByIdQuery]);
 
 	return (
-		<article className={classNames(cl.card, cl[`card-${style}`])}>
+		<article className={classNames(cl.card, cl[`card-${style}`])} aria-labelledby={idTitle}>
 			<div className={cl.image}>
 				{post ? (
 					<picture>
@@ -67,7 +69,9 @@ const PostCard = ({ post, style = 'small' }: PostCardProps) => {
 				<div className={classNames('h3', cl.title)}>
 					{post ? (
 						<Link className={cl['title-link']} to="#">
-							<h3 className={cl['title-text']}>{post.title}</h3>
+							<h3 id={idTitle} className={cl['title-text']}>
+								{post.title}
+							</h3>
 							<span className={cl['title-icon']} aria-hidden="true">
 								<span className="material-symbols-outlined">arrow_outward</span>
 							</span>
