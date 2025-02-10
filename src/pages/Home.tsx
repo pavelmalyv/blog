@@ -1,11 +1,11 @@
-import RecentPosts from '../components/recentPosts/RecentPosts';
+import PopularPosts from '../components/popularPosts/PopularPosts';
 import Heading from '../components/UI/heading/Heading';
 
 const Home = () => {
 	return (
 		<>
 			<Heading title="The blog" />
-			<RecentPosts />
+			<PopularPosts />
 		</>
 	);
 };

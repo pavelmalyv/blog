@@ -1,5 +1,5 @@
 import type { Posts } from '../../types/posts';
-import cl from './RecentPosts.module.scss';
+import cl from './PopularPosts.module.scss';
 import { useGetPostsQuery } from '../../api/postsSlice';
 import Section from '../UI/section/Section';
 import PostCard from '../postCard/PostCard';
@@ -7,7 +7,7 @@ import ErrorMessage from '../UI/errorMessage/ErrorMessage';
 import { ERROR_MESSAGES } from '../../constants/error';
 import HiddenLoadingMessage from '../UI/hiddenLoadingMessage/HiddenLoadingMessage';
 
-const RecentPosts = () => {
+const PopularPosts = () => {
 	let posts: Posts | null[] = Array(4).fill(null);
 
 	const { data, isLoading, isError } = useGetPostsQuery({ limit: 4, skip: 0, sortBy: 'userId' });
@@ -45,7 +45,7 @@ const RecentPosts = () => {
 		);
 	}
 
-	return <Section title="Recent blog posts">{body}</Section>;
+	return <Section title="Popular blog posts">{body}</Section>;
 };
 
-export default RecentPosts;
+export default PopularPosts;
