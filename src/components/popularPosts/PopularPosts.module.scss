@@ -16,7 +16,7 @@
 	}
 }
 
-.item:nth-child(4) {
+.item:last-child {
 	margin-top: 28px;
 
 	@include utils.tablet-l-above {
