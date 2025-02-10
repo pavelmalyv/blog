@@ -68,3 +68,28 @@
 .tags {
 	margin-top: 24px;
 }
+
+.card-small-horizontal {
+	display: flex;
+	column-gap: 24px;
+	height: 100%;
+
+	.image {
+		flex: 0 1 320px;
+		margin-bottom: 0;
+		aspect-ratio: initial;
+	}
+
+	.body {
+		flex: 0 1 248px;
+		padding-bottom: 12px;
+	}
+
+	.title {
+		margin-bottom: 8px;
+
+		&-icon {
+			display: none;
+		}
+	}
+}

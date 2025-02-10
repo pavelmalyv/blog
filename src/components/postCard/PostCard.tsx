@@ -88,7 +88,12 @@ const PostCard = ({ post, styleCard = 'small' }: PostCardProps) => {
 					</span>
 					{createdAt}
 				</div>
-				<div className={classNames('h3', cl.title)}>
+				<div
+					className={classNames(cl.title, {
+						h3: styleCard != 'small-horizontal',
+						h4: styleCard === 'small-horizontal',
+					})}
+				>
 					{post ? (
 						<Link className={cl['title-link']} to="#">
 							<h3 id={idTitle} className={cl['title-text']}>
