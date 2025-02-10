@@ -2,11 +2,20 @@ import { postsResponseSchema } from '../schemas/postsSchemas';
 import type { PostsResponse } from '../types/posts';
 import { apiSlice } from './apiSlice';
 
+interface GetPostsParams {
+	limit: number;
+	skip: number;
+}
+
 const postsSlice = apiSlice.injectEndpoints({
 	endpoints: (build) => ({
-		getPosts: build.query<PostsResponse, void>({
-			query: () => ({
+		getPosts: build.query<PostsResponse, GetPostsParams>({
+			query: ({ limit, skip }) => ({
 				url: '/posts',
+				params: {
+					limit,
+					skip,
+				},
 			}),
 			transformResponse: async (response: unknown) => {
 				// добавить свойство "createdAt" в объект ответа сервера
