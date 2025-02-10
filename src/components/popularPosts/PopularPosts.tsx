@@ -27,7 +27,7 @@ const PopularPosts = () => {
 		body = <ErrorMessage message={ERROR_MESSAGES.postsLoad} />;
 	} else {
 		body = (
-			<div aria-busy={isLoading}>
+			<>
 				<HiddenLoadingMessage isLoading={isLoading} />
 
 				<ul className={cl.list}>
@@ -41,11 +41,15 @@ const PopularPosts = () => {
 						);
 					})}
 				</ul>
-			</div>
+			</>
 		);
 	}
 
-	return <Section title="Popular blog posts">{body}</Section>;
+	return (
+		<Section title="Popular blog posts">
+			<div aria-busy={isLoading}>{body}</div>
+		</Section>
+	);
 };
 
 export default PopularPosts;
