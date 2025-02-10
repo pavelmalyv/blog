@@ -10,7 +10,7 @@ import HiddenLoadingMessage from '../UI/hiddenLoadingMessage/HiddenLoadingMessag
 const RecentPosts = () => {
 	let posts: Posts | null[] = Array(4).fill(null);
 
-	const { data, isLoading, isError } = useGetPostsQuery({ limit: 4, skip: 0 });
+	const { data, isLoading, isError } = useGetPostsQuery({ limit: 4, skip: 0, sortBy: 'userId' });
 	if (!isLoading && data) {
 		posts = data.posts;
 	}
