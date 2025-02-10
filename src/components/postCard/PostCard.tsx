@@ -40,7 +40,7 @@ const PostCard = ({ post, styleCard = 'small' }: PostCardProps) => {
 	let author: React.ReactNode;
 	if (isErrorAuthor) {
 		author = <ErrorMessage message={ERROR_MESSAGES.userLoad} />;
-	} else if (dataAuthor) {
+	} else if (dataAuthor && !post) {
 		author = dataAuthor.firstName + ' ' + dataAuthor.lastName;
 	} else {
 		author = <Skeleton width="4em" />;
