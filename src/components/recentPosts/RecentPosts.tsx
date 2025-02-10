@@ -8,15 +8,16 @@ import { ERROR_MESSAGES } from '../../constants/error';
 import HiddenLoadingMessage from '../UI/hiddenLoadingMessage/HiddenLoadingMessage';
 
 const RecentPosts = () => {
-	let posts: Posts | null[] = Array(6).fill(null);
+	let posts: Posts | null[] = Array(4).fill(null);
 
 	const { data, isLoading, isError } = useGetPostsQuery({ limit: 4, skip: 0 });
 	if (!isLoading && data) {
 		posts = data.posts;
 	}
 
-	let body: React.ReactNode;
+	const stylesPostCard = ['medium', 'small-horizontal', 'small-horizontal', 'large'] as const;
 
+	let body: React.ReactNode;
 	if (isError) {
 		body = <ErrorMessage message={ERROR_MESSAGES.postsLoad} />;
 	} else {
@@ -29,8 +30,8 @@ const RecentPosts = () => {
 						const key = post ? post.id : i;
 
 						return (
-							<li key={key}>
-								<PostCard post={post} />
+							<li className={cl.item} key={key}>
+								<PostCard post={post} styleCard={stylesPostCard[i]} />
 							</li>
 						);
 					})}
