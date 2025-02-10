@@ -61,8 +61,6 @@ const PostCard = ({ post, styleCard = 'small' }: PostCardProps) => {
 		getUserByIdQuery(post.userId, true);
 	}, [post, isLoadingAuthor, dataAuthor, getUserByIdQuery]);
 
-	console.log(styleCard);
-
 	return (
 		<article className={classNames(cl.card, cl[`card-${styleCard}`])} aria-labelledby={idTitle}>
 			<div className={cl.image}>
