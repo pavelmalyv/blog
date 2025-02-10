@@ -3,7 +3,7 @@
 .image {
 	width: 100%;
 	max-width: 100%;
-	aspect-ratio: 384 / 240;
+	height: 240px;
 	margin-bottom: 32px;
 
 	&-img {
@@ -74,15 +74,36 @@
 	column-gap: 24px;
 	height: 100%;
 
+	@include utils.mobile-l {
+		display: block;
+	}
+
 	.image {
 		flex: 0 1 320px;
+		height: 100%;
 		margin-bottom: 0;
-		aspect-ratio: initial;
+
+		@include utils.tablet-l {
+			min-height: 200px;
+		}
+
+		@include utils.mobile-l {
+			height: 200px;
+			margin-bottom: 24px;
+		}
 	}
 
 	.body {
 		flex: 0 1 248px;
 		padding-bottom: 12px;
+
+		@include utils.tablet-l {
+			flex-grow: 1;
+		}
+
+		@include utils.mobile-l {
+			padding-bottom: 0;
+		}
 	}
 
 	.title {
@@ -101,9 +122,13 @@
 
 	.image {
 		position: relative;
-		aspect-ratio: initial;
 		height: 100%;
 		min-height: 200px;
+
+		@include utils.tablet-l {
+			min-height: 228px;
+			margin-bottom: 24px;
+		}
 
 		&-img {
 			position: absolute;
@@ -116,15 +141,25 @@
 }
 
 .card-large {
-	display: grid;
-	grid-template-columns: repeat(2, 1fr);
-	column-gap: 32px;
+	@include utils.tablet-l-above {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+		column-gap: 32px;
+	}
 
 	.image {
 		position: relative;
-		aspect-ratio: initial;
+		height: 100%;
 		min-height: 246px;
-		margin-bottom: 0;
+
+		@include utils.tablet-l-above {
+			margin-bottom: 0;
+		}
+
+		@include utils.tablet-l {
+			min-height: 188px;
+			margin-bottom: 24px;
+		}
 
 		&-img {
 			position: absolute;
