@@ -5,16 +5,20 @@ import { apiSlice } from './apiSlice';
 interface GetPostsParams {
 	limit: number;
 	skip: number;
+	sortBy?: string;
+	order?: 'asc' | 'desc';
 }
 
 const postsSlice = apiSlice.injectEndpoints({
 	endpoints: (build) => ({
 		getPosts: build.query<PostsResponse, GetPostsParams>({
-			query: ({ limit, skip }) => ({
+			query: ({ limit, skip, sortBy, order }) => ({
 				url: '/posts',
 				params: {
 					limit,
 					skip,
+					sortBy,
+					order,
 				},
 			}),
 			transformResponse: async (response: unknown) => {
