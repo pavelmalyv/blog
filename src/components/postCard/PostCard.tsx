@@ -14,10 +14,10 @@ import HiddenLoadingMessage from '../UI/hiddenLoadingMessage/HiddenLoadingMessag
 
 interface PostCardProps {
 	post: Post | null;
-	style?: 'small' | 'small-horizontal' | 'medium' | 'large';
+	styleCard?: 'small' | 'small-horizontal' | 'medium' | 'large';
 }
 
-const PostCard = ({ post, style = 'small' }: PostCardProps) => {
+const PostCard = ({ post, styleCard = 'small' }: PostCardProps) => {
 	const idTitle = useId();
 
 	let description: React.ReactNode;
@@ -60,7 +60,7 @@ const PostCard = ({ post, style = 'small' }: PostCardProps) => {
 	}, [post, isLoadingAuthor, dataAuthor, getUserByIdQuery]);
 
 	return (
-		<article className={classNames(cl.card, cl[`card-${style}`])} aria-labelledby={idTitle}>
+		<article className={classNames(cl.card, cl[`card-${styleCard}`])} aria-labelledby={idTitle}>
 			<div className={cl.image}>
 				{post ? (
 					<picture>
