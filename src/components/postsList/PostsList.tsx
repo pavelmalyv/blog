@@ -13,7 +13,7 @@ const PostsList = () => {
 
 	const { data, isLoading, isError } = useGetPostsQuery({ limit, skip: 0 });
 	if (!isLoading && data) {
-		//posts = data.posts;
+		posts = data.posts;
 	}
 
 	let body: React.ReactNode;
@@ -21,7 +21,7 @@ const PostsList = () => {
 		body = <ErrorMessage message={ERROR_MESSAGES.postsLoad} />;
 	} else {
 		body = (
-			<div aria-busy={isLoading}>
+			<>
 				<HiddenLoadingMessage isLoading={isLoading} />
 
 				<ul className={cl.list}>
@@ -35,11 +35,15 @@ const PostsList = () => {
 						);
 					})}
 				</ul>
-			</div>
+			</>
 		);
 	}
 
-	return <Section title="All blog posts">{body}</Section>;
+	return (
+		<Section title="All blog posts">
+			<div aria-busy={isLoading}>{body}</div>
+		</Section>
+	);
 };
 
 export default PostsList;
