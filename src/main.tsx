@@ -12,13 +12,16 @@ import '@fontsource/inter/600.css';
 import '@fontsource/inter/700.css';
 import './styles/base/index.scss';
 import 'react-loading-skeleton/dist/skeleton.css';
+import { SkeletonTheme } from 'react-loading-skeleton';
 
 Modal.setAppElement('#root');
 
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>
 		<Provider store={store}>
-			<App />
+			<SkeletonTheme baseColor="rgb(244, 244, 244)" highlightColor="rgb(248, 248, 248)">
+				<App />
+			</SkeletonTheme>
 		</Provider>
 	</StrictMode>,
 );
