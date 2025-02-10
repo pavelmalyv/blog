@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router';
 import Root from '../pages/Root';
 import Home from '../pages/Home';
 import ErrorPage from '../pages/ErrorPage';
+import { blogUrl } from './routes';
 
 const router = createBrowserRouter([
 	{
@@ -10,7 +11,7 @@ const router = createBrowserRouter([
 		errorElement: <ErrorPage />,
 		children: [
 			{
-				index: true,
+				path: blogUrl.base,
 				element: <Home />,
 			},
 		],
