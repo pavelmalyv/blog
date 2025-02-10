@@ -15,7 +15,12 @@ const RecentPosts = () => {
 		posts = data.posts;
 	}
 
-	const stylesPostCard = ['medium', 'small-horizontal', 'small-horizontal', 'large'] as const;
+	const stylesPostCard = [
+		'dynamic-height',
+		'small-horizontal',
+		'small-horizontal',
+		'large',
+	] as const;
 
 	let body: React.ReactNode;
 	if (isError) {

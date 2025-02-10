@@ -14,7 +14,7 @@ import HiddenLoadingMessage from '../UI/hiddenLoadingMessage/HiddenLoadingMessag
 
 interface PostCardProps {
 	post: Post | null;
-	styleCard?: 'small' | 'small-horizontal' | 'medium' | 'large';
+	styleCard?: 'small' | 'small-horizontal' | 'dynamic-height' | 'large';
 }
 
 const PostCard = ({ post, styleCard = 'small' }: PostCardProps) => {
