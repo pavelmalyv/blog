@@ -114,3 +114,24 @@
 		}
 	}
 }
+
+.card-large {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	column-gap: 32px;
+
+	.image {
+		position: relative;
+		aspect-ratio: initial;
+		min-height: 246px;
+		margin-bottom: 0;
+
+		&-img {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+		}
+	}
+}

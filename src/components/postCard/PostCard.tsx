@@ -22,8 +22,10 @@ const PostCard = ({ post, styleCard = 'small' }: PostCardProps) => {
 
 	let description: React.ReactNode;
 	if (post) {
+		const length = styleCard === 'large' ? 370 : 90;
+
 		description = truncate(post.body, {
-			length: 90,
+			length,
 			separator: /,? +/,
 		});
 	} else {
