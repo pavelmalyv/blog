@@ -6,6 +6,7 @@ import HiddenLoadingMessage from '../UI/hiddenLoadingMessage/HiddenLoadingMessag
 import Section from '../UI/section/Section';
 import cl from './PostsList.module.scss';
 import { ERROR_MESSAGES } from '../../constants/error';
+import Pagination from '../UI/pagination/Pagination';
 import { useParams } from 'react-router';
 import { useValidatePaginationParam } from '../../hooks/useValidatePaginationParam';
 import { blogUrl } from '../../routes/routes';
@@ -21,9 +22,10 @@ const PostsList = () => {
 	const limit = 9;
 	let total: number | undefined;
 	let posts: Posts | null[] = Array(limit).fill(null);
+	const skip = paginationParam ? (paginationParam - 1) * limit : 0;
 
-	const { data, isLoading, isError } = useGetPostsQuery(
-		{ limit, skip: 0 },
+	const { data, isLoading, isFetching, isError } = useGetPostsQuery(
+		{ limit, skip },
 		{ skip: !isValidPaginationParam },
 	);
 
@@ -58,6 +60,17 @@ const PostsList = () => {
 						);
 					})}
 				</ul>
+
+				{total && paginationPage && (
+					<Pagination
+						limit={limit}
+						total={total}
+						currentPage={paginationPage}
+						urlBase={blogUrl.base}
+						createUrl={blogUrl.pagination}
+						isLoading={isFetching}
+					/>
+				)}
 			</>
 		);
 	}
