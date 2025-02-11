@@ -66,12 +66,13 @@ const PostCard = ({ post, styleCard = 'small' }: PostCardProps) => {
 			<div className={cl.image}>
 				{post ? (
 					<picture>
+						<source srcSet={post.image.webp} type="image/webp" />
 						<img
 							className={cl['image-img']}
-							src="https://dummyjson.com/image/768x480/008080/ffffff?text=Blog"
-							alt=""
-							width="768"
-							height="480"
+							src={post.image.src}
+							width={post.image.width}
+							height={post.image.height}
+							alt={post.image.alt}
 						/>
 					</picture>
 				) : (

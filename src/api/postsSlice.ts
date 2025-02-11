@@ -22,7 +22,9 @@ const postsSlice = apiSlice.injectEndpoints({
 				},
 			}),
 			transformResponse: async (response: unknown) => {
-				// добавить свойство "createdAt" в объект ответа сервера
+				const colors = ['00605E', '006992', '5D5D5D'];
+
+				// добавить свойства "createdAt", "image" в объект ответа сервера
 				if (
 					typeof response === 'object' &&
 					response !== null &&
@@ -34,14 +36,26 @@ const postsSlice = apiSlice.injectEndpoints({
 
 					response.posts = response.posts.map((post) => {
 						if (typeof post == 'object' && post !== null && 'id' in post) {
+							//createdAt
 							const month = Math.ceil(post.id / postsPerMonth);
 							const indexInMonth = post.id - (month - 1) * postsPerMonth;
 							const day = Math.ceil((indexInMonth * 28) / postsPerMonth);
 							const createdAt = new Date(2024, month - 1, day).toISOString();
 
+							//image
+							const colorImage = colors[post.id % colors.length];
+							const image = {
+								src: `https://dummyjson.com/image/960x600/${colorImage}/ffffff?text=Blog+%23${post.id}&fontFamily=poppins&type=jpg`,
+								webp: `https://dummyjson.com/image/960x600/${colorImage}/ffffff?text=Blog+%23${post.id}&fontFamily=poppins&type=webp`,
+								width: 960,
+								height: 600,
+								alt: `Blog #${post.id}`,
+							};
+
 							return {
 								...post,
 								createdAt,
+								image,
 							};
 						}
 

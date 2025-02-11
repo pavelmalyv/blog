@@ -1,6 +1,7 @@
 import { string, object, array } from 'yup';
 import { tagsSchema } from './tagsSchemas';
 import { paginationResponseSchema } from './responsesSchemas';
+import { imageSchema } from './imagesSchemas';
 
 export const postSchema = object({
 	id: string().required(),
@@ -9,6 +10,7 @@ export const postSchema = object({
 	tags: tagsSchema,
 	userId: string().required(),
 	createdAt: string().required(),
+	image: imageSchema.required(),
 });
 
 export const postsSchema = array().of(postSchema).required();
