@@ -11,6 +11,7 @@ import { useParams } from 'react-router';
 import { useValidatePaginationParam } from '../../hooks/useValidatePaginationParam';
 import { blogUrl } from '../../routes/routes';
 import useValidatePaginationTotal from '../../hooks/useValidatePaginationTotal';
+import Filter from '../filter/Filter';
 
 const PostsList = () => {
 	const params = useParams<{ pagination?: string }>();
@@ -48,6 +49,11 @@ const PostsList = () => {
 		body = (
 			<>
 				<HiddenLoadingMessage isLoading={isLoading} />
+
+				<Filter>
+					<Filter.Item>1</Filter.Item>
+					<Filter.Item>2</Filter.Item>
+				</Filter>
 
 				<ul className={cl.list}>
 					{posts.map((post, i) => {
