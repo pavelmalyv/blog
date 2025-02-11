@@ -61,8 +61,8 @@ const Pagination = ({
 				pageCount={totalPages}
 				nextLabel={<ButtonContent previous={false} />}
 				previousLabel={<ButtonContent previous={true} />}
-				pageRangeDisplayed={1}
-				marginPagesDisplayed={2}
+				pageRangeDisplayed={2}
+				marginPagesDisplayed={1}
 				onPageChange={({ selected }) => setSelectedPage(selected + 1)}
 				forcePage={selectedPage - 1}
 				containerClassName={cl.list}
