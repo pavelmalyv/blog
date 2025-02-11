@@ -12,6 +12,7 @@ import { useValidatePaginationParam } from '../../hooks/useValidatePaginationPar
 import { blogUrl } from '../../routes/routes';
 import useValidatePaginationTotal from '../../hooks/useValidatePaginationTotal';
 import Filter from '../filter/Filter';
+import Search from '../Forms/search/Search';
 
 const PostsList = () => {
 	const params = useParams<{ pagination?: string }>();
@@ -51,8 +52,9 @@ const PostsList = () => {
 				<HiddenLoadingMessage isLoading={isLoading} />
 
 				<Filter>
-					<Filter.Item>1</Filter.Item>
-					<Filter.Item>2</Filter.Item>
+					<Filter.Item>
+						<Search title="Blog search" />
+					</Filter.Item>
 				</Filter>
 
 				<ul className={cl.list}>
