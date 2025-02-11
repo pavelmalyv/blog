@@ -11,6 +11,7 @@ import { getDisplayDate } from '../../utils/date';
 import ErrorMessage from '../UI/errorMessage/ErrorMessage';
 import { ERROR_MESSAGES } from '../../constants/error';
 import HiddenLoadingMessage from '../UI/hiddenLoadingMessage/HiddenLoadingMessage';
+import { blogUrl } from '../../routes/routes';
 
 interface PostCardProps {
 	post: Post | null;
@@ -96,7 +97,7 @@ const PostCard = ({ post, styleCard = 'small' }: PostCardProps) => {
 					})}
 				>
 					{post ? (
-						<Link className={cl['title-link']} to="#">
+						<Link className={cl['title-link']} to={blogUrl.post(post.id)}>
 							<h3 id={idTitle} className={cl['title-text']}>
 								{post.title}
 							</h3>
