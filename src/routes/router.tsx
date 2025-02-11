@@ -14,6 +14,10 @@ const router = createBrowserRouter([
 				path: blogUrl.base,
 				element: <Home />,
 			},
+			{
+				path: blogUrl.pagination(':pagination'),
+				element: <Home />,
+			},
 		],
 	},
 ]);
