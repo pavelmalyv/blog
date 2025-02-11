@@ -135,7 +135,7 @@
 }
 
 .pagination {
-	&_loading .link[aria-current='page'] {
+	&_loading-delay .link[aria-current='page'] {
 		&::before {
 			opacity: 0.8;
 		}

@@ -6,6 +6,7 @@ import { getPages } from '../../../utils/pagination';
 import { useNavigate } from 'react-router';
 import { useEffect, useState } from 'react';
 import HiddenLoadingMessage from '../hiddenLoadingMessage/HiddenLoadingMessage';
+import useDelayAnimationLoading from '../../../hooks/useDelayAnimationLoading';
 
 const ButtonContent = ({ previous }: { previous: boolean }) => {
 	return (
@@ -47,9 +48,11 @@ const Pagination = ({
 		navigate(url);
 	}, [navigate, createUrl, urlBase, selectedPage]);
 
+	const isLoadingDelay = useDelayAnimationLoading(isLoading);
+
 	return (
 		<div
-			className={classNames(cl.pagination, { [cl['pagination_loading']]: isLoading })}
+			className={classNames(cl.pagination, { [cl['pagination_loading-delay']]: isLoadingDelay })}
 			aria-busy={isLoading}
 		>
 			<HiddenLoadingMessage isLoading={isLoading} message={`Loading page ${selectedPage}`} />
