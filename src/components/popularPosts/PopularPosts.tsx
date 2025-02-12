@@ -6,13 +6,17 @@ import PostCard from '../postCard/PostCard';
 import ErrorMessage from '../UI/errorMessage/ErrorMessage';
 import { ERROR_MESSAGES } from '../../constants/error';
 import HiddenLoadingMessage from '../UI/hiddenLoadingMessage/HiddenLoadingMessage';
+import Message from '../UI/message/Message';
+import { MESSAGES } from '../../constants/messages';
 
 const PopularPosts = () => {
 	let posts: Posts | null[] = Array(4).fill(null);
+	let total: number | undefined;
 
 	const { data, isLoading, isError } = useGetPostsQuery({ limit: 4, skip: 0, sortBy: 'userId' });
 	if (!isLoading && data) {
 		posts = data.posts;
+		total = data.total;
 	}
 
 	const stylesPostCard = [
@@ -25,6 +29,8 @@ const PopularPosts = () => {
 	let body: React.ReactNode;
 	if (isError) {
 		body = <ErrorMessage message={ERROR_MESSAGES.postsLoad} />;
+	} else if (total === 0) {
+		body = <Message message={MESSAGES.postsEmpty} />;
 	} else {
 		body = (
 			<>
