@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import type { UrlPagination } from '../types/routes';
 import { getPages } from '../utils/pagination';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 
 interface useValidatePaginationTotalProps {
 	limit: number;
@@ -17,6 +17,7 @@ const useValidatePaginationTotal = ({
 	createPaginationUrl,
 }: useValidatePaginationTotalProps) => {
 	const navigate = useNavigate();
+	const location = useLocation();
 
 	let page: number | undefined;
 	let totalPages: number | undefined;
@@ -34,8 +35,8 @@ const useValidatePaginationTotal = ({
 			return;
 		}
 
-		navigate(createPaginationUrl(totalPages));
-	}, [page, navigate, createPaginationUrl, totalPages]);
+		navigate(createPaginationUrl(totalPages + location.search));
+	}, [page, navigate, createPaginationUrl, totalPages, location.search]);
 
 	return page;
 };
