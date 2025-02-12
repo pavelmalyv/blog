@@ -17,6 +17,8 @@ import { useMemo, useState } from 'react';
 import { debounce } from 'lodash';
 import Field from '../UI/field/Field';
 import useDelayAnimationLoading from '../../hooks/useDelayAnimationLoading';
+import Message from '../UI/message/Message';
+import { MESSAGES } from '../../constants/messages';
 
 const SEARCH_MAX_LENGTH = 30;
 
@@ -77,6 +79,8 @@ const PostsList = () => {
 	let body: React.ReactNode;
 	if (isError) {
 		body = <ErrorMessage message={ERROR_MESSAGES.postsLoad} />;
+	} else if (posts.length === 0) {
+		body = <Message message={MESSAGES.postsEmpty} />;
 	} else {
 		body = (
 			<>
