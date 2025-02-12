@@ -7,12 +7,16 @@ import Section from '../UI/section/Section';
 import cl from './PostsList.module.scss';
 import { ERROR_MESSAGES } from '../../constants/error';
 import Pagination from '../UI/pagination/Pagination';
-import { useParams } from 'react-router';
+import { useParams, useSearchParams } from 'react-router';
 import { useValidatePaginationParam } from '../../hooks/useValidatePaginationParam';
 import { blogUrl } from '../../routes/routes';
 import useValidatePaginationTotal from '../../hooks/useValidatePaginationTotal';
 import Filter from '../filter/Filter';
 import Search from '../Forms/search/Search';
+import { useMemo, useState } from 'react';
+import { debounce } from 'lodash';
+
+const SEARCH_MAX_LENGTH = 30;
 
 const PostsList = () => {
 	const params = useParams<{ pagination?: string }>();
@@ -21,13 +25,35 @@ const PostsList = () => {
 		blogUrl.base,
 	);
 
+	const [searchParams, setSearchParams] = useSearchParams();
+	const searchQ = searchParams.get('q')?.slice(0, SEARCH_MAX_LENGTH);
+	const [searchField, setSearchField] = useState(searchQ ?? '');
+	const [search, setSearch] = useState(searchQ);
+	const setSearchDebounced = useMemo(() => debounce(setSearch, 400), []);
+
+	const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const value = e.target.value;
+
+		setSearchParams((prev) => {
+			if (value.length === 0) {
+				prev.delete('q');
+			} else {
+				prev.set('q', value);
+			}
+			return prev;
+		});
+
+		setSearchField(value);
+		setSearchDebounced(value);
+	};
+
 	const limit = 9;
 	let total: number | undefined;
 	let posts: Posts | null[] = Array(limit).fill(null);
 	const skip = paginationParam ? (paginationParam - 1) * limit : 0;
 
 	const { data, isLoading, isFetching, isError } = useGetPostsQuery(
-		{ limit, skip },
+		{ limit, skip, search },
 		{ skip: !isValidPaginationParam },
 	);
 
@@ -53,7 +79,13 @@ const PostsList = () => {
 
 				<Filter>
 					<Filter.Item>
-						<Search title="Blog search" labelField="Search posts" maxLength={30} />
+						<Search
+							title="Blog search"
+							labelField="Search posts"
+							maxLength={SEARCH_MAX_LENGTH}
+							value={searchField}
+							onChange={handleSearch}
+						/>
 					</Filter.Item>
 				</Filter>
 

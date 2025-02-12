@@ -7,20 +7,26 @@ interface GetPostsParams {
 	skip: number;
 	sortBy?: string;
 	order?: 'asc' | 'desc';
+	search?: string;
 }
 
 const postsSlice = apiSlice.injectEndpoints({
 	endpoints: (build) => ({
 		getPosts: build.query<PostsResponse, GetPostsParams>({
-			query: ({ limit, skip, sortBy, order }) => ({
-				url: '/posts',
-				params: {
-					limit,
-					skip,
-					sortBy,
-					order,
-				},
-			}),
+			query: ({ limit, skip, sortBy, order, search }) => {
+				const url = search ? '/posts/search' : '/posts';
+
+				return {
+					url,
+					params: {
+						limit,
+						skip,
+						sortBy,
+						order,
+						q: search,
+					},
+				};
+			},
 			transformResponse: async (response: unknown) => {
 				const colors = ['00605E', '006992', '5D5D5D'];
 
