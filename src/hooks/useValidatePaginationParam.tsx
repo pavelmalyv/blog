@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 
 export const useValidatePaginationParam = (parameter: string | undefined, firstPageUrl: string) => {
 	const navigate = useNavigate();
+	const location = useLocation();
 
 	let page: number | undefined;
 	let isValid: boolean = true;
@@ -22,9 +23,9 @@ export const useValidatePaginationParam = (parameter: string | undefined, firstP
 
 	useEffect(() => {
 		if (!isValid) {
-			navigate(firstPageUrl);
+			navigate(firstPageUrl + location.search);
 		}
-	}, [isValid, navigate, firstPageUrl]);
+	}, [isValid, navigate, firstPageUrl, location.search]);
 
 	return [page, isValid] as const;
 };
