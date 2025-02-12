@@ -13,12 +13,13 @@ import { blogUrl } from '../../routes/routes';
 import useValidatePaginationTotal from '../../hooks/useValidatePaginationTotal';
 import Filter from '../filter/Filter';
 import Search from '../Forms/search/Search';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { debounce } from 'lodash';
 import Field from '../UI/field/Field';
 import useDelayAnimationLoading from '../../hooks/useDelayAnimationLoading';
 import Message from '../UI/message/Message';
 import { MESSAGES } from '../../constants/messages';
+import classNames from 'classnames';
 
 const SEARCH_MAX_LENGTH = 30;
 
@@ -33,7 +34,8 @@ const PostsList = () => {
 	const searchQ = searchParams.get('q')?.slice(0, SEARCH_MAX_LENGTH);
 	const [searchField, setSearchField] = useState(searchQ ?? '');
 	const [search, setSearch] = useState(searchQ);
-	const setSearchDebounced = useMemo(() => debounce(setSearch, 400), []);
+	const [lastQuerySearch, setLastQuerySearch] = useState<string | undefined>(undefined);
+	const setSearchDebounced = useMemo(() => debounce(setSearch, 300), []);
 
 	const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value;
@@ -73,17 +75,33 @@ const PostsList = () => {
 		createPaginationUrl: blogUrl.pagination,
 	});
 	const isLoadingDelaySearch = useDelayAnimationLoading(
-		searchField.length > 0 && isFetching && !isLoading,
+		(searchField.length > 0 || Boolean(lastQuerySearch)) && isFetching && !isLoading,
 	);
+
+	useEffect(() => {
+		if (isFetching) {
+			return;
+		}
+
+		setLastQuerySearch(search);
+	}, [isFetching, search]);
 
 	let body: React.ReactNode;
 	if (isError) {
 		body = <ErrorMessage message={ERROR_MESSAGES.postsLoad} />;
-	} else if (posts.length === 0) {
+	} else if (total === 0 && lastQuerySearch) {
+		body = <Message message={MESSAGES.postsNotFound(lastQuerySearch)} />;
+	} else if (total === 0) {
 		body = <Message message={MESSAGES.postsEmpty} />;
 	} else {
 		body = (
 			<>
+				{searchField.length > 0 && lastQuerySearch && total && (
+					<div className={classNames(cl['search-result'], 'h4')}>
+						{MESSAGES.postsFound(lastQuerySearch, total)}
+					</div>
+				)}
+
 				<ul className={cl.list}>
 					{posts.map((post, i) => {
 						const key = post ? post.id : i;
@@ -96,7 +114,7 @@ const PostsList = () => {
 					})}
 				</ul>
 
-				{total && paginationPage && (
+				{total && paginationPage ? (
 					<Pagination
 						limit={limit}
 						total={total}
@@ -105,7 +123,7 @@ const PostsList = () => {
 						createUrl={blogUrl.pagination}
 						isLoading={isFetching}
 					/>
-				)}
+				) : null}
 			</>
 		);
 	}
