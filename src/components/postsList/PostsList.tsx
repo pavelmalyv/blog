@@ -33,9 +33,9 @@ const PostsList = () => {
 	const [searchParams, setSearchParams] = useSearchParams();
 	const searchQ = searchParams.get('q')?.slice(0, SEARCH_MAX_LENGTH);
 	const [searchField, setSearchField] = useState(searchQ ?? '');
-	const [search, setSearch] = useState(searchQ);
+	const [searchStateDebounced, setSearchStateDebounced] = useState(searchQ);
 	const [lastQuerySearch, setLastQuerySearch] = useState<string | undefined>(undefined);
-	const setSearchDebounced = useMemo(() => debounce(setSearch, 300), []);
+	const setSearchDebounced = useMemo(() => debounce(setSearchStateDebounced, 300), []);
 
 	const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value;
@@ -59,7 +59,7 @@ const PostsList = () => {
 	const skip = paginationParam ? (paginationParam - 1) * limit : 0;
 
 	const { data, isLoading, isFetching, isError } = useGetPostsQuery(
-		{ limit, skip, search },
+		{ limit, skip, search: searchStateDebounced },
 		{ skip: !isValidPaginationParam },
 	);
 
@@ -83,8 +83,8 @@ const PostsList = () => {
 			return;
 		}
 
-		setLastQuerySearch(search);
-	}, [isFetching, search]);
+		setLastQuerySearch(searchStateDebounced);
+	}, [isFetching, searchStateDebounced]);
 
 	let body: React.ReactNode;
 	if (isError) {
