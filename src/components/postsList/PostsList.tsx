@@ -80,7 +80,7 @@ const PostsList = () => {
 
 				<Filter>
 					<Filter.Item>
-						<Search title="Blog search">
+						<Search title="Blog search" onSubmit={(e) => e.preventDefault()}>
 							<Field
 								type="search"
 								icon="search"
