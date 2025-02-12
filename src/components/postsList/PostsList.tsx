@@ -15,6 +15,7 @@ import Filter from '../filter/Filter';
 import Search from '../Forms/search/Search';
 import { useMemo, useState } from 'react';
 import { debounce } from 'lodash';
+import Field from '../UI/field/Field';
 
 const SEARCH_MAX_LENGTH = 30;
 
@@ -79,13 +80,17 @@ const PostsList = () => {
 
 				<Filter>
 					<Filter.Item>
-						<Search
-							title="Blog search"
-							labelField="Search posts"
-							maxLength={SEARCH_MAX_LENGTH}
-							value={searchField}
-							onChange={handleSearch}
-						/>
+						<Search title="Blog search">
+							<Field
+								type="search"
+								icon="search"
+								name="search"
+								value={searchField}
+								label="Search posts"
+								onChange={handleSearch}
+								maxLength={SEARCH_MAX_LENGTH}
+							/>
+						</Search>
 					</Filter.Item>
 				</Filter>
 
