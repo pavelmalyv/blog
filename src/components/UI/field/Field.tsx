@@ -15,6 +15,7 @@ interface FieldProps {
 	icon?: string;
 	maxLength?: number;
 	isLoading?: boolean;
+	'aria-controls'?: string;
 }
 
 const Field = ({
@@ -29,6 +30,7 @@ const Field = ({
 	icon,
 	maxLength,
 	isLoading = false,
+	'aria-controls': ariaControls,
 }: FieldProps) => {
 	const idField = useId();
 
@@ -51,6 +53,7 @@ const Field = ({
 					disabled={disabled}
 					onChange={onChange}
 					maxLength={maxLength}
+					aria-controls={ariaControls}
 				/>
 				<div className={cl.icon}>
 					{isLoading ? <div className={cl.spinner}></div> : <Icon>{icon}</Icon>}

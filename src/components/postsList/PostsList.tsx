@@ -13,7 +13,7 @@ import { blogUrl } from '../../routes/routes';
 import useValidatePaginationTotal from '../../hooks/useValidatePaginationTotal';
 import Filter from '../filter/Filter';
 import Search from '../Forms/search/Search';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useId, useMemo, useState } from 'react';
 import { debounce } from 'lodash';
 import Field from '../UI/field/Field';
 import useDelayAnimationLoading from '../../hooks/useDelayAnimationLoading';
@@ -128,6 +128,8 @@ const PostsList = () => {
 		);
 	}
 
+	const idPosts = useId();
+
 	return (
 		<Section title="All blog posts">
 			<Filter>
@@ -142,12 +144,13 @@ const PostsList = () => {
 							onChange={handleSearch}
 							maxLength={SEARCH_MAX_LENGTH}
 							isLoading={isLoadingDelaySearch}
+							aria-controls={idPosts}
 						/>
 					</Search>
 				</Filter.Item>
 			</Filter>
 
-			<div aria-busy={isLoading || isFetching}>
+			<div id={idPosts} aria-busy={isLoading || isFetching}>
 				<HiddenLoadingMessage isLoading={isLoading || isFetching} />
 
 				{body}
