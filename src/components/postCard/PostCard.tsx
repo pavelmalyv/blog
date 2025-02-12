@@ -12,6 +12,7 @@ import ErrorMessage from '../UI/errorMessage/ErrorMessage';
 import { ERROR_MESSAGES } from '../../constants/error';
 import HiddenLoadingMessage from '../UI/hiddenLoadingMessage/HiddenLoadingMessage';
 import { blogUrl } from '../../routes/routes';
+import Icon from '../UI/icon/Icon';
 
 interface PostCardProps {
 	post: Post | null;
@@ -102,7 +103,7 @@ const PostCard = ({ post, styleCard = 'small' }: PostCardProps) => {
 								{post.title}
 							</h3>
 							<span className={cl['title-icon']} aria-hidden="true">
-								<span className="material-symbols-outlined">arrow_outward</span>
+								<Icon>arrow_outward</Icon>
 							</span>
 						</Link>
 					) : (
