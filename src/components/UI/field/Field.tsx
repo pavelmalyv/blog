@@ -2,6 +2,7 @@ import { useId } from 'react';
 import cl from './Field.module.scss';
 import classNames from 'classnames';
 import Icon from '../icon/Icon';
+import Label from '../label/Label';
 
 interface FieldProps {
 	label: string;
@@ -36,12 +37,9 @@ const Field = ({
 
 	return (
 		<div>
-			<label
-				htmlFor={idField}
-				className={classNames(cl.label, { 'visually-hidden': isLabelHidden })}
-			>
+			<Label htmlFor={idField} isLabelHidden={isLabelHidden}>
 				{label}
-			</label>
+			</Label>
 			<div className={cl['field-wrapper']}>
 				<input
 					id={idField}

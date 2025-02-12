@@ -1,13 +1,6 @@
 @use '../../../styles/shared/spinner';
 @use '../../../styles/utils';
 
-.label {
-	display: block;
-	margin-bottom: 8px;
-	font-size: 14px;
-	color: rgb(var(--color-text-secondary));
-}
-
 .field-wrapper {
 	--padding-x: 16px;
 	--width-icon: 22px;
