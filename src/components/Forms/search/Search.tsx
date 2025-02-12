@@ -11,7 +11,7 @@ interface SearchProps {
 	placeholder?: string;
 	value?: string;
 	disabled?: boolean;
-	onChange?: React.ChangeEventHandler;
+	onChange?: React.ChangeEventHandler<HTMLInputElement>;
 	maxLength?: number;
 }
 
