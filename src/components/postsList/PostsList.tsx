@@ -80,25 +80,6 @@ const PostsList = () => {
 	} else {
 		body = (
 			<>
-				<HiddenLoadingMessage isLoading={isLoading || isFetching} />
-
-				<Filter>
-					<Filter.Item>
-						<Search title="Blog search" onSubmit={(e) => e.preventDefault()}>
-							<Field
-								type="search"
-								icon="search"
-								name="search"
-								value={searchField}
-								label="Search posts"
-								onChange={handleSearch}
-								maxLength={SEARCH_MAX_LENGTH}
-								isLoading={isLoadingDelaySearch}
-							/>
-						</Search>
-					</Filter.Item>
-				</Filter>
-
 				<ul className={cl.list}>
 					{posts.map((post, i) => {
 						const key = post ? post.id : i;
@@ -127,7 +108,28 @@ const PostsList = () => {
 
 	return (
 		<Section title="All blog posts">
-			<div aria-busy={isLoading || isFetching}>{body}</div>
+			<Filter>
+				<Filter.Item>
+					<Search title="Blog search" onSubmit={(e) => e.preventDefault()}>
+						<Field
+							type="search"
+							icon="search"
+							name="search"
+							value={searchField}
+							label="Search posts"
+							onChange={handleSearch}
+							maxLength={SEARCH_MAX_LENGTH}
+							isLoading={isLoadingDelaySearch}
+						/>
+					</Search>
+				</Filter.Item>
+			</Filter>
+
+			<div aria-busy={isLoading || isFetching}>
+				<HiddenLoadingMessage isLoading={isLoading || isFetching} />
+
+				{body}
+			</div>
 		</Section>
 	);
 };
