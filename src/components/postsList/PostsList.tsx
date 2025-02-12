@@ -80,7 +80,7 @@ const PostsList = () => {
 	} else {
 		body = (
 			<>
-				<HiddenLoadingMessage isLoading={isLoading} />
+				<HiddenLoadingMessage isLoading={isLoading || isFetching} />
 
 				<Filter>
 					<Filter.Item>
@@ -127,7 +127,7 @@ const PostsList = () => {
 
 	return (
 		<Section title="All blog posts">
-			<div aria-busy={isLoading}>{body}</div>
+			<div aria-busy={isLoading || isFetching}>{body}</div>
 		</Section>
 	);
 };
