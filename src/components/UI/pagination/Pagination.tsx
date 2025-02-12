@@ -44,18 +44,22 @@ const Pagination = ({
 	const [isLoadingPagination, setIsLoadingPagination] = useState(false);
 
 	useEffect(() => {
-		setIsLoadingPagination(true);
 		const url = selectedPage === 1 ? urlBase : createUrl(selectedPage);
 		navigate(url + location.search);
 	}, [navigate, createUrl, urlBase, selectedPage, location.search]);
 
+	function handlePageChange({ selected }: { selected: number }) {
+		setSelectedPage(selected + 1);
+		setIsLoadingPagination(true);
+	}
+
 	useEffect(() => {
-		if (isLoading || !isLoadingPagination) {
+		if (isLoading) {
 			return;
 		}
 
 		setIsLoadingPagination(false);
-	}, [isLoading, isLoadingPagination]);
+	}, [isLoading]);
 
 	const isLoadingDelay = useDelayAnimationLoading(isLoadingPagination);
 
@@ -76,7 +80,7 @@ const Pagination = ({
 						previousLabel={<ButtonContent previous={true} />}
 						pageRangeDisplayed={2}
 						marginPagesDisplayed={1}
-						onPageChange={({ selected }) => setSelectedPage(selected + 1)}
+						onPageChange={handlePageChange}
 						forcePage={selectedPage - 1}
 						containerClassName={cl.list}
 						pageClassName={cl.item}
