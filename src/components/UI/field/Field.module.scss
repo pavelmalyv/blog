@@ -1,0 +1,57 @@
+@use '../../../styles/utils';
+
+.label {
+	display: block;
+	margin-bottom: 8px;
+	font-size: 14px;
+	color: rgb(var(--color-text-secondary));
+}
+
+.field-wrapper {
+	--padding-x: 16px;
+	--width-icon: 22px;
+
+	position: relative;
+}
+
+.field {
+	--border-color: rgb(var(--color-border-primary));
+
+	@include utils.base-animation(border-color);
+
+	width: 100%;
+	min-height: 48px;
+	padding: 0 16px;
+	border-radius: 8px;
+	border: 1px solid var(--border-color);
+	font-size: 16px;
+	outline: none;
+
+	&::placeholder {
+		color: rgb(var(--color-text-secondary));
+	}
+
+	&:focus {
+		--border-color: rgb(var(--color-accent));
+	}
+
+	&[type='search']::-webkit-search-decoration,
+	&[type='search']::-webkit-search-cancel-button,
+	&[type='search']::-webkit-search-results-button,
+	&[type='search']::-webkit-search-results-decoration {
+		display: none;
+	}
+
+	&_icon {
+		padding-right: calc(var(--width-icon) + (var(--padding-x) * 2));
+	}
+}
+
+.icon {
+	position: absolute;
+	top: 50%;
+	right: var(--padding-x);
+	translate: 0 -50%;
+	display: flex;
+	font-size: var(--width-icon);
+}

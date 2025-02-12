@@ -53,7 +53,7 @@ const PostsList = () => {
 
 				<Filter>
 					<Filter.Item>
-						<Search title="Blog search" />
+						<Search title="Blog search" labelField="Search posts" maxLength={30} />
 					</Filter.Item>
 				</Filter>
 
