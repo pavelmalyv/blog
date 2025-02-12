@@ -3,7 +3,7 @@ import type { UrlPagination } from '../../../types/routes';
 import classNames from 'classnames';
 import cl from './Pagination.module.scss';
 import { getPages } from '../../../utils/pagination';
-import { useNavigate } from 'react-router';
+import { useLocation, useNavigate } from 'react-router';
 import { useEffect, useState } from 'react';
 import HiddenLoadingMessage from '../hiddenLoadingMessage/HiddenLoadingMessage';
 import useDelayAnimationLoading from '../../../hooks/useDelayAnimationLoading';
@@ -38,14 +38,14 @@ const Pagination = ({
 	isLoading,
 }: PaginationProps) => {
 	const navigate = useNavigate();
+	const location = useLocation();
 	const totalPages = getPages(limit, total);
 	const [selectedPage, setSelectedPage] = useState(currentPage);
 
 	useEffect(() => {
 		const url = selectedPage === 1 ? urlBase : createUrl(selectedPage);
-
-		navigate(url);
-	}, [navigate, createUrl, urlBase, selectedPage]);
+		navigate(url + location.search);
+	}, [navigate, createUrl, urlBase, selectedPage, location.search]);
 
 	const isLoadingDelay = useDelayAnimationLoading(isLoading);
 
