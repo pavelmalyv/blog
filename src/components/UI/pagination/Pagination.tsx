@@ -60,29 +60,35 @@ const Pagination = ({
 	const isLoadingDelay = useDelayAnimationLoading(isLoadingPagination);
 
 	return (
-		<div
-			className={classNames(cl.pagination, { [cl['pagination_loading-delay']]: isLoadingDelay })}
-			aria-busy={isLoading}
-		>
-			<HiddenLoadingMessage isLoading={isLoading} message={`Loading page ${selectedPage}`} />
+		<>
+			{totalPages > 1 && (
+				<div
+					className={classNames(cl.pagination, {
+						[cl['pagination_loading-delay']]: isLoadingDelay,
+					})}
+					aria-busy={isLoading}
+				>
+					<HiddenLoadingMessage isLoading={isLoading} message={`Loading page ${selectedPage}`} />
 
-			<ReactPaginate
-				pageCount={totalPages}
-				nextLabel={<ButtonContent previous={false} />}
-				previousLabel={<ButtonContent previous={true} />}
-				pageRangeDisplayed={2}
-				marginPagesDisplayed={1}
-				onPageChange={({ selected }) => setSelectedPage(selected + 1)}
-				forcePage={selectedPage - 1}
-				containerClassName={cl.list}
-				pageClassName={cl.item}
-				pageLinkClassName={cl.link}
-				breakClassName={cl.item}
-				breakLinkClassName={cl.link}
-				previousLinkClassName={classNames(cl.button, cl['button_prev'])}
-				nextLinkClassName={classNames(cl.button, cl['button_next'])}
-			/>
-		</div>
+					<ReactPaginate
+						pageCount={totalPages}
+						nextLabel={<ButtonContent previous={false} />}
+						previousLabel={<ButtonContent previous={true} />}
+						pageRangeDisplayed={2}
+						marginPagesDisplayed={1}
+						onPageChange={({ selected }) => setSelectedPage(selected + 1)}
+						forcePage={selectedPage - 1}
+						containerClassName={cl.list}
+						pageClassName={cl.item}
+						pageLinkClassName={cl.link}
+						breakClassName={cl.item}
+						breakLinkClassName={cl.link}
+						previousLinkClassName={classNames(cl.button, cl['button_prev'])}
+						nextLinkClassName={classNames(cl.button, cl['button_next'])}
+					/>
+				</div>
+			)}
+		</>
 	);
 };
 
