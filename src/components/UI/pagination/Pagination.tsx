@@ -41,13 +41,23 @@ const Pagination = ({
 	const location = useLocation();
 	const totalPages = getPages(limit, total);
 	const [selectedPage, setSelectedPage] = useState(currentPage);
+	const [isLoadingPagination, setIsLoadingPagination] = useState(false);
 
 	useEffect(() => {
+		setIsLoadingPagination(true);
 		const url = selectedPage === 1 ? urlBase : createUrl(selectedPage);
 		navigate(url + location.search);
 	}, [navigate, createUrl, urlBase, selectedPage, location.search]);
 
-	const isLoadingDelay = useDelayAnimationLoading(isLoading);
+	useEffect(() => {
+		if (isLoading || !isLoadingPagination) {
+			return;
+		}
+
+		setIsLoadingPagination(false);
+	}, [isLoading, isLoadingPagination]);
+
+	const isLoadingDelay = useDelayAnimationLoading(isLoadingPagination);
 
 	return (
 		<div
