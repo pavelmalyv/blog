@@ -7,14 +7,13 @@ import { useNavigate } from 'react-router';
 import { useEffect, useState } from 'react';
 import HiddenLoadingMessage from '../hiddenLoadingMessage/HiddenLoadingMessage';
 import useDelayAnimationLoading from '../../../hooks/useDelayAnimationLoading';
+import Icon from '../icon/Icon';
 
 const ButtonContent = ({ previous }: { previous: boolean }) => {
 	return (
 		<>
 			<span className={cl['button-icon']} aria-hidden="true">
-				<span className="material-symbols-outlined">
-					{previous ? 'arrow_back' : 'arrow_forward'}
-				</span>
+				<Icon>{previous ? 'arrow_back' : 'arrow_forward'}</Icon>
 			</span>
 			<span>{previous ? 'Previous' : 'Next'}</span>
 		</>

@@ -1,6 +1,6 @@
-import classNames from 'classnames';
 import cl from './ThemeSwitch.module.scss';
 import { useState } from 'react';
+import Icon from '../icon/Icon';
 
 const ThemeSwitch = () => {
 	const [dark, setDark] = useState(false);
@@ -15,8 +15,12 @@ const ThemeSwitch = () => {
 		>
 			<span className="visually-hidden">Dark Mode</span>
 			<span className={cl.icons} aria-hidden="true">
-				<span className={classNames(cl.icon, 'material-symbols-outlined')}>wb_sunny</span>
-				<span className={classNames(cl.icon, 'material-symbols-outlined')}>bedtime</span>
+				<span className={cl.icon}>
+					<Icon>wb_sunny</Icon>
+				</span>
+				<span className={cl.icon}>
+					<Icon>bedtime</Icon>
+				</span>
 				<span className={cl.cursor}></span>
 			</span>
 		</button>

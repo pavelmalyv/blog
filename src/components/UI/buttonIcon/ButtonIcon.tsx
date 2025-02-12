@@ -1,3 +1,4 @@
+import Icon from '../icon/Icon';
 import cl from './ButtonIcon.module.scss';
 
 interface ButtonIconProps {
@@ -10,9 +11,7 @@ const ButtonIcon = ({ hiddenName, icon, onClick }: ButtonIconProps) => {
 	return (
 		<button className={cl.button} onClick={onClick}>
 			<span className="visually-hidden">{hiddenName}</span>
-			<span className="material-symbols-outlined" aria-hidden="true">
-				{icon}
-			</span>
+			<Icon>{icon}</Icon>
 		</button>
 	);
 };
