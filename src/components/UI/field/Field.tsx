@@ -14,6 +14,7 @@ interface FieldProps {
 	onChange?: React.ChangeEventHandler<HTMLInputElement>;
 	icon?: string;
 	maxLength?: number;
+	isLoading?: boolean;
 }
 
 const Field = ({
@@ -27,6 +28,7 @@ const Field = ({
 	onChange,
 	icon,
 	maxLength,
+	isLoading = false,
 }: FieldProps) => {
 	const idField = useId();
 
@@ -51,7 +53,7 @@ const Field = ({
 					maxLength={maxLength}
 				/>
 				<div className={cl.icon}>
-					<Icon>{icon}</Icon>
+					{isLoading ? <div className={cl.spinner}></div> : <Icon>{icon}</Icon>}
 				</div>
 			</div>
 		</div>

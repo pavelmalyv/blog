@@ -1,3 +1,4 @@
+@use '../../../styles/shared/spinner';
 @use '../../../styles/utils';
 
 .label {
@@ -54,4 +55,8 @@
 	translate: 0 -50%;
 	display: flex;
 	font-size: var(--width-icon);
+}
+
+.spinner {
+	@include spinner.base(18px);
 }

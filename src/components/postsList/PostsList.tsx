@@ -16,6 +16,7 @@ import Search from '../Forms/search/Search';
 import { useMemo, useState } from 'react';
 import { debounce } from 'lodash';
 import Field from '../UI/field/Field';
+import useDelayAnimationLoading from '../../hooks/useDelayAnimationLoading';
 
 const SEARCH_MAX_LENGTH = 30;
 
@@ -69,6 +70,9 @@ const PostsList = () => {
 		currentPage: paginationParam,
 		createPaginationUrl: blogUrl.pagination,
 	});
+	const isLoadingDelaySearch = useDelayAnimationLoading(
+		searchField.length > 0 && isFetching && !isLoading,
+	);
 
 	let body: React.ReactNode;
 	if (isError) {
@@ -89,6 +93,7 @@ const PostsList = () => {
 								label="Search posts"
 								onChange={handleSearch}
 								maxLength={SEARCH_MAX_LENGTH}
+								isLoading={isLoadingDelaySearch}
 							/>
 						</Search>
 					</Filter.Item>
