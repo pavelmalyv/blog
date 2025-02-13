@@ -176,6 +176,7 @@ const PostsList = () => {
 						label="SortSelect by"
 						value={sortSelect}
 						onChange={(e) => setSortSelect(e.target.value)}
+						aria-controls={idPosts}
 					>
 						<Select.Option value={INIT_SORT_SELECT}>Newest to oldest</Select.Option>
 						<Select.Option value="id|asc">Oldest to newest</Select.Option>
@@ -185,6 +186,7 @@ const PostsList = () => {
 						label="Show by"
 						value={String(limit)}
 						onChange={(e) => setLimit(Number(e.target.value))}
+						aria-controls={idPosts}
 					>
 						<Select.Option value={String(INIT_LIMIT)}>{INIT_LIMIT}</Select.Option>
 						<Select.Option value="18">18</Select.Option>

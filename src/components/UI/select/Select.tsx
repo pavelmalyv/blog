@@ -9,9 +9,17 @@ interface SelectProps {
 	isLabelHidden?: boolean;
 	onChange?: React.ChangeEventHandler<HTMLSelectElement>;
 	value?: string;
+	'aria-controls'?: string;
 }
 
-const Select = ({ label, isLabelHidden, children, onChange, value }: SelectProps) => {
+const Select = ({
+	label,
+	isLabelHidden,
+	children,
+	onChange,
+	value,
+	'aria-controls': ariaControls,
+}: SelectProps) => {
 	const idSelect = useId();
 
 	return (
@@ -20,7 +28,13 @@ const Select = ({ label, isLabelHidden, children, onChange, value }: SelectProps
 				{label}
 			</Label>
 			<div className={cl.body}>
-				<select id={idSelect} className={cl.select} value={value} onChange={onChange}>
+				<select
+					id={idSelect}
+					className={cl.select}
+					value={value}
+					onChange={onChange}
+					aria-controls={ariaControls}
+				>
 					{children}
 				</select>
 				<div className={cl.icon}>
