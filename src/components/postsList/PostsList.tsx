@@ -197,7 +197,7 @@ const PostsList = () => {
 			</Filter>
 
 			<div id={idPosts} aria-busy={isLoading || isFetching}>
-				<HiddenLoadingMessage isLoading={isLoading || isFetching} />
+				<HiddenLoadingMessage isLoading={isLoading || isFetching} message={MESSAGES.postsLoading} />
 
 				{body}
 			</div>

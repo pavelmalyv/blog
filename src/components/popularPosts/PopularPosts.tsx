@@ -39,7 +39,7 @@ const PopularPosts = () => {
 	} else {
 		body = (
 			<>
-				<HiddenLoadingMessage isLoading={isLoading} />
+				<HiddenLoadingMessage isLoading={isLoading} message={MESSAGES.postsLoading} />
 
 				<ul className={cl.list}>
 					{posts.map((post, i) => {
