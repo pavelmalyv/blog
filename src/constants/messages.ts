@@ -4,6 +4,6 @@ export const MESSAGES = {
 	postsFound: (query: string, quantity: number) => {
 		const postWord = quantity === 1 ? 'post' : 'posts';
 		const verb = quantity === 1 ? 'was' : 'were';
-		return `For the query "${query}", ${quantity} ${postWord} ${verb} found.`;
+		return `For the query "${query}", ${quantity} ${postWord} ${verb} found`;
 	},
 };
