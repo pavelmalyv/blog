@@ -41,6 +41,10 @@ const PostsList = () => {
 	const [lastQuerySearch, setLastQuerySearch] = useState<string | undefined>(undefined);
 	const setSearchDebounced = useMemo(() => debounce(setSearchStateDebounced, 300), []);
 
+	useEffect(() => {
+		return () => setSearchDebounced.cancel();
+	}, [setSearchDebounced]);
+
 	const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value;
 
