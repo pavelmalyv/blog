@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router';
 import Header from '../components/header/Header';
+import Footer from '../components/footer/Footer';
 
 interface RootProps {
 	children?: React.ReactNode;
@@ -11,6 +12,8 @@ const Root = ({ children }: RootProps) => {
 			<Header />
 
 			<main className="main">{children || <Outlet />}</main>
+
+			<Footer />
 		</>
 	);
 };
