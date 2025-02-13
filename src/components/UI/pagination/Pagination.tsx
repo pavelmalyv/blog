@@ -44,9 +44,16 @@ const Pagination = ({
 	const [isLoadingPagination, setIsLoadingPagination] = useState(false);
 
 	useEffect(() => {
-		const url = selectedPage === 1 ? urlBase : createUrl(selectedPage);
-		navigate(url + location.search);
-	}, [navigate, createUrl, urlBase, selectedPage, location.search]);
+		const baseUrl = selectedPage === 1 ? urlBase : createUrl(selectedPage);
+		const url = baseUrl + location.search;
+		const currentUrl = location.pathname + location.search;
+
+		if (url === currentUrl) {
+			return;
+		}
+
+		navigate(url);
+	}, [navigate, createUrl, urlBase, selectedPage, location.pathname, location.search]);
 
 	function handlePageChange({ selected }: { selected: number }) {
 		setSelectedPage(selected + 1);
