@@ -6,4 +6,5 @@ export const MESSAGES = {
 		const verb = quantity === 1 ? 'was' : 'were';
 		return `For the query "${query}", ${quantity} ${postWord} ${verb} found`;
 	},
+	authorLoading: 'Loading author...',
 };

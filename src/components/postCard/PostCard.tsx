@@ -13,6 +13,7 @@ import { ERROR_MESSAGES } from '../../constants/error';
 import HiddenLoadingMessage from '../UI/hiddenLoadingMessage/HiddenLoadingMessage';
 import { blogUrl } from '../../routes/routes';
 import Icon from '../UI/icon/Icon';
+import { MESSAGES } from '../../constants/messages';
 
 interface PostCardProps {
 	post: Post | null;
@@ -85,7 +86,11 @@ const PostCard = ({ post, styleCard = 'small' }: PostCardProps) => {
 			<div className={cl.body}>
 				<div className={cl.about}>
 					<span aria-busy={isLoadingAuthor}>
-						<HiddenLoadingMessage isLoading={isLoadingAuthor} isRoleStatus={false} />
+						<HiddenLoadingMessage
+							isLoading={isLoadingAuthor}
+							message={MESSAGES.authorLoading}
+							isRoleStatus={false}
+						/>
 
 						{author}
 					</span>
