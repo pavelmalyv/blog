@@ -35,7 +35,7 @@ const useValidatePaginationTotal = ({
 			return;
 		}
 
-		navigate(createPaginationUrl(totalPages + location.search));
+		navigate(createPaginationUrl(totalPages + location.search), { replace: true });
 	}, [page, navigate, createPaginationUrl, totalPages, location.search]);
 
 	return page;
