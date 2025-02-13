@@ -54,7 +54,7 @@ const PostsList = () => {
 		setSearchDebounced(value);
 	};
 
-	const limit = 9;
+	const [limit, setLimit] = useState(9);
 	let total: number | undefined;
 	let posts: Posts | null[] = Array(limit).fill(null);
 	const skip = paginationParam ? (paginationParam - 1) * limit : 0;
@@ -150,7 +150,12 @@ const PostsList = () => {
 					</Search>
 				</Filter.Item>
 				<Filter.Item>
-					<Select label="Show by" size="small">
+					<Select
+						label="Show by"
+						size="small"
+						value={String(limit)}
+						onChange={(e) => setLimit(Number(e.target.value))}
+					>
 						<Select.Option>9</Select.Option>
 						<Select.Option>18</Select.Option>
 						<Select.Option>36</Select.Option>
