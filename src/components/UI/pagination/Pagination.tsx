@@ -54,12 +54,12 @@ const Pagination = ({
 	}
 
 	useEffect(() => {
-		if (isLoading) {
+		if (isLoading || !isLoadingPagination) {
 			return;
 		}
 
 		setIsLoadingPagination(false);
-	}, [isLoading]);
+	}, [isLoading, isLoadingPagination]);
 
 	const isLoadingDelay = useDelayAnimationLoading(isLoadingPagination);
 
