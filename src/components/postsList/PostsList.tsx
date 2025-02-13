@@ -57,14 +57,11 @@ const PostsList = () => {
 		setSearchDebounced(value);
 	};
 
-	const splitSortOrder = (string: string) => {
-		const sortArray = string.split('|');
-		if (sortArray.length < 2) {
-			return [undefined, undefined];
-		}
-
-		const order = SORT_ORDER_VALUES.find((item) => item === sortArray[1]);
-		return [sortArray[0], order] as const;
+	const splitSortOrder = (sortParam: string) => {
+		const paramsArray = sortParam.split('|');
+		const sortBy = paramsArray[0];
+		const order = paramsArray.length === 2 ? paramsArray[1] : undefined;
+		return [sortBy, SORT_ORDER_VALUES.find((item) => item === order)] as const;
 	};
 
 	const [limit, setLimit] = useState(INIT_LIMIT);
