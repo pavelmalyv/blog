@@ -6,20 +6,15 @@ import ThemeSwitch from '../UI/themeSwitch/ThemeSwitch';
 import ButtonIcon from '../UI/buttonIcon/ButtonIcon';
 import { useState } from 'react';
 
-const navigationLinks = [
-	{
-		to: '/',
-		text: 'Home',
-	},
-	{
-		to: '/other',
-		text: 'Blog',
-	},
-	{
-		to: '/other',
-		text: 'Newsletter',
-	},
-];
+const NavigationItems = () => {
+	return (
+		<>
+			<Navigation.Item to="/">Home</Navigation.Item>
+			<Navigation.Item to="/other">Blog</Navigation.Item>
+			<Navigation.Item to="/other">Newsletter</Navigation.Item>
+		</>
+	);
+};
 
 const Header = () => {
 	const [isOpenMenu, setIsOpenMenu] = useState(false);
@@ -39,7 +34,9 @@ const Header = () => {
 					<div className={cl.body}>
 						<Logo />
 						<div className={cl.panel}>
-							<Navigation links={navigationLinks} />
+							<Navigation>
+								<NavigationItems />
+							</Navigation>
 							<ThemeSwitch />
 						</div>
 						<div className={cl.burger}>
@@ -56,7 +53,9 @@ const Header = () => {
 							<Logo />
 						</div>
 						<div className={cl['menu-navigation']}>
-							<Navigation links={navigationLinks} direction="vertical" />
+							<Navigation direction="vertical">
+								<NavigationItems />
+							</Navigation>
 						</div>
 						<ThemeSwitch />
 						<div className={cl['menu-close']}>
