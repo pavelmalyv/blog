@@ -20,6 +20,7 @@ import useDelayAnimationLoading from '../../hooks/useDelayAnimationLoading';
 import Message from '../UI/message/Message';
 import { MESSAGES } from '../../constants/messages';
 import classNames from 'classnames';
+import Select from '../UI/select/Select';
 
 const SEARCH_MAX_LENGTH = 30;
 
@@ -147,6 +148,13 @@ const PostsList = () => {
 							aria-controls={idPosts}
 						/>
 					</Search>
+				</Filter.Item>
+				<Filter.Item>
+					<Select label="Show by" size="small">
+						<Select.Option>9</Select.Option>
+						<Select.Option>18</Select.Option>
+						<Select.Option>36</Select.Option>
+					</Select>
 				</Filter.Item>
 			</Filter>
 
