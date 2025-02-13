@@ -1,11 +1,4 @@
-.wrapper {
-	width: 200px;
-	max-width: 100%;
-
-	&_small {
-		width: 100px;
-	}
-}
+@use '../../../styles/utils';
 
 .body {
 	--padding-x: 16px;

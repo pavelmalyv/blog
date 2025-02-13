@@ -187,7 +187,6 @@ const PostsList = () => {
 					</Select>
 					<Select
 						label="Show by"
-						size="small"
 						value={String(limit)}
 						onChange={(e) => setLimit(Number(e.target.value))}
 					>
