@@ -21,9 +21,11 @@ import Message from '../UI/message/Message';
 import { MESSAGES } from '../../constants/messages';
 import classNames from 'classnames';
 import Select from '../UI/select/Select';
+import { SORT_ORDER_VALUES } from '../../constants/api';
 
 const SEARCH_MAX_LENGTH = 30;
 const INIT_LIMIT = 9;
+const INIT_SORT_SELECT = 'id|desc';
 
 const PostsList = () => {
 	const params = useParams<{ pagination?: string }>();
@@ -55,13 +57,26 @@ const PostsList = () => {
 		setSearchDebounced(value);
 	};
 
+	const splitSortOrder = (string: string) => {
+		const sortArray = string.split('|');
+		if (sortArray.length < 2) {
+			return [undefined, undefined];
+		}
+
+		const order = SORT_ORDER_VALUES.find((item) => item === sortArray[1]);
+		return [sortArray[0], order] as const;
+	};
+
 	const [limit, setLimit] = useState(INIT_LIMIT);
+	const [sortSelect, setSortSelect] = useState(INIT_SORT_SELECT);
+
 	let total: number | undefined;
 	let posts: Posts | null[] = Array(limit).fill(null);
 	const skip = paginationParam ? (paginationParam - 1) * limit : 0;
+	const [sortBy, order] = splitSortOrder(sortSelect);
 
 	const { data, isLoading, isFetching, isError } = useGetPostsQuery(
-		{ limit, skip, search: searchStateDebounced },
+		{ limit, skip, search: searchStateDebounced, sortBy, order },
 		{ skip: !isValidPaginationParam },
 	);
 
@@ -161,6 +176,15 @@ const PostsList = () => {
 					</Search>
 				</Filter.Item>
 				<Filter.Item>
+					<Select
+						label="SortSelect by"
+						value={sortSelect}
+						onChange={(e) => setSortSelect(e.target.value)}
+					>
+						<Select.Option value={INIT_SORT_SELECT}>Newest to oldest</Select.Option>
+						<Select.Option value="id|asc">Oldest to newest</Select.Option>
+						<Select.Option value="views|desc">Most interesting</Select.Option>
+					</Select>
 					<Select
 						label="Show by"
 						size="small"

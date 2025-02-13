@@ -1,12 +1,13 @@
 import { postsResponseSchema } from '../schemas/postsSchemas';
 import type { PostsResponse } from '../types/posts';
+import type { SortOrder } from '../types/api';
 import { apiSlice } from './apiSlice';
 
 interface GetPostsParams {
 	limit: number;
 	skip: number;
 	sortBy?: string;
-	order?: 'asc' | 'desc';
+	order?: SortOrder;
 	search?: string;
 }
 
