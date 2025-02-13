@@ -13,7 +13,12 @@ const PopularPosts = () => {
 	let posts: Posts | null[] = Array(4).fill(null);
 	let total: number | undefined;
 
-	const { data, isLoading, isError } = useGetPostsQuery({ limit: 4, skip: 0, sortBy: 'userId' });
+	const { data, isLoading, isError } = useGetPostsQuery({
+		limit: 4,
+		skip: 0,
+		sortBy: 'views',
+		order: 'desc',
+	});
 	if (!isLoading && data) {
 		posts = data.posts;
 		total = data.total;
