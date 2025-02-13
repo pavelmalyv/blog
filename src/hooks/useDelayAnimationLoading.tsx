@@ -7,7 +7,7 @@ const useDelayAnimationLoading = (isLoading: boolean) => {
 		let timer: ReturnType<typeof setTimeout>;
 
 		if (isLoading) {
-			timer = setTimeout(() => setIsLoadingDelay(true), 400);
+			timer = setTimeout(() => setIsLoadingDelay(true), 200);
 		} else {
 			setIsLoadingDelay(false);
 		}
