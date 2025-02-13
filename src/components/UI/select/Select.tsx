@@ -42,10 +42,11 @@ const Select = ({
 
 interface OptionProps {
 	children: React.ReactNode;
+	value?: string;
 }
 
-const Option = ({ children }: OptionProps) => {
-	return <option>{children}</option>;
+const Option = ({ children, value }: OptionProps) => {
+	return <option value={value}>{children}</option>;
 };
 
 Select.Option = Option;
