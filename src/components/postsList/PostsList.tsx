@@ -48,14 +48,17 @@ const PostsList = () => {
 	const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
 		const value = e.target.value;
 
-		setSearchParams((prev) => {
-			if (value.length === 0) {
-				prev.delete('q');
-			} else {
-				prev.set('q', value);
-			}
-			return prev;
-		});
+		setSearchParams(
+			(prev) => {
+				if (value.length === 0) {
+					prev.delete('q');
+				} else {
+					prev.set('q', value);
+				}
+				return prev;
+			},
+			{ replace: true },
+		);
 
 		setSearchField(value);
 		setSearchDebounced(value);
