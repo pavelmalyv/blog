@@ -12,7 +12,7 @@ const Section = ({ title, children, region = true }: SectionProps) => {
 	const ariaLabelledby = region ? idTitle : undefined;
 
 	return (
-		<section className="section" aria-labelledby={ariaLabelledby}>
+		<section className={cl.section} aria-labelledby={ariaLabelledby}>
 			<div className="container">
 				<div className={cl.head}>
 					<h2 id={idTitle} className="h2">
