@@ -160,22 +160,21 @@ const PostsList = () => {
 	return (
 		<Section title="All blog posts">
 			<Filter>
-				<Filter.Item>
-					<Search title="Blog search" onSubmit={(e) => e.preventDefault()}>
-						<Field
-							type="search"
-							icon="search"
-							name="search"
-							value={searchField}
-							label="Search posts"
-							onChange={handleSearch}
-							maxLength={SEARCH_MAX_LENGTH}
-							isLoading={isLoadingDelaySearch}
-							aria-controls={idPosts}
-						/>
-					</Search>
-				</Filter.Item>
-				<Filter.Item>
+				<Search title="Blog search" onSubmit={(e) => e.preventDefault()}>
+					<Field
+						type="search"
+						icon="search"
+						name="search"
+						value={searchField}
+						label="Search posts"
+						onChange={handleSearch}
+						maxLength={SEARCH_MAX_LENGTH}
+						isLoading={isLoadingDelaySearch}
+						aria-controls={idPosts}
+					/>
+				</Search>
+
+				<div className={cl['filter-select-group']}>
 					<Select
 						label="SortSelect by"
 						value={sortSelect}
@@ -194,7 +193,7 @@ const PostsList = () => {
 						<Select.Option value="18">18</Select.Option>
 						<Select.Option value="36">36</Select.Option>
 					</Select>
-				</Filter.Item>
+				</div>
 			</Filter>
 
 			<div id={idPosts} aria-busy={isLoading || isFetching}>

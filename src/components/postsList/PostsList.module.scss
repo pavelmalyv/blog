@@ -1,6 +1,19 @@
 @use '../../styles/utils';
 @use '../../styles/shared/spinner';
 
+.filter-select-group {
+	display: grid;
+	column-gap: 20px;
+	grid-template-columns: 2fr 1fr;
+	max-width: 330px;
+	width: 100%;
+
+	@include utils.mobile-l {
+		max-width: initial;
+		column-gap: 10px;
+	}
+}
+
 .overlay {
 	@include utils.base-animation(opacity);
 
