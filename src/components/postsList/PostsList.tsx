@@ -23,6 +23,7 @@ import classNames from 'classnames';
 import Select from '../UI/select/Select';
 
 const SEARCH_MAX_LENGTH = 30;
+const INIT_LIMIT = 9;
 
 const PostsList = () => {
 	const params = useParams<{ pagination?: string }>();
@@ -54,7 +55,7 @@ const PostsList = () => {
 		setSearchDebounced(value);
 	};
 
-	const [limit, setLimit] = useState(9);
+	const [limit, setLimit] = useState(INIT_LIMIT);
 	let total: number | undefined;
 	let posts: Posts | null[] = Array(limit).fill(null);
 	const skip = paginationParam ? (paginationParam - 1) * limit : 0;
@@ -166,9 +167,9 @@ const PostsList = () => {
 						value={String(limit)}
 						onChange={(e) => setLimit(Number(e.target.value))}
 					>
-						<Select.Option>9</Select.Option>
-						<Select.Option>18</Select.Option>
-						<Select.Option>36</Select.Option>
+						<Select.Option value={String(INIT_LIMIT)}>{INIT_LIMIT}</Select.Option>
+						<Select.Option value="18">18</Select.Option>
+						<Select.Option value="36">36</Select.Option>
 					</Select>
 				</Filter.Item>
 			</Filter>
