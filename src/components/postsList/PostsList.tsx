@@ -75,6 +75,8 @@ const PostsList = () => {
 		currentPage: paginationParam,
 		createPaginationUrl: blogUrl.pagination,
 	});
+
+	const isFetchingDelayPosts = useDelayAnimationLoading(isFetching);
 	const isLoadingDelaySearch = useDelayAnimationLoading(
 		(searchField.length > 0 || Boolean(lastQuerySearch)) && isFetching && !isLoading,
 	);
@@ -103,17 +105,25 @@ const PostsList = () => {
 					</div>
 				)}
 
-				<ul className={cl.list}>
-					{posts.map((post, i) => {
-						const key = post ? post.id : i;
-
-						return (
-							<li className={cl.item} key={key}>
-								<PostCard post={post} />
-							</li>
-						);
+				<div
+					className={classNames(cl.posts, {
+						[cl['posts_is-animation-posts']]: isFetchingDelayPosts,
 					})}
-				</ul>
+				>
+					{isFetching && <div className={cl.overlay}></div>}
+
+					<ul className={cl.list}>
+						{posts.map((post, i) => {
+							const key = post ? post.id : i;
+
+							return (
+								<li className={cl.item} key={key}>
+									<PostCard post={post} />
+								</li>
+							);
+						})}
+					</ul>
+				</div>
 
 				{total && paginationPage ? (
 					<Pagination
