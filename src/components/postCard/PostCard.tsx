@@ -39,7 +39,12 @@ const PostCard = ({ post, styleCard = 'small' }: PostCardProps) => {
 
 	const [
 		getUserByIdQuery,
-		{ data: dataAuthor, isLoading: isLoadingAuthor, isError: isErrorAuthor },
+		{
+			data: dataAuthor,
+			isLoading: isLoadingAuthor,
+			isFetching: isFetchingAuthor,
+			isError: isErrorAuthor,
+		},
 	] = useLazyGetUserByIdQuery();
 
 	let author: React.ReactNode;
@@ -59,12 +64,12 @@ const PostCard = ({ post, styleCard = 'small' }: PostCardProps) => {
 	}
 
 	useEffect(() => {
-		if (!post || isLoadingAuthor || dataAuthor) {
+		if (!post || dataAuthor || (isLoadingAuthor && isFetchingAuthor)) {
 			return;
 		}
 
 		getUserByIdQuery(post.userId, true);
-	}, [post, isLoadingAuthor, dataAuthor, getUserByIdQuery]);
+	}, [post, isLoadingAuthor, isFetchingAuthor, dataAuthor, getUserByIdQuery]);
 
 	return (
 		<article className={classNames(cl.card, cl[`card-${styleCard}`])} aria-labelledby={idTitle}>
