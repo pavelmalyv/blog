@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import { useSearchParams } from 'react-router';
 
-const useParamUrl = (param: string, acceptableValues: string[], urlKeys: string[]) => {
+export const useParamUrl = (param: string, acceptableValues: string[], urlKeys: string[]) => {
 	const acceptableParam = acceptableValues.find((value) => value === param);
 
 	const searchParamsArray = useSearchParams();
@@ -43,5 +43,3 @@ const useParamUrl = (param: string, acceptableValues: string[], urlKeys: string[
 
 	return [acceptableParam, setParamsUrl] as const;
 };
-
-export default useParamUrl;

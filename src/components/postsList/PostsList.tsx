@@ -22,7 +22,7 @@ import { MESSAGES } from '../../constants/messages';
 import classNames from 'classnames';
 import Select from '../UI/select/Select';
 import { SORT_ORDER_VALUES } from '../../constants/api';
-import useParamUrl from '../../hooks/useParamUrl';
+import { useParamUrl } from '../../hooks/useParamUrl';
 
 const INIT_LIMIT = 9;
 const SEARCH_MAX_LENGTH = 30;
