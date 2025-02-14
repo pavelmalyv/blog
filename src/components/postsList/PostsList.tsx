@@ -22,10 +22,14 @@ import { MESSAGES } from '../../constants/messages';
 import classNames from 'classnames';
 import Select from '../UI/select/Select';
 import { SORT_ORDER_VALUES } from '../../constants/api';
+import useParamUrl from '../../hooks/useParamUrl';
 
-const SEARCH_MAX_LENGTH = 30;
 const INIT_LIMIT = 9;
-const INIT_SORT_SELECT = 'id|desc';
+const SEARCH_MAX_LENGTH = 30;
+
+const KEY_SORT_BY = 'sortBy';
+const KEY_ORDER = 'order';
+const VALUES_SORT = ['id|desc', 'id|asc', 'views|desc'];
 
 const PostsList = () => {
 	const params = useParams<{ pagination?: string }>();
@@ -71,8 +75,18 @@ const PostsList = () => {
 		return [sortBy, SORT_ORDER_VALUES.find((item) => item === order)] as const;
 	};
 
+	const joinSortOrder = (sort: string, order: string) => `${sort}|${order}`;
+
+	const param = joinSortOrder(
+		searchParams.get(KEY_SORT_BY) ?? '',
+		searchParams.get(KEY_ORDER) ?? '',
+	);
+
+	const sortKeys = useMemo(() => [KEY_SORT_BY, KEY_ORDER], []);
+	const [sortParam, setSortParam] = useParamUrl(param, VALUES_SORT, sortKeys);
+
 	const [limit, setLimit] = useState(INIT_LIMIT);
-	const [sortSelect, setSortSelect] = useState(INIT_SORT_SELECT);
+	const [sortSelect, setSortSelect] = useState(sortParam ?? VALUES_SORT[0]);
 
 	let total: number | undefined;
 	let posts: Posts | null[] = Array(limit).fill(null);
@@ -108,6 +122,28 @@ const PostsList = () => {
 
 		setLastQuerySearch(searchStateDebounced);
 	}, [isFetching, searchStateDebounced]);
+
+	const handleChangeSort = (e: React.ChangeEvent<HTMLSelectElement>) => {
+		const value = e.target.value;
+		setSortSelect(value);
+
+		const [sortBy, order] = splitSortOrder(value);
+
+		if (!order) {
+			return;
+		}
+
+		setSortParam(value, [
+			{
+				key: KEY_SORT_BY,
+				value: sortBy,
+			},
+			{
+				key: KEY_ORDER,
+				value: order,
+			},
+		]);
+	};
 
 	let body: React.ReactNode;
 	if (isError) {
@@ -182,12 +218,12 @@ const PostsList = () => {
 					<Select
 						label="SortSelect by"
 						value={sortSelect}
-						onChange={(e) => setSortSelect(e.target.value)}
+						onChange={handleChangeSort}
 						aria-controls={idPosts}
 					>
-						<Select.Option value={INIT_SORT_SELECT}>Newest to oldest</Select.Option>
-						<Select.Option value="id|asc">Oldest to newest</Select.Option>
-						<Select.Option value="views|desc">Most interesting</Select.Option>
+						<Select.Option value={VALUES_SORT[0]}>Newest to oldest</Select.Option>
+						<Select.Option value={VALUES_SORT[1]}>Oldest to newest</Select.Option>
+						<Select.Option value={VALUES_SORT[2]}>Most interesting</Select.Option>
 					</Select>
 					<Select
 						label="Show by"
