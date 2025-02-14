@@ -1,7 +1,7 @@
-import type { PostsResponse } from '../types/posts';
+import type { Post, PostsResponse } from '../types/posts';
 import type { SortOrder } from '../types/api';
 
-import { postsResponseSchema } from '../schemas/postsSchemas';
+import { postSchema, postsResponseSchema } from '../schemas/postsSchemas';
 import { apiSlice } from './apiSlice';
 
 interface GetPostsParams {
@@ -61,9 +61,7 @@ const postsSlice = apiSlice.injectEndpoints({
 				};
 			},
 			transformResponse: async (response: unknown) => {
-				const colors = ['00605E', '006992', '5D5D5D'];
-
-				// добавить свойства "createdAt", "image" в объект ответа сервера
+				// преобразование ответа сервера
 				if (
 					typeof response === 'object' &&
 					response !== null &&
@@ -71,8 +69,6 @@ const postsSlice = apiSlice.injectEndpoints({
 					'total' in response &&
 					Array.isArray(response.posts)
 				) {
-					const postsPerMonth = Math.ceil(Number(response.total) / 12);
-
 					response.posts = response.posts.map((post) => {
 						return addAdditionalFieldsPost(post);
 					});
@@ -83,7 +79,17 @@ const postsSlice = apiSlice.injectEndpoints({
 				return result;
 			},
 		}),
+		getPostById: build.query<Post, string>({
+			query: (id) => `/posts/${id}`,
+			transformResponse: async (response: unknown) => {
+				// преобразование ответа сервера
+				response = addAdditionalFieldsPost(response);
+				//
+
+				return await postSchema.validate(response);
+			},
+		}),
 	}),
 });
 
-export const { useGetPostsQuery } = postsSlice;
+export const { useGetPostsQuery, useGetPostByIdQuery } = postsSlice;

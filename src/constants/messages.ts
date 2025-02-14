@@ -7,5 +7,6 @@ export const MESSAGES = {
 		return `For the query "${query}", ${quantity} ${postWord} ${verb} found`;
 	},
 	postsLoading: 'Loading posts...',
+	postLoading: 'Loading post...',
 	authorLoading: 'Loading author...',
 };
