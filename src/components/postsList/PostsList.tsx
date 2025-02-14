@@ -13,8 +13,7 @@ import { blogUrl } from '../../routes/routes';
 import { useValidatePaginationTotal } from '../../hooks/useValidatePaginationTotal';
 import Filter from '../filter/Filter';
 import Search from '../Forms/search/Search';
-import { useEffect, useId, useMemo, useState } from 'react';
-import { debounce } from 'lodash';
+import { useId, useMemo, useState } from 'react';
 import Field from '../UI/field/Field';
 import { useDelayAnimationLoading } from '../../hooks/useDelayAnimationLoading';
 import Message from '../UI/message/Message';
@@ -23,9 +22,11 @@ import classNames from 'classnames';
 import Select from '../UI/select/Select';
 import { SORT_ORDER_VALUES } from '../../constants/api';
 import { useParamUrl } from '../../hooks/useParamUrl';
+import { useSearch } from '../../hooks/useSearch';
+
+const SEARCH_MAX_LENGTH = 30;
 
 const INIT_LIMIT = 9;
-const SEARCH_MAX_LENGTH = 30;
 
 const KEY_SORT_BY = 'sortBy';
 const KEY_ORDER = 'order';
@@ -39,34 +40,6 @@ const PostsList = () => {
 	);
 
 	const [searchParams, setSearchParams] = useSearchParams();
-	const searchQ = searchParams.get('q')?.slice(0, SEARCH_MAX_LENGTH);
-	const [searchField, setSearchField] = useState(searchQ ?? '');
-	const [searchStateDebounced, setSearchStateDebounced] = useState(searchQ);
-	const [lastQuerySearch, setLastQuerySearch] = useState<string | undefined>(undefined);
-	const setSearchDebounced = useMemo(() => debounce(setSearchStateDebounced, 300), []);
-
-	useEffect(() => {
-		return () => setSearchDebounced.cancel();
-	}, [setSearchDebounced]);
-
-	const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const value = e.target.value;
-
-		setSearchParams(
-			(prev) => {
-				if (value.length === 0) {
-					prev.delete('q');
-				} else {
-					prev.set('q', value);
-				}
-				return prev;
-			},
-			{ replace: true },
-		);
-
-		setSearchField(value);
-		setSearchDebounced(value);
-	};
 
 	const splitSortOrder = (sortParam: string) => {
 		const paramsArray = sortParam.split('|');
@@ -88,15 +61,28 @@ const PostsList = () => {
 	const [limit, setLimit] = useState(INIT_LIMIT);
 	const [sortSelect, setSortSelect] = useState(sortParam ?? VALUES_SORT[0]);
 
+	let isLoading = false;
+	let isFetching = false;
 	let total: number | undefined;
 	let posts: Posts | null[] = Array(limit).fill(null);
 	const skip = paginationParam ? (paginationParam - 1) * limit : 0;
 	const [sortBy, order] = splitSortOrder(sortSelect);
 
-	const { data, isLoading, isFetching, isError } = useGetPostsQuery(
-		{ limit, skip, search: searchStateDebounced, sortBy, order },
+	const { searchDebounced, lastQuerySearch, searchField, isLoadingDelaySearch, handleSearch } =
+		useSearch(isLoading, isFetching, SEARCH_MAX_LENGTH);
+
+	const {
+		data,
+		isLoading: isLoadingQuery,
+		isFetching: isFetchingQuery,
+		isError,
+	} = useGetPostsQuery(
+		{ limit, skip, search: searchDebounced, sortBy, order },
 		{ skip: !isValidPaginationParam },
 	);
+
+	isLoading = isLoadingQuery;
+	isFetching = isFetchingQuery;
 
 	if (!isLoading && data) {
 		posts = data.posts;
@@ -111,17 +97,6 @@ const PostsList = () => {
 	});
 
 	const isFetchingDelayPosts = useDelayAnimationLoading(isFetching);
-	const isLoadingDelaySearch = useDelayAnimationLoading(
-		(searchField.length > 0 || Boolean(lastQuerySearch)) && isFetching && !isLoading,
-	);
-
-	useEffect(() => {
-		if (isFetching) {
-			return;
-		}
-
-		setLastQuerySearch(searchStateDebounced);
-	}, [isFetching, searchStateDebounced]);
 
 	const handleChangeSort = (e: React.ChangeEvent<HTMLSelectElement>) => {
 		const value = e.target.value;
