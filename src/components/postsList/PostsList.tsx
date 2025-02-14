@@ -7,29 +7,26 @@ import Section from '../UI/section/Section';
 import cl from './PostsList.module.scss';
 import { ERROR_MESSAGES } from '../../constants/error';
 import Pagination from '../UI/pagination/Pagination';
-import { useParams, useSearchParams } from 'react-router';
+import { useParams } from 'react-router';
 import { useValidatePaginationParam } from '../../hooks/useValidatePaginationParam';
 import { blogUrl } from '../../routes/routes';
 import { useValidatePaginationTotal } from '../../hooks/useValidatePaginationTotal';
 import Filter from '../filter/Filter';
 import Search from '../Forms/search/Search';
-import { useId, useMemo, useState } from 'react';
+import { useId, useState } from 'react';
 import Field from '../UI/field/Field';
 import { useDelayAnimationLoading } from '../../hooks/useDelayAnimationLoading';
 import Message from '../UI/message/Message';
 import { MESSAGES } from '../../constants/messages';
 import classNames from 'classnames';
 import Select from '../UI/select/Select';
-import { SORT_ORDER_VALUES } from '../../constants/api';
-import { useParamUrl } from '../../hooks/useParamUrl';
 import { useSearch } from '../../hooks/useSearch';
+import { useSortBy } from '../../hooks/useSortBy';
 
 const SEARCH_MAX_LENGTH = 30;
 
 const INIT_LIMIT = 9;
 
-const KEY_SORT_BY = 'sortBy';
-const KEY_ORDER = 'order';
 const VALUES_SORT = ['id|desc', 'id|asc', 'views|desc'];
 
 const PostsList = () => {
@@ -39,37 +36,17 @@ const PostsList = () => {
 		blogUrl.base,
 	);
 
-	const [searchParams, setSearchParams] = useSearchParams();
-
-	const splitSortOrder = (sortParam: string) => {
-		const paramsArray = sortParam.split('|');
-		const sortBy = paramsArray[0];
-		const order = paramsArray.length === 2 ? paramsArray[1] : undefined;
-		return [sortBy, SORT_ORDER_VALUES.find((item) => item === order)] as const;
-	};
-
-	const joinSortOrder = (sort: string, order: string) => `${sort}|${order}`;
-
-	const param = joinSortOrder(
-		searchParams.get(KEY_SORT_BY) ?? '',
-		searchParams.get(KEY_ORDER) ?? '',
-	);
-
-	const sortKeys = useMemo(() => [KEY_SORT_BY, KEY_ORDER], []);
-	const [sortParam, setSortParam] = useParamUrl(param, VALUES_SORT, sortKeys);
-
 	const [limit, setLimit] = useState(INIT_LIMIT);
-	const [sortSelect, setSortSelect] = useState(sortParam ?? VALUES_SORT[0]);
 
 	let isLoading = false;
 	let isFetching = false;
 	let total: number | undefined;
 	let posts: Posts | null[] = Array(limit).fill(null);
 	const skip = paginationParam ? (paginationParam - 1) * limit : 0;
-	const [sortBy, order] = splitSortOrder(sortSelect);
 
 	const { searchDebounced, lastQuerySearch, searchField, isLoadingDelaySearch, handleSearch } =
 		useSearch(isLoading, isFetching, SEARCH_MAX_LENGTH);
+	const { sortBy, order, sortSelectValue, handleChangeSort } = useSortBy(VALUES_SORT);
 
 	const {
 		data,
@@ -83,6 +60,7 @@ const PostsList = () => {
 
 	isLoading = isLoadingQuery;
 	isFetching = isFetchingQuery;
+	const isFetchingDelayPosts = useDelayAnimationLoading(isFetching);
 
 	if (!isLoading && data) {
 		posts = data.posts;
@@ -95,30 +73,6 @@ const PostsList = () => {
 		currentPage: paginationParam,
 		createPaginationUrl: blogUrl.pagination,
 	});
-
-	const isFetchingDelayPosts = useDelayAnimationLoading(isFetching);
-
-	const handleChangeSort = (e: React.ChangeEvent<HTMLSelectElement>) => {
-		const value = e.target.value;
-		setSortSelect(value);
-
-		const [sortBy, order] = splitSortOrder(value);
-
-		if (!order) {
-			return;
-		}
-
-		setSortParam(value, [
-			{
-				key: KEY_SORT_BY,
-				value: sortBy,
-			},
-			{
-				key: KEY_ORDER,
-				value: order,
-			},
-		]);
-	};
 
 	let body: React.ReactNode;
 	if (isError) {
@@ -192,7 +146,7 @@ const PostsList = () => {
 				<div className={cl['filter-select-group']}>
 					<Select
 						label="SortSelect by"
-						value={sortSelect}
+						value={sortSelectValue}
 						onChange={handleChangeSort}
 						aria-controls={idPosts}
 					>
