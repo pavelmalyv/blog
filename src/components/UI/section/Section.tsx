@@ -4,15 +4,15 @@ import { useId } from 'react';
 interface SectionProps {
 	title: string;
 	children: React.ReactNode;
-	region?: boolean;
+	labelledby?: boolean;
 }
 
-const Section = ({ title, children, region = true }: SectionProps) => {
+const Section = ({ title, children, labelledby = true }: SectionProps) => {
 	const idTitle = useId();
-	const ariaLabelledby = region ? idTitle : undefined;
+	const ariaLabelledby = labelledby ? idTitle : undefined;
 
 	return (
-		<section className={cl.section} aria-labelledby={ariaLabelledby}>
+		<section className="section" aria-labelledby={ariaLabelledby}>
 			<div className="container">
 				<div className={cl.head}>
 					<h2 id={idTitle} className="h2">
