@@ -10,7 +10,7 @@ interface useValidatePaginationTotalProps {
 	createPaginationUrl: UrlPagination;
 }
 
-const useValidatePaginationTotal = ({
+export const useValidatePaginationTotal = ({
 	limit,
 	total,
 	currentPage,
@@ -40,5 +40,3 @@ const useValidatePaginationTotal = ({
 
 	return page;
 };
-
-export default useValidatePaginationTotal;

@@ -10,7 +10,7 @@ import Pagination from '../UI/pagination/Pagination';
 import { useParams, useSearchParams } from 'react-router';
 import { useValidatePaginationParam } from '../../hooks/useValidatePaginationParam';
 import { blogUrl } from '../../routes/routes';
-import useValidatePaginationTotal from '../../hooks/useValidatePaginationTotal';
+import { useValidatePaginationTotal } from '../../hooks/useValidatePaginationTotal';
 import Filter from '../filter/Filter';
 import Search from '../Forms/search/Search';
 import { useEffect, useId, useMemo, useState } from 'react';
