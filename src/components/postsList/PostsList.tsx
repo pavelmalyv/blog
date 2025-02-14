@@ -23,6 +23,7 @@ import Select from '../UI/select/Select';
 import { useSearch } from '../../hooks/useSearch';
 import { useSortBy } from '../../hooks/useSortBy';
 import { useLimit } from '../../hooks/useLimit';
+import { useSearchLoading } from '../../hooks/useSearchLoading';
 
 const SEARCH_MAX_LENGTH = 30;
 const VALUES_SORT = ['id|desc', 'id|asc', 'views|desc'];
@@ -35,11 +36,7 @@ const PostsList = () => {
 		blogUrl.base,
 	);
 
-	let isLoading = false;
-	let isFetching = false;
-
-	const { searchDebounced, lastQuerySearch, searchField, isLoadingDelaySearch, handleSearch } =
-		useSearch(isLoading, isFetching, SEARCH_MAX_LENGTH);
+	const { searchDebounced, searchField, handleSearch } = useSearch(SEARCH_MAX_LENGTH);
 	const { sortBy, order, sortSelectValue, handleChangeSort } = useSortBy(VALUES_SORT);
 	const { limit, handleChangeLimit } = useLimit(VALUES_LIMIT);
 
@@ -47,19 +44,18 @@ const PostsList = () => {
 	let posts: Posts | null[] = Array(limit).fill(null);
 	const skip = paginationParam ? (paginationParam - 1) * limit : 0;
 
-	const {
-		data,
-		isLoading: isLoadingQuery,
-		isFetching: isFetchingQuery,
-		isError,
-	} = useGetPostsQuery(
+	const { data, isLoading, isFetching, isError } = useGetPostsQuery(
 		{ limit, skip, search: searchDebounced, sortBy, order },
 		{ skip: !isValidPaginationParam },
 	);
 
-	isLoading = isLoadingQuery;
-	isFetching = isFetchingQuery;
 	const isFetchingDelayPosts = useDelayAnimationLoading(isFetching);
+	const { lastQuerySearch, isLoadingDelaySearch } = useSearchLoading(
+		isFetching,
+		isLoading,
+		searchDebounced,
+		searchField,
+	);
 
 	if (!isLoading && data) {
 		posts = data.posts;
