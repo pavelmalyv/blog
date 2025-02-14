@@ -1,13 +1,15 @@
-import ReactPaginate from 'react-paginate';
 import type { UrlPagination } from '../../../types/routes';
+
 import classNames from 'classnames';
 import cl from './Pagination.module.scss';
+import ReactPaginate from 'react-paginate';
+import Icon from '../icon/Icon';
+import HiddenLoadingMessage from '../hiddenLoadingMessage/HiddenLoadingMessage';
+
 import { getPages } from '../../../utils/pagination';
 import { useLocation, useNavigate } from 'react-router';
 import { useEffect, useState } from 'react';
-import HiddenLoadingMessage from '../hiddenLoadingMessage/HiddenLoadingMessage';
 import { useDelayAnimationLoading } from '../../../hooks/useDelayAnimationLoading';
-import Icon from '../icon/Icon';
 
 const ButtonContent = ({ previous }: { previous: boolean }) => {
 	return (

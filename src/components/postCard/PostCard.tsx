@@ -1,18 +1,20 @@
 import type { Post } from '../../types/posts';
+
 import classNames from 'classnames';
 import cl from './PostCard.module.scss';
-import { Link } from 'react-router';
-import { truncate } from 'lodash';
 import Skeleton from 'react-loading-skeleton';
 import Tags from '../UI/tags/Tags';
+import Icon from '../UI/icon/Icon';
+import ErrorMessage from '../UI/errorMessage/ErrorMessage';
+import HiddenLoadingMessage from '../UI/hiddenLoadingMessage/HiddenLoadingMessage';
+
+import { Link } from 'react-router';
+import { truncate } from 'lodash';
 import { useLazyGetUserByIdQuery } from '../../api/usersSlice';
 import { useEffect, useId } from 'react';
 import { getDisplayDate } from '../../utils/date';
-import ErrorMessage from '../UI/errorMessage/ErrorMessage';
 import { ERROR_MESSAGES } from '../../constants/error';
-import HiddenLoadingMessage from '../UI/hiddenLoadingMessage/HiddenLoadingMessage';
 import { blogUrl } from '../../routes/routes';
-import Icon from '../UI/icon/Icon';
 import { MESSAGES } from '../../constants/messages';
 
 interface PostCardProps {

@@ -1,13 +1,14 @@
 import type { Posts } from '../../types/posts';
+
 import cl from './PopularPosts.module.scss';
-import { useGetPostsQuery } from '../../api/postsSlice';
-import Section from '../UI/section/Section';
 import PostCard from '../postCard/PostCard';
+import Section from '../UI/section/Section';
 import ErrorMessage from '../UI/errorMessage/ErrorMessage';
-import { ERROR_MESSAGES } from '../../constants/error';
 import HiddenLoadingMessage from '../UI/hiddenLoadingMessage/HiddenLoadingMessage';
 import Message from '../UI/message/Message';
+import { useGetPostsQuery } from '../../api/postsSlice';
 import { MESSAGES } from '../../constants/messages';
+import { ERROR_MESSAGES } from '../../constants/error';
 
 const PopularPosts = () => {
 	let posts: Posts | null[] = Array(4).fill(null);

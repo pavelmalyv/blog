@@ -1,5 +1,5 @@
-import { useRouteError } from 'react-router';
 import Root from './Root';
+import { useRouteError } from 'react-router';
 
 const ErrorPage = () => {
 	const error = useRouteError();

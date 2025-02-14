@@ -1,6 +1,6 @@
-import { NavLink } from 'react-router';
 import cl from './Navigation.module.scss';
 import classNames from 'classnames';
+import { NavLink } from 'react-router';
 
 interface NavigationProps {
 	children: React.ReactNode;

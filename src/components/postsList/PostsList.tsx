@@ -1,29 +1,31 @@
 import type { Posts } from '../../types/posts';
-import { useGetPostsQuery } from '../../api/postsSlice';
+
+import cl from './PostsList.module.scss';
+import classNames from 'classnames';
+import Filter from '../filter/Filter';
+import Search from '../Forms/search/Search';
 import PostCard from '../postCard/PostCard';
 import ErrorMessage from '../UI/errorMessage/ErrorMessage';
 import HiddenLoadingMessage from '../UI/hiddenLoadingMessage/HiddenLoadingMessage';
 import Section from '../UI/section/Section';
-import cl from './PostsList.module.scss';
-import { ERROR_MESSAGES } from '../../constants/error';
-import Pagination from '../UI/pagination/Pagination';
-import { useParams } from 'react-router';
-import { useValidatePaginationParam } from '../../hooks/useValidatePaginationParam';
-import { blogUrl } from '../../routes/routes';
-import { useValidatePaginationTotal } from '../../hooks/useValidatePaginationTotal';
-import Filter from '../filter/Filter';
-import Search from '../Forms/search/Search';
-import { useId } from 'react';
-import Field from '../UI/field/Field';
-import { useDelayAnimationLoading } from '../../hooks/useDelayAnimationLoading';
-import Message from '../UI/message/Message';
-import { MESSAGES } from '../../constants/messages';
-import classNames from 'classnames';
 import Select from '../UI/select/Select';
+import Pagination from '../UI/pagination/Pagination';
+import Message from '../UI/message/Message';
+import Field from '../UI/field/Field';
+
+import { useId } from 'react';
+import { useParams } from 'react-router';
+import { blogUrl } from '../../routes/routes';
+import { useGetPostsQuery } from '../../api/postsSlice';
+import { useValidatePaginationParam } from '../../hooks/useValidatePaginationParam';
+import { useValidatePaginationTotal } from '../../hooks/useValidatePaginationTotal';
+import { useDelayAnimationLoading } from '../../hooks/useDelayAnimationLoading';
 import { useSearch } from '../../hooks/useSearch';
 import { useSortBy } from '../../hooks/useSortBy';
 import { useLimit } from '../../hooks/useLimit';
 import { useSearchLoading } from '../../hooks/useSearchLoading';
+import { MESSAGES } from '../../constants/messages';
+import { ERROR_MESSAGES } from '../../constants/error';
 
 const SEARCH_MAX_LENGTH = 30;
 const VALUES_SORT = ['id|desc', 'id|asc', 'views|desc'];

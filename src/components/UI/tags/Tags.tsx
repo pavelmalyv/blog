@@ -1,7 +1,8 @@
-import Skeleton from 'react-loading-skeleton';
 import type { Tags } from '../../../types/tags';
+
 import cl from './Tags.module.scss';
 import classNames from 'classnames';
+import Skeleton from 'react-loading-skeleton';
 
 interface TagsProps {
 	tags: Tags | null;

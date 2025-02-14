@@ -1,6 +1,7 @@
-import { postsResponseSchema } from '../schemas/postsSchemas';
 import type { PostsResponse } from '../types/posts';
 import type { SortOrder } from '../types/api';
+
+import { postsResponseSchema } from '../schemas/postsSchemas';
 import { apiSlice } from './apiSlice';
 
 interface GetPostsParams {

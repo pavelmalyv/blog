@@ -1,6 +1,6 @@
 import cl from './ThemeSwitch.module.scss';
-import { useState } from 'react';
 import Icon from '../icon/Icon';
+import { useState } from 'react';
 
 const ThemeSwitch = () => {
 	const [dark, setDark] = useState(false);

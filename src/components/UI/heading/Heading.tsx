@@ -1,5 +1,5 @@
-import { useEffect, useRef } from 'react';
 import cl from './Heading.module.scss';
+import { useEffect, useRef } from 'react';
 
 interface HeadingProps {
 	title: string;

@@ -1,4 +1,5 @@
 import type { User } from '../types/users';
+
 import { apiSlice } from './apiSlice';
 import { userSchema } from '../schemas/usersSchemas';
 

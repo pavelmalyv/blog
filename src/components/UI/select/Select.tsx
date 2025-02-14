@@ -1,7 +1,7 @@
-import { useId } from 'react';
 import Label from '../label/Label';
 import cl from './Select.module.scss';
 import Icon from '../icon/Icon';
+import { useId } from 'react';
 
 interface SelectProps {
 	children: React.ReactNode;

@@ -1,5 +1,5 @@
-import { Link } from 'react-router';
 import cl from './Logo.module.scss';
+import { Link } from 'react-router';
 
 const Logo = () => {
 	return (

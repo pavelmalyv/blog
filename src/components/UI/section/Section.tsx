@@ -1,5 +1,5 @@
-import { useId } from 'react';
 import cl from './Section.module.scss';
+import { useId } from 'react';
 
 interface SectionProps {
 	title: string;
