@@ -13,7 +13,7 @@ import { blogUrl } from '../../routes/routes';
 import { useValidatePaginationTotal } from '../../hooks/useValidatePaginationTotal';
 import Filter from '../filter/Filter';
 import Search from '../Forms/search/Search';
-import { useId, useState } from 'react';
+import { useId } from 'react';
 import Field from '../UI/field/Field';
 import { useDelayAnimationLoading } from '../../hooks/useDelayAnimationLoading';
 import Message from '../UI/message/Message';
@@ -22,12 +22,11 @@ import classNames from 'classnames';
 import Select from '../UI/select/Select';
 import { useSearch } from '../../hooks/useSearch';
 import { useSortBy } from '../../hooks/useSortBy';
+import { useLimit } from '../../hooks/useLimit';
 
 const SEARCH_MAX_LENGTH = 30;
-
-const INIT_LIMIT = 9;
-
 const VALUES_SORT = ['id|desc', 'id|asc', 'views|desc'];
+const VALUES_LIMIT = [9, 18, 36];
 
 const PostsList = () => {
 	const params = useParams<{ pagination?: string }>();
@@ -36,17 +35,17 @@ const PostsList = () => {
 		blogUrl.base,
 	);
 
-	const [limit, setLimit] = useState(INIT_LIMIT);
-
 	let isLoading = false;
 	let isFetching = false;
-	let total: number | undefined;
-	let posts: Posts | null[] = Array(limit).fill(null);
-	const skip = paginationParam ? (paginationParam - 1) * limit : 0;
 
 	const { searchDebounced, lastQuerySearch, searchField, isLoadingDelaySearch, handleSearch } =
 		useSearch(isLoading, isFetching, SEARCH_MAX_LENGTH);
 	const { sortBy, order, sortSelectValue, handleChangeSort } = useSortBy(VALUES_SORT);
+	const { limit, handleChangeLimit } = useLimit(VALUES_LIMIT);
+
+	let total: number | undefined;
+	let posts: Posts | null[] = Array(limit).fill(null);
+	const skip = paginationParam ? (paginationParam - 1) * limit : 0;
 
 	const {
 		data,
@@ -157,12 +156,12 @@ const PostsList = () => {
 					<Select
 						label="Show by"
 						value={String(limit)}
-						onChange={(e) => setLimit(Number(e.target.value))}
+						onChange={handleChangeLimit}
 						aria-controls={idPosts}
 					>
-						<Select.Option value={String(INIT_LIMIT)}>{INIT_LIMIT}</Select.Option>
-						<Select.Option value="18">18</Select.Option>
-						<Select.Option value="36">36</Select.Option>
+						<Select.Option value={String(VALUES_LIMIT[0])}>{VALUES_LIMIT[0]}</Select.Option>
+						<Select.Option value={String(VALUES_LIMIT[1])}>{VALUES_LIMIT[1]}</Select.Option>
+						<Select.Option value={String(VALUES_LIMIT[2])}>{VALUES_LIMIT[2]}</Select.Option>
 					</Select>
 				</div>
 			</Filter>
