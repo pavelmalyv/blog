@@ -12,6 +12,37 @@ interface GetPostsParams {
 	search?: string;
 }
 
+// адаптация публичного api под проект
+const addAdditionalFieldsPost = (post: unknown) => {
+	const colors = ['00605E', '006992', '5D5D5D'];
+
+	if (typeof post == 'object' && post !== null && 'id' in post && typeof post.id === 'number') {
+		//createdAt
+		const date = new Date('2023.10.01');
+		date.setDate(date.getDate() + post.id * 2);
+		const createdAt = date.toISOString();
+
+		//image
+		const colorImage = colors[post.id % colors.length];
+		const image = {
+			src: `https://dummyjson.com/image/960x600/${colorImage}/ffffff?text=Blog+%23${post.id}&fontFamily=poppins&type=jpg`,
+			webp: `https://dummyjson.com/image/960x600/${colorImage}/ffffff?text=Blog+%23${post.id}&fontFamily=poppins&type=webp`,
+			width: 960,
+			height: 600,
+			alt: `Blog #${post.id}`,
+		};
+
+		return {
+			...post,
+			createdAt,
+			image,
+		};
+	}
+
+	return post;
+};
+//
+
 const postsSlice = apiSlice.injectEndpoints({
 	endpoints: (build) => ({
 		getPosts: build.query<PostsResponse, GetPostsParams>({
@@ -43,31 +74,7 @@ const postsSlice = apiSlice.injectEndpoints({
 					const postsPerMonth = Math.ceil(Number(response.total) / 12);
 
 					response.posts = response.posts.map((post) => {
-						if (typeof post == 'object' && post !== null && 'id' in post) {
-							//createdAt
-							const month = Math.ceil(post.id / postsPerMonth);
-							const indexInMonth = post.id - (month - 1) * postsPerMonth;
-							const day = Math.ceil((indexInMonth * 28) / postsPerMonth);
-							const createdAt = new Date(2024, month - 1, day).toISOString();
-
-							//image
-							const colorImage = colors[post.id % colors.length];
-							const image = {
-								src: `https://dummyjson.com/image/960x600/${colorImage}/ffffff?text=Blog+%23${post.id}&fontFamily=poppins&type=jpg`,
-								webp: `https://dummyjson.com/image/960x600/${colorImage}/ffffff?text=Blog+%23${post.id}&fontFamily=poppins&type=webp`,
-								width: 960,
-								height: 600,
-								alt: `Blog #${post.id}`,
-							};
-
-							return {
-								...post,
-								createdAt,
-								image,
-							};
-						}
-
-						return post;
+						return addAdditionalFieldsPost(post);
 					});
 				}
 				//
