@@ -1,29 +1,45 @@
-import Root from '../pages/Root';
-import Home from '../pages/Home';
-import ErrorPage from '../pages/ErrorPage';
-import Post from '../pages/Post';
-
 import { blogUrl } from './routes';
 import { createBrowserRouter } from 'react-router';
-import Post from '../pages/Post';
+import { lazy, Suspense } from 'react';
+
+const Home = lazy(() => import('../pages/Home'));
+const Root = lazy(() => import('../pages/Root'));
+const ErrorPage = lazy(() => import('../pages/ErrorPage'));
+const Post = lazy(() => import('../pages/Post'));
 
 const router = createBrowserRouter([
 	{
 		path: '/',
-		element: <Root />,
+		element: (
+			<Suspense>
+				<Root />
+			</Suspense>
+		),
 		errorElement: <ErrorPage />,
 		children: [
 			{
 				path: blogUrl.base,
-				element: <Home />,
+				element: (
+					<Suspense>
+						<Home />
+					</Suspense>
+				),
 			},
 			{
 				path: blogUrl.pagination(':pagination'),
-				element: <Home />,
+				element: (
+					<Suspense>
+						<Home />
+					</Suspense>
+				),
 			},
 			{
 				path: blogUrl.post(':id'),
-				element: <Post />,
+				element: (
+					<Suspense>
+						<Post />
+					</Suspense>
+				),
 			},
 		],
 	},
