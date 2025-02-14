@@ -1,9 +1,11 @@
 import Root from '../pages/Root';
 import Home from '../pages/Home';
 import ErrorPage from '../pages/ErrorPage';
+import Post from '../pages/Post';
 
 import { blogUrl } from './routes';
 import { createBrowserRouter } from 'react-router';
+import Post from '../pages/Post';
 
 const router = createBrowserRouter([
 	{
@@ -18,6 +20,10 @@ const router = createBrowserRouter([
 			{
 				path: blogUrl.pagination(':pagination'),
 				element: <Home />,
+			},
+			{
+				path: blogUrl.post(':id'),
+				element: <Post />,
 			},
 		],
 	},
