@@ -16,7 +16,7 @@ import Search from '../Forms/search/Search';
 import { useEffect, useId, useMemo, useState } from 'react';
 import { debounce } from 'lodash';
 import Field from '../UI/field/Field';
-import useDelayAnimationLoading from '../../hooks/useDelayAnimationLoading';
+import { useDelayAnimationLoading } from '../../hooks/useDelayAnimationLoading';
 import Message from '../UI/message/Message';
 import { MESSAGES } from '../../constants/messages';
 import classNames from 'classnames';

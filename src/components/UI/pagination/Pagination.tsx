@@ -6,7 +6,7 @@ import { getPages } from '../../../utils/pagination';
 import { useLocation, useNavigate } from 'react-router';
 import { useEffect, useState } from 'react';
 import HiddenLoadingMessage from '../hiddenLoadingMessage/HiddenLoadingMessage';
-import useDelayAnimationLoading from '../../../hooks/useDelayAnimationLoading';
+import { useDelayAnimationLoading } from '../../../hooks/useDelayAnimationLoading';
 import Icon from '../icon/Icon';
 
 const ButtonContent = ({ previous }: { previous: boolean }) => {
