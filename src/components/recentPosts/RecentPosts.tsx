@@ -12,7 +12,11 @@ import { MESSAGES } from '../../constants/messages';
 const LIMIT = 5;
 
 const RecentPosts = () => {
-	const { data, isLoading, isFetching, isError } = useGetPostsQuery({ limit: LIMIT });
+	const { data, isLoading, isFetching, isError } = useGetPostsQuery({
+		limit: LIMIT,
+		sortBy: 'id',
+		order: 'desc',
+	});
 
 	let body: React.ReactNode;
 	let posts: Posts | null[] = new Array(LIMIT).fill(null);
