@@ -6,3 +6,7 @@ export interface BlogUrl {
 	post: UrlPost;
 	pagination: UrlPagination;
 }
+
+export interface AuthorUrl {
+	profile: UrlPost;
+}
