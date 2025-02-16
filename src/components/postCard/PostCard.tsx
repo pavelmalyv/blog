@@ -29,7 +29,7 @@ const PostCard = ({ post, styleCard = 'small' }: PostCardProps) => {
 	if (post) {
 		const length = styleCard === 'large' ? 370 : 90;
 
-		description = truncate(post.body, {
+		description = truncate(post.excerpt, {
 			length,
 			separator: /,? +/,
 		});
@@ -76,13 +76,13 @@ const PostCard = ({ post, styleCard = 'small' }: PostCardProps) => {
 			<div className={cl.image}>
 				{post ? (
 					<picture>
-						<source srcSet={post.image.webp} type="image/webp" />
+						<source srcSet={post.thumbnail.webp} type="image/webp" />
 						<img
 							className={cl['image-img']}
-							src={post.image.src}
-							width={post.image.width}
-							height={post.image.height}
-							alt={post.image.alt}
+							src={post.thumbnail.src}
+							width={post.thumbnail.width}
+							height={post.thumbnail.height}
+							alt={post.thumbnail.alt}
 						/>
 					</picture>
 				) : (
