@@ -55,6 +55,10 @@
 .h1 {
 	font-size: 36px;
 	font-weight: 700;
+
+	@include utils.tablet-m {
+		font-size: 32px;
+	}
 }
 
 .h2 {
