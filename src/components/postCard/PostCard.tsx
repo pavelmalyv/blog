@@ -5,17 +5,13 @@ import cl from './PostCard.module.scss';
 import Skeleton from 'react-loading-skeleton';
 import Tags from '../UI/tags/Tags';
 import Icon from '../UI/icon/Icon';
-import ErrorMessage from '../UI/errorMessage/ErrorMessage';
-import HiddenLoadingMessage from '../UI/hiddenLoadingMessage/HiddenLoadingMessage';
 
 import { Link } from 'react-router';
 import { truncate } from 'lodash';
-import { useLazyGetUserByIdQuery } from '../../api/usersSlice';
-import { useEffect, useId } from 'react';
+import { useId } from 'react';
 import { getDisplayDate } from '../../utils/date';
-import { ERROR_MESSAGES } from '../../constants/error';
 import { blogUrl } from '../../routes/routes';
-import { MESSAGES } from '../../constants/messages';
+import Author from '../author/Author';
 
 interface PostCardProps {
 	post: Post | null;
@@ -37,39 +33,12 @@ const PostCard = ({ post, styleCard = 'small' }: PostCardProps) => {
 		description = <Skeleton count={2} />;
 	}
 
-	const [
-		getUserByIdQuery,
-		{
-			data: dataAuthor,
-			isLoading: isLoadingAuthor,
-			isFetching: isFetchingAuthor,
-			isError: isErrorAuthor,
-		},
-	] = useLazyGetUserByIdQuery();
-
-	let author: React.ReactNode;
-	if (isErrorAuthor) {
-		author = <ErrorMessage message={ERROR_MESSAGES.userLoad} />;
-	} else if (dataAuthor && post) {
-		author = dataAuthor.firstName + ' ' + dataAuthor.lastName;
-	} else {
-		author = <Skeleton width="4em" />;
-	}
-
 	let createdAt: React.ReactNode;
 	if (post) {
 		createdAt = <span className={cl['about-date']}>• {getDisplayDate(post.createdAt)}</span>;
 	} else {
 		createdAt = <Skeleton width="6em" />;
 	}
-
-	useEffect(() => {
-		if (!post || dataAuthor || (isLoadingAuthor && isFetchingAuthor)) {
-			return;
-		}
-
-		getUserByIdQuery(post.userId, true);
-	}, [post, isLoadingAuthor, isFetchingAuthor, dataAuthor, getUserByIdQuery]);
 
 	return (
 		<article className={classNames(cl.card, cl[`card-${styleCard}`])} aria-labelledby={idTitle}>
@@ -92,15 +61,7 @@ const PostCard = ({ post, styleCard = 'small' }: PostCardProps) => {
 
 			<div className={cl.body}>
 				<div className={classNames('date', cl.about)}>
-					<span aria-busy={isLoadingAuthor}>
-						<HiddenLoadingMessage
-							isLoading={isLoadingAuthor}
-							message={MESSAGES.authorLoading}
-							isRoleStatus={false}
-						/>
-
-						{author}
-					</span>
+					<Author id={post?.userId ?? null} />
 					{createdAt}
 				</div>
 				<div
