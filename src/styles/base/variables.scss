@@ -55,7 +55,7 @@
 		--header-height: 72px;
 	}
 
-	@include utils.mobile-s {
+	@include utils.mobile-m {
 		--container-padding-x: 15px;
 	}
 }
