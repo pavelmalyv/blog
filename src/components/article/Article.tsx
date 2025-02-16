@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import cl from './Article.module.scss';
 import Skeleton from 'react-loading-skeleton';
 import Tags from '../UI/tags/Tags';
+import Text from '../UI/text/Text';
 import parse from 'html-react-parser';
 
 import { Link } from 'react-router';
@@ -43,7 +44,23 @@ const Article = ({ post, labelledby = true }: ArticleProps) => {
 					/>
 				</picture>
 			)}
-			<div className={classNames('text', cl.body)}>{post && parse(post.body)}</div>
+			</div>
+			<div className={classNames('text', cl.body)}>
+				<Text>
+					{post ? (
+						parse(post.body)
+					) : (
+						<Text.Skeleton>
+							<Skeleton count={3} />
+							<Skeleton height={400} />
+							<Skeleton count={4} />
+							<Skeleton count={3} />
+							<Skeleton height={400} />
+							<Skeleton count={4} />
+						</Text.Skeleton>
+					)}
+				</Text>
+			</div>
 			<div className={cl.tags}>{post && <Tags tags={post.tags} />}</div>
 		</article>
 	);

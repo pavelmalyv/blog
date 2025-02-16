@@ -1,0 +1,90 @@
+@use '../../../styles/utils';
+
+.text {
+	line-height: 1.5;
+
+	.skeleton {
+		display: flex;
+		flex-direction: column;
+		row-gap: 0.75em;
+	}
+
+	h2,
+	h3 {
+		font-weight: 700;
+
+		&:not(:first-child) {
+			margin-top: 12px;
+		}
+	}
+
+	h2 {
+		font-size: 18px;
+	}
+
+	p:not(:first-child),
+	ul:not(:first-child) {
+		padding-top: 0.75em;
+	}
+
+	picture:not(:first-child),
+	figure:not(:first-child) {
+		margin-top: 0.75em;
+	}
+
+	strong {
+		font-weight: 700;
+	}
+
+	picture {
+		display: block;
+	}
+
+	figure {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		row-gap: 12px;
+		text-align: center;
+
+		figcaption {
+			max-width: 567px;
+		}
+	}
+
+	ul {
+		display: flex;
+		flex-direction: column;
+		padding-left: 0.75em;
+
+		li {
+			position: relative;
+			padding-left: 0.75em;
+
+			&::before {
+				@include utils.square(0.31em);
+
+				content: '';
+				display: inline-block;
+				position: absolute;
+				top: 1em;
+				left: 0;
+				border-radius: 100%;
+				translate: 0 -100%;
+				background-color: currentColor;
+			}
+		}
+	}
+
+	a {
+		@include utils.base-animation(color);
+
+		text-decoration: underline;
+		text-decoration-skip-ink: none;
+
+		@include utils.hover {
+			color: rgb(var(--color-accent));
+			text-decoration: none;
+		}
+	}
+}
