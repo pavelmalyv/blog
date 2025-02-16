@@ -14,12 +14,6 @@
 	align-items: center;
 	flex-wrap: wrap;
 	column-gap: 0.3em;
-
-	&-link {
-		@include utils.hover {
-			text-decoration: underline;
-		}
-	}
 }
 
 .title {
@@ -27,7 +21,6 @@
 }
 
 .image {
-	display: block;
 	margin-bottom: 32px;
 }
 

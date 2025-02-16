@@ -5,10 +5,11 @@ import cl from './Article.module.scss';
 import Skeleton from 'react-loading-skeleton';
 import Tags from '../UI/tags/Tags';
 import Text from '../UI/text/Text';
+import Author from '../author/Author';
 import parse from 'html-react-parser';
 
-import { Link } from 'react-router';
 import { useId } from 'react';
+import { getDisplayDate } from '../../utils/date';
 
 interface ArticleProps {
 	post: Post | null;
@@ -21,29 +22,32 @@ const Article = ({ post, labelledby = true }: ArticleProps) => {
 	return (
 		<article className={cl.article} aria-labelledby={labelledby ? idArticle : undefined}>
 			<div className={classNames('date', cl.about)}>
-				<div className={cl.date}>Sunday , 1 Jan 2023</div>
+				<div className={cl.date}>
+					{post ? getDisplayDate(post.createdAt, { weekday: true }) : <Skeleton width="12em" />}
+				</div>
 				<div className={cl.author}>
-					<div className={cl['author-label']}>Author:</div>
-					<Link to={'other'} className={cl['author-link']}>
-						Aria Parker
-					</Link>
+					{post && <div className={cl['author-label']}>Author:</div>}
+					<Author id={post?.userId ?? null} />
 				</div>
 			</div>
 			<h1 id={idArticle} className={classNames('h1', cl.title)}>
 				{post ? post.title : <Skeleton />}
 			</h1>
-			{post && (
-				<picture className={cl['image']}>
-					<source srcSet={post.image.webp} type="image/webp" />
-					<img
-						className={cl['image-img']}
-						src={post.image.src}
-						width={post.image.width}
-						height={post.image.height}
-						alt={post.image.alt}
-					/>
-				</picture>
-			)}
+			<div className={cl.image}>
+				{post ? (
+					<picture className={cl['image-wrapper']}>
+						<source srcSet={post.image.webp} type="image/webp" />
+						<img
+							className={cl['image-img']}
+							src={post.image.src}
+							width={post.image.width}
+							height={post.image.height}
+							alt={post.image.alt}
+						/>
+					</picture>
+				) : (
+					<Skeleton height={500} />
+				)}
 			</div>
 			<div className={classNames('text', cl.body)}>
 				<Text>
