@@ -5,8 +5,8 @@ import { postSchema, postsResponseSchema } from '../schemas/postsSchemas';
 import { apiSlice } from './apiSlice';
 
 interface GetPostsParams {
-	limit: number;
-	skip: number;
+	limit?: number;
+	skip?: number;
 	sortBy?: string;
 	order?: SortOrder;
 	search?: string;
@@ -15,7 +15,7 @@ interface GetPostsParams {
 const postsSlice = apiSlice.injectEndpoints({
 	endpoints: (build) => ({
 		getPosts: build.query<PostsResponse, GetPostsParams>({
-			query: ({ limit, skip, sortBy, order, search }) => {
+			query: ({ limit = 30, skip = 0, sortBy, order, search }) => {
 				const url = search ? '/posts/search' : '/posts';
 
 				return {
