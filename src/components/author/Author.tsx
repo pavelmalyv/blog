@@ -14,13 +14,15 @@ interface AuthorProps {
 const Author = ({ id }: AuthorProps) => {
 	const [getUserByIdQuery, { data, isLoading, isFetching, isError }] = useLazyGetUserByIdQuery();
 
+	const isBusy = isLoading && isFetching;
+
 	useEffect(() => {
-		if (!id || data || (isLoading && isFetching)) {
+		if (!id || data || isLoading) {
 			return;
 		}
 
 		getUserByIdQuery(id, true);
-	}, [id, data, isLoading, isFetching, getUserByIdQuery]);
+	}, [id, data, isLoading, getUserByIdQuery]);
 
 	let author: React.ReactNode;
 	if (isError) {
@@ -32,9 +34,9 @@ const Author = ({ id }: AuthorProps) => {
 	}
 
 	return (
-		<span aria-busy={isLoading}>
+		<span aria-busy={isBusy}>
 			<HiddenLoadingMessage
-				isLoading={isLoading}
+				isLoading={isBusy}
 				message={MESSAGES.authorLoading}
 				isRoleStatus={false}
 			/>
