@@ -1,0 +1,7 @@
+@use '../../styles/utils';
+
+.author {
+	@include utils.hover {
+		text-decoration: underline;
+	}
+}
