@@ -2,6 +2,9 @@
 $tablet-l-above: 1101px;
 $tablet-l: 1100px;
 
+$tablet-m-above: 981px;
+$tablet-m: 980px;
+
 // mobile-l
 
 $mobile-l-above: 721px;
@@ -16,6 +19,18 @@ $mobile-m: 568px;
 
 $mobile-s-above: 371px;
 $mobile-s: 370px;
+
+@mixin tablet-m-above {
+	@media (min-width: $tablet-m-above) {
+		@content;
+	}
+}
+
+@mixin tablet-m {
+	@media (max-width: $tablet-m) {
+		@content;
+	}
+}
 
 @mixin tablet-l-above {
 	@media (min-width: $tablet-l-above) {
