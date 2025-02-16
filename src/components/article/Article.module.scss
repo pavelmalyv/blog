@@ -1,0 +1,40 @@
+@use '../../styles/utils';
+
+.about {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+	gap: 20px 30px;
+	flex-wrap: wrap;
+	margin-bottom: 32px;
+}
+
+.author {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	column-gap: 0.3em;
+
+	&-link {
+		@include utils.hover {
+			text-decoration: underline;
+		}
+	}
+}
+
+.title {
+	margin-bottom: 32px;
+}
+
+.image {
+	display: block;
+	margin-bottom: 32px;
+}
+
+.body {
+	line-height: 1.5;
+}
+
+.tags {
+	margin-top: 24px;
+}
