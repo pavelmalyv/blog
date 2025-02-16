@@ -30,6 +30,13 @@
 	flex-grow: 1;
 }
 
+.date {
+	font-size: 14px;
+	line-height: 1.42;
+	font-weight: 600;
+	color: rgb(var(--color-accent));
+}
+
 .main {
 	padding-top: var(--header-height);
 }

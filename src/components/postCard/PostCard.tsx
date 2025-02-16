@@ -91,7 +91,7 @@ const PostCard = ({ post, styleCard = 'small' }: PostCardProps) => {
 			</div>
 
 			<div className={cl.body}>
-				<div className={cl.about}>
+				<div className={classNames('date', cl.about)}>
 					<span aria-busy={isLoadingAuthor}>
 						<HiddenLoadingMessage
 							isLoading={isLoadingAuthor}
