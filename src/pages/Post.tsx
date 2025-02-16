@@ -3,12 +3,13 @@ import type { Post } from '../types/posts';
 import Article from '../components/article/Article';
 import ErrorMessage from '../components/UI/errorMessage/ErrorMessage';
 import HiddenLoadingMessage from '../components/UI/hiddenLoadingMessage/HiddenLoadingMessage';
+import Sidebar from '../components/sidebar/Sidebar';
+import RecentPosts from '../components/recentPosts/RecentPosts';
 
 import { useParams } from 'react-router';
 import { useGetPostByIdQuery } from '../api/postsSlice';
 import { ERROR_MESSAGES } from '../constants/error';
 import { MESSAGES } from '../constants/messages';
-import Sidebar from '../components/sidebar/Sidebar';
 
 const Post = () => {
 	const params = useParams<{ id?: string }>();
@@ -35,7 +36,9 @@ const Post = () => {
 				<Sidebar reverse={true}>
 					{articleBody}
 
-					<Sidebar.Aside title="Recent blog posts">{null}</Sidebar.Aside>
+					<Sidebar.Aside title="Recent blog posts">
+						<RecentPosts />
+					</Sidebar.Aside>
 				</Sidebar>
 			</div>
 		</div>
