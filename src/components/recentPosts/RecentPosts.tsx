@@ -11,12 +11,36 @@ import { MESSAGES } from '../../constants/messages';
 
 const LIMIT = 5;
 
-const RecentPosts = () => {
-	const { data, isLoading, isFetching, isError } = useGetPostsQuery({
-		limit: LIMIT,
-		sortBy: 'id',
-		order: 'desc',
-	});
+interface RecentPostsProps {
+	excludeId?: string;
+}
+
+const RecentPosts = ({ excludeId }: RecentPostsProps) => {
+	const { data, isLoading, isFetching, isError } = useGetPostsQuery(
+		{
+			limit: LIMIT + 1,
+			sortBy: 'id',
+			order: 'desc',
+		},
+		{
+			selectFromResult: (result) => {
+				if (result.data?.posts && excludeId) {
+					const postsFiltered = result.data.posts
+						.filter((post) => post.id !== excludeId)
+						.slice(0, LIMIT);
+
+					return {
+						...result,
+						data: {
+							...result.data,
+							posts: postsFiltered,
+						},
+					};
+				}
+				return result;
+			},
+		},
+	);
 
 	let body: React.ReactNode;
 	let posts: Posts | null[] = new Array(LIMIT).fill(null);
@@ -36,8 +60,8 @@ const RecentPosts = () => {
 
 					return (
 						<li key={key}>
-						<PostCard post={post} />
-					</li>
+							<PostCard post={post} />
+						</li>
 					);
 				})}
 			</ul>

@@ -13,11 +13,13 @@ import { MESSAGES } from '../constants/messages';
 
 const Post = () => {
 	const params = useParams<{ id?: string }>();
-	if (!params.id) {
+	const idPost = params.id;
+
+	if (!idPost) {
 		throw new Response('Not Found', { status: 404 });
 	}
 
-	const { data, isLoading, isFetching, isError } = useGetPostByIdQuery(params.id);
+	const { data, isLoading, isFetching, isError } = useGetPostByIdQuery(idPost);
 	const isBusy = isLoading || isFetching;
 
 	let articleBody: React.ReactNode;
@@ -36,7 +38,7 @@ const Post = () => {
 			</div>
 
 			<Sidebar.Aside title="Recent blog posts">
-				<RecentPosts />
+				<RecentPosts excludeId={idPost} />
 			</Sidebar.Aside>
 		</Sidebar>
 	);
