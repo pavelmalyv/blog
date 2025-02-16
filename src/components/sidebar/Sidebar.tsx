@@ -31,7 +31,7 @@ const Aside = ({ title, labelledby = true, children }: AsideProps) => {
 
 	return (
 		<aside className={cl.aside} aria-labelledby={ariaLabelledby}>
-			<h2 id={idAside} className="h2">
+			<h2 id={idAside} className={classNames('h2', cl.title)}>
 				{title}
 			</h2>
 

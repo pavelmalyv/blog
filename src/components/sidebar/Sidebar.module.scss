@@ -1,9 +1,29 @@
+@use '../../styles/utils';
+
 .sidebar {
 	display: grid;
 	column-gap: 32px;
 	grid-template-columns: 342px 1fr;
 
+	@include utils.tablet-l {
+		grid-template-columns: 285px 1fr;
+	}
+
+	@include utils.tablet-m {
+		grid-template-columns: 1fr;
+	}
+
 	&_reverse .aside {
 		order: -1;
 	}
+}
+
+.aside {
+	@include utils.tablet-m {
+		display: none;
+	}
+}
+
+.title {
+	margin-bottom: 32px;
 }
