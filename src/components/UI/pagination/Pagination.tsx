@@ -1,4 +1,4 @@
-import type { UrlPagination } from '../../../types/routes';
+import type { UrlPageId } from '../../../types/routes';
 
 import classNames from 'classnames';
 import cl from './Pagination.module.scss';
@@ -27,7 +27,7 @@ interface PaginationProps {
 	total: number;
 	currentPage: number;
 	urlBase: string;
-	createUrl: UrlPagination;
+	createUrl: UrlPageId;
 	isLoading: boolean;
 }
 

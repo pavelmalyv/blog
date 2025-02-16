@@ -1,5 +1,6 @@
+import type { UrlPageId } from '../types/routes';
+
 import { useEffect } from 'react';
-import type { UrlPagination } from '../types/routes';
 import { getPages } from '../utils/pagination';
 import { useLocation, useNavigate } from 'react-router';
 
@@ -7,7 +8,7 @@ interface useValidatePaginationTotalProps {
 	limit: number;
 	total?: number;
 	currentPage?: number;
-	createPaginationUrl: UrlPagination;
+	createPaginationUrl: UrlPageId;
 }
 
 export const useValidatePaginationTotal = ({
