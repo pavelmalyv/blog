@@ -31,11 +31,15 @@ const RecentPosts = () => {
 	} else {
 		body = (
 			<ul className={cl.list}>
-				{posts.map((post) => (
-					<li>
+				{posts.map((post, index) => {
+					const key = post ? post.id : index;
+
+					return (
+						<li key={key}>
 						<PostCard post={post} />
 					</li>
-				))}
+					);
+				})}
 			</ul>
 		);
 	}
