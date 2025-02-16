@@ -8,6 +8,7 @@ import { useParams } from 'react-router';
 import { useGetPostByIdQuery } from '../api/postsSlice';
 import { ERROR_MESSAGES } from '../constants/error';
 import { MESSAGES } from '../constants/messages';
+import Sidebar from '../components/sidebar/Sidebar';
 
 const Post = () => {
 	const params = useParams<{ id?: string }>();
@@ -18,12 +19,12 @@ const Post = () => {
 	const { data, isLoading, isFetching, isError } = useGetPostByIdQuery(params.id);
 	const isBusy = isLoading || isFetching;
 
-	let body: React.ReactNode;
+	let articleBody: React.ReactNode;
 
 	if (isError) {
-		body = <ErrorMessage message={ERROR_MESSAGES.postLoad} />;
+		articleBody = <ErrorMessage message={ERROR_MESSAGES.postLoad} />;
 	} else {
-		body = <Article post={data ?? null} />;
+		articleBody = <Article post={data ?? null} />;
 	}
 
 	return (
@@ -31,7 +32,11 @@ const Post = () => {
 			<div aria-busy={isBusy}>
 				<HiddenLoadingMessage isLoading={isBusy} message={MESSAGES.postLoading} />
 
-				{body}
+				<Sidebar reverse={true}>
+					{articleBody}
+
+					<Sidebar.Aside title="Recent blog posts">{null}</Sidebar.Aside>
+				</Sidebar>
 			</div>
 		</div>
 	);

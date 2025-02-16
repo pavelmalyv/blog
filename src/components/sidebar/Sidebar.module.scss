@@ -1,0 +1,9 @@
+.sidebar {
+	display: grid;
+	column-gap: 32px;
+	grid-template-columns: 342px 1fr;
+
+	&_reverse .aside {
+		order: -1;
+	}
+}
