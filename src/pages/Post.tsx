@@ -29,19 +29,16 @@ const Post = () => {
 	}
 
 	return (
-		<div className="container">
+		<Sidebar reverse={true}>
 			<div aria-busy={isBusy}>
 				<HiddenLoadingMessage isLoading={isBusy} message={MESSAGES.postLoading} />
-
-				<Sidebar reverse={true}>
-					{articleBody}
-
-					<Sidebar.Aside title="Recent blog posts">
-						<RecentPosts />
-					</Sidebar.Aside>
-				</Sidebar>
+				{articleBody}
 			</div>
-		</div>
+
+			<Sidebar.Aside title="Recent blog posts">
+				<RecentPosts />
+			</Sidebar.Aside>
+		</Sidebar>
 	);
 };
 
