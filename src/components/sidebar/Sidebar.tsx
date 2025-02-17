@@ -40,6 +40,15 @@ const Aside = ({ title, labelledby = true, children }: AsideProps) => {
 	);
 };
 
+interface MainProps {
+	children: React.ReactNode;
+}
+
+const Main = ({ children }: MainProps) => {
+	return <div>{children}</div>;
+};
+
 Sidebar.Aside = Aside;
+Sidebar.Main = Main;
 
 export default Sidebar;

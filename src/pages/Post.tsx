@@ -32,10 +32,12 @@ const Post = () => {
 
 	return (
 		<Sidebar reverse={true}>
-			<div aria-busy={isBusy}>
-				<HiddenLoadingMessage isLoading={isBusy} message={MESSAGES.postLoading} />
-				{articleBody}
-			</div>
+			<Sidebar.Main>
+				<div aria-busy={isBusy}>
+					<HiddenLoadingMessage isLoading={isBusy} message={MESSAGES.postLoading} />
+					{articleBody}
+				</div>
+			</Sidebar.Main>
 
 			<Sidebar.Aside title="Recent blog posts">
 				<RecentPosts excludeId={idPost} />
