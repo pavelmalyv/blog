@@ -78,7 +78,7 @@ const Field = forwardRef<HTMLInputElement, FieldProps>(
 						{isLoading ? <div className={cl.spinner}></div> : <Icon>{icon}</Icon>}
 					</div>
 				</div>
-				<div id={idErrorMessage} className={cl['error-message']} aria-live="polite">
+				<div id={idErrorMessage} className="error-message" aria-live="polite">
 					{errorMessage ? errorMessage : null}
 				</div>
 			</div>
