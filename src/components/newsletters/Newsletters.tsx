@@ -1,3 +1,4 @@
+import Subscription from '../Forms/subscription/Subscription';
 import Section from '../UI/section/Section';
 
 const Newsletters = () => {
@@ -12,7 +13,7 @@ const Newsletters = () => {
 			center={true}
 			marginBottom="large"
 		>
-			{null}
+			<Subscription title="Subscribe to the newsletter">{null}</Subscription>
 		</Section>
 	);
 };
