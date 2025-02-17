@@ -1,6 +1,12 @@
 .head {
 	margin-bottom: 32px;
 
+	&_center {
+		margin-left: auto;
+		margin-right: auto;
+		text-align: center;
+	}
+
 	&_medium {
 		max-width: 768px;
 	}

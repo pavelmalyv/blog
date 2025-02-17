@@ -11,6 +11,7 @@ interface SectionProps {
 	container?: boolean;
 	width?: 'medium' | 'full';
 	titleSize?: 'h1' | 'h2';
+	center?: boolean;
 }
 
 const Section = ({
@@ -22,6 +23,7 @@ const Section = ({
 	container = true,
 	width = 'full',
 	titleSize = 'h2',
+	center = false,
 }: SectionProps) => {
 	const idTitle = useId();
 	const ariaLabelledby = labelledby ? idTitle : undefined;
@@ -29,7 +31,11 @@ const Section = ({
 	return (
 		<section className="section" aria-labelledby={ariaLabelledby}>
 			<div className={classNames({ container: container })}>
-				<div className={classNames(cl.head, cl[`head_${width}`])}>
+				<div
+					className={classNames(cl.head, cl[`head_${width}`], {
+						[cl['head_center']]: center,
+					})}
+				>
 					{subtitle && <div className={cl.subtitle}>{subtitle}</div>}
 
 					<h2 id={idTitle} className={titleSize}>
