@@ -3,11 +3,12 @@ import { useId } from 'react';
 
 interface SectionProps {
 	title: string;
+	subtitle?: string;
 	children: React.ReactNode;
 	labelledby?: boolean;
 }
 
-const Section = ({ title, children, labelledby = true }: SectionProps) => {
+const Section = ({ title, subtitle, children, labelledby = true }: SectionProps) => {
 	const idTitle = useId();
 	const ariaLabelledby = labelledby ? idTitle : undefined;
 
@@ -15,6 +16,8 @@ const Section = ({ title, children, labelledby = true }: SectionProps) => {
 		<section className="section" aria-labelledby={ariaLabelledby}>
 			<div className="container">
 				<div className={cl.head}>
+					{subtitle && <div className={cl.subtitle}>{subtitle}</div>}
+
 					<h2 id={idTitle} className="h2">
 						{title}
 					</h2>
