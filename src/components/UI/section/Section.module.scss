@@ -1,5 +1,9 @@
 .head {
 	margin-bottom: 32px;
+
+	&_medium {
+		max-width: 768px;
+	}
 }
 
 .subtitle {

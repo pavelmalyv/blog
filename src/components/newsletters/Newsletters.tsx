@@ -7,6 +7,7 @@ const Newsletters = () => {
 			subtitle="Newsletters"
 			description="Subscribe to learn about new product features, the latest in technology, solutions, and updates."
 			container={false}
+			width="medium"
 		>
 			{null}
 		</Section>

@@ -9,6 +9,7 @@ interface SectionProps {
 	children: React.ReactNode;
 	labelledby?: boolean;
 	container?: boolean;
+	width?: 'medium' | 'full';
 }
 
 const Section = ({
@@ -18,6 +19,7 @@ const Section = ({
 	children,
 	labelledby = true,
 	container = true,
+	width = 'full',
 }: SectionProps) => {
 	const idTitle = useId();
 	const ariaLabelledby = labelledby ? idTitle : undefined;
@@ -25,7 +27,7 @@ const Section = ({
 	return (
 		<section className="section" aria-labelledby={ariaLabelledby}>
 			<div className={classNames({ container: container })}>
-				<div className={cl.head}>
+				<div className={classNames(cl.head, cl[`head_${width}`])}>
 					{subtitle && <div className={cl.subtitle}>{subtitle}</div>}
 
 					<h2 id={idTitle} className="h2">
