@@ -9,3 +9,5 @@ export const blogUrl: BlogUrl = {
 export const authorUrl: AuthorUrl = {
 	profile: (id) => `/author/${id}`,
 };
+
+export const policyUrl = '/policy';
