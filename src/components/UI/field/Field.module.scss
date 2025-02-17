@@ -40,9 +40,19 @@
 		display: none;
 	}
 
+	&[aria-invalid='true'] {
+		--border-color: rgb(var(--color-error));
+	}
+
 	&_icon {
 		padding-right: calc(var(--width-icon) + (var(--padding-x) * 2));
 	}
+}
+
+.error-message {
+	margin-top: 6px;
+	font-size: 14px;
+	color: rgb(var(--color-error));
 }
 
 .icon {

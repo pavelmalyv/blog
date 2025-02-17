@@ -2,7 +2,7 @@ import cl from './Field.module.scss';
 import classNames from 'classnames';
 import Icon from '../icon/Icon';
 import Label from '../label/Label';
-import { useId } from 'react';
+import { forwardRef, useId } from 'react';
 
 interface FieldProps {
 	label: string;
@@ -12,53 +12,78 @@ interface FieldProps {
 	placeholder?: string;
 	value?: string;
 	disabled?: boolean;
-	onChange?: React.ChangeEventHandler<HTMLInputElement>;
 	icon?: string;
 	maxLength?: number;
 	isLoading?: boolean;
+	errorMessage?: string;
+	autoComplete?: string;
+	onChange?: React.ChangeEventHandler<HTMLInputElement>;
+	onBlur?: React.FocusEventHandler<HTMLInputElement>;
 	'aria-controls'?: string;
+	'aria-invalid'?: boolean;
+	'aria-required'?: boolean;
 }
 
-const Field = ({
-	label,
-	isLabelHidden = false,
-	type = 'text',
-	name,
-	placeholder,
-	value,
-	disabled = false,
-	onChange,
-	icon,
-	maxLength,
-	isLoading = false,
-	'aria-controls': ariaControls,
-}: FieldProps) => {
-	const idField = useId();
+const Field = forwardRef<HTMLInputElement, FieldProps>(
+	(
+		{
+			label,
+			isLabelHidden = false,
+			type = 'text',
+			name,
+			placeholder,
+			value = '',
+			disabled,
+			icon,
+			maxLength,
+			isLoading = false,
+			errorMessage,
+			autoComplete,
+			onChange,
+			onBlur,
+			'aria-controls': ariaControls,
+			'aria-invalid': ariaInvalid,
+			'aria-required': ariaRequired,
+		},
+		ref,
+	) => {
+		const idField = useId();
+		const idErrorMessage = useId();
 
-	return (
-		<div className={cl.wrapper}>
-			<Label htmlFor={idField} isLabelHidden={isLabelHidden}>
-				{label}
-			</Label>
-			<div className={cl['field-wrapper']}>
-				<input
-					id={idField}
-					className={classNames(cl.field, { [cl['field_icon']]: icon })}
-					type={type}
-					name={name}
-					placeholder={placeholder}
-					value={value}
-					disabled={disabled}
-					onChange={onChange}
-					maxLength={maxLength}
-					aria-controls={ariaControls}
-				/>
-				<div className={cl.icon}>
-					{isLoading ? <div className={cl.spinner}></div> : <Icon>{icon}</Icon>}
+		return (
+			<div className={cl.wrapper}>
+				<Label htmlFor={idField} isLabelHidden={isLabelHidden}>
+					{label}
+				</Label>
+				<div className={cl['field-wrapper']}>
+					<input
+						ref={ref}
+						id={idField}
+						className={classNames(cl.field, { [cl['field_icon']]: icon })}
+						type={type}
+						name={name}
+						placeholder={placeholder}
+						value={value}
+						disabled={disabled}
+						maxLength={maxLength}
+						onChange={onChange}
+						onBlur={onBlur}
+						autoComplete={autoComplete}
+						aria-controls={ariaControls}
+						aria-invalid={ariaInvalid}
+						aria-describedby={idErrorMessage}
+						aria-required={ariaRequired}
+					/>
+					<div className={cl.icon}>
+						{isLoading ? <div className={cl.spinner}></div> : <Icon>{icon}</Icon>}
+					</div>
+				</div>
+				<div id={idErrorMessage} className={cl['error-message']} aria-live="polite">
+					{errorMessage ? errorMessage : null}
 				</div>
 			</div>
-		</div>
-	);
-};
+		);
+	},
+);
 
 export default Field;
