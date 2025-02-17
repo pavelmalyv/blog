@@ -10,6 +10,7 @@ const Newsletters = () => {
 			width="medium"
 			titleSize="h1"
 			center={true}
+			marginBottom="large"
 		>
 			{null}
 		</Section>
