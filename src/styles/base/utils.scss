@@ -45,6 +45,18 @@
 	padding: var(--section-padding-y) 0;
 }
 
+.link {
+	@include utils.base-animation(color);
+
+	text-decoration: underline;
+	text-decoration-skip-ink: none;
+
+	@include utils.hover {
+		text-decoration: none;
+		color: rgb(var(--color-accent));
+	}
+}
+
 .h2,
 .h3,
 .h4 {
