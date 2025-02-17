@@ -30,7 +30,7 @@
 	font-size: 20px;
 	line-height: 1.5;
 
-	@include utils.tablet-m {
+	@include utils.mobile-l {
 		font-size: 18px;
 		margin-top: 22px;
 	}
