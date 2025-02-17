@@ -9,14 +9,21 @@ interface SubscriptionProps {
 	title: string;
 	isHiddenTitle?: boolean;
 	children: React.ReactNode;
+	noValidate?: boolean;
 	onSubmit?: React.FormEventHandler<HTMLFormElement>;
 }
 
-const Subscription = ({ title, isHiddenTitle = true, children, onSubmit }: SubscriptionProps) => {
+const Subscription = ({
+	title,
+	isHiddenTitle = true,
+	children,
+	noValidate,
+	onSubmit,
+}: SubscriptionProps) => {
 	const idHead = useId();
 
 	return (
-		<form className={cl.form} onSubmit={onSubmit} aria-labelledby={idHead}>
+		<form className={cl.form} onSubmit={onSubmit} aria-labelledby={idHead} noValidate={noValidate}>
 			<h3 id={idHead} className={classNames({ 'visually-hidden': isHiddenTitle })}>
 				{title}
 			</h3>
