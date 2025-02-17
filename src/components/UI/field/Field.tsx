@@ -36,7 +36,7 @@ const Field = ({
 	const idField = useId();
 
 	return (
-		<div>
+		<div className={cl.wrapper}>
 			<Label htmlFor={idField} isLabelHidden={isLabelHidden}>
 				{label}
 			</Label>
