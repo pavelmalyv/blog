@@ -5,6 +5,7 @@ import { useId } from 'react';
 interface SectionProps {
 	title: string;
 	subtitle?: string;
+	description?: string;
 	children: React.ReactNode;
 	labelledby?: boolean;
 	container?: boolean;
@@ -13,6 +14,7 @@ interface SectionProps {
 const Section = ({
 	title,
 	subtitle,
+	description,
 	children,
 	labelledby = true,
 	container = true,
@@ -29,6 +31,8 @@ const Section = ({
 					<h2 id={idTitle} className="h2">
 						{title}
 					</h2>
+
+					{description && <div className={cl.description}>{description}</div>}
 				</div>
 
 				{children}
