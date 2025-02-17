@@ -3,7 +3,7 @@ import cl from './Section.module.scss';
 import { useId } from 'react';
 
 interface SectionProps {
-	title: string;
+	title?: string;
 	subtitle?: string;
 	description?: string;
 	children: React.ReactNode;
@@ -28,7 +28,7 @@ const Section = ({
 	marginBottom = 'medium',
 }: SectionProps) => {
 	const idTitle = useId();
-	const ariaLabelledby = labelledby ? idTitle : undefined;
+	const ariaLabelledby = labelledby && title ? idTitle : undefined;
 	const classesHead = classNames(cl.head, cl[`head_${width}`], cl[`head_${marginBottom}`], {
 		[cl['head_center']]: center,
 	});
@@ -36,15 +36,17 @@ const Section = ({
 	return (
 		<section className="section" aria-labelledby={ariaLabelledby}>
 			<div className={classNames({ container: container })}>
-				<div className={classesHead}>
-					{subtitle && <div className={cl.subtitle}>{subtitle}</div>}
+				{title && (
+					<div className={classesHead}>
+						{subtitle && <div className={cl.subtitle}>{subtitle}</div>}
 
-					<h2 id={idTitle} className={titleSize}>
-						{title}
-					</h2>
+						<h2 id={idTitle} className={titleSize}>
+							{title}
+						</h2>
 
-					{description && <div className={cl.description}>{description}</div>}
-				</div>
+						{description && <div className={cl.description}>{description}</div>}
+					</div>
+				)}
 
 				{children}
 			</div>
