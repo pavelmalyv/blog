@@ -18,4 +18,10 @@
 	@include utils.hover {
 		--background-color: rgb(var(--color-accent));
 	}
+
+	&_mobile-full {
+		@include utils.mobile-m {
+			width: 100%;
+		}
+	}
 }

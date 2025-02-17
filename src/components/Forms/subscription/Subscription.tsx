@@ -22,7 +22,7 @@ const Subscription = ({ title, isHiddenTitle = true, children }: SubscriptionPro
 			<div className={cl.body}>
 				{children}
 
-				<Button>Subscribe</Button>
+				<Button mobileFull={true}>Subscribe</Button>
 			</div>
 		</form>
 	);
