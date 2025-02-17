@@ -2,7 +2,7 @@ import Section from '../UI/section/Section';
 
 const Newsletters = () => {
 	return (
-		<Section title="Stories and interviews" subtitle="Newsletters">
+		<Section title="Stories and interviews" subtitle="Newsletters" container={false}>
 			{null}
 		</Section>
 	);
