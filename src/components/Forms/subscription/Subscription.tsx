@@ -1,5 +1,6 @@
 import cl from './Subscription.module.scss';
 import classNames from 'classnames';
+import Button from '../../UI/button/Button';
 
 import { useId } from 'react';
 
@@ -18,7 +19,11 @@ const Subscription = ({ title, isHiddenTitle = true, children }: SubscriptionPro
 				{title}
 			</h3>
 
-			<div className={cl.body}>{children}</div>
+			<div className={cl.body}>
+				{children}
+
+				<Button>Subscribe</Button>
+			</div>
 		</form>
 	);
 };
