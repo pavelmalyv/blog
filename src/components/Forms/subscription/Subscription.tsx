@@ -3,18 +3,20 @@ import classNames from 'classnames';
 import Button from '../../UI/button/Button';
 
 import { useId } from 'react';
+import { Link } from 'react-router';
 
 interface SubscriptionProps {
 	title: string;
 	isHiddenTitle?: boolean;
 	children: React.ReactNode;
+	onChange?: React.ChangeEventHandler<HTMLFormElement>;
 }
 
-const Subscription = ({ title, isHiddenTitle = true, children }: SubscriptionProps) => {
+const Subscription = ({ title, isHiddenTitle = true, children, onChange }: SubscriptionProps) => {
 	const idHead = useId();
 
 	return (
-		<form aria-labelledby={idHead}>
+		<form className={cl.form} onChange={onChange} aria-labelledby={idHead}>
 			<h3 id={idHead} className={classNames({ 'visually-hidden': isHiddenTitle })}>
 				{title}
 			</h3>
@@ -22,8 +24,16 @@ const Subscription = ({ title, isHiddenTitle = true, children }: SubscriptionPro
 			<div className={cl.body}>
 				{children}
 
-				<Button mobileFull={true}>Subscribe</Button>
+				<Button type="submit" mobileFull={true}>
+					Subscribe
+				</Button>
 			</div>
+			<small className={cl.policy}>
+				<span>We care about your data in our </span>
+				<Link to="#" className="link">
+					privacy policy
+				</Link>
+			</small>
 		</form>
 	);
 };

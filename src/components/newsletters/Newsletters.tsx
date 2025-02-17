@@ -1,4 +1,5 @@
 import Subscription from '../Forms/subscription/Subscription';
+import Field from '../UI/field/Field';
 import Section from '../UI/section/Section';
 
 const Newsletters = () => {
@@ -13,7 +14,9 @@ const Newsletters = () => {
 			center={true}
 			marginBottom="large"
 		>
-			<Subscription title="Subscribe to the newsletter">{null}</Subscription>
+			<Subscription title="Subscribe to the newsletter">
+				<Field label="Your email" isLabelHidden={true} placeholder="Enter your email" />
+			</Subscription>
 		</Section>
 	);
 };
