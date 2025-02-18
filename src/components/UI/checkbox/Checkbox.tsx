@@ -1,5 +1,7 @@
-import Icon from '../icon/Icon';
 import cl from './Checkbox.module.scss';
+import FieldError from '../fieldError/FieldError';
+import Icon from '../icon/Icon';
+
 import { forwardRef, useId } from 'react';
 
 interface CheckboxProps {
@@ -59,9 +61,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 					</span>
 					<span className={cl.description}>{label}</span>
 				</label>
-				<div id={idErrorMessage} className="error-message" aria-live="polite">
-					{errorMessage ? errorMessage : null}
-				</div>
+				<FieldError id={idErrorMessage} message={errorMessage ? errorMessage : null} />
 			</div>
 		);
 	},

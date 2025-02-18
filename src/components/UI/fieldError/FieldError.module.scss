@@ -1,0 +1,8 @@
+.message {
+	font-size: 14px;
+	color: rgb(var(--color-error));
+
+	&_visible {
+		margin-top: 6px;
+	}
+}

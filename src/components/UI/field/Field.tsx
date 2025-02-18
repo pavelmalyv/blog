@@ -2,6 +2,8 @@ import cl from './Field.module.scss';
 import classNames from 'classnames';
 import Icon from '../icon/Icon';
 import Label from '../label/Label';
+import FieldError from '../fieldError/FieldError';
+
 import { forwardRef, useId } from 'react';
 
 interface FieldProps {
@@ -78,9 +80,7 @@ const Field = forwardRef<HTMLInputElement, FieldProps>(
 						{isLoading ? <div className={cl.spinner}></div> : <Icon>{icon}</Icon>}
 					</div>
 				</div>
-				<div id={idErrorMessage} className="error-message" aria-live="polite">
-					{errorMessage ? errorMessage : null}
-				</div>
+				<FieldError id={idErrorMessage} message={errorMessage ? errorMessage : null} />
 			</div>
 		);
 	},
