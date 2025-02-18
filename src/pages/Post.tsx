@@ -43,7 +43,7 @@ const Post = () => {
 			</Sidebar.Main>
 
 			<Sidebar.Aside title="Recent blog posts">
-				<RecentPosts excludeId={idPost} />
+				<RecentPosts limit={5} excludeId={idPost} />
 			</Sidebar.Aside>
 		</Sidebar>
 	);

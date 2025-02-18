@@ -9,25 +9,30 @@ import { useGetPostsQuery } from '../../api/postsSlice';
 import { ERROR_MESSAGES } from '../../constants/error';
 import { MESSAGES } from '../../constants/messages';
 
-const LIMIT = 5;
-
 interface RecentPostsProps {
+	limit: number;
 	excludeId?: string;
 }
 
-const RecentPosts = ({ excludeId }: RecentPostsProps) => {
+const RecentPosts = ({ limit, excludeId }: RecentPostsProps) => {
+	const limitQuery = excludeId ? limit + 1 : limit;
+
 	const { data, isLoading, isFetching, isError } = useGetPostsQuery(
 		{
-			limit: LIMIT + 1,
+			limit: limitQuery,
 			sortBy: 'id',
 			order: 'desc',
 		},
 		{
 			selectFromResult: (result) => {
 				if (result.data?.posts && excludeId) {
+					if (!excludeId) {
+						return result;
+					}
+
 					const postsFiltered = result.data.posts
 						.filter((post) => post.id !== excludeId)
-						.slice(0, LIMIT);
+						.slice(0, limit);
 
 					return {
 						...result,
@@ -43,7 +48,7 @@ const RecentPosts = ({ excludeId }: RecentPostsProps) => {
 	);
 
 	let body: React.ReactNode;
-	let posts: Posts | null[] = new Array(LIMIT).fill(null);
+	let posts: Posts | null[] = new Array(limit).fill(null);
 	const isBusy = isLoading || isFetching;
 
 	if (!isLoading && data) {
