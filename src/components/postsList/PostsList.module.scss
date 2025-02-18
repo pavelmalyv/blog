@@ -1,34 +1,37 @@
 @use '../../styles/utils';
 
+.item {
+	flex: 1 0 calc((100% - (var(--column-gap) * var(--columns))) / var(--columns));
+}
+
 .list {
+	--columns: 3;
+	--column-gap: 32px;
+
 	position: relative;
 	z-index: 0;
-	display: grid;
-	grid-template-columns: repeat(3, 1fr);
-	gap: 48px 32px;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 48px var(--column-gap);
+
+	@include utils.tablet-l {
+		--columns: 2;
+		--column-gap: 16px;
+
+		row-gap: 24px;
+	}
+
+	@include utils.mobile-l {
+		--columns: 1;
+
+		row-gap: 16px;
+	}
 
 	&_vertical {
-		grid-template-columns: 1fr;
 		row-gap: 32px;
 	}
 
-	@include utils.tablet-l {
-		grid-template-columns: repeat(2, 1fr);
-		gap: 24px 16px;
-	}
-
-	@include utils.mobile-l {
-		grid-template-columns: 1fr;
-		gap: 16px;
-	}
-}
-
-.item:last-child {
-	@include utils.tablet-l {
-		grid-column: 1 / 3;
-	}
-
-	@include utils.mobile-l {
-		grid-column: 1;
+	&_vertical .item {
+		flex: 0 0 100%;
 	}
 }
