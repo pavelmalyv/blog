@@ -9,6 +9,10 @@
 		row-gap: 0.75em;
 	}
 
+	h2 {
+		font-size: 18px;
+	}
+
 	h2,
 	h3 {
 		font-weight: 700;
@@ -16,20 +20,6 @@
 		&:not(:first-child) {
 			margin-top: 12px;
 		}
-	}
-
-	h2 {
-		font-size: 18px;
-	}
-
-	p:not(:first-child),
-	ul:not(:first-child) {
-		padding-top: 0.75em;
-	}
-
-	picture:not(:first-child),
-	figure:not(:first-child) {
-		margin-top: 0.75em;
 	}
 
 	strong {
@@ -72,7 +62,7 @@
 				left: 0;
 				border-radius: 100%;
 				translate: 0 -100%;
-				background-color: currentColor;
+				background-color: currentcolor;
 			}
 		}
 	}
@@ -87,5 +77,12 @@
 			color: rgb(var(--color-accent));
 			text-decoration: none;
 		}
+	}
+
+	p:not(:first-child),
+	ul:not(:first-child),
+	picture:not(:first-child),
+	figure:not(:first-child) {
+		padding-top: 0.75em;
 	}
 }
