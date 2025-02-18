@@ -3,13 +3,14 @@ import Section from '../UI/section/Section';
 import Checkbox from '../UI/checkbox/Checkbox';
 import Button from '../UI/button/Button';
 import FormSmall from '../Forms/formSmall/FormSmall';
+import ModalSuccess from '../Modals/ModalSuccess/ModalSuccess';
 
 import { Link } from 'react-router';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { boolean, InferType, object, string } from 'yup';
 import { policyUrl } from '../../routes/routes';
-import { useId } from 'react';
+import { useId, useState } from 'react';
 import { ERROR_MESSAGES } from '../../constants/error';
 import { useSendNewslettersMutation } from '../../api/formsSlice';
 import { toast } from 'react-toastify';
@@ -23,7 +24,7 @@ type FormSchema = InferType<typeof formSchema>;
 
 const Newsletters = () => {
 	const idHead = useId();
-	const showFormError = () => toast.error(ERROR_MESSAGES.form);
+	const [isOpen, setIsOpen] = useState(false);
 
 	const { control, handleSubmit, reset } = useForm({
 		resolver: yupResolver(formSchema),
@@ -35,10 +36,13 @@ const Newsletters = () => {
 
 	const [sendNewsletters, { isLoading }] = useSendNewslettersMutation();
 
+	const showFormError = () => toast.error(ERROR_MESSAGES.form);
+
 	const onSubmit: SubmitHandler<FormSchema> = async () => {
 		try {
 			// не отправляем реальный email
 			await sendNewsletters('example@example.com').unwrap();
+			setIsOpen(true);
 			reset();
 		} catch (error) {
 			showFormError();
@@ -47,80 +51,84 @@ const Newsletters = () => {
 	};
 
 	return (
-		<Section
-			title="Stories and interviews"
-			subtitle="Newsletters"
-			description="Subscribe to learn about new product features, the latest in technology, solutions, and updates."
-			container={false}
-			width="medium"
-			titleSize="h1"
-			center={true}
-			marginBottom="large"
-		>
-			<FormSmall
-				title="Subscribe to the newsletter"
-				aria-labelledby={idHead}
-				noValidate={true}
-				onSubmit={handleSubmit(onSubmit)}
+		<>
+			<Section
+				title="Stories and interviews"
+				subtitle="Newsletters"
+				description="Subscribe to learn about new product features, the latest in technology, solutions, and updates."
+				container={false}
+				width="medium"
+				titleSize="h1"
+				center={true}
+				marginBottom="large"
 			>
-				<Controller
-					name="email"
-					control={control}
-					render={({ field, fieldState }) => (
-						<Field
-							type="email"
-							label="Your email"
-							isLabelHidden={true}
-							placeholder="Enter your email"
-							autoComplete="email"
-							onChange={field.onChange}
-							onBlur={field.onBlur}
-							value={field.value}
-							disabled={field.disabled}
-							name={field.name}
-							ref={field.ref}
-							aria-required={true}
-							aria-invalid={fieldState.invalid}
-							errorMessage={fieldState.error?.message}
-						/>
-					)}
-				/>
-				<Controller
-					name="policy"
-					control={control}
-					render={({ field, fieldState }) => {
-						const labelPolicy = (
-							<>
-								<span>I agree to the </span>
-								<Link to={policyUrl} className="link">
-									privacy policy
-								</Link>
-							</>
-						);
-
-						return (
-							<Checkbox
-								label={labelPolicy}
+				<FormSmall
+					title="Subscribe to the newsletter"
+					aria-labelledby={idHead}
+					noValidate={true}
+					onSubmit={handleSubmit(onSubmit)}
+				>
+					<Controller
+						name="email"
+						control={control}
+						render={({ field, fieldState }) => (
+							<Field
+								type="email"
+								label="Your email"
+								isLabelHidden={true}
+								placeholder="Enter your email"
+								autoComplete="email"
 								onChange={field.onChange}
 								onBlur={field.onBlur}
-								checked={field.value}
+								value={field.value}
 								disabled={field.disabled}
 								name={field.name}
 								ref={field.ref}
-								center={true}
 								aria-required={true}
 								aria-invalid={fieldState.invalid}
 								errorMessage={fieldState.error?.message}
 							/>
-						);
-					}}
-				/>
+						)}
+					/>
+					<Controller
+						name="policy"
+						control={control}
+						render={({ field, fieldState }) => {
+							const labelPolicy = (
+								<>
+									<span>I agree to the </span>
+									<Link to={policyUrl} className="link">
+										privacy policy
+									</Link>
+								</>
+							);
 
-				<Button type="submit" disabled={isLoading}>
-					Subscribe
-				</Button>
-			</FormSmall>
-		</Section>
+							return (
+								<Checkbox
+									label={labelPolicy}
+									onChange={field.onChange}
+									onBlur={field.onBlur}
+									checked={field.value}
+									disabled={field.disabled}
+									name={field.name}
+									ref={field.ref}
+									center={true}
+									aria-required={true}
+									aria-invalid={fieldState.invalid}
+									errorMessage={fieldState.error?.message}
+								/>
+							);
+						}}
+					/>
+
+					<Button type="submit" disabled={isLoading}>
+						Subscribe
+					</Button>
+				</FormSmall>
+			</Section>
+
+			<ModalSuccess isOpen={isOpen} onClose={() => setIsOpen(false)} />
+		</>
 	);
 };
 
