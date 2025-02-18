@@ -1,5 +1,5 @@
 import { debounce } from 'lodash';
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router';
 
 const KEY_SEARCH = 'q';
@@ -16,24 +16,27 @@ export const useSearch = (maxLength: number) => {
 		return () => setSearchDebounced.cancel();
 	}, [setSearchDebounced]);
 
-	const handleSearch = (e: React.ChangeEvent<HTMLInputElement>) => {
-		const value = e.target.value;
+	const handleSearch = useCallback(
+		(e: React.ChangeEvent<HTMLInputElement>) => {
+			const value = e.target.value;
 
-		setSearchParams(
-			(prev) => {
-				if (value.length === 0) {
-					prev.delete(KEY_SEARCH);
-				} else {
-					prev.set(KEY_SEARCH, value);
-				}
-				return prev;
-			},
-			{ replace: true },
-		);
+			setSearchParams(
+				(prev) => {
+					if (value.length === 0) {
+						prev.delete(KEY_SEARCH);
+					} else {
+						prev.set(KEY_SEARCH, value);
+					}
+					return prev;
+				},
+				{ replace: true },
+			);
 
-		setSearchField(value);
-		setSearchDebounced(value);
-	};
+			setSearchField(value);
+			setSearchDebounced(value);
+		},
+		[setSearchParams, setSearchDebounced],
+	);
 
 	return {
 		searchDebounced: searchStateDebounced,
