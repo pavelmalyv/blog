@@ -22,7 +22,11 @@ const formSchema = object({
 
 type FormSchema = InferType<typeof formSchema>;
 
-const Newsletters = () => {
+interface NewslettersProps {
+	titleLevel?: 1 | 2;
+}
+
+const Newsletters = ({ titleLevel }: NewslettersProps) => {
 	const idHead = useId();
 	const [isOpen, setIsOpen] = useState(false);
 
@@ -59,6 +63,7 @@ const Newsletters = () => {
 				container={false}
 				width="medium"
 				titleSize="h1"
+				titleLevel={titleLevel}
 				center={true}
 				marginBottom="large"
 			>
