@@ -1,4 +1,5 @@
 import cl from './Checkbox.module.scss';
+import classNames from 'classnames';
 import FieldError from '../fieldError/FieldError';
 import Icon from '../icon/Icon';
 
@@ -11,6 +12,7 @@ interface CheckboxProps {
 	disabled?: boolean;
 	errorMessage?: string;
 	autoComplete?: string;
+	center?: boolean;
 	onChange?: React.ChangeEventHandler<HTMLInputElement>;
 	onBlur?: React.FocusEventHandler<HTMLInputElement>;
 	'aria-controls'?: string;
@@ -27,6 +29,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 			disabled,
 			errorMessage,
 			autoComplete,
+			center = false,
 			onChange,
 			onBlur,
 			'aria-controls': ariaControls,
@@ -38,7 +41,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 		const idErrorMessage = useId();
 
 		return (
-			<div className={cl.wrapper}>
+			<div className={classNames(cl.wrapper, { [cl['wrapper_center']]: center })}>
 				<label className={cl.label}>
 					<input
 						ref={ref}

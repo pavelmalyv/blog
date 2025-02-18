@@ -102,6 +102,7 @@ const Newsletters = () => {
 									disabled={field.disabled}
 									name={field.name}
 									ref={field.ref}
+								center={true}
 									aria-required={true}
 									aria-invalid={fieldState.invalid}
 									errorMessage={fieldState.error?.message}
