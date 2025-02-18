@@ -32,7 +32,7 @@ const Field = forwardRef<HTMLInputElement, FieldProps>(
 			type = 'text',
 			name,
 			placeholder,
-			value = '',
+			value,
 			disabled,
 			icon,
 			maxLength,
