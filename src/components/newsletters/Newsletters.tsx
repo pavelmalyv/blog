@@ -1,15 +1,19 @@
 import cl from './Newsletters.module.scss';
 import Field from '../UI/field/Field';
 import Section from '../UI/section/Section';
+import Checkbox from '../UI/checkbox/Checkbox';
 import Button from '../UI/button/Button';
 
+import { Link } from 'react-router';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Controller, useForm } from 'react-hook-form';
-import { object, string } from 'yup';
+import { boolean, object, string } from 'yup';
+import { policyUrl } from '../../routes/routes';
 import { useId } from 'react';
 
 const formSchema = object({
 	email: string().email().required(),
+	policy: boolean().oneOf([true]).required(),
 });
 
 const Newsletters = () => {
@@ -19,6 +23,7 @@ const Newsletters = () => {
 		resolver: yupResolver(formSchema),
 		defaultValues: {
 			email: '',
+			policy: false,
 		},
 	});
 
@@ -74,7 +79,35 @@ const Newsletters = () => {
 					</Button>
 				</div>
 				<div className={cl.policy}>
-					<Checkbox label="I agree to the" aria-required={true} />
+					<Controller
+						name="policy"
+						control={control}
+						render={({ field, fieldState }) => {
+							const labelPolicy = (
+								<>
+									<span>I agree to the </span>
+									<Link to={policyUrl} className="link">
+										privacy policy
+									</Link>
+								</>
+							);
+
+							return (
+								<Checkbox
+									label={labelPolicy}
+									onChange={field.onChange}
+									onBlur={field.onBlur}
+									value={field.value}
+									disabled={field.disabled}
+									name={field.name}
+									ref={field.ref}
+									aria-required={true}
+									aria-invalid={fieldState.invalid}
+									errorMessage={fieldState.error?.message}
+								/>
+							);
+						}}
+					/>
 				</div>
 			</form>
 		</Section>
