@@ -73,6 +73,9 @@ const Newsletters = () => {
 						Subscribe
 					</Button>
 				</div>
+				<div className={cl.policy}>
+					<Checkbox label="I agree to the" aria-required={true} />
+				</div>
 			</form>
 		</Section>
 	);

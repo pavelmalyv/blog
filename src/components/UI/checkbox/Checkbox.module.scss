@@ -1,0 +1,50 @@
+@use '../../../styles/utils';
+
+.label {
+	display: flex;
+	align-items: center;
+	column-gap: 8px;
+}
+
+.field {
+	@include utils.visually-hidden();
+}
+
+.emulator {
+	--border-color: rgb(var(--color-border-primary));
+
+	@include utils.square(22px);
+
+	position: relative;
+	border: 1px solid var(--border-color);
+	border-radius: 4px;
+
+	&-marker {
+		@include utils.base-animation(opacity);
+
+		display: flex;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		translate: -50% -50%;
+		font-size: 18px;
+		opacity: 0;
+	}
+}
+
+.field:checked + .emulator .emulator-marker {
+	opacity: 1;
+}
+
+.field[aria-invalid='true'] + .emulator {
+	--border-color: rgb(var(--color-error));
+}
+
+.field:focus + .emulator {
+	--border-color: rgb(var(--color-accent));
+}
+
+.description {
+	font-size: 14px;
+	color: rgb(var(--color-text-secondary));
+}
