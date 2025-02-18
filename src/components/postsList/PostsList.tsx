@@ -13,7 +13,7 @@ import Pagination from '../UI/pagination/Pagination';
 import Message from '../UI/message/Message';
 import Field from '../UI/field/Field';
 
-import { useId } from 'react';
+import { useEffect, useId, useState } from 'react';
 import { useParams } from 'react-router';
 import { blogUrl } from '../../routes/routes';
 import { useGetPostsQuery } from '../../api/postsSlice';
@@ -23,9 +23,9 @@ import { useDelayAnimationLoading } from '../../hooks/useDelayAnimationLoading';
 import { useSearch } from '../../hooks/useSearch';
 import { useSortBy } from '../../hooks/useSortBy';
 import { useLimit } from '../../hooks/useLimit';
-import { useSearchLoading } from '../../hooks/useSearchLoading';
 import { MESSAGES } from '../../constants/messages';
 import { ERROR_MESSAGES } from '../../constants/error';
+import { useLastQuery } from '../../hooks/useLastQuery';
 
 const SEARCH_MAX_LENGTH = 30;
 const VALUES_SORT = ['id|desc', 'id|asc', 'views|desc'];
@@ -51,13 +51,26 @@ const PostsList = () => {
 		{ skip: !isValidPaginationParam },
 	);
 
-	const isFetchingDelayPosts = useDelayAnimationLoading(isFetching);
-	const { lastQuerySearch, isLoadingDelaySearch } = useSearchLoading(
-		isFetching,
-		isLoading,
-		searchDebounced,
-		searchField,
+	const joinSort = (sortBy: string, order: string) => `${sortBy}|${order}`;
+	const lastQueryLimit = useLastQuery(limit, isFetching);
+	const lastQuerySortBy = useLastQuery(joinSort(sortBy, order ?? ''), isFetching);
+	const lastQuerySearch = useLastQuery(searchDebounced, isFetching);
+
+	const [isAnimationLoadingPosts, setIsAnimationLoadingPosts] = useState(false);
+	const isAnimationLoadingPostsDelay = useDelayAnimationLoading(isAnimationLoadingPosts);
+	const isLoadingDelaySearch = useDelayAnimationLoading(
+		(searchField.length > 0 || Boolean(lastQuerySearch)) && isFetching && !isLoading,
 	);
+
+	useEffect(() => {
+		const currentSortJoin = joinSort(sortBy, order ?? '');
+		if (lastQueryLimit === limit && lastQuerySortBy == currentSortJoin) {
+			setIsAnimationLoadingPosts(false);
+			return;
+		}
+
+		setIsAnimationLoadingPosts(true);
+	}, [lastQueryLimit, limit, lastQuerySortBy, sortBy, order]);
 
 	if (!isLoading && data) {
 		posts = data.posts;
@@ -89,7 +102,7 @@ const PostsList = () => {
 
 				<div
 					className={classNames(cl.posts, {
-						[cl['posts_is-animation-posts']]: isFetchingDelayPosts,
+						[cl['posts_is-animation-posts']]: isAnimationLoadingPostsDelay,
 					})}
 				>
 					{isFetching && <div className={cl.overlay}></div>}
