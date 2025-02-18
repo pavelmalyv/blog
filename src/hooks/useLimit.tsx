@@ -1,5 +1,5 @@
 import { useSearchParams } from 'react-router';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 const KEY_LIMIT = 'limit';
 
@@ -25,23 +25,26 @@ export const useLimit = (optionsValue: number[]) => {
 		);
 	}, [limit, setUrlParams]);
 
-	const handleChangeLimit = (e: React.ChangeEvent<HTMLSelectElement>) => {
-		const value = Number(e.target.value);
-		setLimit(value);
+	const handleChangeLimit = useCallback(
+		(e: React.ChangeEvent<HTMLSelectElement>) => {
+			const value = Number(e.target.value);
+			setLimit(value);
 
-		setUrlParams(
-			(prev) => {
-				if (value === optionsValue[0]) {
-					prev.delete(KEY_LIMIT);
-				} else {
-					prev.set(KEY_LIMIT, String(value));
-				}
+			setUrlParams(
+				(prev) => {
+					if (value === optionsValue[0]) {
+						prev.delete(KEY_LIMIT);
+					} else {
+						prev.set(KEY_LIMIT, String(value));
+					}
 
-				return prev;
-			},
-			{ replace: true },
-		);
-	};
+					return prev;
+				},
+				{ replace: true },
+			);
+		},
+		[setUrlParams, optionsValue],
+	);
 
 	return { limit, handleChangeLimit };
 };
