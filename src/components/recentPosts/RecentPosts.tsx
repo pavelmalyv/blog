@@ -1,9 +1,8 @@
 import type { Posts } from '../../types/posts';
 
-import cl from './RecentPosts.module.scss';
+import PostsList from '../postsList/PostsList';
 import HiddenLoadingMessage from '../UI/hiddenLoadingMessage/HiddenLoadingMessage';
 import ErrorMessage from '../UI/errorMessage/ErrorMessage';
-import PostCard from '../postCard/PostCard';
 
 import { useGetPostsQuery } from '../../api/postsSlice';
 import { ERROR_MESSAGES } from '../../constants/error';
@@ -12,9 +11,10 @@ import { MESSAGES } from '../../constants/messages';
 interface RecentPostsProps {
 	limit: number;
 	excludeId?: string;
+	direction?: 'vertical' | 'horizontal';
 }
 
-const RecentPosts = ({ limit, excludeId }: RecentPostsProps) => {
+const RecentPosts = ({ limit, excludeId, direction = 'horizontal' }: RecentPostsProps) => {
 	const limitQuery = excludeId ? limit + 1 : limit;
 
 	const { data, isLoading, isFetching, isError } = useGetPostsQuery(
@@ -47,7 +47,6 @@ const RecentPosts = ({ limit, excludeId }: RecentPostsProps) => {
 		},
 	);
 
-	let body: React.ReactNode;
 	let posts: Posts | null[] = new Array(limit).fill(null);
 	const isBusy = isLoading || isFetching;
 
@@ -55,29 +54,15 @@ const RecentPosts = ({ limit, excludeId }: RecentPostsProps) => {
 		posts = data.posts;
 	}
 
-	if (isError) {
-		body = <ErrorMessage message={ERROR_MESSAGES.postsLoad} />;
-	} else {
-		body = (
-			<ul className={cl.list}>
-				{posts.map((post, index) => {
-					const key = post ? post.id : index;
-
-					return (
-						<li key={key}>
-							<PostCard post={post} />
-						</li>
-					);
-				})}
-			</ul>
-		);
-	}
-
 	return (
 		<div aria-busy={isBusy}>
 			<HiddenLoadingMessage isLoading={isBusy} message={MESSAGES.postsLoading} />
 
-			{body}
+			{isError ? (
+				<ErrorMessage message={ERROR_MESSAGES.postsLoad} />
+			) : (
+				<PostsList posts={posts} direction={direction} />
+			)}
 		</div>
 	);
 };

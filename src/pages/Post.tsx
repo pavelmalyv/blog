@@ -5,12 +5,12 @@ import ErrorMessage from '../components/UI/errorMessage/ErrorMessage';
 import HiddenLoadingMessage from '../components/UI/hiddenLoadingMessage/HiddenLoadingMessage';
 import Sidebar from '../components/sidebar/Sidebar';
 import RecentPosts from '../components/recentPosts/RecentPosts';
+import Newsletters from '../components/newsletters/Newsletters';
 
 import { useParams } from 'react-router';
 import { useGetPostByIdQuery } from '../api/postsSlice';
 import { ERROR_MESSAGES } from '../constants/error';
 import { MESSAGES } from '../constants/messages';
-import Newsletters from '../components/newsletters/Newsletters';
 
 const Post = () => {
 	const params = useParams<{ id?: string }>();
@@ -43,7 +43,7 @@ const Post = () => {
 			</Sidebar.Main>
 
 			<Sidebar.Aside title="Recent blog posts">
-				<RecentPosts limit={5} excludeId={idPost} />
+				<RecentPosts limit={5} excludeId={idPost} direction="vertical" />
 			</Sidebar.Aside>
 		</Sidebar>
 	);
