@@ -1,5 +1,5 @@
 import PopularPosts from '../components/popularPosts/PopularPosts';
-import PostsList from '../components/postsList/PostsList';
+import AllPosts from '../components/allPosts/AllPosts';
 import Heading from '../components/UI/heading/Heading';
 
 const Home = () => {
@@ -7,7 +7,7 @@ const Home = () => {
 		<>
 			<Heading title="The blog" />
 			<PopularPosts />
-			<PostsList />
+			<AllPosts />
 		</>
 	);
 };

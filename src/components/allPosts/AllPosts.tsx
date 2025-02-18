@@ -1,6 +1,6 @@
 import type { Posts } from '../../types/posts';
 
-import cl from './PostsList.module.scss';
+import cl from './AllPosts.module.scss';
 import classNames from 'classnames';
 import Filter from '../filter/Filter';
 import Search from '../Forms/search/Search';
@@ -32,7 +32,7 @@ const SEARCH_MAX_LENGTH = 30;
 const VALUES_SORT = ['id|desc', 'id|asc', 'views|desc'];
 const VALUES_LIMIT = [9, 18, 36];
 
-const PostsList = () => {
+const AllPosts = () => {
 	const params = useParams<{ pagination?: string }>();
 	const [paginationParam, isValidPaginationParam] = useValidatePaginationParam(
 		params.pagination,
@@ -186,4 +186,4 @@ const PostsList = () => {
 	);
 };
 
-export default PostsList;
+export default AllPosts;
