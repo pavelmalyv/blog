@@ -8,7 +8,7 @@ import { forwardRef, useId } from 'react';
 interface CheckboxProps {
 	label: React.ReactNode;
 	name?: string;
-	value?: boolean;
+	checked?: boolean;
 	disabled?: boolean;
 	errorMessage?: string;
 	autoComplete?: string;
@@ -25,7 +25,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 		{
 			label,
 			name,
-			value,
+			checked,
 			disabled,
 			errorMessage,
 			autoComplete,
@@ -48,7 +48,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 						type="checkbox"
 						className={cl.field}
 						name={name}
-						value={String(value)}
+						checked={checked}
 						disabled={disabled}
 						autoComplete={autoComplete}
 						onChange={onChange}

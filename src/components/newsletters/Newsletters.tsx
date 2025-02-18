@@ -92,7 +92,7 @@ const Newsletters = () => {
 								label={labelPolicy}
 								onChange={field.onChange}
 								onBlur={field.onBlur}
-								value={field.value}
+								checked={field.value}
 								disabled={field.disabled}
 								name={field.name}
 								ref={field.ref}
