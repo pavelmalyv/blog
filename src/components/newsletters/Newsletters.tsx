@@ -102,7 +102,7 @@ const Newsletters = ({ titleLevel }: NewslettersProps) => {
 							const labelPolicy = (
 								<>
 									<span>I agree to the </span>
-									<Link to={policyUrl} className="link">
+									<Link to={policyUrl} target="_blank" className="link">
 										privacy policy
 									</Link>
 								</>
