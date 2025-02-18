@@ -11,6 +11,7 @@ interface SectionProps {
 	container?: boolean;
 	width?: 'medium' | 'full';
 	titleSize?: 'h1' | 'h2';
+	titleLevel?: 1 | 2;
 	center?: boolean;
 	marginBottom?: 'medium' | 'large';
 }
@@ -24,6 +25,7 @@ const Section = ({
 	container = true,
 	width = 'full',
 	titleSize = 'h2',
+	titleLevel = 2,
 	center = false,
 	marginBottom = 'medium',
 }: SectionProps) => {
@@ -40,9 +42,16 @@ const Section = ({
 					<div className={classesHead}>
 						{subtitle && <div className={cl.subtitle}>{subtitle}</div>}
 
-						<h2 id={idTitle} className={titleSize}>
-							{title}
-						</h2>
+						{titleLevel === 1 && (
+							<h1 id={idTitle} className={titleSize}>
+								{title}
+							</h1>
+						)}
+						{titleLevel === 2 && (
+							<h2 id={idTitle} className={titleSize}>
+								{title}
+							</h2>
+						)}
 
 						{description && <div className={cl.description}>{description}</div>}
 					</div>
