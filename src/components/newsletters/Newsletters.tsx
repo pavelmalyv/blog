@@ -6,21 +6,26 @@ import Button from '../UI/button/Button';
 
 import { Link } from 'react-router';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Controller, useForm } from 'react-hook-form';
-import { boolean, object, string } from 'yup';
+import { Controller, SubmitHandler, useForm } from 'react-hook-form';
+import { boolean, InferType, object, string } from 'yup';
 import { policyUrl } from '../../routes/routes';
 import { useId } from 'react';
 import { ERROR_MESSAGES } from '../../constants/error';
+import { useSendNewslettersMutation } from '../../api/formsSlice';
+import { toast } from 'react-toastify';
 
 const formSchema = object({
 	email: string().email().required(),
 	policy: boolean().oneOf([true], ERROR_MESSAGES.policyCheckbox).required(),
 });
 
+type FormSchema = InferType<typeof formSchema>;
+
 const Newsletters = () => {
 	const idHead = useId();
+	const showFormError = () => toast.error(ERROR_MESSAGES.form);
 
-	const { control, handleSubmit } = useForm({
+	const { control, handleSubmit, reset } = useForm({
 		resolver: yupResolver(formSchema),
 		defaultValues: {
 			email: '',
@@ -28,7 +33,18 @@ const Newsletters = () => {
 		},
 	});
 
-	const onSubmit = () => {};
+	const [sendNewsletters, { isLoading }] = useSendNewslettersMutation();
+
+	const onSubmit: SubmitHandler<FormSchema> = async () => {
+		try {
+			// не отправляем реальный email
+			await sendNewsletters('example@example.com').unwrap();
+			reset();
+		} catch (error) {
+			showFormError();
+			console.error(error);
+		}
+	};
 
 	return (
 		<Section
@@ -105,7 +121,9 @@ const Newsletters = () => {
 					}}
 				/>
 
-				<Button type="submit">Subscribe</Button>
+				<Button type="submit" disabled={isLoading}>
+					Subscribe
+				</Button>
 			</form>
 		</Section>
 	);
