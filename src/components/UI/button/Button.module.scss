@@ -4,7 +4,7 @@
 	--background-color: rgb(var(--color-background-accent));
 
 	@include utils.flex-center(true);
-	@include utils.base-animation(background-color);
+	@include utils.base-animation(background-color, opacity);
 
 	min-height: 48px;
 	padding: 8px 20px;
@@ -15,8 +15,14 @@
 	color: rgb(var(--color-text-contrast));
 	background-color: var(--background-color);
 
-	@include utils.hover {
-		--background-color: rgb(var(--color-accent));
+	&:disabled {
+		opacity: 0.5;
+	}
+
+	&:not(:disabled) {
+		@include utils.hover {
+			--background-color: rgb(var(--color-accent));
+		}
 	}
 
 	&_mobile-full {
