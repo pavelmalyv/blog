@@ -1,0 +1,23 @@
+@use '../../../styles/utils';
+
+.body {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	row-gap: 30px;
+}
+
+.icon {
+	display: flex;
+	font-size: 60px;
+	color: rgb(var(--color-accent));
+
+	@include utils.mobile-l {
+		font-size: 45px;
+	}
+}
+
+.description {
+	line-height: 1.4;
+	text-align: center;
+}
