@@ -51,66 +51,61 @@ const Newsletters = () => {
 					Subscribe to the newsletter
 				</h3>
 
-				<div className={cl.body}>
-					<Controller
-						name="email"
-						control={control}
-						render={({ field, fieldState }) => (
-							<Field
-								type="email"
-								label="Your email"
-								isLabelHidden={true}
-								placeholder="Enter your email"
-								autoComplete="email"
+				<Controller
+					name="email"
+					control={control}
+					render={({ field, fieldState }) => (
+						<Field
+							type="email"
+							label="Your email"
+							isLabelHidden={true}
+							placeholder="Enter your email"
+							autoComplete="email"
+							onChange={field.onChange}
+							onBlur={field.onBlur}
+							value={field.value}
+							disabled={field.disabled}
+							name={field.name}
+							ref={field.ref}
+							aria-required={true}
+							aria-invalid={fieldState.invalid}
+							errorMessage={fieldState.error?.message}
+						/>
+					)}
+				/>
+
+				<Controller
+					name="policy"
+					control={control}
+					render={({ field, fieldState }) => {
+						const labelPolicy = (
+							<>
+								<span>I agree to the </span>
+								<Link to={policyUrl} className="link">
+									privacy policy
+								</Link>
+							</>
+						);
+
+						return (
+							<Checkbox
+								label={labelPolicy}
 								onChange={field.onChange}
 								onBlur={field.onBlur}
 								value={field.value}
 								disabled={field.disabled}
 								name={field.name}
 								ref={field.ref}
+								center={true}
 								aria-required={true}
 								aria-invalid={fieldState.invalid}
 								errorMessage={fieldState.error?.message}
 							/>
-						)}
-					/>
+						);
+					}}
+				/>
 
-					<Button type="submit" mobileFull={true}>
-						Subscribe
-					</Button>
-				</div>
-				<div className={cl.policy}>
-					<Controller
-						name="policy"
-						control={control}
-						render={({ field, fieldState }) => {
-							const labelPolicy = (
-								<>
-									<span>I agree to the </span>
-									<Link to={policyUrl} className="link">
-										privacy policy
-									</Link>
-								</>
-							);
-
-							return (
-								<Checkbox
-									label={labelPolicy}
-									onChange={field.onChange}
-									onBlur={field.onBlur}
-									value={field.value}
-									disabled={field.disabled}
-									name={field.name}
-									ref={field.ref}
-								center={true}
-									aria-required={true}
-									aria-invalid={fieldState.invalid}
-									errorMessage={fieldState.error?.message}
-								/>
-							);
-						}}
-					/>
-				</div>
+				<Button type="submit">Subscribe</Button>
 			</form>
 		</Section>
 	);
