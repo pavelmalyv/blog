@@ -1,5 +1,11 @@
 @use '../../styles/utils';
 
+.aside {
+	@include utils.tablet-m {
+		display: none;
+	}
+}
+
 .sidebar {
 	display: grid;
 	column-gap: 32px;
@@ -15,12 +21,6 @@
 
 	&_reverse .aside {
 		order: -1;
-	}
-}
-
-.aside {
-	@include utils.tablet-m {
-		display: none;
 	}
 }
 
