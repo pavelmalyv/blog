@@ -11,3 +11,4 @@ export const authorUrl: AuthorUrl = {
 };
 
 export const policyUrl = '/policy';
+export const newslettersUrl = '/newsletters';

@@ -1,4 +1,4 @@
-import { blogUrl, policyUrl } from './routes';
+import { blogUrl, newslettersUrl, policyUrl } from './routes';
 import { createBrowserRouter } from 'react-router';
 import { lazy, Suspense } from 'react';
 
@@ -7,6 +7,7 @@ const Root = lazy(() => import('../pages/Root'));
 const ErrorPage = lazy(() => import('../pages/ErrorPage'));
 const Post = lazy(() => import('../pages/Post'));
 const Policy = lazy(() => import('../pages/Policy'));
+const NewslettersPage = lazy(() => import('../pages/NewslettersPage'));
 
 const router = createBrowserRouter([
 	{
@@ -47,6 +48,14 @@ const router = createBrowserRouter([
 				element: (
 					<Suspense>
 						<Policy />
+					</Suspense>
+				),
+			},
+			{
+				path: newslettersUrl,
+				element: (
+					<Suspense>
+						<NewslettersPage />
 					</Suspense>
 				),
 			},
