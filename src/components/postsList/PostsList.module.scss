@@ -1,0 +1,29 @@
+@use '../../styles/utils';
+
+.list {
+	position: relative;
+	z-index: 0;
+	display: grid;
+	grid-template-columns: repeat(3, 1fr);
+	gap: 48px 32px;
+
+	@include utils.tablet-l {
+		grid-template-columns: repeat(2, 1fr);
+		gap: 24px 16px;
+	}
+
+	@include utils.mobile-l {
+		grid-template-columns: 1fr;
+		gap: 16px;
+	}
+}
+
+.item:last-child {
+	@include utils.tablet-l {
+		grid-column: 1 / 3;
+	}
+
+	@include utils.mobile-l {
+		grid-column: 1;
+	}
+}

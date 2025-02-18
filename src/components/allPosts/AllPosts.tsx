@@ -4,7 +4,6 @@ import cl from './AllPosts.module.scss';
 import classNames from 'classnames';
 import Filter from '../filter/Filter';
 import Search from '../Forms/search/Search';
-import PostCard from '../postCard/PostCard';
 import ErrorMessage from '../UI/errorMessage/ErrorMessage';
 import HiddenLoadingMessage from '../UI/hiddenLoadingMessage/HiddenLoadingMessage';
 import Section from '../UI/section/Section';
@@ -27,6 +26,7 @@ import { useSortBy } from '../../hooks/useSortBy';
 import { useLimit } from '../../hooks/useLimit';
 import { MESSAGES } from '../../constants/messages';
 import { ERROR_MESSAGES } from '../../constants/error';
+import PostsList from '../postsList/PostsList';
 
 const SEARCH_MAX_LENGTH = 30;
 const VALUES_SORT = ['id|desc', 'id|asc', 'views|desc'];
@@ -107,7 +107,7 @@ const AllPosts = () => {
 				>
 					{isFetching && <div className={cl.overlay}></div>}
 
-					<ul className={cl.list}>
+					{/* <ul className={cl.list}>
 						{posts.map((post, i) => {
 							const key = post ? post.id : i;
 
@@ -117,7 +117,8 @@ const AllPosts = () => {
 								</li>
 							);
 						})}
-					</ul>
+					</ul> */}
+					<PostsList posts={posts} />
 				</div>
 
 				{total && paginationPage ? (
