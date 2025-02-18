@@ -7,8 +7,8 @@ interface SuccessProps {
 
 const ModalSuccess = ({ isOpen, onClose }: SuccessProps) => {
 	return (
-		<Modal isOpen={isOpen} onClose={onClose}>
-			ModalSuccess
+		<Modal type="popup" isOpen={isOpen} onClose={onClose}>
+			<Modal.Header title="Subscription Confirmed!" />
 		</Modal>
 	);
 };

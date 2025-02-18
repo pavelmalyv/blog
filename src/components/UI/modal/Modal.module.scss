@@ -28,6 +28,10 @@
 	}
 }
 
+.body {
+	position: relative;
+}
+
 .overlay-full {
 	.body {
 		width: 100%;
@@ -36,4 +40,41 @@
 		padding: 0 var(--container-padding-x);
 		overflow: auto;
 	}
+}
+
+.overlay-popup {
+	padding: 30px var(--container-padding-x);
+
+	@include utils.mobile-l {
+		padding: 0;
+	}
+
+	.body {
+		width: 100%;
+		max-width: 600px;
+		margin: auto;
+		padding: 60px 20px 50px;
+		border-radius: 12px;
+		background-color: rgb(var(--color-background-primary));
+
+		@include utils.mobile-l {
+			padding: 80px var(--container-padding-x) 55px;
+			border-radius: 0;
+		}
+	}
+}
+
+.close {
+	position: absolute;
+	top: 8px;
+	right: 10px;
+
+	@include utils.mobile-l {
+		right: 6px;
+	}
+}
+
+.title {
+	text-align: center;
+	margin-bottom: 30px;
 }
