@@ -1,5 +1,5 @@
 import { useSearchParams } from 'react-router';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { joinSortOrder, splitSortOrder } from '../utils/sort';
 
 const KEY_SORT_BY = 'sortBy';
@@ -29,31 +29,34 @@ export const useSortBy = (optionsValue: string[]) => {
 		);
 	}, [acceptableParam, setUrlParams]);
 
-	const handleChangeSort = (e: React.ChangeEvent<HTMLSelectElement>) => {
-		const value = e.target.value;
-		setSortSelectValue(value);
+	const handleChangeSort = useCallback(
+		(e: React.ChangeEvent<HTMLSelectElement>) => {
+			const value = e.target.value;
+			setSortSelectValue(value);
 
-		const [sortBy, order] = splitSortOrder(value);
+			const [sortBy, order] = splitSortOrder(value);
 
-		if (!order) {
-			return;
-		}
+			if (!order) {
+				return;
+			}
 
-		setUrlParams(
-			(prev) => {
-				if (value === optionsValue[0]) {
-					prev.delete(KEY_SORT_BY);
-					prev.delete(KEY_ORDER);
-				} else {
-					prev.set(KEY_SORT_BY, sortBy);
-					prev.set(KEY_ORDER, order);
-				}
+			setUrlParams(
+				(prev) => {
+					if (value === optionsValue[0]) {
+						prev.delete(KEY_SORT_BY);
+						prev.delete(KEY_ORDER);
+					} else {
+						prev.set(KEY_SORT_BY, sortBy);
+						prev.set(KEY_ORDER, order);
+					}
 
-				return prev;
-			},
-			{ replace: true },
-		);
-	};
+					return prev;
+				},
+				{ replace: true },
+			);
+		},
+		[setUrlParams, optionsValue],
+	);
 
 	return { sortBy, order, sortSelectValue, handleChangeSort };
 };
