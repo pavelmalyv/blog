@@ -15,7 +15,7 @@
 }
 
 .field {
-	@include utils.visually-hidden();
+	@include utils.visually-hidden;
 }
 
 .emulator {
