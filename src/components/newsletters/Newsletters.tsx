@@ -1,8 +1,8 @@
-import cl from './Newsletters.module.scss';
 import Field from '../UI/field/Field';
 import Section from '../UI/section/Section';
 import Checkbox from '../UI/checkbox/Checkbox';
 import Button from '../UI/button/Button';
+import FormSmall from '../Forms/formSmall/FormSmall';
 
 import { Link } from 'react-router';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -57,16 +57,12 @@ const Newsletters = () => {
 			center={true}
 			marginBottom="large"
 		>
-			<form
-				className={cl.form}
-				onSubmit={handleSubmit(onSubmit)}
+			<FormSmall
+				title="Subscribe to the newsletter"
 				aria-labelledby={idHead}
 				noValidate={true}
+				onSubmit={handleSubmit(onSubmit)}
 			>
-				<h3 id={idHead} className={'visually-hidden'}>
-					Subscribe to the newsletter
-				</h3>
-
 				<Controller
 					name="email"
 					control={control}
@@ -89,7 +85,6 @@ const Newsletters = () => {
 						/>
 					)}
 				/>
-
 				<Controller
 					name="policy"
 					control={control}
@@ -124,7 +119,7 @@ const Newsletters = () => {
 				<Button type="submit" disabled={isLoading}>
 					Subscribe
 				</Button>
-			</form>
+			</FormSmall>
 		</Section>
 	);
 };
