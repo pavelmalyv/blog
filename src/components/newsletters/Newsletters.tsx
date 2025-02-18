@@ -1,8 +1,13 @@
-import Subscription from '../Forms/subscription/Subscription';
+import cl from './Newsletters.module.scss';
 import Field from '../UI/field/Field';
 import Section from '../UI/section/Section';
+import Button from '../UI/button/Button';
+
+import { useId } from 'react';
 
 const Newsletters = () => {
+	const idHead = useId();
+
 	return (
 		<Section
 			title="Stories and interviews"
@@ -14,9 +19,26 @@ const Newsletters = () => {
 			center={true}
 			marginBottom="large"
 		>
-			<Subscription title="Subscribe to the newsletter">
-				<Field label="Your email" isLabelHidden={true} placeholder="Enter your email" />
-			</Subscription>
+			<form className={cl.form} aria-labelledby={idHead} noValidate={true}>
+				<h3 id={idHead} className={'visually-hidden'}>
+					Subscribe to the newsletter
+				</h3>
+
+				<div className={cl.body}>
+					<Field
+						type="email"
+						label="Your email"
+						isLabelHidden={true}
+						placeholder="Enter your email"
+						autoComplete="email"
+						aria-required={true}
+					/>
+
+					<Button type="submit" mobileFull={true}>
+						Subscribe
+					</Button>
+				</div>
+			</form>
 		</Section>
 	);
 };
