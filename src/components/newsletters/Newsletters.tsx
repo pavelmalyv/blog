@@ -10,10 +10,11 @@ import { Controller, useForm } from 'react-hook-form';
 import { boolean, object, string } from 'yup';
 import { policyUrl } from '../../routes/routes';
 import { useId } from 'react';
+import { ERROR_MESSAGES } from '../../constants/error';
 
 const formSchema = object({
 	email: string().email().required(),
-	policy: boolean().oneOf([true]).required(),
+	policy: boolean().oneOf([true], ERROR_MESSAGES.policyCheckbox).required(),
 });
 
 const Newsletters = () => {
