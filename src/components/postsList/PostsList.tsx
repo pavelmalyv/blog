@@ -13,6 +13,8 @@ import Pagination from '../UI/pagination/Pagination';
 import Message from '../UI/message/Message';
 import Field from '../UI/field/Field';
 
+import { useLastQuery } from '../../hooks/useLastQuery';
+import { joinSortOrder } from '../../utils/sort';
 import { useEffect, useId, useState } from 'react';
 import { useParams } from 'react-router';
 import { blogUrl } from '../../routes/routes';
@@ -25,7 +27,6 @@ import { useSortBy } from '../../hooks/useSortBy';
 import { useLimit } from '../../hooks/useLimit';
 import { MESSAGES } from '../../constants/messages';
 import { ERROR_MESSAGES } from '../../constants/error';
-import { useLastQuery } from '../../hooks/useLastQuery';
 
 const SEARCH_MAX_LENGTH = 30;
 const VALUES_SORT = ['id|desc', 'id|asc', 'views|desc'];
@@ -51,9 +52,8 @@ const PostsList = () => {
 		{ skip: !isValidPaginationParam },
 	);
 
-	const joinSort = (sortBy: string, order: string) => `${sortBy}|${order}`;
 	const lastQueryLimit = useLastQuery(limit, isFetching);
-	const lastQuerySortBy = useLastQuery(joinSort(sortBy, order ?? ''), isFetching);
+	const lastQuerySortBy = useLastQuery(joinSortOrder(sortBy, order ?? ''), isFetching);
 	const lastQuerySearch = useLastQuery(searchDebounced, isFetching);
 
 	const [isAnimationLoadingPosts, setIsAnimationLoadingPosts] = useState(false);
@@ -63,7 +63,7 @@ const PostsList = () => {
 	);
 
 	useEffect(() => {
-		const currentSortJoin = joinSort(sortBy, order ?? '');
+		const currentSortJoin = joinSortOrder(sortBy, order ?? '');
 		if (lastQueryLimit === limit && lastQuerySortBy == currentSortJoin) {
 			setIsAnimationLoadingPosts(false);
 			return;
