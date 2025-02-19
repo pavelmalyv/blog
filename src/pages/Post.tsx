@@ -7,6 +7,7 @@ import Sidebar from '../components/sidebar/Sidebar';
 import RecentPosts from '../components/recentPosts/RecentPosts';
 import Newsletters from '../components/newsletters/Newsletters';
 
+import { throwNotFoundIfInvalid } from '../utils/error';
 import { useParams } from 'react-router';
 import { useGetPostByIdQuery } from '../api/postsSlice';
 import { ERROR_MESSAGES } from '../constants/error';
@@ -14,13 +15,11 @@ import { MESSAGES } from '../constants/messages';
 
 const Post = () => {
 	const params = useParams<{ id?: string }>();
-	const idPost = params.id;
-
-	if (!idPost) {
-		throw new Response('Not Found', { status: 404 });
-	}
+	const idPost = throwNotFoundIfInvalid(params.id);
 
 	const { data, isLoading, isFetching, isError } = useGetPostByIdQuery(idPost);
+
+
 	const isBusy = isLoading || isFetching;
 
 	let articleBody: React.ReactNode;
