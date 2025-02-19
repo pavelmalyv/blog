@@ -17,14 +17,10 @@ const Post = () => {
 	const params = useParams<{ id?: string }>();
 	const postId = throwNotFoundIfInvalid(params.id);
 
-	const { data, isLoading, isFetching, isError, error } = useGetPostByIdQuery(postId);
-
+	const { data, isLoading, isError, error } = useGetPostByIdQuery(postId);
 	throwNotFoundIfStatus(error);
 
-	const isBusy = isLoading || isFetching;
-
 	let articleBody: React.ReactNode;
-
 	if (isError) {
 		articleBody = <ErrorMessage message={ERROR_MESSAGES.postLoad} />;
 	} else {
@@ -34,8 +30,8 @@ const Post = () => {
 	return (
 		<Sidebar reverse={true}>
 			<Sidebar.Main>
-				<div aria-busy={isBusy}>
-					<HiddenLoadingMessage isLoading={isBusy} message={MESSAGES.postLoading} />
+				<div aria-busy={isLoading}>
+					<HiddenLoadingMessage isLoading={isLoading} message={MESSAGES.postLoading} />
 					{articleBody}
 				</div>
 
