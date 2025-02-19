@@ -10,9 +10,9 @@ const HiddenLoadingMessage = ({
 	isRoleStatus = true,
 }: HiddenLoadingMessageProps) => {
 	return (
-		<div className="visually-hidden" role={isRoleStatus ? 'status' : undefined}>
+		<span className="visually-hidden" role={isRoleStatus ? 'status' : undefined}>
 			{isLoading && message}
-		</div>
+		</span>
 	);
 };
 
