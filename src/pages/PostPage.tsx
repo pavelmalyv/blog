@@ -1,5 +1,3 @@
-import type { Post } from '../types/posts';
-
 import Article from '../components/article/Article';
 import ErrorMessage from '../components/UI/errorMessage/ErrorMessage';
 import HiddenLoadingMessage from '../components/UI/hiddenLoadingMessage/HiddenLoadingMessage';
