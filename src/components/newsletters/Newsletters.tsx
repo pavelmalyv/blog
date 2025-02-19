@@ -27,7 +27,7 @@ interface NewslettersProps {
 }
 
 const Newsletters = ({ titleLevel }: NewslettersProps) => {
-	const idHead = useId();
+	const headId = useId();
 	const [isOpen, setIsOpen] = useState(false);
 
 	const { control, handleSubmit, reset } = useForm({
@@ -69,7 +69,7 @@ const Newsletters = ({ titleLevel }: NewslettersProps) => {
 			>
 				<FormSmall
 					title="Subscribe to the newsletter"
-					aria-labelledby={idHead}
+					aria-labelledby={headId}
 					noValidate={true}
 					onSubmit={handleSubmit(onSubmit)}
 				>
