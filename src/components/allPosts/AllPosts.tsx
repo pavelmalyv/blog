@@ -84,14 +84,14 @@ const AllPosts = () => {
 		body = <ErrorMessage message={ERROR_MESSAGES.postsLoad} />;
 	} else if (total === 0 && lastQuerySearch) {
 		body = <Message message={MESSAGES.postsNotFound(lastQuerySearch)} />;
-	} else if (total) {
+	} else {
 		body = (
 			<>
 				<SearchResult field={searchField} lastQuery={lastQuerySearch} total={total} />
 
 				<PostsList posts={posts} isFetching={idFetchingPosts} stretchLast={true} />
 
-				{paginationPage ? (
+				{paginationPage && total ? (
 					<Pagination
 						limit={limit}
 						total={total}
