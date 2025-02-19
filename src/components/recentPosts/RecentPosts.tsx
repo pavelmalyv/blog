@@ -54,15 +54,14 @@ const RecentPosts = ({
 	);
 
 	let posts: Posts | null[] = new Array(limit).fill(null);
-	const isBusy = isLoading || isFetching;
 
 	if (!isLoading && data) {
 		posts = data.posts;
 	}
 
 	return (
-		<div aria-busy={isBusy}>
-			<HiddenLoadingMessage isLoading={isBusy} message={MESSAGES.postsLoading} />
+		<div aria-busy={isLoading}>
+			<HiddenLoadingMessage isLoading={isLoading} message={MESSAGES.postsLoading} />
 
 			{isError ? (
 				<ErrorMessage message={ERROR_MESSAGES.postsLoad} />
