@@ -6,7 +6,7 @@ const Home = lazy(() => import('../pages/Home'));
 const Root = lazy(() => import('../pages/Root'));
 const ErrorPage = lazy(() => import('../pages/ErrorPage'));
 const Post = lazy(() => import('../pages/Post'));
-const Author = lazy(() => import('../pages/Author'));
+const AuthorPage = lazy(() => import('../pages/AuthorPage'));
 const Policy = lazy(() => import('../pages/Policy'));
 const NewslettersPage = lazy(() => import('../pages/NewslettersPage'));
 
@@ -48,7 +48,7 @@ const router = createBrowserRouter([
 				path: authorUrl.profile(':id'),
 				element: (
 					<Suspense>
-						<Author />
+						<AuthorPage />
 					</Suspense>
 				),
 			},

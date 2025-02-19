@@ -4,7 +4,7 @@ import { useParams } from 'react-router';
 import { throwNotFoundIfInvalid } from '../utils/error';
 import { useGetUserByIdQuery } from '../api/usersSlice';
 
-const Author = () => {
+const AuthorPage = () => {
 	const params = useParams<{ id?: string }>();
 	const authorId = throwNotFoundIfInvalid(params.id);
 	const { data: user } = useGetUserByIdQuery(authorId);
@@ -17,4 +17,4 @@ const Author = () => {
 	);
 };
 
-export default Author;
+export default AuthorPage;
