@@ -9,10 +9,16 @@ import { MESSAGES } from '../../constants/messages';
 interface PostsListProps {
 	posts: Posts | null[];
 	stretchLast?: boolean;
+	isCurrentPageAuthor?: boolean;
 	direction?: 'horizontal' | 'vertical';
 }
 
-const PostsList = ({ posts, stretchLast = false, direction = 'horizontal' }: PostsListProps) => {
+const PostsList = ({
+	posts,
+	stretchLast = false,
+	isCurrentPageAuthor,
+	direction = 'horizontal',
+}: PostsListProps) => {
 	return (
 		<>
 			{posts.length > 0 ? (
@@ -26,7 +32,7 @@ const PostsList = ({ posts, stretchLast = false, direction = 'horizontal' }: Pos
 
 						return (
 							<li className={cl.item} key={key}>
-								<PostCard post={post} />
+								<PostCard post={post} isCurrentPageAuthor={isCurrentPageAuthor} />
 							</li>
 						);
 					})}

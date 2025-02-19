@@ -15,10 +15,11 @@ import Author from '../author/Author';
 
 interface PostCardProps {
 	post: Post | null;
+	isCurrentPageAuthor?: boolean;
 	styleCard?: 'small' | 'small-horizontal' | 'dynamic-height' | 'large';
 }
 
-const PostCard = ({ post, styleCard = 'small' }: PostCardProps) => {
+const PostCard = ({ post, isCurrentPageAuthor, styleCard = 'small' }: PostCardProps) => {
 	const titleId = useId();
 
 	let description: React.ReactNode;
@@ -61,7 +62,7 @@ const PostCard = ({ post, styleCard = 'small' }: PostCardProps) => {
 
 			<div className={cl.body}>
 				<div className={classNames('date', cl.about)}>
-					<Author id={post?.userId ?? null} />
+					<Author id={post?.userId ?? null} isCurrentPageAuthor={isCurrentPageAuthor} />
 					{createdAt}
 				</div>
 				<div

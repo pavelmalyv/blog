@@ -12,9 +12,10 @@ import { MESSAGES } from '../../constants/messages';
 
 interface AuthorProps {
 	id: string | null;
+	isCurrentPageAuthor?: boolean;
 }
 
-const Author = ({ id }: AuthorProps) => {
+const Author = ({ id, isCurrentPageAuthor = false }: AuthorProps) => {
 	const [getUserByIdQuery, { data, isLoading, isFetching, isError }] = useLazyGetUserByIdQuery();
 
 	const isBusy = isLoading && isFetching;
@@ -31,11 +32,15 @@ const Author = ({ id }: AuthorProps) => {
 	if (isError) {
 		author = <ErrorMessage message={ERROR_MESSAGES.authorLoad} />;
 	} else if (data && id) {
-		author = (
-			<Link to={authorUrl.profile(data.id)} className={cl.author}>
-				{data.firstName + ' ' + data.lastName}
-			</Link>
-		);
+		if (isCurrentPageAuthor) {
+			author = data.firstName + ' ' + data.lastName;
+		} else {
+			author = (
+				<Link to={authorUrl.profile(data.id)} className={cl.link}>
+					{data.firstName + ' ' + data.lastName}
+				</Link>
+			);
+		}
 	} else {
 		author = <Skeleton width="4em" />;
 	}

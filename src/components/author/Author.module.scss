@@ -1,6 +1,6 @@
 @use '../../styles/utils';
 
-.author {
+.link {
 	@include utils.hover {
 		text-decoration: underline;
 		text-decoration-skip-ink: none;

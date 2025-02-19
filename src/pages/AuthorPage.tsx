@@ -82,7 +82,7 @@ const AuthorPage = () => {
 						<ErrorMessage message={ERROR_MESSAGES.authorPostLoad} />
 					) : (
 						<>
-							<PostsList posts={posts} />
+							<PostsList posts={posts} isCurrentPageAuthor={true} />
 
 							{totalPosts && paginationPage ? (
 								<Pagination
