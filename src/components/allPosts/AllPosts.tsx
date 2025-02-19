@@ -106,7 +106,7 @@ const AllPosts = () => {
 				>
 					{isFetching && <div className={cl.overlay}></div>}
 
-					<PostsList posts={posts} />
+					<PostsList posts={posts} stretchLast={true} />
 				</div>
 
 				{total && paginationPage ? (

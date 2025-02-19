@@ -8,14 +8,19 @@ import { MESSAGES } from '../../constants/messages';
 
 interface PostsListProps {
 	posts: Posts | null[];
+	stretchLast?: boolean;
 	direction?: 'horizontal' | 'vertical';
 }
 
-const PostsList = ({ posts, direction = 'horizontal' }: PostsListProps) => {
+const PostsList = ({ posts, stretchLast = false, direction = 'horizontal' }: PostsListProps) => {
 	return (
 		<>
 			{posts.length > 0 ? (
-				<ul className={classNames(cl.list, cl[`list_${direction}`])}>
+				<ul
+					className={classNames(cl.list, cl[`list_${direction}`], {
+						[cl['list_stretch-last']]: stretchLast,
+					})}
+				>
 					{posts.map((post, i) => {
 						const key = post ? post.id : i;
 

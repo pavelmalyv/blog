@@ -7,7 +7,7 @@ const NewslettersPage = () => {
 		<>
 			<Newsletters titleLevel={1} />
 			<Section title="Recent blog posts">
-				<RecentPosts limit={3} />
+				<RecentPosts limit={3} stretchLast={true} />
 			</Section>
 		</>
 	);

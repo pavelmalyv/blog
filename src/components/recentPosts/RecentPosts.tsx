@@ -11,10 +11,16 @@ import { MESSAGES } from '../../constants/messages';
 interface RecentPostsProps {
 	limit: number;
 	excludeId?: string;
+	stretchLast?: boolean;
 	direction?: 'vertical' | 'horizontal';
 }
 
-const RecentPosts = ({ limit, excludeId, direction = 'horizontal' }: RecentPostsProps) => {
+const RecentPosts = ({
+	limit,
+	excludeId,
+	stretchLast,
+	direction = 'horizontal',
+}: RecentPostsProps) => {
 	const limitQuery = excludeId ? limit + 1 : limit;
 
 	const { data, isLoading, isFetching, isError } = useGetPostsQuery(
@@ -61,7 +67,7 @@ const RecentPosts = ({ limit, excludeId, direction = 'horizontal' }: RecentPosts
 			{isError ? (
 				<ErrorMessage message={ERROR_MESSAGES.postsLoad} />
 			) : (
-				<PostsList posts={posts} direction={direction} />
+				<PostsList posts={posts} direction={direction} stretchLast={stretchLast} />
 			)}
 		</div>
 	);
