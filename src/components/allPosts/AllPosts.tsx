@@ -81,7 +81,7 @@ const AllPosts = () => {
 		limit,
 		total,
 		currentPage: paginationParam,
-		createPaginationUrl: blogUrl.pagination,
+		paginationUrlCallback: (page) => blogUrl.pagination(page),
 	});
 
 	let body: React.ReactNode;

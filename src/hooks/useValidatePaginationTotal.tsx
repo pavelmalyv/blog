@@ -1,5 +1,3 @@
-import type { UrlPageId } from '../types/routes';
-
 import { useEffect } from 'react';
 import { getPages } from '../utils/pagination';
 import { useLocation, useNavigate } from 'react-router';
@@ -8,14 +6,14 @@ interface useValidatePaginationTotalProps {
 	limit: number;
 	total?: number;
 	currentPage?: number;
-	createPaginationUrl: UrlPageId;
+	paginationUrlCallback: (page: string) => string;
 }
 
 export const useValidatePaginationTotal = ({
 	limit,
 	total,
 	currentPage,
-	createPaginationUrl,
+	paginationUrlCallback,
 }: useValidatePaginationTotalProps) => {
 	const navigate = useNavigate();
 	const location = useLocation();
@@ -36,8 +34,8 @@ export const useValidatePaginationTotal = ({
 			return;
 		}
 
-		navigate(createPaginationUrl(totalPages + location.search), { replace: true });
-	}, [page, navigate, createPaginationUrl, totalPages, location.search]);
+		navigate(paginationUrlCallback(totalPages + location.search), { replace: true });
+	}, [page, navigate, paginationUrlCallback, totalPages, location.search]);
 
 	return page;
 };
