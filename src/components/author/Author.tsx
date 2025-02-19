@@ -16,9 +16,7 @@ interface AuthorProps {
 }
 
 const Author = ({ id, isCurrentPageAuthor = false }: AuthorProps) => {
-	const [getUserByIdQuery, { data, isLoading, isFetching, isError }] = useLazyGetUserByIdQuery();
-
-	const isBusy = isLoading && isFetching;
+	const [getUserByIdQuery, { data, isLoading, isError }] = useLazyGetUserByIdQuery();
 
 	useEffect(() => {
 		if (!id || data || isLoading) {
@@ -46,9 +44,9 @@ const Author = ({ id, isCurrentPageAuthor = false }: AuthorProps) => {
 	}
 
 	return (
-		<span aria-busy={isBusy}>
+		<span aria-busy={isLoading}>
 			<HiddenLoadingMessage
-				isLoading={isBusy}
+				isLoading={isLoading}
 				message={MESSAGES.authorLoading}
 				isRoleStatus={false}
 			/>
