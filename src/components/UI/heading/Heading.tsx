@@ -33,7 +33,8 @@ const Heading = ({ title }: HeadingProps) => {
 			const fontSize = parseFloat(
 				window.getComputedStyle(titleTextElement, null).getPropertyValue('font-size'),
 			);
-			const scaleFontSize = Math.floor(fontSize * (widthContainer / widthText));
+			const scaleFontSizeCalc = Math.floor(fontSize * (widthContainer / widthText));
+			const scaleFontSize = scaleFontSizeCalc < 224 ? scaleFontSizeCalc : 224;
 
 			requestAnimationFrame(() => {
 				titleTextElement.style.fontSize = scaleFontSize + 'px';
