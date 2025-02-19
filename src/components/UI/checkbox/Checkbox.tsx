@@ -38,7 +38,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 		},
 		ref,
 	) => {
-		const idErrorMessage = useId();
+		const errorMessageId = useId();
 
 		return (
 			<div className={classNames(cl.wrapper, { [cl['wrapper_center']]: center })}>
@@ -64,7 +64,7 @@ const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
 					</span>
 					<span className={cl.description}>{label}</span>
 				</label>
-				<FieldError id={idErrorMessage} message={errorMessage ? errorMessage : null} />
+				<FieldError id={errorMessageId} message={errorMessage ? errorMessage : null} />
 			</div>
 		);
 	},
