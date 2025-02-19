@@ -26,12 +26,12 @@ interface AsideProps {
 }
 
 const Aside = ({ title, labelledby = true, children }: AsideProps) => {
-	const idAside = useId();
-	const ariaLabelledby = labelledby ? idAside : undefined;
+	const asideId = useId();
+	const ariaLabelledby = labelledby ? asideId : undefined;
 
 	return (
 		<aside className={cl.aside} aria-labelledby={ariaLabelledby}>
-			<h2 id={idAside} className={classNames('h2', cl.title)}>
+			<h2 id={asideId} className={classNames('h2', cl.title)}>
 				{title}
 			</h2>
 
