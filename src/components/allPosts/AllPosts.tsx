@@ -25,6 +25,7 @@ import { useDelayAnimationLoading } from '../../hooks/useDelayAnimationLoading';
 import { useSearch } from '../../hooks/useSearch';
 import { useSortBy } from '../../hooks/useSortBy';
 import { useLimit } from '../../hooks/useLimit';
+import { getSkip } from '../../utils/pagination';
 import { MESSAGES } from '../../constants/messages';
 import { ERROR_MESSAGES } from '../../constants/error';
 
@@ -45,7 +46,7 @@ const AllPosts = () => {
 
 	let total: number | undefined;
 	let posts: Posts | null[] = Array(limit).fill(null);
-	const skip = paginationParam ? (paginationParam - 1) * limit : 0;
+	const skip = getSkip(paginationParam, limit);
 
 	const { data, isLoading, isFetching, isError } = useGetPostsQuery(
 		{ limit, skip, search: searchDebounced, sortBy, order },
