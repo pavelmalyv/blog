@@ -8,6 +8,7 @@ import Text from '../UI/text/Text';
 import HiddenLoadingMessage from '../UI/hiddenLoadingMessage/HiddenLoadingMessage';
 
 import { MESSAGES } from '../../constants/messages';
+import { useId } from 'react';
 
 interface UserProps {
 	user: User | null;
@@ -15,9 +16,10 @@ interface UserProps {
 
 const User = ({ user }: UserProps) => {
 	const isLoading = !user;
+	const titleId = useId();
 
 	return (
-		<Section>
+		<Section aria-labelledby={titleId}>
 			<div aria-busy={isLoading}>
 				<HiddenLoadingMessage isLoading={isLoading} message={MESSAGES.authorLoading} />
 
@@ -40,7 +42,9 @@ const User = ({ user }: UserProps) => {
 					)}
 				</div>
 
-				<h2 className={classNames('h2', cl.title)}>{user ? 'About Me' : <Skeleton />}</h2>
+				<h2 id={titleId} className={classNames('h2', cl.title)}>
+					{user ? 'About Me' : <Skeleton />}
+				</h2>
 
 				<Text>{user ? user.description : <Skeleton count={3} />}</Text>
 			</div>
