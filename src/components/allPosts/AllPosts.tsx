@@ -1,7 +1,6 @@
 import type { Posts } from '../../types/posts';
 
 import cl from './AllPosts.module.scss';
-import classNames from 'classnames';
 import Filter from '../filter/Filter';
 import Search from '../Forms/search/Search';
 import ErrorMessage from '../UI/errorMessage/ErrorMessage';
@@ -12,6 +11,7 @@ import Pagination from '../UI/pagination/Pagination';
 import Message from '../UI/message/Message';
 import Field from '../UI/field/Field';
 import PostsList from '../postsList/PostsList';
+import SearchResult from '../UI/searchResult/SearchResult';
 
 import { useFetchingQuery } from '../../hooks/useFetchingQuery';
 import { joinSortOrder } from '../../utils/sort';
@@ -84,18 +84,14 @@ const AllPosts = () => {
 		body = <ErrorMessage message={ERROR_MESSAGES.postsLoad} />;
 	} else if (total === 0 && lastQuerySearch) {
 		body = <Message message={MESSAGES.postsNotFound(lastQuerySearch)} />;
-	} else {
+	} else if (total) {
 		body = (
 			<>
-				{searchField.length > 0 && lastQuerySearch && total && (
-					<div className={classNames(cl['search-result'], 'h4')}>
-						{MESSAGES.postsFound(lastQuerySearch, total)}
-					</div>
-				)}
+				<SearchResult field={searchField} lastQuery={lastQuerySearch} total={total} />
 
 				<PostsList posts={posts} isFetching={idFetchingPosts} stretchLast={true} />
 
-				{total && paginationPage ? (
+				{paginationPage ? (
 					<Pagination
 						limit={limit}
 						total={total}
