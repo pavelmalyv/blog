@@ -107,17 +107,6 @@ const AllPosts = () => {
 				>
 					{isFetching && <div className={cl.overlay}></div>}
 
-					{/* <ul className={cl.list}>
-						{posts.map((post, i) => {
-							const key = post ? post.id : i;
-
-							return (
-								<li className={cl.item} key={key}>
-									<PostCard post={post} />
-								</li>
-							);
-						})}
-					</ul> */}
 					<PostsList posts={posts} />
 				</div>
 
