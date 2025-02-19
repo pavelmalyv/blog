@@ -1,6 +1,7 @@
 import Heading from '../components/UI/heading/Heading';
 import ErrorMessage from '../components/UI/errorMessage/ErrorMessage';
 import User from '../components/user/User';
+import Section from '../components/UI/section/Section';
 
 import { useParams } from 'react-router';
 import { useGetUserByIdQuery } from '../api/usersSlice';
@@ -16,7 +17,11 @@ const AuthorPage = () => {
 	if (isError) {
 		throwNotFoundIfStatus(error);
 
-		body = <ErrorMessage message={ERROR_MESSAGES.authorLoad} />;
+		body = (
+			<Section>
+				<ErrorMessage message={ERROR_MESSAGES.authorLoad} />
+			</Section>
+		);
 	} else {
 		const fullName = user ? `${user.firstName} ${user.lastName}` : null;
 
