@@ -7,7 +7,7 @@ import Sidebar from '../components/sidebar/Sidebar';
 import RecentPosts from '../components/recentPosts/RecentPosts';
 import Newsletters from '../components/newsletters/Newsletters';
 
-import { throwNotFoundIfInvalid } from '../utils/error';
+import { throwNotFoundIfInvalid, throwNotFoundIfStatus } from '../utils/error';
 import { useParams } from 'react-router';
 import { useGetPostByIdQuery } from '../api/postsSlice';
 import { ERROR_MESSAGES } from '../constants/error';
@@ -17,8 +17,9 @@ const Post = () => {
 	const params = useParams<{ id?: string }>();
 	const idPost = throwNotFoundIfInvalid(params.id);
 
-	const { data, isLoading, isFetching, isError } = useGetPostByIdQuery(idPost);
+	const { data, isLoading, isFetching, isError, error } = useGetPostByIdQuery(idPost);
 
+	throwNotFoundIfStatus(error);
 
 	const isBusy = isLoading || isFetching;
 
