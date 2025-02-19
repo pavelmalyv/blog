@@ -53,6 +53,14 @@ const router = createBrowserRouter([
 				),
 			},
 			{
+				path: authorUrl.pagination(':id', ':pagination'),
+				element: (
+					<Suspense>
+						<AuthorPage />
+					</Suspense>
+				),
+			},
+			{
 				path: policyUrl,
 				element: (
 					<Suspense>

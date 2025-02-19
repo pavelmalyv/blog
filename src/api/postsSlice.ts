@@ -12,6 +12,12 @@ interface GetPostsParams {
 	search?: string;
 }
 
+interface GetPostByIdUserParams {
+	id: string;
+	limit?: number;
+	skip?: number;
+}
+
 const postsSlice = apiSlice.injectEndpoints({
 	endpoints: (build) => ({
 		getPosts: build.query<PostsResponse, GetPostsParams>({
@@ -31,39 +37,57 @@ const postsSlice = apiSlice.injectEndpoints({
 			},
 			transformResponse: async (response: unknown) => {
 				// преобразование ответа сервера
-				if (
-					typeof response === 'object' &&
-					response !== null &&
-					'posts' in response &&
-					'total' in response &&
-					Array.isArray(response.posts)
-				) {
-					response.posts = response.posts.map((post) => {
-						return addAdditionalFieldsPost(post);
-					});
-				}
-				//
+				const result = addAdditionalFieldsPosts(response);
 
-				const result = await postsResponseSchema.validate(response);
-				return result;
+				return await postsResponseSchema.validate(result);
 			},
 		}),
 		getPostById: build.query<Post, string>({
 			query: (id) => `/posts/${id}`,
 			transformResponse: async (response: unknown) => {
 				// преобразование ответа сервера
-				response = addAdditionalFieldsPost(response);
-				//
+				const result = addAdditionalFieldsPost(response);
 
-				return await postSchema.validate(response);
+				return await postSchema.validate(result);
+			},
+		}),
+		getPostByIdUser: build.query<PostsResponse, GetPostByIdUserParams>({
+			query: ({ id, limit = 30, skip = 0 }) => ({
+				url: `/users/${id}/posts`,
+				params: {
+					limit,
+					skip,
+				},
+			}),
+			transformResponse: async (response: unknown) => {
+				// преобразование ответа сервера
+				const result = addAdditionalFieldsPosts(response);
+
+				return await postsResponseSchema.validate(result);
 			},
 		}),
 	}),
 });
 
-export const { useGetPostsQuery, useGetPostByIdQuery } = postsSlice;
+export const { useGetPostsQuery, useGetPostByIdQuery, useGetPostByIdUserQuery } = postsSlice;
 
 // адаптация публичного api под проект
+function addAdditionalFieldsPosts(response: unknown) {
+	if (
+		typeof response === 'object' &&
+		response !== null &&
+		'posts' in response &&
+		'total' in response &&
+		Array.isArray(response.posts)
+	) {
+		response.posts = response.posts.map((post) => {
+			return addAdditionalFieldsPost(post);
+		});
+	}
+
+	return response;
+}
+
 function addAdditionalFieldsPost(post: unknown) {
 	const colors = ['00605E', '006992', '5D5D5D'];
 

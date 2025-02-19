@@ -10,4 +10,5 @@ export interface BlogUrl {
 
 export interface AuthorUrl {
 	profile: UrlPageId;
+	pagination: (id: string | number, page: string | number) => string;
 }

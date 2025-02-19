@@ -8,6 +8,7 @@ export const blogUrl: BlogUrl = {
 
 export const authorUrl: AuthorUrl = {
 	profile: (id) => `/author/${id}`,
+	pagination: (id, page) => `/author/${id}/page/${page}`,
 };
 
 export const policyUrl = '/policy';
