@@ -14,4 +14,4 @@ const usersSlice = apiSlice.injectEndpoints({
 	}),
 });
 
-export const { useLazyGetUserByIdQuery } = usersSlice;
+export const { useGetUserByIdQuery, useLazyGetUserByIdQuery } = usersSlice;
