@@ -13,7 +13,7 @@ import { useGetPostByIdQuery } from '../api/postsSlice';
 import { ERROR_MESSAGES } from '../constants/error';
 import { MESSAGES } from '../constants/messages';
 
-const Post = () => {
+const PostPage = () => {
 	const params = useParams<{ id?: string }>();
 	const postId = throwNotFoundIfInvalid(params.id);
 
@@ -45,4 +45,4 @@ const Post = () => {
 	);
 };
 
-export default Post;
+export default PostPage;

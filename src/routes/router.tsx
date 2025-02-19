@@ -5,7 +5,7 @@ import { lazy, Suspense } from 'react';
 const HomePage = lazy(() => import('../pages/HomePage'));
 const Root = lazy(() => import('../pages/Root'));
 const ErrorPage = lazy(() => import('../pages/ErrorPage'));
-const Post = lazy(() => import('../pages/Post'));
+const PostPage = lazy(() => import('../pages/PostPage'));
 const AuthorPage = lazy(() => import('../pages/AuthorPage'));
 const PolicyPage = lazy(() => import('../pages/PolicyPage'));
 const NewslettersPage = lazy(() => import('../pages/NewslettersPage'));
@@ -40,7 +40,7 @@ const router = createBrowserRouter([
 				path: blogUrl.post(':id'),
 				element: (
 					<Suspense>
-						<Post />
+						<PostPage />
 					</Suspense>
 				),
 			},
