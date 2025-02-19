@@ -17,10 +17,10 @@ interface ArticleProps {
 }
 
 const Article = ({ post, labelledby = true }: ArticleProps) => {
-	const idArticle = useId();
+	const articleId = useId();
 
 	return (
-		<article className={cl.article} aria-labelledby={labelledby ? idArticle : undefined}>
+		<article className={cl.article} aria-labelledby={labelledby ? articleId : undefined}>
 			<div className={classNames('date', cl.about)}>
 				<div className={cl.date}>
 					{post ? getDisplayDate(post.createdAt, { weekday: true }) : <Skeleton width="12em" />}
@@ -30,7 +30,7 @@ const Article = ({ post, labelledby = true }: ArticleProps) => {
 					<Author id={post?.userId ?? null} />
 				</div>
 			</div>
-			<h1 id={idArticle} className={classNames('h1', cl.title)}>
+			<h1 id={articleId} className={classNames('h1', cl.title)}>
 				{post ? post.title : <Skeleton />}
 			</h1>
 			<div className={cl.image}>
