@@ -23,7 +23,7 @@ const RecentPosts = ({
 }: RecentPostsProps) => {
 	const limitQuery = excludeId ? limit + 1 : limit;
 
-	const { data, isLoading, isFetching, isError } = useGetPostsQuery(
+	const { data, isLoading, isError } = useGetPostsQuery(
 		{
 			limit: limitQuery,
 			sortBy: 'id',

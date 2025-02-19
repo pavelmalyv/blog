@@ -14,27 +14,6 @@
 	}
 }
 
-.overlay {
-	@include utils.base-animation(opacity);
-
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	z-index: 100;
-	background-color: rgb(var(--color-background-primary));
-	opacity: 0;
-}
-
-.posts {
-	position: relative;
-
-	&_is-animation-posts .overlay {
-		opacity: 0.3;
-	}
-}
-
 .search-result {
 	margin-bottom: 40px;
 	text-align: center;

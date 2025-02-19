@@ -1,4 +1,5 @@
 @use '../../styles/utils';
+@use '../../styles/shared/spinner';
 
 .list {
 	--columns: 3;
@@ -36,4 +37,37 @@
 			grid-column: 1;
 		}
 	}
+}
+
+.overlay {
+	@include utils.base-animation(opacity);
+
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 100;
+	background-color: rgb(var(--color-background-primary));
+	opacity: 0;
+}
+
+.posts {
+	position: relative;
+
+	&_is-animation-posts .overlay {
+		opacity: 0.3;
+	}
+}
+
+.spinner-wrapper {
+	display: flex;
+	justify-content: center;
+	margin: 100px 0;
+}
+
+.spinner {
+	@include spinner.base(35px);
+
+	color: rgb(var(--color-accent));
 }

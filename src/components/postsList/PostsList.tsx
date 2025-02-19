@@ -3,11 +3,13 @@ import classNames from 'classnames';
 import PostCard from '../postCard/PostCard';
 import Message from '../UI/message/Message';
 
+import { useDelayAnimationLoading } from '../../hooks/useDelayAnimationLoading';
 import { Posts } from '../../types/posts';
 import { MESSAGES } from '../../constants/messages';
 
 interface PostsListProps {
 	posts: Posts | null[];
+	isFetching?: boolean;
 	stretchLast?: boolean;
 	isCurrentPageAuthor?: boolean;
 	direction?: 'horizontal' | 'vertical';
@@ -15,32 +17,51 @@ interface PostsListProps {
 
 const PostsList = ({
 	posts,
+	isFetching = false,
 	stretchLast = false,
 	isCurrentPageAuthor,
 	direction = 'horizontal',
 }: PostsListProps) => {
-	return (
-		<>
-			{posts.length > 0 ? (
-				<ul
-					className={classNames(cl.list, cl[`list_${direction}`], {
-						[cl['list_stretch-last']]: stretchLast,
-					})}
-				>
-					{posts.map((post, i) => {
-						const key = post ? post.id : i;
+	const idFetchingDelay = useDelayAnimationLoading(isFetching);
 
-						return (
-							<li className={cl.item} key={key}>
-								<PostCard post={post} isCurrentPageAuthor={isCurrentPageAuthor} />
-							</li>
-						);
-					})}
-				</ul>
+	return (
+		<div
+			className={classNames(cl.posts, {
+				[cl['posts_is-animation-posts']]: idFetchingDelay,
+			})}
+		>
+			{posts.length > 0 ? (
+				<>
+					{isFetching && <div className={cl.overlay}></div>}
+
+					<ul
+						className={classNames(cl.list, cl[`list_${direction}`], {
+							[cl['list_stretch-last']]: stretchLast,
+						})}
+					>
+						{posts.map((post, i) => {
+							const key = post ? post.id : i;
+
+							return (
+								<li className={cl.item} key={key}>
+									<PostCard post={post} isCurrentPageAuthor={isCurrentPageAuthor} />
+								</li>
+							);
+						})}
+					</ul>
+				</>
 			) : (
-				<Message message={MESSAGES.postsEmpty} />
+				<>
+					{isFetching ? (
+						<div className={cl['spinner-wrapper']}>
+							<div className={cl.spinner}></div>
+						</div>
+					) : (
+						<Message message={MESSAGES.postsEmpty} />
+					)}
+				</>
 			)}
-		</>
+		</div>
 	);
 };
 

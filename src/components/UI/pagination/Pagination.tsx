@@ -40,8 +40,8 @@ const Pagination = ({
 	const navigate = useNavigate();
 	const location = useLocation();
 	const totalPages = getPages(limit, total);
+	const isLoadingDelay = useDelayAnimationLoading(isLoading);
 	const [selectedPage, setSelectedPage] = useState(currentPage);
-	const [isLoadingPagination, setIsLoadingPagination] = useState(false);
 
 	useEffect(() => {
 		const baseUrl = selectedPage === 1 ? urlBase : urlCallback(selectedPage);
@@ -55,20 +55,9 @@ const Pagination = ({
 		navigate(url);
 	}, [navigate, urlCallback, urlBase, selectedPage, location.pathname, location.search]);
 
-	function handlePageChange({ selected }: { selected: number }) {
+	const handlePageChange = ({ selected }: { selected: number }) => {
 		setSelectedPage(selected + 1);
-		setIsLoadingPagination(true);
-	}
-
-	useEffect(() => {
-		if (isLoading || !isLoadingPagination) {
-			return;
-		}
-
-		setIsLoadingPagination(false);
-	}, [isLoading, isLoadingPagination]);
-
-	const isLoadingDelay = useDelayAnimationLoading(isLoadingPagination);
+	};
 
 	return (
 		<>

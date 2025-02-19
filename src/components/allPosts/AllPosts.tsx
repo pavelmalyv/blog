@@ -13,15 +13,14 @@ import Message from '../UI/message/Message';
 import Field from '../UI/field/Field';
 import PostsList from '../postsList/PostsList';
 
-import { useLastQuery } from '../../hooks/useLastQuery';
+import { useFetchingQuery } from '../../hooks/useFetchingQuery';
 import { joinSortOrder } from '../../utils/sort';
-import { useEffect, useId, useState } from 'react';
+import { useId } from 'react';
 import { useParams } from 'react-router';
 import { blogUrl } from '../../routes/routes';
 import { useGetPostsQuery } from '../../api/postsSlice';
 import { useValidatePaginationParam } from '../../hooks/useValidatePaginationParam';
 import { useValidatePaginationTotal } from '../../hooks/useValidatePaginationTotal';
-import { useDelayAnimationLoading } from '../../hooks/useDelayAnimationLoading';
 import { useSearch } from '../../hooks/useSearch';
 import { useSortBy } from '../../hooks/useSortBy';
 import { useLimit } from '../../hooks/useLimit';
@@ -53,26 +52,6 @@ const AllPosts = () => {
 		{ skip: !isValidPaginationParam },
 	);
 
-	const lastQueryLimit = useLastQuery(limit, isFetching);
-	const lastQuerySortBy = useLastQuery(joinSortOrder(sortBy, order ?? ''), isFetching);
-	const lastQuerySearch = useLastQuery(searchDebounced, isFetching);
-
-	const [isAnimationLoadingPosts, setIsAnimationLoadingPosts] = useState(false);
-	const isAnimationLoadingPostsDelay = useDelayAnimationLoading(isAnimationLoadingPosts);
-	const isLoadingDelaySearch = useDelayAnimationLoading(
-		(searchField.length > 0 || Boolean(lastQuerySearch)) && isFetching && !isLoading,
-	);
-
-	useEffect(() => {
-		const currentSortJoin = joinSortOrder(sortBy, order ?? '');
-		if (lastQueryLimit === limit && lastQuerySortBy == currentSortJoin) {
-			setIsAnimationLoadingPosts(false);
-			return;
-		}
-
-		setIsAnimationLoadingPosts(true);
-	}, [lastQueryLimit, limit, lastQuerySortBy, sortBy, order]);
-
 	if (!isLoading && data) {
 		posts = data.posts;
 		total = data.total;
@@ -84,6 +63,21 @@ const AllPosts = () => {
 		currentPage: paginationParam,
 		paginationUrlCallback: (page) => blogUrl.pagination(page),
 	});
+
+	const { isFetching: isFetchingPagination } = useFetchingQuery(paginationPage, isFetching);
+	const { isFetching: isFetchingLimit } = useFetchingQuery(limit, isFetching);
+	const { isFetching: isFetchingSort } = useFetchingQuery(
+		joinSortOrder(sortBy, order ?? ''),
+		isFetching,
+	);
+	const {
+		isFetching: isFetchingSearch,
+		isLoadingDelay: isFetchingDelaySearch,
+		lastQuery: lastQuerySearch,
+	} = useFetchingQuery(searchDebounced, isFetching);
+
+	const idFetchingPosts =
+		isFetchingPagination || isFetchingLimit || isFetchingSort || isFetchingSearch;
 
 	let body: React.ReactNode;
 	if (isError) {
@@ -99,15 +93,7 @@ const AllPosts = () => {
 					</div>
 				)}
 
-				<div
-					className={classNames(cl.posts, {
-						[cl['posts_is-animation-posts']]: isAnimationLoadingPostsDelay,
-					})}
-				>
-					{isFetching && <div className={cl.overlay}></div>}
-
-					<PostsList posts={posts} stretchLast={true} />
-				</div>
+				<PostsList posts={posts} isFetching={idFetchingPosts} stretchLast={true} />
 
 				{total && paginationPage ? (
 					<Pagination
@@ -116,7 +102,7 @@ const AllPosts = () => {
 						currentPage={paginationPage}
 						urlBase={blogUrl.base}
 						urlCallback={(page) => blogUrl.pagination(page)}
-						isLoading={isFetching}
+						isLoading={isFetchingPagination}
 					/>
 				) : null}
 			</>
@@ -137,7 +123,7 @@ const AllPosts = () => {
 						label="Search posts"
 						onChange={handleSearch}
 						maxLength={SEARCH_MAX_LENGTH}
-						isLoading={isLoadingDelaySearch}
+						isLoading={isFetchingDelaySearch && searchField.length > 0}
 						aria-controls={postsId}
 					/>
 				</Search>
@@ -166,8 +152,8 @@ const AllPosts = () => {
 				</div>
 			</Filter>
 
-			<div id={postsId} aria-busy={isLoading || isFetching}>
-				<HiddenLoadingMessage isLoading={isLoading || isFetching} message={MESSAGES.postsLoading} />
+			<div id={postsId} aria-busy={idFetchingPosts}>
+				<HiddenLoadingMessage isLoading={idFetchingPosts} message={MESSAGES.postsLoading} />
 
 				{body}
 			</div>

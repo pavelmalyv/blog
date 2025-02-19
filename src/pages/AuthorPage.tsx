@@ -16,6 +16,7 @@ import { useValidatePaginationParam } from '../hooks/useValidatePaginationParam'
 import { useGetPostByIdUserQuery } from '../api/postsSlice';
 import { useValidatePaginationTotal } from '../hooks/useValidatePaginationTotal';
 import { getSkip } from '../utils/pagination';
+import { useFetchingQuery } from '../hooks/useFetchingQuery';
 
 import { ERROR_MESSAGES } from '../constants/error';
 import { MESSAGES } from '../constants/messages';
@@ -41,7 +42,6 @@ const AuthorPage = () => {
 
 	const {
 		data: dataPosts,
-		isLoading: isLoadingPosts,
 		isError: isErrorPosts,
 		isFetching: isFetchingAuthor,
 	} = useGetPostByIdUserQuery(
@@ -61,6 +61,8 @@ const AuthorPage = () => {
 		paginationUrlCallback: (page) => authorUrl.pagination(authorId, page),
 	});
 
+	const { isFetching: isFetchingPagination } = useFetchingQuery(paginationPage, isFetchingAuthor);
+
 	return (
 		<>
 			{isError ? (
@@ -75,14 +77,21 @@ const AuthorPage = () => {
 			)}
 
 			<Section title="All articles by the author">
-				<div aria-busy={isLoadingPosts}>
-					<HiddenLoadingMessage isLoading={isLoadingPosts} message={MESSAGES.authorPostsLoading} />
+				<div aria-busy={isFetchingPagination}>
+					<HiddenLoadingMessage
+						isLoading={isFetchingPagination}
+						message={MESSAGES.authorPostsLoading}
+					/>
 
 					{isErrorPosts ? (
 						<ErrorMessage message={ERROR_MESSAGES.authorPostLoad} />
 					) : (
 						<>
-							<PostsList posts={posts} isCurrentPageAuthor={true} />
+							<PostsList
+								posts={posts}
+								isFetching={isFetchingPagination}
+								isCurrentPageAuthor={true}
+							/>
 
 							{totalPosts && paginationPage ? (
 								<Pagination
@@ -90,7 +99,7 @@ const AuthorPage = () => {
 									total={totalPosts}
 									currentPage={paginationPage}
 									urlBase={authorUrl.profile(authorId)}
-									isLoading={isFetchingAuthor}
+									isLoading={isFetchingPagination}
 									urlCallback={(page) => authorUrl.pagination(authorId, page)}
 								/>
 							) : null}
