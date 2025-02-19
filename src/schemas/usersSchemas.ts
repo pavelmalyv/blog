@@ -7,4 +7,6 @@ export const userSchema = object({
 	lastName: string().required(),
 	image: imageSchema.required(),
 	description: string().required(),
+	skills: string().required(),
+	experience: string().required(),
 });

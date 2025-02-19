@@ -11,6 +11,24 @@ import parse from 'html-react-parser';
 import { MESSAGES } from '../../constants/messages';
 import { useId } from 'react';
 
+interface UserTextProps {
+	title: string;
+	titleId?: string;
+	text?: string;
+}
+
+const UserTextItem = ({ title, titleId, text }: UserTextProps) => {
+	return (
+		<div>
+			<h2 id={titleId} className={classNames('h2', cl.title)}>
+				{text ? title : <Skeleton />}
+			</h2>
+
+			<Text>{text ? parse(text) : <Skeleton count={3} />}</Text>
+		</div>
+	);
+};
+
 interface UserProps {
 	user: User | null;
 }
@@ -21,7 +39,7 @@ const User = ({ user }: UserProps) => {
 
 	return (
 		<Section aria-labelledby={titleId}>
-			<div aria-busy={isLoading}>
+			<div className={cl.body} aria-busy={isLoading}>
 				<HiddenLoadingMessage isLoading={isLoading} message={MESSAGES.authorLoading} />
 
 				<div className={cl.image}>
@@ -43,11 +61,9 @@ const User = ({ user }: UserProps) => {
 					)}
 				</div>
 
-				<h2 id={titleId} className={classNames('h2', cl.title)}>
-					{user ? 'About Me' : <Skeleton />}
-				</h2>
-
-				<Text>{user ? parse(user.description) : <Skeleton count={3} />}</Text>
+				<UserTextItem title="About Me" titleId={titleId} text={user?.description} />
+				<UserTextItem title="Skills:" text={user?.skills} />
+				<UserTextItem title="Experience:" text={user?.experience} />
 			</div>
 		</Section>
 	);

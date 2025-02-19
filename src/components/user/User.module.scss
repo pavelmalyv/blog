@@ -1,8 +1,12 @@
 @use '../../styles/utils';
 
-.image {
-	margin-bottom: 32px;
+.body {
+	display: flex;
+	flex-direction: column;
+	row-gap: 32px;
+}
 
+.image {
 	@include utils.tablet-m {
 		aspect-ratio: 1.7;
 	}
