@@ -9,7 +9,7 @@ const Author = () => {
 	const authorId = throwNotFoundIfInvalid(params.id);
 	const { data: user } = useGetUserByIdQuery(authorId);
 
-	const fullName = user ? `${user.firstName} ${user.lastName}` : '';
+	const fullName = user ? `${user.firstName} ${user.lastName}` : null;
 	return (
 		<>
 			<Heading title={fullName} />

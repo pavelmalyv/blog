@@ -9,4 +9,5 @@ export const MESSAGES = {
 	postsLoading: 'Loading posts...',
 	postLoading: 'Loading post...',
 	authorLoading: 'Loading author...',
+	titleLoading: 'Loading title...',
 };

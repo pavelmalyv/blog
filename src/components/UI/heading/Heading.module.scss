@@ -36,3 +36,15 @@
 		padding: 0 14px;
 	}
 }
+
+.skeleton {
+	font-size: 224px;
+
+	@include utils.tablet-l {
+		font-size: 160px;
+	}
+
+	@include utils.mobile-l {
+		font-size: 72px;
+	}
+}

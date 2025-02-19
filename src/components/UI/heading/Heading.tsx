@@ -1,13 +1,18 @@
+import Skeleton from 'react-loading-skeleton';
 import cl from './Heading.module.scss';
+import HiddenLoadingMessage from '../hiddenLoadingMessage/HiddenLoadingMessage';
+
 import { useEffect, useRef } from 'react';
+import { MESSAGES } from '../../../constants/messages';
 
 interface HeadingProps {
-	title: string;
+	title: string | null;
 }
 
 const Heading = ({ title }: HeadingProps) => {
 	const titleRef = useRef<HTMLHeadingElement>(null);
 	const titleTextRef = useRef<HTMLSpanElement>(null);
+	const isLoading = !title;
 
 	useEffect(() => {
 		if (!titleRef.current || !titleTextRef.current) {
@@ -49,10 +54,18 @@ const Heading = ({ title }: HeadingProps) => {
 			<section className={cl.heading}>
 				<div className="container">
 					<div className={cl.wrapper}>
-						<h1 className={cl.title} ref={titleRef}>
+						<h1 className={cl.title} ref={titleRef} aria-busy={isLoading}>
+							<HiddenLoadingMessage isLoading={isLoading} message={MESSAGES.titleLoading} />
+
 							<span className={cl.text} ref={titleTextRef}>
 								{title}
 							</span>
+
+							{!title && (
+								<span className={cl.skeleton}>
+									<Skeleton borderRadius={10} />
+								</span>
+							)}
 						</h1>
 					</div>
 				</div>
