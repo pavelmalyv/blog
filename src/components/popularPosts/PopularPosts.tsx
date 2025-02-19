@@ -14,14 +14,12 @@ const PopularPosts = () => {
 	let posts: Posts | null[] = Array(4).fill(null);
 	let total: number | undefined;
 
-	const { data, isLoading, isFetching, isError } = useGetPostsQuery({
+	const { data, isLoading, isError } = useGetPostsQuery({
 		limit: 4,
 		skip: 0,
 		sortBy: 'views',
 		order: 'desc',
 	});
-
-	const isBusy = isLoading || isFetching;
 
 	if (!isLoading && data) {
 		posts = data.posts;
@@ -42,8 +40,8 @@ const PopularPosts = () => {
 		body = <Message message={MESSAGES.postsEmpty} />;
 	} else {
 		body = (
-			<div aria-busy={isBusy}>
-				<HiddenLoadingMessage isLoading={isBusy} message={MESSAGES.postsLoading} />
+			<div aria-busy={isLoading}>
+				<HiddenLoadingMessage isLoading={isLoading} message={MESSAGES.postsLoading} />
 
 				<ul className={cl.list}>
 					{posts.map((post, i) => {
