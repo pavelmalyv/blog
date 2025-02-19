@@ -19,7 +19,7 @@ interface PostCardProps {
 }
 
 const PostCard = ({ post, styleCard = 'small' }: PostCardProps) => {
-	const idTitle = useId();
+	const titleId = useId();
 
 	let description: React.ReactNode;
 	if (post) {
@@ -41,7 +41,7 @@ const PostCard = ({ post, styleCard = 'small' }: PostCardProps) => {
 	}
 
 	return (
-		<article className={classNames(cl.card, cl[`card-${styleCard}`])} aria-labelledby={idTitle}>
+		<article className={classNames(cl.card, cl[`card-${styleCard}`])} aria-labelledby={titleId}>
 			<div className={cl.image}>
 				{post ? (
 					<picture>
@@ -72,7 +72,7 @@ const PostCard = ({ post, styleCard = 'small' }: PostCardProps) => {
 				>
 					{post ? (
 						<Link className={cl['title-link']} to={blogUrl.post(post.id)}>
-							<h3 id={idTitle} className={cl['title-text']}>
+							<h3 id={titleId} className={cl['title-text']}>
 								{post.title}
 							</h3>
 							<span className={cl['title-icon']} aria-hidden="true">
