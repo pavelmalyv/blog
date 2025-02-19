@@ -50,7 +50,7 @@ const Field = forwardRef<HTMLInputElement, FieldProps>(
 		ref,
 	) => {
 		const fieldId = useId();
-		const idErrorMessage = useId();
+		const errorMessageId = useId();
 
 		return (
 			<div className={cl.wrapper}>
@@ -73,14 +73,14 @@ const Field = forwardRef<HTMLInputElement, FieldProps>(
 						autoComplete={autoComplete}
 						aria-controls={ariaControls}
 						aria-invalid={ariaInvalid}
-						aria-describedby={idErrorMessage}
+						aria-describedby={errorMessageId}
 						aria-required={ariaRequired}
 					/>
 					<div className={cl.icon}>
 						{isLoading ? <div className={cl.spinner}></div> : <Icon>{icon}</Icon>}
 					</div>
 				</div>
-				<FieldError id={idErrorMessage} message={errorMessage ? errorMessage : null} />
+				<FieldError id={errorMessageId} message={errorMessage ? errorMessage : null} />
 			</div>
 		);
 	},
