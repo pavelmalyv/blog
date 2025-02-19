@@ -29,7 +29,7 @@ const Author = ({ id }: AuthorProps) => {
 
 	let author: React.ReactNode;
 	if (isError) {
-		author = <ErrorMessage message={ERROR_MESSAGES.userLoad} />;
+		author = <ErrorMessage message={ERROR_MESSAGES.authorLoad} />;
 	} else if (data && id) {
 		author = (
 			<Link to={authorUrl.profile(data.id)} className={cl.author}>
