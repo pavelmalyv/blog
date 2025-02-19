@@ -7,7 +7,7 @@ const Root = lazy(() => import('../pages/Root'));
 const ErrorPage = lazy(() => import('../pages/ErrorPage'));
 const Post = lazy(() => import('../pages/Post'));
 const AuthorPage = lazy(() => import('../pages/AuthorPage'));
-const Policy = lazy(() => import('../pages/Policy'));
+const PolicyPage = lazy(() => import('../pages/PolicyPage'));
 const NewslettersPage = lazy(() => import('../pages/NewslettersPage'));
 
 const router = createBrowserRouter([
@@ -64,7 +64,7 @@ const router = createBrowserRouter([
 				path: policyUrl,
 				element: (
 					<Suspense>
-						<Policy />
+						<PolicyPage />
 					</Suspense>
 				),
 			},

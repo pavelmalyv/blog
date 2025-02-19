@@ -5,7 +5,7 @@ import Text from '../components/UI/text/Text';
 const SITE = 'example.com';
 const EMAIL = 'pavelmalyv@gmail.com';
 
-const Policy = () => {
+const PolicyPage = () => {
 	return (
 		<>
 			<Heading title="Privacy Policy" />
@@ -449,4 +449,4 @@ const Policy = () => {
 	);
 };
 
-export default Policy;
+export default PolicyPage;
