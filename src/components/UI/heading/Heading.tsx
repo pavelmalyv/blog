@@ -25,6 +25,11 @@ const Heading = ({ title }: HeadingProps) => {
 		const setFontSize = () => {
 			const widthContainer = titleElement.clientWidth;
 			const widthText = titleTextElement.clientWidth;
+
+			if (widthText === 0) {
+				return;
+			}
+
 			const fontSize = parseFloat(
 				window.getComputedStyle(titleTextElement, null).getPropertyValue('font-size'),
 			);
