@@ -6,6 +6,7 @@ import Section from '../UI/section/Section';
 import Skeleton from 'react-loading-skeleton';
 import Text from '../UI/text/Text';
 import HiddenLoadingMessage from '../UI/hiddenLoadingMessage/HiddenLoadingMessage';
+import parse from 'html-react-parser';
 
 import { MESSAGES } from '../../constants/messages';
 import { useId } from 'react';
@@ -46,7 +47,7 @@ const User = ({ user }: UserProps) => {
 					{user ? 'About Me' : <Skeleton />}
 				</h2>
 
-				<Text>{user ? user.description : <Skeleton count={3} />}</Text>
+				<Text>{user ? parse(user.description) : <Skeleton count={3} />}</Text>
 			</div>
 		</Section>
 	);
