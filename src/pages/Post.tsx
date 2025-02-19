@@ -15,9 +15,9 @@ import { MESSAGES } from '../constants/messages';
 
 const Post = () => {
 	const params = useParams<{ id?: string }>();
-	const idPost = throwNotFoundIfInvalid(params.id);
+	const postId = throwNotFoundIfInvalid(params.id);
 
-	const { data, isLoading, isFetching, isError, error } = useGetPostByIdQuery(idPost);
+	const { data, isLoading, isFetching, isError, error } = useGetPostByIdQuery(postId);
 
 	throwNotFoundIfStatus(error);
 
@@ -43,7 +43,7 @@ const Post = () => {
 			</Sidebar.Main>
 
 			<Sidebar.Aside title="Recent blog posts">
-				<RecentPosts limit={5} excludeId={idPost} direction="vertical" />
+				<RecentPosts limit={5} excludeId={postId} direction="vertical" />
 			</Sidebar.Aside>
 		</Sidebar>
 	);
