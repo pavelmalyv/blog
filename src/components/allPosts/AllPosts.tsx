@@ -135,7 +135,7 @@ const AllPosts = () => {
 		);
 	}
 
-	const idPosts = useId();
+	const postsId = useId();
 
 	return (
 		<Section title="All blog posts">
@@ -150,7 +150,7 @@ const AllPosts = () => {
 						onChange={handleSearch}
 						maxLength={SEARCH_MAX_LENGTH}
 						isLoading={isLoadingDelaySearch}
-						aria-controls={idPosts}
+						aria-controls={postsId}
 					/>
 				</Search>
 
@@ -159,7 +159,7 @@ const AllPosts = () => {
 						label="SortSelect by"
 						value={sortSelectValue}
 						onChange={handleChangeSort}
-						aria-controls={idPosts}
+						aria-controls={postsId}
 					>
 						<Select.Option value={VALUES_SORT[0]}>Newest to oldest</Select.Option>
 						<Select.Option value={VALUES_SORT[1]}>Oldest to newest</Select.Option>
@@ -169,7 +169,7 @@ const AllPosts = () => {
 						label="Show by"
 						value={String(limit)}
 						onChange={handleChangeLimit}
-						aria-controls={idPosts}
+						aria-controls={postsId}
 					>
 						<Select.Option value={String(VALUES_LIMIT[0])}>{VALUES_LIMIT[0]}</Select.Option>
 						<Select.Option value={String(VALUES_LIMIT[1])}>{VALUES_LIMIT[1]}</Select.Option>
@@ -178,7 +178,7 @@ const AllPosts = () => {
 				</div>
 			</Filter>
 
-			<div id={idPosts} aria-busy={isLoading || isFetching}>
+			<div id={postsId} aria-busy={isLoading || isFetching}>
 				<HiddenLoadingMessage isLoading={isLoading || isFetching} message={MESSAGES.postsLoading} />
 
 				{body}
