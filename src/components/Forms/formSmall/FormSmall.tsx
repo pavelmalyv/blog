@@ -18,11 +18,11 @@ const FormSmall = ({
 	noValidate,
 	onSubmit,
 }: FormSmallProps) => {
-	const idHead = useId();
+	const headId = useId();
 
 	return (
-		<form className={cl.form} aria-labelledby={idHead} onSubmit={onSubmit} noValidate={noValidate}>
-			<h3 id={idHead} className={classNames({ 'visually-hidden': isHiddenTitle })}>
+		<form className={cl.form} aria-labelledby={headId} onSubmit={onSubmit} noValidate={noValidate}>
+			<h3 id={headId} className={classNames({ 'visually-hidden': isHiddenTitle })}>
 				{title}
 			</h3>
 			{children}
