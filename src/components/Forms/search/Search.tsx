@@ -10,11 +10,11 @@ interface SearchProps {
 }
 
 const Search = ({ title, isHiddenTitle = true, children, onSubmit }: SearchProps) => {
-	const idHead = useId();
+	const headId = useId();
 
 	return (
-		<form role="search" className={cl.search} aria-labelledby={idHead} onSubmit={onSubmit}>
-			<h3 id={idHead} className={classNames({ 'visually-hidden': isHiddenTitle })}>
+		<form role="search" className={cl.search} aria-labelledby={headId} onSubmit={onSubmit}>
+			<h3 id={headId} className={classNames({ 'visually-hidden': isHiddenTitle })}>
 				{title}
 			</h3>
 			{children}
