@@ -20,16 +20,16 @@ const Select = ({
 	value,
 	'aria-controls': ariaControls,
 }: SelectProps) => {
-	const idSelect = useId();
+	const selectId = useId();
 
 	return (
 		<div>
-			<Label htmlFor={idSelect} isLabelHidden={isLabelHidden}>
+			<Label htmlFor={selectId} isLabelHidden={isLabelHidden}>
 				{label}
 			</Label>
 			<div className={cl.body}>
 				<select
-					id={idSelect}
+					id={selectId}
 					className={cl.select}
 					value={value}
 					onChange={onChange}
