@@ -89,8 +89,6 @@ const AllPosts = () => {
 		body = <ErrorMessage message={ERROR_MESSAGES.postsLoad} />;
 	} else if (total === 0 && lastQuerySearch) {
 		body = <Message message={MESSAGES.postsNotFound(lastQuerySearch)} />;
-	} else if (total === 0) {
-		body = <Message message={MESSAGES.postsEmpty} />;
 	} else {
 		body = (
 			<>
