@@ -49,18 +49,18 @@ const Field = forwardRef<HTMLInputElement, FieldProps>(
 		},
 		ref,
 	) => {
-		const idField = useId();
+		const fieldId = useId();
 		const idErrorMessage = useId();
 
 		return (
 			<div className={cl.wrapper}>
-				<Label htmlFor={idField} isLabelHidden={isLabelHidden}>
+				<Label htmlFor={fieldId} isLabelHidden={isLabelHidden}>
 					{label}
 				</Label>
 				<div className={cl['field-wrapper']}>
 					<input
 						ref={ref}
-						id={idField}
+						id={fieldId}
 						className={classNames(cl.field, { [cl['field_icon']]: icon })}
 						type={type}
 						name={name}
