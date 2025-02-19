@@ -2,7 +2,7 @@ import { authorUrl, blogUrl, newslettersUrl, policyUrl } from './routes';
 import { createBrowserRouter } from 'react-router';
 import { lazy, Suspense } from 'react';
 
-const Home = lazy(() => import('../pages/Home'));
+const HomePage = lazy(() => import('../pages/HomePage'));
 const Root = lazy(() => import('../pages/Root'));
 const ErrorPage = lazy(() => import('../pages/ErrorPage'));
 const Post = lazy(() => import('../pages/Post'));
@@ -24,7 +24,7 @@ const router = createBrowserRouter([
 				path: blogUrl.base,
 				element: (
 					<Suspense>
-						<Home />
+						<HomePage />
 					</Suspense>
 				),
 			},
@@ -32,7 +32,7 @@ const router = createBrowserRouter([
 				path: blogUrl.pagination(':pagination'),
 				element: (
 					<Suspense>
-						<Home />
+						<HomePage />
 					</Suspense>
 				),
 			},
