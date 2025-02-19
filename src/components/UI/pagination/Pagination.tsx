@@ -1,5 +1,3 @@
-import type { UrlPageId } from '../../../types/routes';
-
 import classNames from 'classnames';
 import cl from './Pagination.module.scss';
 import ReactPaginate from 'react-paginate';
@@ -27,8 +25,8 @@ interface PaginationProps {
 	total: number;
 	currentPage: number;
 	urlBase: string;
-	createUrl: UrlPageId;
 	isLoading: boolean;
+	urlCallback: (page: number) => string;
 }
 
 const Pagination = ({
@@ -36,8 +34,8 @@ const Pagination = ({
 	total,
 	currentPage,
 	urlBase,
-	createUrl,
 	isLoading,
+	urlCallback,
 }: PaginationProps) => {
 	const navigate = useNavigate();
 	const location = useLocation();
@@ -46,7 +44,7 @@ const Pagination = ({
 	const [isLoadingPagination, setIsLoadingPagination] = useState(false);
 
 	useEffect(() => {
-		const baseUrl = selectedPage === 1 ? urlBase : createUrl(selectedPage);
+		const baseUrl = selectedPage === 1 ? urlBase : urlCallback(selectedPage);
 		const url = baseUrl + location.search;
 		const currentUrl = location.pathname + location.search;
 
@@ -55,7 +53,7 @@ const Pagination = ({
 		}
 
 		navigate(url);
-	}, [navigate, createUrl, urlBase, selectedPage, location.pathname, location.search]);
+	}, [navigate, urlCallback, urlBase, selectedPage, location.pathname, location.search]);
 
 	function handlePageChange({ selected }: { selected: number }) {
 		setSelectedPage(selected + 1);

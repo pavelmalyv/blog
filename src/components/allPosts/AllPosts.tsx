@@ -114,7 +114,7 @@ const AllPosts = () => {
 						total={total}
 						currentPage={paginationPage}
 						urlBase={blogUrl.base}
-						createUrl={blogUrl.pagination}
+						urlCallback={(page) => blogUrl.pagination(page)}
 						isLoading={isFetching}
 					/>
 				) : null}
