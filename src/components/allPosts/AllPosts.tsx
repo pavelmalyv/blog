@@ -11,6 +11,7 @@ import Select from '../UI/select/Select';
 import Pagination from '../UI/pagination/Pagination';
 import Message from '../UI/message/Message';
 import Field from '../UI/field/Field';
+import PostsList from '../postsList/PostsList';
 
 import { useLastQuery } from '../../hooks/useLastQuery';
 import { joinSortOrder } from '../../utils/sort';
@@ -26,7 +27,6 @@ import { useSortBy } from '../../hooks/useSortBy';
 import { useLimit } from '../../hooks/useLimit';
 import { MESSAGES } from '../../constants/messages';
 import { ERROR_MESSAGES } from '../../constants/error';
-import PostsList from '../postsList/PostsList';
 
 const SEARCH_MAX_LENGTH = 30;
 const VALUES_SORT = ['id|desc', 'id|asc', 'views|desc'];
