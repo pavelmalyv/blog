@@ -1,5 +1,6 @@
 import Heading from '../components/UI/heading/Heading';
 import ErrorMessage from '../components/UI/errorMessage/ErrorMessage';
+import User from '../components/user/User';
 
 import { useParams } from 'react-router';
 import { useGetUserByIdQuery } from '../api/usersSlice';
@@ -22,6 +23,7 @@ const AuthorPage = () => {
 		body = (
 			<>
 				<Heading title={fullName} />
+				<User user={user ?? null} />
 			</>
 		);
 	}
