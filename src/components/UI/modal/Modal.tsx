@@ -28,9 +28,9 @@ const Modal = ({ type = 'full', isOpen, children, aria, onClose }: ModalProps) =
 			<ReactModal
 				bodyOpenClassName={cl['body-open']}
 				overlayClassName={{
-					base: classNames(cl.overlay, cl[`overlay-${type}`]),
-					afterOpen: cl['overlay-after-open'],
-					beforeClose: cl['overlay-before-close'],
+					base: classNames(cl.overlay, cl[`overlay_${type}`]),
+					afterOpen: cl['overlay_after-open'],
+					beforeClose: cl['overlay_before-close'],
 				}}
 				className={cl.body}
 				isOpen={isOpen}
