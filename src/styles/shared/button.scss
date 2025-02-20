@@ -15,7 +15,9 @@
 	color: rgb(var(--color-text-contrast));
 	background-color: var(--background-color);
 
-	@include utils.hover {
-		--background-color: rgb(var(--color-accent));
+	&:not(:disabled) {
+		@include utils.hover {
+			--background-color: rgb(var(--color-accent));
+		}
 	}
 }
