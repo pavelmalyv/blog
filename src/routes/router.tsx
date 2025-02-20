@@ -1,4 +1,4 @@
-import { authorUrl, blogUrl, cookiesUrl, newslettersUrl, policyUrl } from './routes';
+import { authorUrl, blogUrl, cookiesUrl, creditsUrl, newslettersUrl, policyUrl } from './routes';
 import { createBrowserRouter } from 'react-router';
 import { lazy, Suspense } from 'react';
 
@@ -9,6 +9,7 @@ const PostPage = lazy(() => import('../pages/PostPage'));
 const AuthorPage = lazy(() => import('../pages/AuthorPage'));
 const PolicyPage = lazy(() => import('../pages/PolicyPage'));
 const CookiesPage = lazy(() => import('../pages/CookiesPage'));
+const CreditsPage = lazy(() => import('../pages/CreditsPage'));
 const NewslettersPage = lazy(() => import('../pages/NewslettersPage'));
 
 const router = createBrowserRouter([
@@ -74,6 +75,14 @@ const router = createBrowserRouter([
 				element: (
 					<Suspense>
 						<CookiesPage />
+					</Suspense>
+				),
+			},
+			{
+				path: creditsUrl,
+				element: (
+					<Suspense>
+						<CreditsPage />
 					</Suspense>
 				),
 			},

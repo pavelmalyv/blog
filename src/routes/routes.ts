@@ -13,4 +13,5 @@ export const authorUrl: AuthorUrl = {
 
 export const policyUrl = '/policy';
 export const cookiesUrl = '/cookies';
+export const creditsUrl = '/credits';
 export const newslettersUrl = '/newsletters';
