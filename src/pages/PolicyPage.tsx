@@ -3,6 +3,7 @@ import Section from '../components/UI/section/Section';
 import Text from '../components/UI/text/Text';
 
 const SITE = 'example.com';
+const SITE_URL = 'https://example.com';
 const EMAIL = 'pavelmalyv@gmail.com';
 
 const PolicyPage = () => {
@@ -99,7 +100,7 @@ const PolicyPage = () => {
 						<li>
 							<p>
 								<strong>Website</strong> refers to Blog, accessible from{' '}
-								<a href={SITE} rel="external nofollow noopener" target="_blank">
+								<a href={SITE_URL} rel="external nofollow noopener" target="_blank">
 									{SITE}
 								</a>
 							</p>
