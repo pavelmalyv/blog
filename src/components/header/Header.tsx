@@ -4,14 +4,15 @@ import Modal from '../UI/modal/Modal';
 import Navigation from '../UI/navigation/Navigation';
 import ThemeSwitch from '../UI/themeSwitch/ThemeSwitch';
 import ButtonIcon from '../UI/buttonIcon/ButtonIcon';
+
 import { useState } from 'react';
+import { newslettersUrl } from '../../routes/routes';
 
 const NavigationItems = () => {
 	return (
 		<>
 			<Navigation.Item to="/">Home</Navigation.Item>
-			<Navigation.Item to="/other">Blog</Navigation.Item>
-			<Navigation.Item to="/other">Newsletter</Navigation.Item>
+			<Navigation.Item to={newslettersUrl}>Newsletters</Navigation.Item>
 		</>
 	);
 };
