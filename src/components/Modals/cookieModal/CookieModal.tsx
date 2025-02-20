@@ -7,6 +7,7 @@ import ButtonIcon from '../../UI/buttonIcon/ButtonIcon';
 import { useEffect, useId, useState } from 'react';
 import { Link } from 'react-router';
 import { boolean, date, InferType, object } from 'yup';
+import { cookiesUrl } from '../../../routes/routes';
 
 const cookieAcceptSchema = object({
 	accept: boolean().required(),
@@ -97,7 +98,7 @@ const CookieModal = () => {
 			<div className={cl.bottom}>
 				<div className={cl.description}>
 					This site uses cookies to improve your experience. See our{' '}
-					<Link to={'#'} className="link">
+					<Link to={cookiesUrl} className="link">
 						Cookie Policy
 					</Link>{' '}
 					for details.
