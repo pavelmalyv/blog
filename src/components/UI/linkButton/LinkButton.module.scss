@@ -1,0 +1,5 @@
+@use '../../../styles/shared/button';
+
+.link {
+	@include button.base;
+}

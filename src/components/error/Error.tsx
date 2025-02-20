@@ -1,5 +1,6 @@
 import cl from './Error.module.scss';
-import Button from '../UI/button/Button';
+import LinkButton from '../UI/linkButton/LinkButton';
+
 import { useId } from 'react';
 
 interface ErrorProps {
@@ -20,7 +21,7 @@ const Error = ({ title, description, isLink = true }: ErrorProps) => {
 					</h1>
 					<div className={cl.description}>{description}</div>
 
-					{isLink && <Button>Home</Button>}
+					{isLink && <LinkButton to="/">Home</LinkButton>}
 				</div>
 			</div>
 		</section>
