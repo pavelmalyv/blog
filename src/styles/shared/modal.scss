@@ -1,0 +1,13 @@
+@mixin fade-animation($duration: 0.3s) {
+	opacity: 0;
+	transition: opacity $duration ease-out;
+	will-change: opacity;
+}
+
+@mixin fade-animation-open {
+	opacity: 1;
+}
+
+@mixin fade-animation-close {
+	opacity: 0;
+}
