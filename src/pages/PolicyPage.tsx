@@ -3,6 +3,7 @@ import Section from '../components/UI/section/Section';
 import Text from '../components/UI/text/Text';
 
 const SITE = 'example.com';
+const SITE_NAME = 'Blog';
 const SITE_URL = 'https://example.com';
 const EMAIL = 'pavelmalyv@gmail.com';
 
@@ -49,7 +50,8 @@ const PolicyPage = () => {
 						<li>
 							<p>
 								<strong>Company</strong> (referred to as either &quot;the Company&quot;,
-								&quot;We&quot;, &quot;Us&quot; or &quot;Our&quot; in this Agreement) refers to Blog.
+								&quot;We&quot;, &quot;Us&quot; or &quot;Our&quot; in this Agreement) refers to{' '}
+								{SITE_NAME}.
 							</p>
 						</li>
 						<li>
@@ -99,7 +101,7 @@ const PolicyPage = () => {
 						</li>
 						<li>
 							<p>
-								<strong>Website</strong> refers to Blog, accessible from{' '}
+								<strong>Website</strong> refers to {SITE_NAME}, accessible from{' '}
 								<a href={SITE_URL} rel="external nofollow noopener" target="_blank">
 									{SITE}
 								</a>
