@@ -3,7 +3,7 @@ import Section from '../UI/section/Section';
 import Checkbox from '../UI/checkbox/Checkbox';
 import Button from '../UI/button/Button';
 import FormSmall from '../Forms/formSmall/FormSmall';
-import ModalSuccess from '../Modals/ModalSuccess/ModalSuccess';
+import SuccessModal from '../Modals/successModal/successModal';
 
 import { Link } from 'react-router';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -132,7 +132,7 @@ const Newsletters = ({ titleLevel }: NewslettersProps) => {
 				</FormSmall>
 			</Section>
 
-			<ModalSuccess isOpen={isOpen} onClose={() => setIsOpen(false)} />
+			<SuccessModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
 		</>
 	);
 };

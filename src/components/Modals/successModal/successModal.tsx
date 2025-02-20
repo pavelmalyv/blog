@@ -1,4 +1,4 @@
-import cl from './ModalSuccess.module.scss';
+import cl from './SuccessModal.module.scss';
 import Modal from '../../UI/modal/Modal';
 import Icon from '../../UI/icon/Icon';
 
@@ -7,7 +7,7 @@ interface SuccessProps {
 	onClose: () => void;
 }
 
-const ModalSuccess = ({ isOpen, onClose }: SuccessProps) => {
+const SuccessModal = ({ isOpen, onClose }: SuccessProps) => {
 	return (
 		<Modal type="popup" isOpen={isOpen} onClose={onClose}>
 			<Modal.Header title="Subscription Confirmed!" />
@@ -25,4 +25,4 @@ const ModalSuccess = ({ isOpen, onClose }: SuccessProps) => {
 	);
 };
 
-export default ModalSuccess;
+export default SuccessModal;
