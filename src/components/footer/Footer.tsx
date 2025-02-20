@@ -1,5 +1,7 @@
 import cl from './Footer.module.scss';
+
 import { NavLink } from 'react-router';
+import { cookiesUrl, creditsUrl, newslettersUrl, policyUrl } from '../../routes/routes';
 
 const Footer = () => {
 	return (
@@ -15,18 +17,23 @@ const Footer = () => {
 								</NavLink>
 							</li>
 							<li className={cl.item}>
-								<NavLink to="/other" className={cl.link}>
-									Newsletter
+								<NavLink to={newslettersUrl} className={cl.link}>
+									Newsletters
 								</NavLink>
 							</li>
 							<li className={cl.item}>
-								<NavLink to="/other" className={cl.link}>
-									Privacy policy
+								<NavLink to={policyUrl} className={cl.link}>
+									Privacy Policy
 								</NavLink>
 							</li>
 							<li className={cl.item}>
-								<NavLink to="/other" className={cl.link}>
-									Licenses
+								<NavLink to={cookiesUrl} className={cl.link}>
+									Cookies Policy
+								</NavLink>
+							</li>
+							<li className={cl.item}>
+								<NavLink to={creditsUrl} className={cl.link}>
+									Credits
 								</NavLink>
 							</li>
 						</ul>
