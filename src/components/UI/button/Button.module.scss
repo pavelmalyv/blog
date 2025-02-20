@@ -1,33 +1,9 @@
-@use '../../../styles/utils';
+@use '../../../styles/shared/button';
 
 .button {
-	--background-color: rgb(var(--color-background-accent));
-
-	@include utils.flex-center(true);
-	@include utils.base-animation(background-color, opacity);
-
-	min-height: 48px;
-	padding: 8px 20px;
-	border-radius: 8px;
-	text-align: center;
-	font-weight: 500;
-	line-height: 1.5;
-	color: rgb(var(--color-text-contrast));
-	background-color: var(--background-color);
+	@include button.base;
 
 	&:disabled {
 		opacity: 0.5;
-	}
-
-	&:not(:disabled) {
-		@include utils.hover {
-			--background-color: rgb(var(--color-accent));
-		}
-	}
-
-	&_mobile-full {
-		@include utils.mobile-m {
-			width: 100%;
-		}
 	}
 }
