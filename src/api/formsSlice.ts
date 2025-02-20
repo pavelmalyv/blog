@@ -8,7 +8,7 @@ const formsSlice = apiSlice.injectEndpoints({
 			query: (email) => ({
 				url: '/http/200',
 				method: 'POST',
-				params: {
+				body: {
 					email,
 				},
 			}),
