@@ -6,14 +6,22 @@ interface ButtonProps {
 	mobileFull?: boolean;
 	disabled?: boolean;
 	children: React.ReactNode;
+	onClick: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-const Button = ({ type = 'button', mobileFull = false, disabled, children }: ButtonProps) => {
+const Button = ({
+	type = 'button',
+	mobileFull = false,
+	disabled,
+	children,
+	onClick,
+}: ButtonProps) => {
 	return (
 		<button
 			type={type}
 			disabled={disabled}
 			className={classNames(cl.button, { [cl['button_mobile-full']]: mobileFull })}
+			onClick={onClick}
 		>
 			{children}
 		</button>
