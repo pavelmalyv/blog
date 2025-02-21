@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import cl from './Pagination.module.scss';
 import ReactPaginate from 'react-paginate';
 import Icon from '../icon/Icon';
-import HiddenLoadingMessage from '../hiddenLoadingMessage/HiddenLoadingMessage';
+import HiddenLoading from '../../hiddenLoading/hiddenLoading';
 
 import { getPages } from '../../../utils/pagination';
 import { useLocation, useNavigate } from 'react-router';
@@ -62,31 +62,30 @@ const Pagination = ({
 	return (
 		<>
 			{totalPages > 1 && (
-				<div
-					className={classNames(cl.pagination, {
-						[cl['pagination_loading-delay']]: isLoadingDelay,
-					})}
-					aria-busy={isLoading}
-				>
-					<HiddenLoadingMessage isLoading={isLoading} message={`Loading page ${selectedPage}`} />
-
-					<ReactPaginate
-						pageCount={totalPages}
-						nextLabel={<ButtonContent previous={false} />}
-						previousLabel={<ButtonContent previous={true} />}
-						pageRangeDisplayed={2}
-						marginPagesDisplayed={1}
-						onPageChange={handlePageChange}
-						forcePage={selectedPage - 1}
-						containerClassName={cl.list}
-						pageClassName={cl.item}
-						pageLinkClassName={cl.link}
-						breakClassName={cl.item}
-						breakLinkClassName={cl.link}
-						previousLinkClassName={classNames(cl.button, cl['button_prev'])}
-						nextLinkClassName={classNames(cl.button, cl['button_next'])}
-					/>
-				</div>
+				<HiddenLoading isFetching={isLoading} hiddenMessage={`Loading page ${selectedPage}`}>
+					<div
+						className={classNames(cl.pagination, {
+							[cl['pagination_loading-delay']]: isLoadingDelay,
+						})}
+					>
+						<ReactPaginate
+							pageCount={totalPages}
+							nextLabel={<ButtonContent previous={false} />}
+							previousLabel={<ButtonContent previous={true} />}
+							pageRangeDisplayed={2}
+							marginPagesDisplayed={1}
+							onPageChange={handlePageChange}
+							forcePage={selectedPage - 1}
+							containerClassName={cl.list}
+							pageClassName={cl.item}
+							pageLinkClassName={cl.link}
+							breakClassName={cl.item}
+							breakLinkClassName={cl.link}
+							previousLinkClassName={classNames(cl.button, cl['button_prev'])}
+							nextLinkClassName={classNames(cl.button, cl['button_next'])}
+						/>
+					</div>
+				</HiddenLoading>
 			)}
 		</>
 	);
