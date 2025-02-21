@@ -1,7 +1,7 @@
 import cl from './PostsList.module.scss';
 import classNames from 'classnames';
 import PostCard from '@components/postCard/PostCard';
-import Message from '@components/UI/message/Message';
+import MessageInfo from '@/components/UI/messageInfo/MessageInfo';
 
 import { useDelayAnimationLoading } from '@hooks/useDelayAnimationLoading';
 import { Posts } from '@/types/posts';
@@ -57,7 +57,7 @@ const PostsList = ({
 							<div className={cl.spinner}></div>
 						</div>
 					) : (
-						<Message message={MESSAGES.postsEmpty} />
+						<MessageInfo message={MESSAGES.postsEmpty} />
 					)}
 				</>
 			)}

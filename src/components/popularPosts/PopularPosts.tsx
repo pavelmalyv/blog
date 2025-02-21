@@ -3,7 +3,7 @@ import type { Posts } from '@/types/posts';
 import cl from './PopularPosts.module.scss';
 import PostCard from '@components/postCard/PostCard';
 import Section from '@components/UI/section/Section';
-import Message from '@components/UI/message/Message';
+import MessageInfo from '@/components/UI/messageInfo/MessageInfo';
 import VisuallyHiddenLoader from '@components/visuallyHiddenLoader/VisuallyHiddenLoader';
 import ErrorBoundaryDisplay from '@components/errorBoundaryDisplay/ErrorBoundaryDisplay';
 
@@ -39,7 +39,7 @@ const PopularPosts = () => {
 			<VisuallyHiddenLoader isFetching={isLoading} hiddenMessage={MESSAGES.postsLoading}>
 				<ErrorBoundaryDisplay isError={isError} errorMessage={ERROR_MESSAGES.postsLoad}>
 					{total === 0 ? (
-						<Message message={MESSAGES.postsEmpty} />
+						<MessageInfo message={MESSAGES.postsEmpty} />
 					) : (
 						<ul className={cl.list}>
 							{posts.map((post, i) => {

@@ -6,7 +6,7 @@ import Search from '@components/Forms/search/Search';
 import Section from '@components/UI/section/Section';
 import Select from '@components/UI/select/Select';
 import Pagination from '@components/UI/pagination/Pagination';
-import Message from '@components/UI/message/Message';
+import MessageInfo from '@/components/UI/messageInfo/MessageInfo';
 import Field from '@components/UI/field/Field';
 import PostsList from '@components/postsList/PostsList';
 import SearchResult from '@components/UI/searchResult/SearchResult';
@@ -130,7 +130,7 @@ const AllPosts = () => {
 			>
 				<ErrorBoundaryDisplay isError={isError} errorMessage={ERROR_MESSAGES.postsLoad}>
 					{total === 0 && lastQuerySearch ? (
-						<Message message={MESSAGES.postsNotFound(lastQuerySearch)} />
+						<MessageInfo message={MESSAGES.postsNotFound(lastQuerySearch)} />
 					) : (
 						<>
 							<SearchResult field={searchField} lastQuery={lastQuerySearch} total={total} />
