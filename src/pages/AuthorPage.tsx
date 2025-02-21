@@ -10,7 +10,7 @@ import ErrorBoundaryDisplay from '@components/errorBoundaryDisplay/ErrorBoundary
 
 import { useParams } from 'react-router';
 import { useGetUserByIdQuery } from '@/api/usersSlice';
-import { throwNotFoundIfInvalid } from '@/utils/error';
+import { requiredParamOrThrow } from '@/utils/error';
 import { authorUrl } from '@/routes/routes';
 import { useValidatePaginationParam } from '@hooks/useValidatePaginationParam';
 import { useGetPostByIdUserQuery } from '@/api/postsSlice';
@@ -25,7 +25,7 @@ const LIMIT_POSTS = 6;
 
 const AuthorPage = () => {
 	const params = useParams<{ id?: string; pagination?: string }>();
-	const authorId = throwNotFoundIfInvalid(params.id);
+	const authorId = requiredParamOrThrow(params.id);
 	const [paginationParam, isValidPaginationParam] = useValidatePaginationParam(
 		params.pagination,
 		authorUrl.profile(authorId),

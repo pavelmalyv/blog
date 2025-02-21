@@ -1,25 +1,30 @@
 import { number, object } from 'yup';
 
-const NOT_FOUND_RESPONSE = new Response('Not Found', { status: 404 });
+export class NotFoundError extends Error {
+	constructor(message = 'Not Found') {
+		super(message);
+		this.name = 'NotFoundError';
+	}
+}
 
-export const throwNotFoundIfInvalid = (id: string | undefined) => {
-	if (!id) {
-		throw NOT_FOUND_RESPONSE;
+export const requiredParamOrThrow = (param: string | undefined) => {
+	if (!param) {
+		throw new NotFoundError();
 	}
 
-	return id;
+	return param;
 };
 
 const errorSchema = object({
 	status: number().required(),
 });
 
-export const throwNotFoundIfStatus = (error: unknown) => {
+export const checkStatusOrThrow = (error: unknown) => {
 	if (!errorSchema.isValidSync(error)) {
 		return;
 	}
 
 	if (error.status === 404) {
-		throw NOT_FOUND_RESPONSE;
+		throw new NotFoundError();
 	}
 };

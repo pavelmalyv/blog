@@ -1,5 +1,5 @@
 import ErrorMessage from '@components/UI/errorMessage/ErrorMessage';
-import { throwNotFoundIfStatus } from '@/utils/error';
+import { checkStatusOrThrow } from '@/utils/error';
 
 interface ErrorBoundaryDisplayProps {
 	isError: boolean;
@@ -17,7 +17,7 @@ const ErrorBoundaryDisplay = ({
 	isThrowNotFound,
 }: ErrorBoundaryDisplayProps) => {
 	if (isThrowNotFound) {
-		throwNotFoundIfStatus(error);
+		checkStatusOrThrow(error);
 	}
 
 	return <>{isError ? <ErrorMessage message={errorMessage} /> : <>{children}</>}</>;

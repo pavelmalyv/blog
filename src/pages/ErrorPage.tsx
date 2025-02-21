@@ -2,30 +2,38 @@ import Root from '@/pages/Root';
 import ErrorScreen from '@/components/errorScreen/ErrorScreen';
 
 import { isRouteErrorResponse, useRouteError } from 'react-router';
+import { NotFoundError } from '@/utils/error';
 
-const ErrorPage = () => {
-	const error = useRouteError();
+const DESCRIPTION_NOT_FOUND =
+	'The page you are looking for does not exist or has been moved. Check the URL or return to the homepage';
 
-	let title: string;
-	let description: string;
-	let isLink: boolean = false;
-
+const getErrorInfo = (error: unknown) => {
 	if (isRouteErrorResponse(error)) {
-		title = String(error.status);
+		const title = String(error.status);
+		const isLink = true;
 
 		switch (error.status) {
 			case 404:
-				description =
-					'The page you are looking for does not exist or has been moved. Check the URL or return to the homepage';
-				isLink = true;
-				break;
+				return { title, description: DESCRIPTION_NOT_FOUND, isLink };
 			default:
-				description = 'Please try again later';
+				return { title, description: 'Please try again later', isLink };
 		}
-	} else {
-		title = 'Error';
-		description = 'A critical error has occurred. Try refreshing the page';
 	}
+
+	if (error instanceof NotFoundError) {
+		return { title: '404', description: DESCRIPTION_NOT_FOUND, isLink: true };
+	}
+
+	return {
+		title: 'Error',
+		description: 'A critical error has occurred. Try refreshing the page',
+		isLink: false,
+	};
+};
+
+const ErrorPage = () => {
+	const error = useRouteError();
+	const { title, description, isLink } = getErrorInfo(error);
 
 	return (
 		<Root>

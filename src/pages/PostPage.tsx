@@ -5,7 +5,7 @@ import Newsletters from '@components/newsletters/Newsletters';
 import VisuallyHiddenLoader from '@components/visuallyHiddenLoader/VisuallyHiddenLoader';
 import ErrorBoundaryDisplay from '@components/errorBoundaryDisplay/ErrorBoundaryDisplay';
 
-import { throwNotFoundIfInvalid } from '@/utils/error';
+import { requiredParamOrThrow } from '@/utils/error';
 import { useParams } from 'react-router';
 import { useGetPostByIdQuery } from '@/api/postsSlice';
 import { ERROR_MESSAGES } from '@/constants/error';
@@ -13,7 +13,7 @@ import { MESSAGES } from '@/constants/messages';
 
 const PostPage = () => {
 	const params = useParams<{ id?: string }>();
-	const postId = throwNotFoundIfInvalid(params.id);
+	const postId = requiredParamOrThrow(params.id);
 
 	const { data, isLoading, isError, error } = useGetPostByIdQuery(postId);
 
