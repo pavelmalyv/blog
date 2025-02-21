@@ -69,5 +69,5 @@
 .spinner {
 	@include spinner.base(35px);
 
-	color: rgb(var(--color-accent));
+	color: rgb(var(--color-accent-primary));
 }

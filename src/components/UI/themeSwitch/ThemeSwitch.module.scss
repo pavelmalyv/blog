@@ -2,11 +2,16 @@
 
 .switch {
 	--icons-size: 24px;
+	--background-color: rgb(var(--color-background-primary-dark));
 
 	padding: 8px 16px;
 	border-radius: 30px;
 	color: rgb(var(--color-background-primary));
-	background-color: rgb(var(--color-background-primary-other-theme));
+	background-color: var(--background-color);
+
+	&[aria-checked='true'] {
+		--background-color: rgb(var(--color-background-primary-light));
+	}
 }
 
 .icons {
@@ -35,6 +40,6 @@
 	z-index: 100;
 }
 
-.switch[aria-checked='true'] .cursor {
+.switch[aria-checked='false'] .cursor {
 	right: calc(100% - var(--icons-size));
 }

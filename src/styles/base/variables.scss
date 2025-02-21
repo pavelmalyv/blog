@@ -10,23 +10,6 @@
 
 	--font-base: 'Inter', sans-serif;
 
-	// theme
-
-	--color-background-primary: 255, 255, 255;
-	--color-background-secondary: 244, 244, 244;
-	--color-background-accent: 127, 86, 217;
-	--color-text-primary: 26, 26, 26;
-	--color-text-secondary: 102, 112, 133;
-	--color-text-tertiary: 192, 197, 208;
-	--color-text-contrast: 255, 255, 255;
-	--color-accent: 105 65 198;
-	--color-accent-light: 249, 245, 255;
-	--color-background-primary-other-theme: 9, 13, 31;
-	--color-contrast-primary: 0, 0, 0;
-	--color-error: 200, 0, 3;
-	--color-border-primary: 208, 213, 221;
-	--color-border-secondary: 234, 236, 240;
-
 	// highlight-text
 
 	--color-highlight-text-first: 2, 106, 162;
@@ -49,6 +32,36 @@
 	--color-highlight-background-seventh: 255, 246, 237;
 	--color-highlight-background-eighth: 255, 241, 243;
 
+	// common colors
+
+	--color-accent-primary: 105 65 198;
+	--color-accent-secondary: 17 34 17;
+	--color-background-accent-primary: 127, 86, 217;
+	--color-accent-light-secondary: 249, 245, 255;
+	--color-text-contrast: 255, 255, 255;
+	--color-error: 200, 0, 3;
+	--color-border-primary: 208, 213, 221;
+
+	// light colors
+	--color-background-secondary-light: 244, 244, 244;
+	--color-background-primary-light: 255, 255, 255;
+	--color-text-primary-light: 26, 26, 26;
+	--color-text-secondary-light: 102, 112, 133;
+	--color-text-tertiary-light: 102, 112, 133;
+	--color-contrast-primary-light: 0, 0, 0;
+	--color-border-secondary-light: 234, 236, 240;
+	--color-border-tertiary-light: 168, 168, 168;
+
+	// dark colors
+	--color-background-secondary-dark: 33 37 56;
+	--color-background-primary-dark: 9, 13, 31;
+	--color-text-primary-dark: 255, 255, 255;
+	--color-text-secondary-dark: 192, 197, 208;
+	--color-text-tertiary-dark: 239, 239, 239;
+	--color-contrast-primary-dark: 255, 255, 255;
+	--color-border-secondary-dark: 86, 89, 102;
+	--color-border-tertiary-dark: 255, 255, 255;
+
 	@include utils.tablet-l {
 		--header-height: 80px;
 	}
@@ -59,5 +72,51 @@
 
 	@include utils.mobile-m {
 		--container-padding-x: 15px;
+	}
+}
+
+@mixin light-variables {
+	--color-background-primary: var(--color-background-primary-light);
+	--color-background-secondary: var(--color-background-secondary-light);
+	--color-text-primary: var(--color-text-primary-light);
+	--color-text-secondary: var(--color-text-secondary-light);
+	--color-text-tertiary: var(--color-text-tertiary-light);
+	--color-contrast-primary: var(--color-contrast-primary-light);
+	--color-border-secondary: var(--color-border-secondary-light);
+	--color-border-tertiary: var(--color-border-tertiary-light);
+}
+
+@mixin dark-variables {
+	--color-background-primary: var(--color-background-primary-dark);
+	--color-background-secondary: var(--color-background-secondary-dark);
+	--color-text-primary: var(--color-text-primary-dark);
+	--color-text-secondary: var(--color-text-secondary-dark);
+	--color-text-tertiary: var(--color-text-tertiary-dark);
+	--color-contrast-primary: var(--color-contrast-primary-dark);
+	--color-border-secondary: var(--color-border-secondary-dark);
+	--color-border-tertiary: var(--color-border-tertiary-dark);
+}
+
+[data-theme='light'] {
+	@include light-variables;
+}
+
+:not([data-theme='light']) {
+	@media (prefers-color-scheme: light) {
+		:root {
+			@include light-variables;
+		}
+	}
+}
+
+[data-theme='dark'] {
+	@include dark-variables;
+}
+
+:not([data-theme='dark']) {
+	@media (prefers-color-scheme: dark) {
+		:root {
+			@include dark-variables;
+		}
 	}
 }

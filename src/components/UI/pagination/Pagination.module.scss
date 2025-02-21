@@ -10,7 +10,7 @@
 	font-size: 14px;
 	line-height: 1.42;
 	font-weight: 500;
-	color: rgb(var(--color-text-secondary));
+	color: rgb(var(--color-text-tertiary));
 
 	&[aria-disabled='true'] {
 		opacity: 0.7;
@@ -18,7 +18,7 @@
 
 	&:not([aria-disabled='true']) {
 		@include utils.hover {
-			color: rgb(var(--color-accent));
+			color: rgb(var(--color-accent-primary));
 		}
 	}
 
@@ -98,7 +98,7 @@
 	color: var(--color);
 
 	@include utils.hover {
-		--background-color: rgba(var(--color-accent-light));
+		--background-color: rgba(var(--color-accent-light-secondary));
 	}
 
 	@include utils.mobile-s {
@@ -106,8 +106,8 @@
 	}
 
 	&[aria-current='page'] {
-		--color: rgb(var(--color-accent));
-		--background-color: rgba(var(--color-accent-light));
+		--color: rgb(var(--color-accent-primary));
+		--background-color: rgba(var(--color-accent-light-secondary));
 	}
 
 	&::before {

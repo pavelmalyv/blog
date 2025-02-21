@@ -39,7 +39,7 @@
 
 	&:not(&[aria-current='page']) {
 		@include utils.hover {
-			color: rgb(var(--color-accent));
+			color: rgb(var(--color-accent-primary));
 		}
 	}
 

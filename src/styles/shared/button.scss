@@ -1,7 +1,7 @@
 @use '../utils';
 
 @mixin base {
-	--background-color: rgb(var(--color-background-accent));
+	--background-color: rgb(var(--color-background-accent-primary));
 
 	@include utils.flex-center(true);
 	@include utils.base-animation(background-color, opacity);
@@ -17,7 +17,7 @@
 
 	&:not(:disabled) {
 		@include utils.hover {
-			--background-color: rgb(var(--color-accent));
+			--background-color: rgb(var(--color-accent-primary));
 		}
 	}
 }
