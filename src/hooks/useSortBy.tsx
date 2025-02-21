@@ -1,6 +1,6 @@
 import { useSearchParams } from 'react-router';
 import { useCallback, useEffect, useState } from 'react';
-import { joinSortOrder, splitSortOrder } from '@/utils/sort';
+import { joinSortOrder, parseSortOrder } from '@/utils/sort';
 
 const KEY_SORT_BY = 'sortBy';
 const KEY_ORDER = 'order';
@@ -11,7 +11,7 @@ export const useSortBy = (optionsValue: string[]) => {
 	const param = joinSortOrder(urlParams.get(KEY_SORT_BY) ?? '', urlParams.get(KEY_ORDER) ?? '');
 	const acceptableParam = optionsValue.find((value) => value === param);
 	const [sortSelectValue, setSortSelectValue] = useState(acceptableParam ?? optionsValue[0]);
-	const [sortBy, order] = splitSortOrder(sortSelectValue);
+	const [sortBy, order] = parseSortOrder(sortSelectValue);
 
 	useEffect(() => {
 		if (acceptableParam) {
@@ -34,7 +34,7 @@ export const useSortBy = (optionsValue: string[]) => {
 			const value = e.target.value;
 			setSortSelectValue(value);
 
-			const [sortBy, order] = splitSortOrder(value);
+			const [sortBy, order] = parseSortOrder(value);
 
 			if (!order) {
 				return;

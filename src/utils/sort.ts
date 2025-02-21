@@ -1,6 +1,6 @@
 import { SORT_ORDER_VALUES } from '@/constants/api';
 
-export const splitSortOrder = (sortParam: string) => {
+export const parseSortOrder = (sortParam: string) => {
 	const paramsArray = sortParam.split('|');
 	const sortBy = paramsArray[0];
 	const order = paramsArray.length === 2 ? paramsArray[1] : undefined;
