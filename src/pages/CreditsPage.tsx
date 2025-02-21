@@ -1,6 +1,6 @@
-import Heading from '../components/UI/heading/Heading';
-import Section from '../components/UI/section/Section';
-import Text from '../components/UI/text/Text';
+import Heading from '@components/UI/heading/Heading';
+import Section from '@components/UI/section/Section';
+import Text from '@components/UI/text/Text';
 
 const CreditsPage = () => {
 	return (

@@ -1,14 +1,14 @@
 import cl from './Author.module.scss';
 import Skeleton from 'react-loading-skeleton';
-import HiddenLoading from '../hiddenLoading/hiddenLoading';
-import ErrorWrapper from '../errorWrapper/ErrorWrapper';
+import HiddenLoading from '@components/hiddenLoading/hiddenLoading';
+import ErrorWrapper from '@components/errorWrapper/ErrorWrapper';
 
 import { useEffect } from 'react';
 import { Link } from 'react-router';
-import { useLazyGetUserByIdQuery } from '../../api/usersSlice';
-import { authorUrl } from '../../routes/routes';
-import { ERROR_MESSAGES } from '../../constants/error';
-import { MESSAGES } from '../../constants/messages';
+import { useLazyGetUserByIdQuery } from '@/api/usersSlice';
+import { authorUrl } from '@/routes/routes';
+import { ERROR_MESSAGES } from '@/constants/error';
+import { MESSAGES } from '@/constants/messages';
 
 interface AuthorProps {
 	id: string | null;

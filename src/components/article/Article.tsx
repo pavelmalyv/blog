@@ -1,15 +1,15 @@
-import type { Post } from '../../types/posts';
+import type { Post } from '@/types/posts';
 
 import classNames from 'classnames';
 import cl from './Article.module.scss';
 import Skeleton from 'react-loading-skeleton';
-import Tags from '../UI/tags/Tags';
-import Text from '../UI/text/Text';
-import Author from '../author/Author';
 import parse from 'html-react-parser';
+import Tags from '@components/UI/tags/Tags';
+import Text from '@components/UI/text/Text';
+import Author from '@components/author/Author';
 
 import { useId } from 'react';
-import { getDisplayDate } from '../../utils/date';
+import { getDisplayDate } from '@/utils/date';
 
 interface ArticleProps {
 	post: Post | null;

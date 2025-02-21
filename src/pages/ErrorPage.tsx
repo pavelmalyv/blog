@@ -1,5 +1,5 @@
-import Root from './Root';
-import Error from '../components/error/Error';
+import Root from '@/pages/Root';
+import Error from '@components/error/Error';
 
 import { isRouteErrorResponse, useRouteError } from 'react-router';
 

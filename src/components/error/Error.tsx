@@ -1,5 +1,5 @@
 import cl from './Error.module.scss';
-import LinkButton from '../UI/linkButton/LinkButton';
+import LinkButton from '@components/UI/linkButton/LinkButton';
 
 import { useId } from 'react';
 

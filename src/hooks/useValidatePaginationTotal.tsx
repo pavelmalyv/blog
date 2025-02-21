@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { getPages } from '../utils/pagination';
+import { getPages } from '@/utils/pagination';
 import { useLocation, useNavigate } from 'react-router';
 
 interface useValidatePaginationTotalProps {

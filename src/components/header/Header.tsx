@@ -1,12 +1,12 @@
 import cl from './Header.module.scss';
-import Logo from '../UI/logo/Logo';
-import Modal from '../UI/modal/Modal';
-import Navigation from '../UI/navigation/Navigation';
-import ThemeSwitch from '../UI/themeSwitch/ThemeSwitch';
-import ButtonIcon from '../UI/buttonIcon/ButtonIcon';
+import Logo from '@components/UI/logo/Logo';
+import Modal from '@components/UI/modal/Modal';
+import Navigation from '@components/UI/navigation/Navigation';
+import ThemeSwitch from '@components/UI/themeSwitch/ThemeSwitch';
+import ButtonIcon from '@components/UI/buttonIcon/ButtonIcon';
 
 import { useState } from 'react';
-import { newslettersUrl } from '../../routes/routes';
+import { newslettersUrl } from '@/routes/routes';
 
 const NavigationItems = () => {
 	return (

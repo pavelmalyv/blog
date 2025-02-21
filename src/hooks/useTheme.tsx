@@ -1,11 +1,11 @@
-import type { Themes } from '../types/theme';
+import type { Themes } from '@/types/theme';
 
 import { useCallback, useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../store/hooks';
-import { selectSavedTheme, setSavedTheme } from '../store/savedThemeSlice';
-import { savedThemeSchema } from '../schemas/themeSchemas';
+import { useAppDispatch, useAppSelector } from '@/store/hooks';
+import { selectSavedTheme, setSavedTheme } from '@/store/savedThemeSlice';
+import { savedThemeSchema } from '@/schemas/themeSchemas';
 
-import { THEMES } from '../constants/theme';
+import { THEMES } from '@/constants/theme';
 
 const getSavedThemeStorage = async () => {
 	const storage = localStorage.getItem('saved-theme');

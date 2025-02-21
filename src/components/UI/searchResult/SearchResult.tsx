@@ -1,6 +1,6 @@
 import classNames from 'classnames';
 import cl from './SearchResult.module.scss';
-import { MESSAGES } from '../../../constants/messages';
+import { MESSAGES } from '@/constants/messages';
 
 interface SearchResultProps {
 	field: string;

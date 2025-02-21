@@ -1,6 +1,6 @@
-import Newsletters from '../components/newsletters/Newsletters';
-import RecentPosts from '../components/recentPosts/RecentPosts';
-import Section from '../components/UI/section/Section';
+import Newsletters from '@components/newsletters/Newsletters';
+import RecentPosts from '@components/recentPosts/RecentPosts';
+import Section from '@components/UI/section/Section';
 
 const NewslettersPage = () => {
 	return (

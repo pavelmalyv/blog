@@ -1,7 +1,7 @@
-import type { User } from '../types/users';
+import type { User } from '@/types/users';
 
-import { apiSlice } from './apiSlice';
-import { userSchema } from '../schemas/usersSchemas';
+import { apiSlice } from '@/api/apiSlice';
+import { userSchema } from '@/schemas/usersSchemas';
 
 const usersSlice = apiSlice.injectEndpoints({
 	endpoints: (build) => ({

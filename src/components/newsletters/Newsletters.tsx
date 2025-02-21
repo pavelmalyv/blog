@@ -1,18 +1,18 @@
-import Field from '../UI/field/Field';
-import Section from '../UI/section/Section';
-import Checkbox from '../UI/checkbox/Checkbox';
-import Button from '../UI/button/Button';
-import FormSmall from '../Forms/formSmall/FormSmall';
-import SuccessModal from '../Modals/successModal/successModal';
+import Field from '@components/UI/field/Field';
+import Section from '@components/UI/section/Section';
+import Checkbox from '@components/UI/checkbox/Checkbox';
+import Button from '@components/UI/button/Button';
+import FormSmall from '@components/Forms/formSmall/FormSmall';
+import SuccessModal from '@components/Modals/successModal/successModal';
 
 import { Link } from 'react-router';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { boolean, InferType, object, string } from 'yup';
-import { policyUrl } from '../../routes/routes';
+import { policyUrl } from '@/routes/routes';
 import { useId, useState } from 'react';
-import { ERROR_MESSAGES } from '../../constants/error';
-import { useSendNewslettersMutation } from '../../api/formsSlice';
+import { ERROR_MESSAGES } from '@/constants/error';
+import { useSendNewslettersMutation } from '@/api/formsSlice';
 import { toast } from 'react-toastify';
 
 const formSchema = object({

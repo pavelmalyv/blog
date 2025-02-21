@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useDelayAnimationLoading } from './useDelayAnimationLoading';
+import { useDelayAnimationLoading } from '@hooks/useDelayAnimationLoading';
 
 export const useFetchingQuery = <T extends string | number | boolean | undefined>(
 	value: T,

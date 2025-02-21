@@ -1,10 +1,10 @@
-import App from './App.tsx';
+import App from '@/App.tsx';
 import Modal from 'react-modal';
 
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { store } from './store/store.ts';
+import { store } from '@/store/store.ts';
 import { SkeletonTheme } from 'react-loading-skeleton';
 import { Slide, ToastContainer } from 'react-toastify';
 

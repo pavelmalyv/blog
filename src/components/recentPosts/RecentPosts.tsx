@@ -1,12 +1,12 @@
-import type { Posts } from '../../types/posts';
+import type { Posts } from '@/types/posts';
 
-import PostsList from '../postsList/PostsList';
-import HiddenLoading from '../hiddenLoading/hiddenLoading';
-import ErrorWrapper from '../errorWrapper/ErrorWrapper';
+import PostsList from '@components/postsList/PostsList';
+import HiddenLoading from '@components/hiddenLoading/hiddenLoading';
+import ErrorWrapper from '@components/errorWrapper/ErrorWrapper';
 
-import { useGetPostsQuery } from '../../api/postsSlice';
-import { ERROR_MESSAGES } from '../../constants/error';
-import { MESSAGES } from '../../constants/messages';
+import { useGetPostsQuery } from '@/api/postsSlice';
+import { ERROR_MESSAGES } from '@/constants/error';
+import { MESSAGES } from '@/constants/messages';
 
 interface RecentPostsProps {
 	limit: number;

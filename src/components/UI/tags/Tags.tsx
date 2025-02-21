@@ -1,4 +1,4 @@
-import type { Tags } from '../../../types/tags';
+import type { Tags } from '@/types/tags';
 
 import cl from './Tags.module.scss';
 import classNames from 'classnames';

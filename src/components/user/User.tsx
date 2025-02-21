@@ -1,14 +1,14 @@
-import type { User } from '../../types/users';
+import type { User } from '@/types/users';
 
 import cl from './User.module.scss';
 import classNames from 'classnames';
-import Section from '../UI/section/Section';
-import Skeleton from 'react-loading-skeleton';
-import Text from '../UI/text/Text';
-import HiddenLoading from '../hiddenLoading/hiddenLoading';
 import parse from 'html-react-parser';
+import Section from '@components/UI/section/Section';
+import Skeleton from 'react-loading-skeleton';
+import Text from '@components/UI/text/Text';
+import HiddenLoading from '@components/hiddenLoading/hiddenLoading';
 
-import { MESSAGES } from '../../constants/messages';
+import { MESSAGES } from '@/constants/messages';
 import { useId } from 'react';
 
 interface UserTextProps {

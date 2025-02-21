@@ -1,13 +1,13 @@
 import classNames from 'classnames';
 import cl from './CookieModal.module.scss';
 import ReactModal from 'react-modal';
-import Button from '../../UI/button/Button';
-import ButtonIcon from '../../UI/buttonIcon/ButtonIcon';
+import Button from '@components/UI/button/Button';
+import ButtonIcon from '@components/UI/buttonIcon/ButtonIcon';
 
 import { useEffect, useId, useState } from 'react';
 import { Link } from 'react-router';
 import { boolean, date, InferType, object } from 'yup';
-import { cookiesUrl } from '../../../routes/routes';
+import { cookiesUrl } from '@/routes/routes';
 
 const cookieAcceptSchema = object({
 	accept: boolean().required(),

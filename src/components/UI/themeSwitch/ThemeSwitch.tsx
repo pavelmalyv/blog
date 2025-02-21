@@ -1,8 +1,8 @@
 import cl from './ThemeSwitch.module.scss';
-import Icon from '../icon/Icon';
+import Icon from '@components/UI/icon/Icon';
 
-import { useTheme } from '../../../hooks/useTheme';
-import { THEMES } from '../../../constants/theme';
+import { useTheme } from '@hooks/useTheme';
+import { THEMES } from '@/constants/theme';
 
 const ThemeSwitch = () => {
 	const [theme, setTheme] = useTheme();

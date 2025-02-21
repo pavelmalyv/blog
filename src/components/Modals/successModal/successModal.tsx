@@ -1,6 +1,6 @@
 import cl from './SuccessModal.module.scss';
-import Modal from '../../UI/modal/Modal';
-import Icon from '../../UI/icon/Icon';
+import Modal from '@components/UI/modal/Modal';
+import Icon from '@components/UI/icon/Icon';
 
 interface SuccessProps {
 	isOpen: boolean;

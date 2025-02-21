@@ -1,17 +1,17 @@
-import type { Post } from '../../types/posts';
+import type { Post } from '@/types/posts';
 
 import classNames from 'classnames';
 import cl from './PostCard.module.scss';
 import Skeleton from 'react-loading-skeleton';
-import Tags from '../UI/tags/Tags';
-import Icon from '../UI/icon/Icon';
+import Tags from '@components/UI/tags/Tags';
+import Icon from '@components/UI/icon/Icon';
+import Author from '@components/author/Author';
 
 import { Link } from 'react-router';
 import { truncate } from 'lodash';
 import { useId } from 'react';
-import { getDisplayDate } from '../../utils/date';
-import { blogUrl } from '../../routes/routes';
-import Author from '../author/Author';
+import { getDisplayDate } from '@/utils/date';
+import { blogUrl } from '@/routes/routes';
 
 interface PostCardProps {
 	post: Post | null;

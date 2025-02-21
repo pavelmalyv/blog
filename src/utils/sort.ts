@@ -1,4 +1,4 @@
-import { SORT_ORDER_VALUES } from '../constants/api';
+import { SORT_ORDER_VALUES } from '@/constants/api';
 
 export const splitSortOrder = (sortParam: string) => {
 	const paramsArray = sortParam.split('|');

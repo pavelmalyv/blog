@@ -1,15 +1,15 @@
-import Article from '../components/article/Article';
-import Sidebar from '../components/sidebar/Sidebar';
-import RecentPosts from '../components/recentPosts/RecentPosts';
-import Newsletters from '../components/newsletters/Newsletters';
-import HiddenLoading from '../components/hiddenLoading/hiddenLoading';
-import ErrorWrapper from '../components/errorWrapper/ErrorWrapper';
+import Article from '@components/article/Article';
+import Sidebar from '@components/sidebar/Sidebar';
+import RecentPosts from '@components/recentPosts/RecentPosts';
+import Newsletters from '@components/newsletters/Newsletters';
+import HiddenLoading from '@components/hiddenLoading/hiddenLoading';
+import ErrorWrapper from '@components/errorWrapper/ErrorWrapper';
 
-import { throwNotFoundIfInvalid } from '../utils/error';
+import { throwNotFoundIfInvalid } from '@/utils/error';
 import { useParams } from 'react-router';
-import { useGetPostByIdQuery } from '../api/postsSlice';
-import { ERROR_MESSAGES } from '../constants/error';
-import { MESSAGES } from '../constants/messages';
+import { useGetPostByIdQuery } from '@/api/postsSlice';
+import { ERROR_MESSAGES } from '@/constants/error';
+import { MESSAGES } from '@/constants/messages';
 
 const PostPage = () => {
 	const params = useParams<{ id?: string }>();

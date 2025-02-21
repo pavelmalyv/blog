@@ -1,7 +1,7 @@
-import type { SavedThemes } from '../types/theme';
+import type { SavedThemes } from '@/types/theme';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
-import { RootState } from './store';
+import { RootState } from '@/store/store';
 
 export interface ThemeSavedState {
 	value: SavedThemes;

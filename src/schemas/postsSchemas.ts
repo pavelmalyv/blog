@@ -1,7 +1,7 @@
 import { string, object, array } from 'yup';
-import { tagsSchema } from './tagsSchemas';
-import { paginationResponseSchema } from './responsesSchemas';
-import { imageSchema } from './imagesSchemas';
+import { tagsSchema } from '@/schemas/tagsSchemas';
+import { paginationResponseSchema } from '@/schemas/responsesSchemas';
+import { imageSchema } from '@/schemas/imagesSchemas';
 
 export const postSchema = object({
 	id: string().required(),

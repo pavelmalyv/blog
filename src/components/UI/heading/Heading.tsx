@@ -1,9 +1,9 @@
 import Skeleton from 'react-loading-skeleton';
 import cl from './Heading.module.scss';
-import HiddenLoading from '../../hiddenLoading/hiddenLoading';
+import HiddenLoading from '@components/hiddenLoading/hiddenLoading';
 
 import { useEffect, useRef } from 'react';
-import { MESSAGES } from '../../../constants/messages';
+import { MESSAGES } from '@/constants/messages';
 
 interface HeadingProps {
 	title: string | null;

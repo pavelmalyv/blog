@@ -1,6 +1,6 @@
 import { useSearchParams } from 'react-router';
 import { useCallback, useEffect, useState } from 'react';
-import { joinSortOrder, splitSortOrder } from '../utils/sort';
+import { joinSortOrder, splitSortOrder } from '@/utils/sort';
 
 const KEY_SORT_BY = 'sortBy';
 const KEY_ORDER = 'order';

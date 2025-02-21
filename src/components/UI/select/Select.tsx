@@ -1,6 +1,6 @@
-import Label from '../label/Label';
+import Label from '@components/UI/label/Label';
 import cl from './Select.module.scss';
-import Icon from '../icon/Icon';
+import Icon from '@components/UI/icon/Icon';
 import { useId } from 'react';
 
 interface SelectProps {

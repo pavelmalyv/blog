@@ -1,6 +1,6 @@
-import { successResponseSchema } from '../schemas/responsesSchemas';
-import { SuccessResponseSchema } from '../types/response';
-import { apiSlice } from './apiSlice';
+import { successResponseSchema } from '@/schemas/responsesSchemas';
+import { SuccessResponseSchema } from '@/types/response';
+import { apiSlice } from '@/api/apiSlice';
 
 const formsSlice = apiSlice.injectEndpoints({
 	endpoints: (build) => ({

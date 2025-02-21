@@ -1,8 +1,8 @@
 import cl from './Field.module.scss';
 import classNames from 'classnames';
-import Icon from '../icon/Icon';
-import Label from '../label/Label';
-import FieldError from '../fieldError/FieldError';
+import Icon from '@components/UI/icon/Icon';
+import Label from '@components/UI/label/Label';
+import FieldError from '@components/UI/fieldError/FieldError';
 
 import { forwardRef, useId } from 'react';
 

@@ -1,7 +1,7 @@
 import cl from './Footer.module.scss';
 
 import { NavLink } from 'react-router';
-import { cookiesUrl, creditsUrl, newslettersUrl, policyUrl } from '../../routes/routes';
+import { cookiesUrl, creditsUrl, newslettersUrl, policyUrl } from '@/routes/routes';
 
 const Footer = () => {
 	return (

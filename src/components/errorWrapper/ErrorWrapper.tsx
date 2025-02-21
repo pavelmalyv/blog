@@ -1,5 +1,5 @@
-import ErrorMessage from '../UI/errorMessage/ErrorMessage';
-import { throwNotFoundIfStatus } from '../../utils/error';
+import ErrorMessage from '@components/UI/errorMessage/ErrorMessage';
+import { throwNotFoundIfStatus } from '@/utils/error';
 
 interface ErrorWrapperProps {
 	isError: boolean;

@@ -1,7 +1,7 @@
 import cl from './Checkbox.module.scss';
 import classNames from 'classnames';
-import FieldError from '../fieldError/FieldError';
-import Icon from '../icon/Icon';
+import FieldError from '@components/UI/fieldError/FieldError';
+import Icon from '@components/UI/icon/Icon';
 
 import { forwardRef, useId } from 'react';
 

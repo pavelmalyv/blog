@@ -1,5 +1,5 @@
 import { object, string } from 'yup';
-import { imageSchema } from './imagesSchemas';
+import { imageSchema } from '@/schemas/imagesSchemas';
 
 export const userSchema = object({
 	id: string().required(),

@@ -1,11 +1,11 @@
 import cl from './PostsList.module.scss';
 import classNames from 'classnames';
-import PostCard from '../postCard/PostCard';
-import Message from '../UI/message/Message';
+import PostCard from '@components/postCard/PostCard';
+import Message from '@components/UI/message/Message';
 
-import { useDelayAnimationLoading } from '../../hooks/useDelayAnimationLoading';
-import { Posts } from '../../types/posts';
-import { MESSAGES } from '../../constants/messages';
+import { useDelayAnimationLoading } from '@hooks/useDelayAnimationLoading';
+import { Posts } from '@/types/posts';
+import { MESSAGES } from '@/constants/messages';
 
 interface PostsListProps {
 	posts: Posts | null[];

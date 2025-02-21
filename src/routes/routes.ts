@@ -1,4 +1,4 @@
-import type { BlogUrl, AuthorUrl } from '../types/routes';
+import type { BlogUrl, AuthorUrl } from '@/types/routes';
 
 export const blogUrl: BlogUrl = {
 	base: '/',

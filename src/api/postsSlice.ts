@@ -1,8 +1,8 @@
-import type { Post, PostsResponse } from '../types/posts';
-import type { SortOrder } from '../types/api';
+import type { Post, PostsResponse } from '@/types/posts';
+import type { SortOrder } from '@/types/api';
 
-import { postSchema, postsResponseSchema } from '../schemas/postsSchemas';
-import { apiSlice } from './apiSlice';
+import { postSchema, postsResponseSchema } from '@/schemas/postsSchemas';
+import { apiSlice } from '@/api/apiSlice';
 
 interface GetPostsParams {
 	limit?: number;

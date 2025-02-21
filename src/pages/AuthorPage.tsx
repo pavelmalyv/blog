@@ -1,25 +1,25 @@
-import type { Posts } from '../types/posts';
+import type { Posts } from '@/types/posts';
 
-import Heading from '../components/UI/heading/Heading';
-import User from '../components/user/User';
-import Section from '../components/UI/section/Section';
-import PostsList from '../components/postsList/PostsList';
-import Pagination from '../components/UI/pagination/Pagination';
-import HiddenLoading from '../components/hiddenLoading/hiddenLoading';
-import ErrorWrapper from '../components/errorWrapper/ErrorWrapper';
+import Heading from '@components/UI/heading/Heading';
+import User from '@components/user/User';
+import Section from '@components/UI/section/Section';
+import PostsList from '@components/postsList/PostsList';
+import Pagination from '@components/UI/pagination/Pagination';
+import HiddenLoading from '@components/hiddenLoading/hiddenLoading';
+import ErrorWrapper from '@components/errorWrapper/ErrorWrapper';
 
 import { useParams } from 'react-router';
-import { useGetUserByIdQuery } from '../api/usersSlice';
-import { throwNotFoundIfInvalid } from '../utils/error';
-import { authorUrl } from '../routes/routes';
-import { useValidatePaginationParam } from '../hooks/useValidatePaginationParam';
-import { useGetPostByIdUserQuery } from '../api/postsSlice';
-import { useValidatePaginationTotal } from '../hooks/useValidatePaginationTotal';
-import { getSkip } from '../utils/pagination';
-import { useFetchingQuery } from '../hooks/useFetchingQuery';
+import { useGetUserByIdQuery } from '@/api/usersSlice';
+import { throwNotFoundIfInvalid } from '@/utils/error';
+import { authorUrl } from '@/routes/routes';
+import { useValidatePaginationParam } from '@hooks/useValidatePaginationParam';
+import { useGetPostByIdUserQuery } from '@/api/postsSlice';
+import { useValidatePaginationTotal } from '@hooks/useValidatePaginationTotal';
+import { getSkip } from '@/utils/pagination';
+import { useFetchingQuery } from '@hooks/useFetchingQuery';
 
-import { ERROR_MESSAGES } from '../constants/error';
-import { MESSAGES } from '../constants/messages';
+import { ERROR_MESSAGES } from '@/constants/error';
+import { MESSAGES } from '@/constants/messages';
 
 const LIMIT_POSTS = 6;
 
