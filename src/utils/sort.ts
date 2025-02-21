@@ -7,4 +7,4 @@ export const parseSortOrder = (sortParam: string) => {
 	return [sortBy, SORT_ORDER_VALUES.find((item) => item === order)] as const;
 };
 
-export const joinSortOrder = (sort: string, order: string) => `${sort}|${order}`;
+export const formatSortOrder = (sort: string, order: string) => `${sort}|${order}`;

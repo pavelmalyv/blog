@@ -16,7 +16,7 @@ import ErrorBoundaryDisplay from '@components/errorBoundaryDisplay/ErrorBoundary
 import { useId } from 'react';
 import { useParams } from 'react-router';
 import { useFetchingQuery } from '@hooks/useFetchingQuery';
-import { joinSortOrder } from '@/utils/sort';
+import { formatSortOrder } from '@/utils/sort';
 import { blogUrl } from '@/routes/routes';
 import { useGetPostsQuery } from '@/api/postsSlice';
 import { useValidatePaginationParam } from '@hooks/useValidatePaginationParam';
@@ -67,7 +67,7 @@ const AllPosts = () => {
 	const { isFetching: isFetchingPagination } = useFetchingQuery(paginationPage, isFetching);
 	const { isFetching: isFetchingLimit } = useFetchingQuery(limit, isFetching);
 	const { isFetching: isFetchingSort } = useFetchingQuery(
-		joinSortOrder(sortBy, order ?? ''),
+		formatSortOrder(sortBy, order ?? ''),
 		isFetching,
 	);
 	const {
