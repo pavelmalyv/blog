@@ -127,7 +127,7 @@ const AllPosts = () => {
 
 				<div className={cl['filter-select-group']}>
 					<Select
-						label="SortSelect by"
+						label="Sort by"
 						value={sortSelectValue}
 						onChange={handleChangeSort}
 						aria-controls={postsId}
