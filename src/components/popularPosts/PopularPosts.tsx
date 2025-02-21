@@ -4,7 +4,7 @@ import cl from './PopularPosts.module.scss';
 import PostCard from '@components/postCard/PostCard';
 import Section from '@components/UI/section/Section';
 import Message from '@components/UI/message/Message';
-import HiddenLoading from '@components/hiddenLoading/hiddenLoading';
+import VisuallyHiddenLoader from '@components/visuallyHiddenLoader/VisuallyHiddenLoader';
 import ErrorBoundaryDisplay from '@components/errorBoundaryDisplay/ErrorBoundaryDisplay';
 
 import { useGetPostsQuery } from '@/api/postsSlice';
@@ -36,7 +36,7 @@ const PopularPosts = () => {
 
 	return (
 		<Section title="Popular blog posts">
-			<HiddenLoading isFetching={isLoading} hiddenMessage={MESSAGES.postsLoading}>
+			<VisuallyHiddenLoader isFetching={isLoading} hiddenMessage={MESSAGES.postsLoading}>
 				<ErrorBoundaryDisplay isError={isError} errorMessage={ERROR_MESSAGES.postsLoad}>
 					{total === 0 ? (
 						<Message message={MESSAGES.postsEmpty} />
@@ -54,7 +54,7 @@ const PopularPosts = () => {
 						</ul>
 					)}
 				</ErrorBoundaryDisplay>
-			</HiddenLoading>
+			</VisuallyHiddenLoader>
 		</Section>
 	);
 };

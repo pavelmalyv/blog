@@ -1,7 +1,7 @@
 import type { Posts } from '@/types/posts';
 
 import PostsList from '@components/postsList/PostsList';
-import HiddenLoading from '@components/hiddenLoading/hiddenLoading';
+import VisuallyHiddenLoader from '@components/visuallyHiddenLoader/VisuallyHiddenLoader';
 import ErrorBoundaryDisplay from '@components/errorBoundaryDisplay/ErrorBoundaryDisplay';
 
 import { useGetPostsQuery } from '@/api/postsSlice';
@@ -60,11 +60,11 @@ const RecentPosts = ({
 	}
 
 	return (
-		<HiddenLoading isFetching={isLoading} hiddenMessage={MESSAGES.postsLoading}>
+		<VisuallyHiddenLoader isFetching={isLoading} hiddenMessage={MESSAGES.postsLoading}>
 			<ErrorBoundaryDisplay isError={isError} errorMessage={ERROR_MESSAGES.postsLoad}>
 				<PostsList posts={posts} direction={direction} stretchLast={stretchLast} />
 			</ErrorBoundaryDisplay>
-		</HiddenLoading>
+		</VisuallyHiddenLoader>
 	);
 };
 

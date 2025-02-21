@@ -6,7 +6,7 @@ import parse from 'html-react-parser';
 import Section from '@components/UI/section/Section';
 import Skeleton from 'react-loading-skeleton';
 import Text from '@components/UI/text/Text';
-import HiddenLoading from '@components/hiddenLoading/hiddenLoading';
+import VisuallyHiddenLoader from '@components/visuallyHiddenLoader/VisuallyHiddenLoader';
 
 import { MESSAGES } from '@/constants/messages';
 import { useId } from 'react';
@@ -39,7 +39,7 @@ const User = ({ user }: UserProps) => {
 
 	return (
 		<Section aria-labelledby={titleId}>
-			<HiddenLoading isFetching={isLoading} hiddenMessage={MESSAGES.authorLoading}>
+			<VisuallyHiddenLoader isFetching={isLoading} hiddenMessage={MESSAGES.authorLoading}>
 				<div className={cl.body}>
 					<div className={cl.image}>
 						{user ? (
@@ -64,7 +64,7 @@ const User = ({ user }: UserProps) => {
 					<UserTextItem title="Skills:" text={user?.skills} />
 					<UserTextItem title="Experience:" text={user?.experience} />
 				</div>
-			</HiddenLoading>
+			</VisuallyHiddenLoader>
 		</Section>
 	);
 };

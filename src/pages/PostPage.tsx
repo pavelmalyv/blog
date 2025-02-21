@@ -2,7 +2,7 @@ import Article from '@components/article/Article';
 import Sidebar from '@components/sidebar/Sidebar';
 import RecentPosts from '@components/recentPosts/RecentPosts';
 import Newsletters from '@components/newsletters/Newsletters';
-import HiddenLoading from '@components/hiddenLoading/hiddenLoading';
+import VisuallyHiddenLoader from '@components/visuallyHiddenLoader/VisuallyHiddenLoader';
 import ErrorBoundaryDisplay from '@components/errorBoundaryDisplay/ErrorBoundaryDisplay';
 
 import { throwNotFoundIfInvalid } from '@/utils/error';
@@ -20,7 +20,7 @@ const PostPage = () => {
 	return (
 		<Sidebar reverse={true}>
 			<Sidebar.Main>
-				<HiddenLoading isFetching={isLoading} hiddenMessage={MESSAGES.postLoading}>
+				<VisuallyHiddenLoader isFetching={isLoading} hiddenMessage={MESSAGES.postLoading}>
 					<ErrorBoundaryDisplay
 						isError={isError}
 						error={error}
@@ -29,7 +29,7 @@ const PostPage = () => {
 					>
 						<Article post={data ?? null} />
 					</ErrorBoundaryDisplay>
-				</HiddenLoading>
+				</VisuallyHiddenLoader>
 
 				<Newsletters />
 			</Sidebar.Main>

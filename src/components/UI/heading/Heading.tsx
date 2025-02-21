@@ -1,6 +1,6 @@
 import Skeleton from 'react-loading-skeleton';
 import cl from './Heading.module.scss';
-import HiddenLoading from '@components/hiddenLoading/hiddenLoading';
+import VisuallyHiddenLoader from '@components/visuallyHiddenLoader/VisuallyHiddenLoader';
 
 import { useEffect, useRef } from 'react';
 import { MESSAGES } from '@/constants/messages';
@@ -60,7 +60,7 @@ const Heading = ({ title }: HeadingProps) => {
 			<section className={cl.heading}>
 				<div className="container">
 					<div className={cl.wrapper}>
-						<HiddenLoading isFetching={isLoading} hiddenMessage={MESSAGES.titleLoading}>
+						<VisuallyHiddenLoader isFetching={isLoading} hiddenMessage={MESSAGES.titleLoading}>
 							<h1 className={cl.title} ref={titleRef}>
 								<span className={cl.text} ref={titleTextRef}>
 									{title}
@@ -72,7 +72,7 @@ const Heading = ({ title }: HeadingProps) => {
 									</span>
 								)}
 							</h1>
-						</HiddenLoading>
+						</VisuallyHiddenLoader>
 					</div>
 				</div>
 			</section>

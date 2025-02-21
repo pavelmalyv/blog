@@ -5,7 +5,7 @@ import User from '@components/user/User';
 import Section from '@components/UI/section/Section';
 import PostsList from '@components/postsList/PostsList';
 import Pagination from '@components/UI/pagination/Pagination';
-import HiddenLoading from '@components/hiddenLoading/hiddenLoading';
+import VisuallyHiddenLoader from '@components/visuallyHiddenLoader/VisuallyHiddenLoader';
 import ErrorBoundaryDisplay from '@components/errorBoundaryDisplay/ErrorBoundaryDisplay';
 
 import { useParams } from 'react-router';
@@ -75,7 +75,7 @@ const AuthorPage = () => {
 			</Section>
 
 			<Section title="All articles by the author">
-				<HiddenLoading
+				<VisuallyHiddenLoader
 					isFetching={isFetchingPagination}
 					hiddenMessage={MESSAGES.authorPostsLoading}
 				>
@@ -93,7 +93,7 @@ const AuthorPage = () => {
 							/>
 						) : null}
 					</ErrorBoundaryDisplay>
-				</HiddenLoading>
+				</VisuallyHiddenLoader>
 			</Section>
 		</>
 	);

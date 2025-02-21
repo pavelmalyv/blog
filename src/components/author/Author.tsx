@@ -1,6 +1,6 @@
 import cl from './Author.module.scss';
 import Skeleton from 'react-loading-skeleton';
-import HiddenLoading from '@components/hiddenLoading/hiddenLoading';
+import VisuallyHiddenLoader from '@components/visuallyHiddenLoader/VisuallyHiddenLoader';
 import ErrorBoundaryDisplay from '@components/errorBoundaryDisplay/ErrorBoundaryDisplay';
 
 import { useEffect } from 'react';
@@ -42,7 +42,7 @@ const Author = ({ id, isCurrentPageAuthor = false }: AuthorProps) => {
 	}
 
 	return (
-		<HiddenLoading
+		<VisuallyHiddenLoader
 			isFetching={isLoading}
 			hiddenMessage={MESSAGES.authorLoading}
 			isRoleStatus={false}
@@ -50,7 +50,7 @@ const Author = ({ id, isCurrentPageAuthor = false }: AuthorProps) => {
 			<ErrorBoundaryDisplay isError={isError} errorMessage={ERROR_MESSAGES.authorLoad}>
 				{author}
 			</ErrorBoundaryDisplay>
-		</HiddenLoading>
+		</VisuallyHiddenLoader>
 	);
 };
 

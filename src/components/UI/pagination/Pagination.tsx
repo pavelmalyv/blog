@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import cl from './Pagination.module.scss';
 import ReactPaginate from 'react-paginate';
 import Icon from '@components/UI/icon/Icon';
-import HiddenLoading from '@components/hiddenLoading/hiddenLoading';
+import VisuallyHiddenLoader from '@components/visuallyHiddenLoader/VisuallyHiddenLoader';
 
 import { getPages } from '@/utils/pagination';
 import { useLocation, useNavigate } from 'react-router';
@@ -62,7 +62,7 @@ const Pagination = ({
 	return (
 		<>
 			{totalPages > 1 && (
-				<HiddenLoading isFetching={isLoading} hiddenMessage={`Loading page ${selectedPage}`}>
+				<VisuallyHiddenLoader isFetching={isLoading} hiddenMessage={`Loading page ${selectedPage}`}>
 					<div
 						className={classNames(cl.pagination, {
 							[cl['pagination_loading-delay']]: isLoadingDelay,
@@ -85,7 +85,7 @@ const Pagination = ({
 							nextLinkClassName={classNames(cl.button, cl['button_next'])}
 						/>
 					</div>
-				</HiddenLoading>
+				</VisuallyHiddenLoader>
 			)}
 		</>
 	);

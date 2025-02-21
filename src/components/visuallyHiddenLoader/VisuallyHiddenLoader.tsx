@@ -1,4 +1,4 @@
-interface HiddenLoadingProps {
+interface VisuallyHiddenLoaderProps {
 	isFetching: boolean;
 	children: React.ReactNode;
 	hiddenMessage?: string;
@@ -6,13 +6,13 @@ interface HiddenLoadingProps {
 	id?: string;
 }
 
-const HiddenLoading = ({
+const VisuallyHiddenLoader = ({
 	isFetching,
 	children,
 	hiddenMessage = 'Loading...',
 	isRoleStatus = true,
 	id,
-}: HiddenLoadingProps) => {
+}: VisuallyHiddenLoaderProps) => {
 	return (
 		<div id={id} aria-busy={isFetching}>
 			<span className="visually-hidden" role={isRoleStatus ? 'status' : undefined}>
@@ -24,4 +24,4 @@ const HiddenLoading = ({
 	);
 };
 
-export default HiddenLoading;
+export default VisuallyHiddenLoader;

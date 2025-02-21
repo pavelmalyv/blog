@@ -10,7 +10,7 @@ import Message from '@components/UI/message/Message';
 import Field from '@components/UI/field/Field';
 import PostsList from '@components/postsList/PostsList';
 import SearchResult from '@components/UI/searchResult/SearchResult';
-import HiddenLoading from '@components/hiddenLoading/hiddenLoading';
+import VisuallyHiddenLoader from '@components/visuallyHiddenLoader/VisuallyHiddenLoader';
 import ErrorBoundaryDisplay from '@components/errorBoundaryDisplay/ErrorBoundaryDisplay';
 
 import { useId } from 'react';
@@ -123,7 +123,7 @@ const AllPosts = () => {
 				</div>
 			</Filter>
 
-			<HiddenLoading
+			<VisuallyHiddenLoader
 				id={postsId}
 				isFetching={idFetchingPosts}
 				hiddenMessage={MESSAGES.postsLoading}
@@ -150,7 +150,7 @@ const AllPosts = () => {
 						</>
 					)}
 				</ErrorBoundaryDisplay>
-			</HiddenLoading>
+			</VisuallyHiddenLoader>
 		</Section>
 	);
 };
