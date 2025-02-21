@@ -1,5 +1,5 @@
 import type { SavedThemes } from '../types/theme';
-import { PayloadAction } from '../../node_modules/@reduxjs/toolkit/src/createAction';
+import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from './store';
 
