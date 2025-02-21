@@ -115,6 +115,7 @@ const AllPosts = () => {
 						type="search"
 						icon="search"
 						name="search"
+						placeholder="Enter your query"
 						value={searchField}
 						label="Search posts"
 						onChange={handleSearch}
