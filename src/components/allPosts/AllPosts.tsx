@@ -3,7 +3,6 @@ import type { Posts } from '../../types/posts';
 import cl from './AllPosts.module.scss';
 import Filter from '../filter/Filter';
 import Search from '../Forms/search/Search';
-import ErrorMessage from '../UI/errorMessage/ErrorMessage';
 import Section from '../UI/section/Section';
 import Select from '../UI/select/Select';
 import Pagination from '../UI/pagination/Pagination';
@@ -12,6 +11,7 @@ import Field from '../UI/field/Field';
 import PostsList from '../postsList/PostsList';
 import SearchResult from '../UI/searchResult/SearchResult';
 import HiddenLoading from '../hiddenLoading/hiddenLoading';
+import ErrorWrapper from '../errorWrapper/ErrorWrapper';
 
 import { useFetchingQuery } from '../../hooks/useFetchingQuery';
 import { joinSortOrder } from '../../utils/sort';
@@ -79,32 +79,6 @@ const AllPosts = () => {
 	const idFetchingPosts =
 		isFetchingPagination || isFetchingLimit || isFetchingSort || isFetchingSearch;
 
-	let body: React.ReactNode;
-	if (isError) {
-		body = <ErrorMessage message={ERROR_MESSAGES.postsLoad} />;
-	} else if (total === 0 && lastQuerySearch) {
-		body = <Message message={MESSAGES.postsNotFound(lastQuerySearch)} />;
-	} else {
-		body = (
-			<>
-				<SearchResult field={searchField} lastQuery={lastQuerySearch} total={total} />
-
-				<PostsList posts={posts} isFetching={idFetchingPosts} stretchLast={true} />
-
-				{paginationPage && total ? (
-					<Pagination
-						limit={limit}
-						total={total}
-						currentPage={paginationPage}
-						urlBase={blogUrl.base}
-						urlCallback={(page) => blogUrl.pagination(page)}
-						isLoading={isFetchingPagination}
-					/>
-				) : null}
-			</>
-		);
-	}
-
 	const postsId = useId();
 
 	return (
@@ -154,7 +128,28 @@ const AllPosts = () => {
 				isFetching={idFetchingPosts}
 				hiddenMessage={MESSAGES.postsLoading}
 			>
-				{body}
+				<ErrorWrapper isError={isError} errorMessage={ERROR_MESSAGES.postsLoad}>
+					{total === 0 && lastQuerySearch ? (
+						<Message message={MESSAGES.postsNotFound(lastQuerySearch)} />
+					) : (
+						<>
+							<SearchResult field={searchField} lastQuery={lastQuerySearch} total={total} />
+
+							<PostsList posts={posts} isFetching={idFetchingPosts} stretchLast={true} />
+
+							{paginationPage && total ? (
+								<Pagination
+									limit={limit}
+									total={total}
+									currentPage={paginationPage}
+									urlBase={blogUrl.base}
+									urlCallback={(page) => blogUrl.pagination(page)}
+									isLoading={isFetchingPagination}
+								/>
+							) : null}
+						</>
+					)}
+				</ErrorWrapper>
 			</HiddenLoading>
 		</Section>
 	);
