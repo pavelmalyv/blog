@@ -2,6 +2,7 @@ import type { SavedThemes } from '@/types/theme';
 import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '@/store/store';
+import { listenerMiddleware } from './listenerMiddleware';
 
 export interface ThemeSavedState {
 	value: SavedThemes;
@@ -25,3 +26,15 @@ export const selectSavedTheme = (state: RootState) => state.savedTheme.value;
 
 export const { setSavedTheme } = savedThemeSlice.actions;
 export const savedThemeReducer = savedThemeSlice.reducer;
+
+listenerMiddleware.startListening({
+	actionCreator: setSavedTheme,
+	effect: async (action) => {
+		const theme = action.payload;
+		if (!theme) {
+			return;
+		}
+
+		document.documentElement.setAttribute('data-theme', theme);
+	},
+});

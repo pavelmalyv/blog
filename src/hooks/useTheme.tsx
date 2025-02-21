@@ -53,14 +53,6 @@ export const useTheme = () => {
 	}, [setTheme]);
 
 	useEffect(() => {
-		if (!themeSelected) {
-			return;
-		}
-
-		localStorage.setItem('saved-theme', String(themeSelected));
-	}, [themeSelected]);
-
-	useEffect(() => {
 		if (!currentTheme) {
 			return;
 		}
