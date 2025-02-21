@@ -136,6 +136,20 @@
 	}
 }
 
+[data-theme='dark'] .link {
+	--color: rgb(var(--color-text-tertiary));
+
+	&[aria-current='page'] {
+		--color: rgb(var(--color-accent-secondary));
+	}
+
+	&:not(&[aria-current='page']) {
+		@include utils.hover {
+			--background-color: rgba(var(--color-background-secondary));
+		}
+	}
+}
+
 .pagination {
 	&_loading-delay .link[aria-current='page'] {
 		&::before {
