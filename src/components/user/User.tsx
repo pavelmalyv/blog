@@ -55,7 +55,7 @@ const User = ({ user }: UserProps) => {
 							</picture>
 						) : (
 							<div className={cl['image-skeleton']}>
-								<Skeleton height="100%" />
+								<Skeleton height="100%" borderRadius={6} />
 							</div>
 						)}
 					</div>
