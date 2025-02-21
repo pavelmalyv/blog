@@ -5,11 +5,11 @@ import { useTheme } from '../../../hooks/useTheme';
 import { THEMES } from '../../../constants/theme';
 
 const ThemeSwitch = () => {
-	const [savedTheme, setSavedTheme] = useTheme();
-	const isDark = savedTheme === THEMES.dark;
+	const [theme, setTheme] = useTheme();
+	const isDark = theme === THEMES.dark;
 
 	const handleClick = () => {
-		setSavedTheme(isDark ? THEMES.light : THEMES.dark);
+		setTheme(isDark ? THEMES.light : THEMES.dark);
 	};
 
 	return (
@@ -28,7 +28,7 @@ const ThemeSwitch = () => {
 				<span className={cl.icon}>
 					<Icon>bedtime</Icon>
 				</span>
-				{savedTheme && <span className={cl.cursor}></span>}
+				{theme && <span className={cl.cursor}></span>}
 			</span>
 		</button>
 	);
