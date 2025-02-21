@@ -56,7 +56,7 @@ const PostCard = ({ post, isCurrentPageAuthor, styleCard = 'small' }: PostCardPr
 						/>
 					</picture>
 				) : (
-					<Skeleton width="100%" height="100%" />
+					<Skeleton width="100%" height="100%" borderRadius={6} />
 				)}
 			</div>
 
