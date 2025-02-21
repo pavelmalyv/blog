@@ -3,9 +3,10 @@ import type { Posts } from '../../types/posts';
 import cl from './PopularPosts.module.scss';
 import PostCard from '../postCard/PostCard';
 import Section from '../UI/section/Section';
-import ErrorMessage from '../UI/errorMessage/ErrorMessage';
-import HiddenLoadingMessage from '../UI/hiddenLoadingMessage/HiddenLoadingMessage';
 import Message from '../UI/message/Message';
+import HiddenLoading from '../hiddenLoading/hiddenLoading';
+import ErrorWrapper from '../errorWrapper/ErrorWrapper';
+
 import { useGetPostsQuery } from '../../api/postsSlice';
 import { MESSAGES } from '../../constants/messages';
 import { ERROR_MESSAGES } from '../../constants/error';
@@ -33,34 +34,27 @@ const PopularPosts = () => {
 		'large',
 	] as const;
 
-	let body: React.ReactNode;
-	if (isError) {
-		body = <ErrorMessage message={ERROR_MESSAGES.postsLoad} />;
-	} else if (total === 0) {
-		body = <Message message={MESSAGES.postsEmpty} />;
-	} else {
-		body = (
-			<ul className={cl.list}>
-				{posts.map((post, i) => {
-					const key = post ? post.id : i;
-
-					return (
-						<li className={cl.item} key={key}>
-							<PostCard post={post} styleCard={stylesPostCard[i]} />
-						</li>
-					);
-				})}
-			</ul>
-		);
-	}
-
 	return (
 		<Section title="Popular blog posts">
-			<div aria-busy={isLoading}>
-				<HiddenLoadingMessage isLoading={isLoading} message={MESSAGES.postsLoading} />
+			<HiddenLoading isFetching={isLoading} hiddenMessage={MESSAGES.postsLoading}>
+				<ErrorWrapper isError={isError} errorMessage={ERROR_MESSAGES.postsLoad}>
+					{total === 0 ? (
+						<Message message={MESSAGES.postsEmpty} />
+					) : (
+						<ul className={cl.list}>
+							{posts.map((post, i) => {
+								const key = post ? post.id : i;
 
-				{body}
-			</div>
+								return (
+									<li className={cl.item} key={key}>
+										<PostCard post={post} styleCard={stylesPostCard[i]} />
+									</li>
+								);
+							})}
+						</ul>
+					)}
+				</ErrorWrapper>
+			</HiddenLoading>
 		</Section>
 	);
 };
