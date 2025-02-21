@@ -24,7 +24,7 @@ export const checkStatusOrThrow = (error: unknown) => {
 		return;
 	}
 
-	if (error.status === 404) {
+	if (error.status === 404 || error.status === 400) {
 		throw new NotFoundError();
 	}
 };
