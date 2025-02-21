@@ -1,7 +1,7 @@
 import cl from './Author.module.scss';
-import HiddenLoadingMessage from '../UI/hiddenLoadingMessage/HiddenLoadingMessage';
 import Skeleton from 'react-loading-skeleton';
-import ErrorMessage from '../UI/errorMessage/ErrorMessage';
+import HiddenLoading from '../hiddenLoading/hiddenLoading';
+import ErrorWrapper from '../errorWrapper/ErrorWrapper';
 
 import { useEffect } from 'react';
 import { Link } from 'react-router';
@@ -27,9 +27,7 @@ const Author = ({ id, isCurrentPageAuthor = false }: AuthorProps) => {
 	}, [id, data, isLoading, getUserByIdQuery]);
 
 	let author: React.ReactNode;
-	if (isError) {
-		author = <ErrorMessage message={ERROR_MESSAGES.authorLoad} />;
-	} else if (data && id) {
+	if (data && id) {
 		if (isCurrentPageAuthor) {
 			author = data.firstName + ' ' + data.lastName;
 		} else {
@@ -44,15 +42,15 @@ const Author = ({ id, isCurrentPageAuthor = false }: AuthorProps) => {
 	}
 
 	return (
-		<span aria-busy={isLoading}>
-			<HiddenLoadingMessage
-				isLoading={isLoading}
-				message={MESSAGES.authorLoading}
-				isRoleStatus={false}
-			/>
-
-			{author}
-		</span>
+		<HiddenLoading
+			isFetching={isLoading}
+			hiddenMessage={MESSAGES.authorLoading}
+			isRoleStatus={false}
+		>
+			<ErrorWrapper isError={isError} errorMessage={ERROR_MESSAGES.authorLoad}>
+				{author}
+			</ErrorWrapper>
+		</HiddenLoading>
 	);
 };
 
