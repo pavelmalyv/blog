@@ -1,8 +1,8 @@
 import type { Posts } from '../../types/posts';
 
 import PostsList from '../postsList/PostsList';
-import HiddenLoadingMessage from '../UI/hiddenLoadingMessage/HiddenLoadingMessage';
-import ErrorMessage from '../UI/errorMessage/ErrorMessage';
+import HiddenLoading from '../hiddenLoading/hiddenLoading';
+import ErrorWrapper from '../errorWrapper/ErrorWrapper';
 
 import { useGetPostsQuery } from '../../api/postsSlice';
 import { ERROR_MESSAGES } from '../../constants/error';
@@ -60,15 +60,11 @@ const RecentPosts = ({
 	}
 
 	return (
-		<div aria-busy={isLoading}>
-			<HiddenLoadingMessage isLoading={isLoading} message={MESSAGES.postsLoading} />
-
-			{isError ? (
-				<ErrorMessage message={ERROR_MESSAGES.postsLoad} />
-			) : (
+		<HiddenLoading isFetching={isLoading} hiddenMessage={MESSAGES.postsLoading}>
+			<ErrorWrapper isError={isError} errorMessage={ERROR_MESSAGES.postsLoad}>
 				<PostsList posts={posts} direction={direction} stretchLast={stretchLast} />
-			)}
-		</div>
+			</ErrorWrapper>
+		</HiddenLoading>
 	);
 };
 
