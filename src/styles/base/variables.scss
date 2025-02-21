@@ -41,6 +41,7 @@
 	--color-text-contrast: 255, 255, 255;
 	--color-error: 200, 0, 3;
 	--color-border-primary: 208, 213, 221;
+	--color-contrast-primary: 0, 0, 0;
 
 	// light colors
 
@@ -50,7 +51,6 @@
 	--color-text-primary-light: 26, 26, 26;
 	--color-text-secondary-light: 102, 112, 133;
 	--color-text-tertiary-light: 102, 112, 133;
-	--color-contrast-primary-light: 0, 0, 0;
 	--color-border-secondary-light: 234, 236, 240;
 	--color-border-tertiary-light: 168, 168, 168;
 	--color-skeleton-light: 241, 241, 241;
@@ -64,7 +64,6 @@
 	--color-text-primary-dark: 255, 255, 255;
 	--color-text-secondary-dark: 192, 197, 208;
 	--color-text-tertiary-dark: 239, 239, 239;
-	--color-contrast-primary-dark: 255, 255, 255;
 	--color-border-secondary-dark: 86, 89, 102;
 	--color-border-tertiary-dark: 255, 255, 255;
 	--color-skeleton-dark: 34, 38, 58;
@@ -90,7 +89,6 @@
 	--color-text-primary: var(--color-text-primary-light);
 	--color-text-secondary: var(--color-text-secondary-light);
 	--color-text-tertiary: var(--color-text-tertiary-light);
-	--color-contrast-primary: var(--color-contrast-primary-light);
 	--color-border-secondary: var(--color-border-secondary-light);
 	--color-border-tertiary: var(--color-border-tertiary-light);
 	--color-skeleton: var(--color-skeleton-light);
@@ -104,7 +102,6 @@
 	--color-text-primary: var(--color-text-primary-dark);
 	--color-text-secondary: var(--color-text-secondary-dark);
 	--color-text-tertiary: var(--color-text-tertiary-dark);
-	--color-contrast-primary: var(--color-contrast-primary-dark);
 	--color-border-secondary: var(--color-border-secondary-dark);
 	--color-border-tertiary: var(--color-border-tertiary-dark);
 	--color-skeleton: var(--color-skeleton-dark);
