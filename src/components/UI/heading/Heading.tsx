@@ -68,7 +68,7 @@ const Heading = ({ title }: HeadingProps) => {
 
 								{!title && (
 									<span className={cl.skeleton}>
-										<Skeleton borderRadius={10} />
+										<Skeleton borderRadius={6} />
 									</span>
 								)}
 							</h1>
