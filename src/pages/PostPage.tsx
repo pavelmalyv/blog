@@ -1,11 +1,11 @@
 import Article from '../components/article/Article';
-import ErrorMessage from '../components/UI/errorMessage/ErrorMessage';
-import HiddenLoadingMessage from '../components/UI/hiddenLoadingMessage/HiddenLoadingMessage';
 import Sidebar from '../components/sidebar/Sidebar';
 import RecentPosts from '../components/recentPosts/RecentPosts';
 import Newsletters from '../components/newsletters/Newsletters';
+import HiddenLoading from '../components/hiddenLoading/hiddenLoading';
+import ErrorWrapper from '../components/errorWrapper/ErrorWrapper';
 
-import { throwNotFoundIfInvalid, throwNotFoundIfStatus } from '../utils/error';
+import { throwNotFoundIfInvalid } from '../utils/error';
 import { useParams } from 'react-router';
 import { useGetPostByIdQuery } from '../api/postsSlice';
 import { ERROR_MESSAGES } from '../constants/error';
@@ -16,22 +16,20 @@ const PostPage = () => {
 	const postId = throwNotFoundIfInvalid(params.id);
 
 	const { data, isLoading, isError, error } = useGetPostByIdQuery(postId);
-	throwNotFoundIfStatus(error);
-
-	let articleBody: React.ReactNode;
-	if (isError) {
-		articleBody = <ErrorMessage message={ERROR_MESSAGES.postLoad} />;
-	} else {
-		articleBody = <Article post={data ?? null} />;
-	}
 
 	return (
 		<Sidebar reverse={true}>
 			<Sidebar.Main>
-				<div aria-busy={isLoading}>
-					<HiddenLoadingMessage isLoading={isLoading} message={MESSAGES.postLoading} />
-					{articleBody}
-				</div>
+				<HiddenLoading isFetching={isLoading} hiddenMessage={MESSAGES.postLoading}>
+					<ErrorWrapper
+						isError={isError}
+						error={error}
+						isThrowNotFound={true}
+						errorMessage={ERROR_MESSAGES.postLoad}
+					>
+						<Article post={data ?? null} />
+					</ErrorWrapper>
+				</HiddenLoading>
 
 				<Newsletters />
 			</Sidebar.Main>
