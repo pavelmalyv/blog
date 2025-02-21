@@ -3,7 +3,7 @@ import Sidebar from '@components/sidebar/Sidebar';
 import RecentPosts from '@components/recentPosts/RecentPosts';
 import Newsletters from '@components/newsletters/Newsletters';
 import HiddenLoading from '@components/hiddenLoading/hiddenLoading';
-import ErrorWrapper from '@components/errorWrapper/ErrorWrapper';
+import ErrorBoundaryDisplay from '@components/errorBoundaryDisplay/ErrorBoundaryDisplay';
 
 import { throwNotFoundIfInvalid } from '@/utils/error';
 import { useParams } from 'react-router';
@@ -21,14 +21,14 @@ const PostPage = () => {
 		<Sidebar reverse={true}>
 			<Sidebar.Main>
 				<HiddenLoading isFetching={isLoading} hiddenMessage={MESSAGES.postLoading}>
-					<ErrorWrapper
+					<ErrorBoundaryDisplay
 						isError={isError}
 						error={error}
 						isThrowNotFound={true}
 						errorMessage={ERROR_MESSAGES.postLoad}
 					>
 						<Article post={data ?? null} />
-					</ErrorWrapper>
+					</ErrorBoundaryDisplay>
 				</HiddenLoading>
 
 				<Newsletters />

@@ -1,7 +1,7 @@
 import cl from './Author.module.scss';
 import Skeleton from 'react-loading-skeleton';
 import HiddenLoading from '@components/hiddenLoading/hiddenLoading';
-import ErrorWrapper from '@components/errorWrapper/ErrorWrapper';
+import ErrorBoundaryDisplay from '@components/errorBoundaryDisplay/ErrorBoundaryDisplay';
 
 import { useEffect } from 'react';
 import { Link } from 'react-router';
@@ -47,9 +47,9 @@ const Author = ({ id, isCurrentPageAuthor = false }: AuthorProps) => {
 			hiddenMessage={MESSAGES.authorLoading}
 			isRoleStatus={false}
 		>
-			<ErrorWrapper isError={isError} errorMessage={ERROR_MESSAGES.authorLoad}>
+			<ErrorBoundaryDisplay isError={isError} errorMessage={ERROR_MESSAGES.authorLoad}>
 				{author}
-			</ErrorWrapper>
+			</ErrorBoundaryDisplay>
 		</HiddenLoading>
 	);
 };

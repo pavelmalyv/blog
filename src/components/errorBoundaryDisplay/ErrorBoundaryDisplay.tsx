@@ -1,7 +1,7 @@
 import ErrorMessage from '@components/UI/errorMessage/ErrorMessage';
 import { throwNotFoundIfStatus } from '@/utils/error';
 
-interface ErrorWrapperProps {
+interface ErrorBoundaryDisplayProps {
 	isError: boolean;
 	errorMessage: string;
 	children: React.ReactNode;
@@ -9,13 +9,13 @@ interface ErrorWrapperProps {
 	isThrowNotFound?: boolean;
 }
 
-const ErrorWrapper = ({
+const ErrorBoundaryDisplay = ({
 	isError,
 	errorMessage,
 	children,
 	error,
 	isThrowNotFound,
-}: ErrorWrapperProps) => {
+}: ErrorBoundaryDisplayProps) => {
 	if (isThrowNotFound) {
 		throwNotFoundIfStatus(error);
 	}
@@ -23,4 +23,4 @@ const ErrorWrapper = ({
 	return <>{isError ? <ErrorMessage message={errorMessage} /> : <>{children}</>}</>;
 };
 
-export default ErrorWrapper;
+export default ErrorBoundaryDisplay;

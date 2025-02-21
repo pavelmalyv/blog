@@ -6,7 +6,7 @@ import Section from '@components/UI/section/Section';
 import PostsList from '@components/postsList/PostsList';
 import Pagination from '@components/UI/pagination/Pagination';
 import HiddenLoading from '@components/hiddenLoading/hiddenLoading';
-import ErrorWrapper from '@components/errorWrapper/ErrorWrapper';
+import ErrorBoundaryDisplay from '@components/errorBoundaryDisplay/ErrorBoundaryDisplay';
 
 import { useParams } from 'react-router';
 import { useGetUserByIdQuery } from '@/api/usersSlice';
@@ -63,7 +63,7 @@ const AuthorPage = () => {
 	return (
 		<>
 			<Section>
-				<ErrorWrapper
+				<ErrorBoundaryDisplay
 					isError={isError}
 					error={error}
 					isThrowNotFound={true}
@@ -71,7 +71,7 @@ const AuthorPage = () => {
 				>
 					<Heading title={user ? `${user.firstName} ${user.lastName}` : null} />
 					<User user={user ?? null} />
-				</ErrorWrapper>
+				</ErrorBoundaryDisplay>
 			</Section>
 
 			<Section title="All articles by the author">
@@ -79,7 +79,7 @@ const AuthorPage = () => {
 					isFetching={isFetchingPagination}
 					hiddenMessage={MESSAGES.authorPostsLoading}
 				>
-					<ErrorWrapper isError={isErrorPosts} errorMessage={ERROR_MESSAGES.authorPostLoad}>
+					<ErrorBoundaryDisplay isError={isErrorPosts} errorMessage={ERROR_MESSAGES.authorPostLoad}>
 						<PostsList posts={posts} isFetching={isFetchingPagination} isCurrentPageAuthor={true} />
 
 						{totalPosts && paginationPage ? (
@@ -92,7 +92,7 @@ const AuthorPage = () => {
 								urlCallback={(page) => authorUrl.pagination(authorId, page)}
 							/>
 						) : null}
-					</ErrorWrapper>
+					</ErrorBoundaryDisplay>
 				</HiddenLoading>
 			</Section>
 		</>

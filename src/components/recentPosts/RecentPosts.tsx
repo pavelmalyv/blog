@@ -2,7 +2,7 @@ import type { Posts } from '@/types/posts';
 
 import PostsList from '@components/postsList/PostsList';
 import HiddenLoading from '@components/hiddenLoading/hiddenLoading';
-import ErrorWrapper from '@components/errorWrapper/ErrorWrapper';
+import ErrorBoundaryDisplay from '@components/errorBoundaryDisplay/ErrorBoundaryDisplay';
 
 import { useGetPostsQuery } from '@/api/postsSlice';
 import { ERROR_MESSAGES } from '@/constants/error';
@@ -61,9 +61,9 @@ const RecentPosts = ({
 
 	return (
 		<HiddenLoading isFetching={isLoading} hiddenMessage={MESSAGES.postsLoading}>
-			<ErrorWrapper isError={isError} errorMessage={ERROR_MESSAGES.postsLoad}>
+			<ErrorBoundaryDisplay isError={isError} errorMessage={ERROR_MESSAGES.postsLoad}>
 				<PostsList posts={posts} direction={direction} stretchLast={stretchLast} />
-			</ErrorWrapper>
+			</ErrorBoundaryDisplay>
 		</HiddenLoading>
 	);
 };

@@ -11,7 +11,7 @@ import Field from '@components/UI/field/Field';
 import PostsList from '@components/postsList/PostsList';
 import SearchResult from '@components/UI/searchResult/SearchResult';
 import HiddenLoading from '@components/hiddenLoading/hiddenLoading';
-import ErrorWrapper from '@components/errorWrapper/ErrorWrapper';
+import ErrorBoundaryDisplay from '@components/errorBoundaryDisplay/ErrorBoundaryDisplay';
 
 import { useId } from 'react';
 import { useParams } from 'react-router';
@@ -128,7 +128,7 @@ const AllPosts = () => {
 				isFetching={idFetchingPosts}
 				hiddenMessage={MESSAGES.postsLoading}
 			>
-				<ErrorWrapper isError={isError} errorMessage={ERROR_MESSAGES.postsLoad}>
+				<ErrorBoundaryDisplay isError={isError} errorMessage={ERROR_MESSAGES.postsLoad}>
 					{total === 0 && lastQuerySearch ? (
 						<Message message={MESSAGES.postsNotFound(lastQuerySearch)} />
 					) : (
@@ -149,7 +149,7 @@ const AllPosts = () => {
 							) : null}
 						</>
 					)}
-				</ErrorWrapper>
+				</ErrorBoundaryDisplay>
 			</HiddenLoading>
 		</Section>
 	);

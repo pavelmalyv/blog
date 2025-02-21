@@ -5,7 +5,7 @@ import PostCard from '@components/postCard/PostCard';
 import Section from '@components/UI/section/Section';
 import Message from '@components/UI/message/Message';
 import HiddenLoading from '@components/hiddenLoading/hiddenLoading';
-import ErrorWrapper from '@components/errorWrapper/ErrorWrapper';
+import ErrorBoundaryDisplay from '@components/errorBoundaryDisplay/ErrorBoundaryDisplay';
 
 import { useGetPostsQuery } from '@/api/postsSlice';
 import { MESSAGES } from '@/constants/messages';
@@ -37,7 +37,7 @@ const PopularPosts = () => {
 	return (
 		<Section title="Popular blog posts">
 			<HiddenLoading isFetching={isLoading} hiddenMessage={MESSAGES.postsLoading}>
-				<ErrorWrapper isError={isError} errorMessage={ERROR_MESSAGES.postsLoad}>
+				<ErrorBoundaryDisplay isError={isError} errorMessage={ERROR_MESSAGES.postsLoad}>
 					{total === 0 ? (
 						<Message message={MESSAGES.postsEmpty} />
 					) : (
@@ -53,7 +53,7 @@ const PopularPosts = () => {
 							})}
 						</ul>
 					)}
-				</ErrorWrapper>
+				</ErrorBoundaryDisplay>
 			</HiddenLoading>
 		</Section>
 	);
