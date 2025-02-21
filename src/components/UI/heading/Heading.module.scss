@@ -28,12 +28,10 @@
 }
 
 .wrapper {
-	--border: 1px solid rgba(var(--color-contrast-primary), 0.34);
-
-	border-bottom: var(--border);
+	border-top: 1px solid rgba(var(--color-border-tertiary));
+	border-bottom: 1px solid rgba(var(--color-border-tertiary));
 
 	@include utils.tablet-l {
-		border-top: var(--border);
 		margin: 0 calc(var(--container-padding-x) * -1);
 		padding: 0 14px;
 	}
