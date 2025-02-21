@@ -1,4 +1,4 @@
-@use '../../../styles/utils';
+@use '@styles/utils';
 
 .button {
 	@include utils.square(44px);

@@ -1,5 +1,5 @@
-@use '../../../styles/utils';
-@use '../../../styles/shared/spinner';
+@use '@styles/utils';
+@use '@styles/shared/spinner';
 
 .button {
 	@include utils.base-animation(color, opacity);

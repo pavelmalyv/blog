@@ -1,4 +1,4 @@
-@use '../../../styles/shared/button';
+@use '@styles/shared/button';
 
 .link {
 	@include button.base;

@@ -4,6 +4,11 @@ import { checker } from 'vite-plugin-checker';
 
 // https://vite.dev/config/
 export default defineConfig({
+	resolve: {
+		alias: {
+			'@styles': '/src/styles',
+		},
+	},
 	plugins: [
 		checker({
 			typescript: true,

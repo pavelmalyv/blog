@@ -1,4 +1,4 @@
-@use '../../styles/utils';
+@use '@styles/utils';
 
 .aside {
 	@include utils.tablet-m {
