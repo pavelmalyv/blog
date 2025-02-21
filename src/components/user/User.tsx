@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import Section from '../UI/section/Section';
 import Skeleton from 'react-loading-skeleton';
 import Text from '../UI/text/Text';
-import HiddenLoadingMessage from '../UI/hiddenLoadingMessage/HiddenLoadingMessage';
+import HiddenLoading from '../hiddenLoading/hiddenLoading';
 import parse from 'html-react-parser';
 
 import { MESSAGES } from '../../constants/messages';
@@ -39,32 +39,32 @@ const User = ({ user }: UserProps) => {
 
 	return (
 		<Section aria-labelledby={titleId}>
-			<div className={cl.body} aria-busy={isLoading}>
-				<HiddenLoadingMessage isLoading={isLoading} message={MESSAGES.authorLoading} />
+			<HiddenLoading isFetching={isLoading} hiddenMessage={MESSAGES.authorLoading}>
+				<div className={cl.body}>
+					<div className={cl.image}>
+						{user ? (
+							<picture>
+								<source srcSet={user.image.webp} type="image/webp" />
+								<img
+									className={cl['image-img']}
+									src={user.image.src}
+									width={user.image.width}
+									height={user.image.height}
+									alt={user.image.alt}
+								/>
+							</picture>
+						) : (
+							<div className={cl['image-skeleton']}>
+								<Skeleton height="100%" />
+							</div>
+						)}
+					</div>
 
-				<div className={cl.image}>
-					{user ? (
-						<picture>
-							<source srcSet={user.image.webp} type="image/webp" />
-							<img
-								className={cl['image-img']}
-								src={user.image.src}
-								width={user.image.width}
-								height={user.image.height}
-								alt={user.image.alt}
-							/>
-						</picture>
-					) : (
-						<div className={cl['image-skeleton']}>
-							<Skeleton height="100%" />
-						</div>
-					)}
+					<UserTextItem title="About Me" titleId={titleId} text={user?.description} />
+					<UserTextItem title="Skills:" text={user?.skills} />
+					<UserTextItem title="Experience:" text={user?.experience} />
 				</div>
-
-				<UserTextItem title="About Me" titleId={titleId} text={user?.description} />
-				<UserTextItem title="Skills:" text={user?.skills} />
-				<UserTextItem title="Experience:" text={user?.experience} />
-			</div>
+			</HiddenLoading>
 		</Section>
 	);
 };
