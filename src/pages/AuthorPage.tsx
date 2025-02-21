@@ -1,16 +1,16 @@
 import type { Posts } from '../types/posts';
 
 import Heading from '../components/UI/heading/Heading';
-import ErrorMessage from '../components/UI/errorMessage/ErrorMessage';
 import User from '../components/user/User';
 import Section from '../components/UI/section/Section';
-import HiddenLoadingMessage from '../components/UI/hiddenLoadingMessage/HiddenLoadingMessage';
 import PostsList from '../components/postsList/PostsList';
 import Pagination from '../components/UI/pagination/Pagination';
+import HiddenLoading from '../components/hiddenLoading/hiddenLoading';
+import ErrorWrapper from '../components/errorWrapper/ErrorWrapper';
 
 import { useParams } from 'react-router';
 import { useGetUserByIdQuery } from '../api/usersSlice';
-import { throwNotFoundIfInvalid, throwNotFoundIfStatus } from '../utils/error';
+import { throwNotFoundIfInvalid } from '../utils/error';
 import { authorUrl } from '../routes/routes';
 import { useValidatePaginationParam } from '../hooks/useValidatePaginationParam';
 import { useGetPostByIdUserQuery } from '../api/postsSlice';
@@ -32,9 +32,6 @@ const AuthorPage = () => {
 	);
 
 	const { data: user, isError, error } = useGetUserByIdQuery(authorId);
-	if (isError) {
-		throwNotFoundIfStatus(error);
-	}
 
 	let totalPosts: number | undefined;
 	const skipPosts = getSkip(paginationParam, LIMIT_POSTS);
@@ -65,47 +62,38 @@ const AuthorPage = () => {
 
 	return (
 		<>
-			{isError ? (
-				<Section>
-					<ErrorMessage message={ERROR_MESSAGES.authorLoad} />
-				</Section>
-			) : (
-				<>
+			<Section>
+				<ErrorWrapper
+					isError={isError}
+					error={error}
+					isThrowNotFound={true}
+					errorMessage={ERROR_MESSAGES.authorLoad}
+				>
 					<Heading title={user ? `${user.firstName} ${user.lastName}` : null} />
 					<User user={user ?? null} />
-				</>
-			)}
+				</ErrorWrapper>
+			</Section>
 
 			<Section title="All articles by the author">
-				<div aria-busy={isFetchingPagination}>
-					<HiddenLoadingMessage
-						isLoading={isFetchingPagination}
-						message={MESSAGES.authorPostsLoading}
-					/>
+				<HiddenLoading
+					isFetching={isFetchingPagination}
+					hiddenMessage={MESSAGES.authorPostsLoading}
+				>
+					<ErrorWrapper isError={isErrorPosts} errorMessage={ERROR_MESSAGES.authorPostLoad}>
+						<PostsList posts={posts} isFetching={isFetchingPagination} isCurrentPageAuthor={true} />
 
-					{isErrorPosts ? (
-						<ErrorMessage message={ERROR_MESSAGES.authorPostLoad} />
-					) : (
-						<>
-							<PostsList
-								posts={posts}
-								isFetching={isFetchingPagination}
-								isCurrentPageAuthor={true}
+						{totalPosts && paginationPage ? (
+							<Pagination
+								limit={LIMIT_POSTS}
+								total={totalPosts}
+								currentPage={paginationPage}
+								urlBase={authorUrl.profile(authorId)}
+								isLoading={isFetchingPagination}
+								urlCallback={(page) => authorUrl.pagination(authorId, page)}
 							/>
-
-							{totalPosts && paginationPage ? (
-								<Pagination
-									limit={LIMIT_POSTS}
-									total={totalPosts}
-									currentPage={paginationPage}
-									urlBase={authorUrl.profile(authorId)}
-									isLoading={isFetchingPagination}
-									urlCallback={(page) => authorUrl.pagination(authorId, page)}
-								/>
-							) : null}
-						</>
-					)}
-				</div>
+						) : null}
+					</ErrorWrapper>
+				</HiddenLoading>
 			</Section>
 		</>
 	);
