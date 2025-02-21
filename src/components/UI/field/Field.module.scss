@@ -10,27 +10,29 @@
 	--width-icon: 22px;
 
 	position: relative;
+	color: rgb(var(--color-text-primary-light));
 }
 
 .field {
-	--border-color: rgb(var(--color-border-primary));
+	--background-color: rgb(var(--color-background-primary-light));
 
-	@include utils.base-animation(border-color);
+	@include utils.base-animation(background-color);
 
 	width: 100%;
 	min-height: 48px;
 	padding: 0 16px;
 	border-radius: 8px;
-	border: 1px solid var(--border-color);
+	border: 1px solid rgb(var(--color-border-primary));
+	background-color: var(--background-color);
 	font-size: 16px;
 	outline: none;
 
 	&::placeholder {
-		color: rgb(var(--color-text-secondary));
+		color: rgb(var(--color-text-secondary-light));
 	}
 
 	&:focus {
-		--border-color: rgb(var(--color-accent));
+		--background-color: rgb(var(--color-background-tertiary));
 	}
 
 	&[type='search']::-webkit-search-decoration,

@@ -43,8 +43,10 @@
 	--color-border-primary: 208, 213, 221;
 
 	// light colors
-	--color-background-secondary-light: 244, 244, 244;
+
 	--color-background-primary-light: 255, 255, 255;
+	--color-background-secondary-light: 244, 244, 244;
+	--color-background-tertiary-light: 234, 234, 234;
 	--color-text-primary-light: 26, 26, 26;
 	--color-text-secondary-light: 102, 112, 133;
 	--color-text-tertiary-light: 102, 112, 133;
@@ -53,8 +55,10 @@
 	--color-border-tertiary-light: 168, 168, 168;
 
 	// dark colors
-	--color-background-secondary-dark: 33 37 56;
+
 	--color-background-primary-dark: 9, 13, 31;
+	--color-background-secondary-dark: 33 37 56;
+	--color-background-tertiary-dark: 210, 210, 210;
 	--color-text-primary-dark: 255, 255, 255;
 	--color-text-secondary-dark: 192, 197, 208;
 	--color-text-tertiary-dark: 239, 239, 239;
@@ -78,6 +82,7 @@
 @mixin light-variables {
 	--color-background-primary: var(--color-background-primary-light);
 	--color-background-secondary: var(--color-background-secondary-light);
+	--color-background-tertiary: var(--color-background-tertiary-light);
 	--color-text-primary: var(--color-text-primary-light);
 	--color-text-secondary: var(--color-text-secondary-light);
 	--color-text-tertiary: var(--color-text-tertiary-light);
@@ -89,6 +94,7 @@
 @mixin dark-variables {
 	--color-background-primary: var(--color-background-primary-dark);
 	--color-background-secondary: var(--color-background-secondary-dark);
+	--color-background-tertiary: var(--color-background-tertiary-dark);
 	--color-text-primary: var(--color-text-primary-dark);
 	--color-text-secondary: var(--color-text-secondary-dark);
 	--color-text-tertiary: var(--color-text-tertiary-dark);
