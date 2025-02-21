@@ -21,7 +21,10 @@ Modal.setAppElement('#root');
 createRoot(document.getElementById('root')!).render(
 	<StrictMode>
 		<Provider store={store}>
-			<SkeletonTheme baseColor="rgb(244, 244, 244)" highlightColor="rgb(248, 248, 248)">
+			<SkeletonTheme
+				baseColor="rgb(var(--color-skeleton))"
+				highlightColor="rgb(var(--color-skeleton-highlight))"
+			>
 				<App />
 				<ToastContainer transition={Slide} />
 			</SkeletonTheme>

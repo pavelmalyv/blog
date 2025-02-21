@@ -53,6 +53,8 @@
 	--color-contrast-primary-light: 0, 0, 0;
 	--color-border-secondary-light: 234, 236, 240;
 	--color-border-tertiary-light: 168, 168, 168;
+	--color-skeleton-light: 241, 241, 241;
+	--color-skeleton-highlight-light: 247, 247, 247;
 
 	// dark colors
 
@@ -65,6 +67,8 @@
 	--color-contrast-primary-dark: 255, 255, 255;
 	--color-border-secondary-dark: 86, 89, 102;
 	--color-border-tertiary-dark: 255, 255, 255;
+	--color-skeleton-dark: 34, 38, 58;
+	--color-skeleton-highlight-dark: 47, 47, 73;
 
 	@include utils.tablet-l {
 		--header-height: 80px;
@@ -89,6 +93,8 @@
 	--color-contrast-primary: var(--color-contrast-primary-light);
 	--color-border-secondary: var(--color-border-secondary-light);
 	--color-border-tertiary: var(--color-border-tertiary-light);
+	--color-skeleton: var(--color-skeleton-light);
+	--color-skeleton-highlight: var(--color-skeleton-highlight-light);
 }
 
 @mixin dark-variables {
@@ -101,6 +107,8 @@
 	--color-contrast-primary: var(--color-contrast-primary-dark);
 	--color-border-secondary: var(--color-border-secondary-dark);
 	--color-border-tertiary: var(--color-border-tertiary-dark);
+	--color-skeleton: var(--color-skeleton-dark);
+	--color-skeleton-highlight: var(--color-skeleton-highlight-dark);
 }
 
 [data-theme='light'] {
