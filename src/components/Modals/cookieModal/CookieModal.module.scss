@@ -27,14 +27,22 @@
 }
 
 .body {
+	--border-color: rgb(var(--color-border-primary));
+
 	position: relative;
 	padding: 20px;
 	border-radius: 16px;
 	background-color: rgb(var(--color-background-primary));
-	border: 1px solid rgb(var(--color-border-primary));
+	border: 1px solid var(--border-color);
 
 	@include utils.mobile-m {
 		padding: 15px;
+	}
+}
+
+[data-theme='dark'] {
+	.body {
+		--border-color: rgb(var(--color-border-secondary));
 	}
 }
 
