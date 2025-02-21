@@ -5,23 +5,27 @@
 	--width-icon: 20px;
 
 	position: relative;
+	color: rgb(var(--color-text-primary-light));
 }
 
 .select {
-	--border-color: rgb(var(--color-border-primary));
+	--background-color: rgb(var(--color-background-primary-light));
+
+	@include utils.base-animation(background-color);
 
 	width: 100%;
 	min-height: 48px;
 	padding-left: var(--padding-x);
 	padding-right: calc(var(--width-icon) + (var(--padding-x) * 1.5));
 	border-radius: 8px;
-	border: 1px solid var(--border-color);
 	font-size: 16px;
+	border: 1px solid rgb(var(--color-border-primary));
+	background-color: var(--background-color);
 	outline: none;
 	appearance: none;
 
 	&:focus {
-		--border-color: rgb(var(--color-accent));
+		--background-color: rgb(var(--color-background-tertiary));
 	}
 }
 
