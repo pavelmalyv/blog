@@ -1,6 +1,6 @@
 import Skeleton from 'react-loading-skeleton';
 import cl from './Heading.module.scss';
-import HiddenLoadingMessage from '../hiddenLoadingMessage/HiddenLoadingMessage';
+import HiddenLoading from '../../hiddenLoading/hiddenLoading';
 
 import { useEffect, useRef } from 'react';
 import { MESSAGES } from '../../../constants/messages';
@@ -60,19 +60,19 @@ const Heading = ({ title }: HeadingProps) => {
 			<section className={cl.heading}>
 				<div className="container">
 					<div className={cl.wrapper}>
-						<h1 className={cl.title} ref={titleRef} aria-busy={isLoading}>
-							<HiddenLoadingMessage isLoading={isLoading} message={MESSAGES.titleLoading} />
-
-							<span className={cl.text} ref={titleTextRef}>
-								{title}
-							</span>
-
-							{!title && (
-								<span className={cl.skeleton}>
-									<Skeleton borderRadius={10} />
+						<HiddenLoading isFetching={isLoading} hiddenMessage={MESSAGES.titleLoading}>
+							<h1 className={cl.title} ref={titleRef}>
+								<span className={cl.text} ref={titleTextRef}>
+									{title}
 								</span>
-							)}
-						</h1>
+
+								{!title && (
+									<span className={cl.skeleton}>
+										<Skeleton borderRadius={10} />
+									</span>
+								)}
+							</h1>
+						</HiddenLoading>
 					</div>
 				</div>
 			</section>
