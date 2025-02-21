@@ -4,7 +4,6 @@ import cl from './AllPosts.module.scss';
 import Filter from '../filter/Filter';
 import Search from '../Forms/search/Search';
 import ErrorMessage from '../UI/errorMessage/ErrorMessage';
-import HiddenLoadingMessage from '../UI/hiddenLoadingMessage/HiddenLoadingMessage';
 import Section from '../UI/section/Section';
 import Select from '../UI/select/Select';
 import Pagination from '../UI/pagination/Pagination';
@@ -12,6 +11,7 @@ import Message from '../UI/message/Message';
 import Field from '../UI/field/Field';
 import PostsList from '../postsList/PostsList';
 import SearchResult from '../UI/searchResult/SearchResult';
+import HiddenLoading from '../hiddenLoading/hiddenLoading';
 
 import { useFetchingQuery } from '../../hooks/useFetchingQuery';
 import { joinSortOrder } from '../../utils/sort';
@@ -149,11 +149,13 @@ const AllPosts = () => {
 				</div>
 			</Filter>
 
-			<div id={postsId} aria-busy={idFetchingPosts}>
-				<HiddenLoadingMessage isLoading={idFetchingPosts} message={MESSAGES.postsLoading} />
-
+			<HiddenLoading
+				id={postsId}
+				isFetching={idFetchingPosts}
+				hiddenMessage={MESSAGES.postsLoading}
+			>
 				{body}
-			</div>
+			</HiddenLoading>
 		</Section>
 	);
 };

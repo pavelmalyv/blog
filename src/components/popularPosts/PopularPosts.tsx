@@ -40,27 +40,27 @@ const PopularPosts = () => {
 		body = <Message message={MESSAGES.postsEmpty} />;
 	} else {
 		body = (
-			<div aria-busy={isLoading}>
-				<HiddenLoadingMessage isLoading={isLoading} message={MESSAGES.postsLoading} />
+			<ul className={cl.list}>
+				{posts.map((post, i) => {
+					const key = post ? post.id : i;
 
-				<ul className={cl.list}>
-					{posts.map((post, i) => {
-						const key = post ? post.id : i;
-
-						return (
-							<li className={cl.item} key={key}>
-								<PostCard post={post} styleCard={stylesPostCard[i]} />
-							</li>
-						);
-					})}
-				</ul>
-			</div>
+					return (
+						<li className={cl.item} key={key}>
+							<PostCard post={post} styleCard={stylesPostCard[i]} />
+						</li>
+					);
+				})}
+			</ul>
 		);
 	}
 
 	return (
 		<Section title="Popular blog posts">
-			<div aria-busy={isLoading}>{body}</div>
+			<div aria-busy={isLoading}>
+				<HiddenLoadingMessage isLoading={isLoading} message={MESSAGES.postsLoading} />
+
+				{body}
+			</div>
 		</Section>
 	);
 };
