@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useDelayAnimationLoading } from '@hooks/useDelayAnimationLoading';
+import { useDelayedLoader } from '@hooks/useDelayedLoader';
 
 export const useFetchingQuery = <T extends string | number | boolean | undefined>(
 	value: T,
@@ -16,7 +16,7 @@ export const useFetchingQuery = <T extends string | number | boolean | undefined
 	}, [isFetching, value]);
 
 	const isFetchingQuery = lastQuery !== value;
-	const isLoadingDelay = useDelayAnimationLoading(isFetchingQuery);
+	const isLoadingDelay = useDelayedLoader(isFetchingQuery);
 
 	return { isFetching: isFetchingQuery, isLoadingDelay, lastQuery };
 };

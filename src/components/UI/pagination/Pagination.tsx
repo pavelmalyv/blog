@@ -7,7 +7,7 @@ import VisuallyHiddenLoader from '@components/visuallyHiddenLoader/VisuallyHidde
 import { getPages } from '@/utils/pagination';
 import { useLocation, useNavigate } from 'react-router';
 import { useEffect, useState } from 'react';
-import { useDelayAnimationLoading } from '@hooks/useDelayAnimationLoading';
+import { useDelayedLoader } from '@hooks/useDelayedLoader';
 
 const ButtonContent = ({ previous }: { previous: boolean }) => {
 	return (
@@ -40,7 +40,7 @@ const Pagination = ({
 	const navigate = useNavigate();
 	const location = useLocation();
 	const totalPages = getPages(limit, total);
-	const isLoadingDelay = useDelayAnimationLoading(isLoading);
+	const isLoadingDelay = useDelayedLoader(isLoading);
 	const [selectedPage, setSelectedPage] = useState(currentPage);
 
 	useEffect(() => {

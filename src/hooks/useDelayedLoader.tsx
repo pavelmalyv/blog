@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export const useDelayAnimationLoading = (isLoading: boolean) => {
+export const useDelayedLoader = (isLoading: boolean) => {
 	const [isLoadingDelay, setIsLoadingDelay] = useState(isLoading);
 
 	useEffect(() => {

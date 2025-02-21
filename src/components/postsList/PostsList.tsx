@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import PostCard from '@components/postCard/PostCard';
 import MessageInfo from '@/components/UI/messageInfo/MessageInfo';
 
-import { useDelayAnimationLoading } from '@hooks/useDelayAnimationLoading';
+import { useDelayedLoader } from '@hooks/useDelayedLoader';
 import { Posts } from '@/types/posts';
 import { MESSAGES } from '@/constants/messages';
 
@@ -22,7 +22,7 @@ const PostsList = ({
 	isCurrentPageAuthor,
 	direction = 'horizontal',
 }: PostsListProps) => {
-	const idFetchingDelay = useDelayAnimationLoading(isFetching);
+	const idFetchingDelay = useDelayedLoader(isFetching);
 
 	return (
 		<div
