@@ -19,12 +19,16 @@
 }
 
 .emulator {
+	--background-color: transparent;
 	--border-color: rgb(var(--color-border-primary));
 
+	@include utils.base-animation(background-color);
 	@include utils.square(22px);
 
 	position: relative;
 	border: 1px solid var(--border-color);
+	//border: 1px solid rgb(var(--color-border-primary));
+	background-color: var(--background-color);
 	border-radius: 4px;
 
 	&-marker {
@@ -50,6 +54,11 @@
 
 .field:focus + .emulator {
 	--border-color: rgb(var(--color-accent-primary));
+	--background-color: rgba(var(--color-background-tertiary-light));
+}
+
+[data-theme='dark'] .field:focus + .emulator {
+	--background-color: rgba(var(--color-background-secondary));
 }
 
 .description {
