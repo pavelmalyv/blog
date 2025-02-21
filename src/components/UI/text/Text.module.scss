@@ -86,3 +86,7 @@
 		padding-top: 0.75em;
 	}
 }
+
+[data-theme='dark'] .text {
+	color: rgb(var(--color-text-secondary));
+}
