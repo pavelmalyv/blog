@@ -46,7 +46,7 @@ const Article = ({ post, labelledby = true }: ArticleProps) => {
 						/>
 					</picture>
 				) : (
-					<Skeleton height={500} />
+					<Skeleton height={500} borderRadius={6} />
 				)}
 			</div>
 			<div className={classNames('text', cl.body)}>
@@ -56,10 +56,10 @@ const Article = ({ post, labelledby = true }: ArticleProps) => {
 					) : (
 						<Text.Skeleton>
 							<Skeleton count={3} />
-							<Skeleton height={400} />
+							<Skeleton height={400} borderRadius={6} />
 							<Skeleton count={4} />
 							<Skeleton count={3} />
-							<Skeleton height={400} />
+							<Skeleton height={400} borderRadius={6} />
 							<Skeleton count={4} />
 						</Text.Skeleton>
 					)}
