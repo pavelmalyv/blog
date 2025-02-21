@@ -1,5 +1,5 @@
 import Root from '@/pages/Root';
-import Error from '@components/error/Error';
+import ErrorScreen from '@/components/errorScreen/ErrorScreen';
 
 import { isRouteErrorResponse, useRouteError } from 'react-router';
 
@@ -29,7 +29,7 @@ const ErrorPage = () => {
 
 	return (
 		<Root>
-			<Error title={title} description={description} isLink={isLink} />
+			<ErrorScreen title={title} description={description} isLink={isLink} />
 		</Root>
 	);
 };

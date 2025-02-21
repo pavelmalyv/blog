@@ -1,4 +1,4 @@
-import cl from './Error.module.scss';
+import cl from './ErrorScreen.module.scss';
 import LinkButton from '@components/UI/linkButton/LinkButton';
 
 import { useId } from 'react';
@@ -9,7 +9,7 @@ interface ErrorProps {
 	isLink?: boolean;
 }
 
-const Error = ({ title, description, isLink = true }: ErrorProps) => {
+const ErrorScreen = ({ title, description, isLink = true }: ErrorProps) => {
 	const titleId = useId();
 
 	return (
@@ -28,4 +28,4 @@ const Error = ({ title, description, isLink = true }: ErrorProps) => {
 	);
 };
 
-export default Error;
+export default ErrorScreen;
