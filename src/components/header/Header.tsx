@@ -8,15 +8,6 @@ import ButtonIcon from '@components/UI/buttonIcon/ButtonIcon';
 import { useState } from 'react';
 import { newslettersUrl } from '@/routes/routes';
 
-const NavigationItems = () => {
-	return (
-		<>
-			<Navigation.Item to="/">Home</Navigation.Item>
-			<Navigation.Item to={newslettersUrl}>Newsletters</Navigation.Item>
-		</>
-	);
-};
-
 const Header = () => {
 	const [isOpenMenu, setIsOpenMenu] = useState(false);
 
@@ -28,6 +19,17 @@ const Header = () => {
 		setIsOpenMenu(true);
 	}
 
+	const navigationItems = (
+		<>
+			<Navigation.Item to="/" onClick={handleMenuClose}>
+				Home
+			</Navigation.Item>
+			<Navigation.Item to={newslettersUrl} onClick={handleMenuClose}>
+				Newsletters
+			</Navigation.Item>
+		</>
+	);
+
 	return (
 		<>
 			<header className={cl.header}>
@@ -35,9 +37,7 @@ const Header = () => {
 					<div className={cl.body}>
 						<Logo />
 						<div className={cl.panel}>
-							<Navigation>
-								<NavigationItems />
-							</Navigation>
+							<Navigation>{navigationItems}</Navigation>
 							<ThemeSwitch />
 						</div>
 						<div className={cl.burger}>
@@ -54,9 +54,7 @@ const Header = () => {
 							<Logo />
 						</div>
 						<div className={cl['menu-navigation']}>
-							<Navigation direction="vertical">
-								<NavigationItems />
-							</Navigation>
+							<Navigation direction="vertical">{navigationItems}</Navigation>
 						</div>
 						<ThemeSwitch />
 						<div className={cl['menu-close']}>

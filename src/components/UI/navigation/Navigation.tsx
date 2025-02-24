@@ -23,12 +23,13 @@ interface ItemProps {
 	to: string;
 	target?: string;
 	children: React.ReactNode;
+	onClick?: React.MouseEventHandler<HTMLAnchorElement>;
 }
 
-const Item = ({ to, target = '_self', children }: ItemProps) => {
+const Item = ({ to, target = '_self', children, onClick }: ItemProps) => {
 	return (
 		<li className={cl.item}>
-			<NavLink to={to} target={target} className={cl.link}>
+			<NavLink to={to} target={target} className={cl.link} onClick={onClick}>
 				{children}
 			</NavLink>
 		</li>
