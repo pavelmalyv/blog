@@ -80,7 +80,9 @@ const AuthorPage = () => {
 					hiddenMessage={MESSAGES.authorPostsLoading}
 				>
 					<ErrorBoundaryDisplay isError={isErrorPosts} errorMessage={ERROR_MESSAGES.authorPostLoad}>
-						<PostsList posts={posts} isFetching={isFetchingPagination} isCurrentPageAuthor={true} />
+						<PostsList isFetching={isFetchingPagination}>
+							<PostsList.Posts posts={posts} isCurrentPageAuthor={true} />
+						</PostsList>
 
 						{totalPosts && paginationPage ? (
 							<Pagination

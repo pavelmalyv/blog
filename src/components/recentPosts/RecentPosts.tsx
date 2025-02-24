@@ -62,7 +62,9 @@ const RecentPosts = ({
 	return (
 		<VisuallyHiddenLoader isFetching={isLoading} hiddenMessage={MESSAGES.postsLoading}>
 			<ErrorBoundaryDisplay isError={isError} errorMessage={ERROR_MESSAGES.postsLoad}>
-				<PostsList posts={posts} direction={direction} stretchLast={stretchLast} />
+				<PostsList>
+					<PostsList.Posts posts={posts} direction={direction} stretchLast={stretchLast} />
+				</PostsList>
 			</ErrorBoundaryDisplay>
 		</VisuallyHiddenLoader>
 	);

@@ -1,35 +1,56 @@
+import { Posts as PostsType } from '@/types/posts';
+
 import cl from './PostsList.module.scss';
 import classNames from 'classnames';
 import PostCard from '@components/postCard/PostCard';
 import MessageInfo from '@/components/UI/messageInfo/MessageInfo';
 
+import { createCompoundContext } from '@/context/createCompoundContext';
 import { useDelayedLoader } from '@hooks/useDelayedLoader';
-import { Posts } from '@/types/posts';
 import { MESSAGES } from '@/constants/messages';
 
+const [usePostsListContext, PostsListProvider] = createCompoundContext<{
+	isFetching: boolean;
+}>();
+
 interface PostsListProps {
-	posts: Posts | null[];
 	isFetching?: boolean;
+	children: React.ReactNode;
+}
+
+const PostsList = ({ isFetching = false, children }: PostsListProps) => {
+	const isFetchingDelay = useDelayedLoader(isFetching);
+
+	return (
+		<PostsListProvider value={{ isFetching: isFetching }}>
+			<div
+				className={classNames(cl.posts, {
+					[cl['posts_is-animation-posts']]: isFetchingDelay,
+				})}
+			>
+				{children}
+			</div>
+		</PostsListProvider>
+	);
+};
+
+interface PostsProps {
+	posts: PostsType | null[];
 	stretchLast?: boolean;
 	isCurrentPageAuthor?: boolean;
 	direction?: 'horizontal' | 'vertical';
 }
 
-const PostsList = ({
+const Posts = ({
 	posts,
-	isFetching = false,
 	stretchLast = false,
 	isCurrentPageAuthor,
 	direction = 'horizontal',
-}: PostsListProps) => {
-	const idFetchingDelay = useDelayedLoader(isFetching);
+}: PostsProps) => {
+	const { isFetching } = usePostsListContext();
 
 	return (
-		<div
-			className={classNames(cl.posts, {
-				[cl['posts_is-animation-posts']]: idFetchingDelay,
-			})}
-		>
+		<>
 			{posts.length > 0 ? (
 				<>
 					{isFetching && <div className={cl.overlay}></div>}
@@ -61,8 +82,10 @@ const PostsList = ({
 					)}
 				</>
 			)}
-		</div>
+		</>
 	);
 };
+
+PostsList.Posts = Posts;
 
 export default PostsList;

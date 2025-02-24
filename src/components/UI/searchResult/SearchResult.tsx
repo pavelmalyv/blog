@@ -11,9 +11,9 @@ interface SearchResultProps {
 const SearchResult = ({ field, lastQuery, total }: SearchResultProps) => {
 	return (
 		<>
-			{field.length > 0 && lastQuery && total && (
+			{field.length > 0 && lastQuery && total ? (
 				<div className={classNames(cl.result, 'h4')}>{MESSAGES.postsFound(lastQuery, total)}</div>
-			)}
+			) : null}
 		</>
 	);
 };

@@ -129,26 +129,26 @@ const AllPosts = () => {
 				hiddenMessage={MESSAGES.postsLoading}
 			>
 				<ErrorBoundaryDisplay isError={isError} errorMessage={ERROR_MESSAGES.postsLoad}>
-					{total === 0 && lastQuerySearch ? (
-						<MessageInfo message={MESSAGES.postsNotFound(lastQuerySearch)} />
-					) : (
-						<>
-							<SearchResult field={searchField} lastQuery={lastQuerySearch} total={total} />
+					<SearchResult field={searchField} lastQuery={lastQuerySearch} total={total} />
 
-							<PostsList posts={posts} isFetching={idFetchingPosts} stretchLast={true} />
+					<PostsList isFetching={idFetchingPosts}>
+						{total === 0 && lastQuerySearch ? (
+							<MessageInfo message={MESSAGES.postsNotFound(lastQuerySearch)} />
+						) : (
+							<PostsList.Posts posts={posts} stretchLast={true} />
+						)}
+					</PostsList>
 
-							{paginationPage && total ? (
-								<Pagination
-									limit={limit}
-									total={total}
-									currentPage={paginationPage}
-									urlBase={blogUrl.base}
-									urlCallback={(page) => blogUrl.pagination(page)}
-									isLoading={isFetchingPagination}
-								/>
-							) : null}
-						</>
-					)}
+					{paginationPage && total ? (
+						<Pagination
+							limit={limit}
+							total={total}
+							currentPage={paginationPage}
+							urlBase={blogUrl.base}
+							urlCallback={(page) => blogUrl.pagination(page)}
+							isLoading={isFetchingPagination}
+						/>
+					) : null}
 				</ErrorBoundaryDisplay>
 			</VisuallyHiddenLoader>
 		</Section>
