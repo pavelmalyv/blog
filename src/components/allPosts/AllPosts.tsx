@@ -94,7 +94,7 @@ const AllPosts = () => {
 						label="Search posts"
 						onChange={handleSearch}
 						maxLength={SEARCH_MAX_LENGTH}
-						isLoading={isFetchingDelaySearch && searchField.length > 0}
+						isLoading={isFetchingDelaySearch}
 						aria-controls={postsId}
 					/>
 				</Search>
