@@ -99,7 +99,7 @@ function addAdditionalFieldsPost(post: unknown) {
 		'body' in post
 	) {
 		//createdAt
-		const date = new Date('2023.10.01');
+		const date = new Date('2023-10-01');
 		date.setDate(date.getDate() + post.id * 2);
 		const createdAt = date.toISOString();
 
