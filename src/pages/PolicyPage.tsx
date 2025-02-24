@@ -2,10 +2,9 @@ import Heading from '@components/UI/heading/Heading';
 import Section from '@components/UI/section/Section';
 import Text from '@components/UI/text/Text';
 
-const SITE = 'example.com';
-const SITE_NAME = 'Blog';
-const SITE_URL = 'https://example.com';
-const EMAIL = 'pavelmalyv@gmail.com';
+import { SITE, SITE_NAME, SITE_URL } from '@/constants/config';
+
+export const EMAIL = 'pavelmalyv@gmail.com';
 
 const PolicyPage = () => {
 	return (
