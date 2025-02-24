@@ -66,17 +66,15 @@ const AuthorPage = () => {
 
 	return (
 		<>
-			<Section>
-				<ErrorBoundaryDisplay
-					isError={isError}
-					error={error}
-					isThrowNotFound={true}
-					errorMessage={ERROR_MESSAGES.authorLoad}
-				>
-					<Heading title={user ? `${user.firstName} ${user.lastName}` : null} />
-					<User user={user ?? null} />
-				</ErrorBoundaryDisplay>
-			</Section>
+			<ErrorBoundaryDisplay
+				isError={isError}
+				error={error}
+				isThrowNotFound={true}
+				errorMessage={ERROR_MESSAGES.authorLoad}
+			>
+				<Heading title={user ? `${user.firstName} ${user.lastName}` : null} />
+				<User user={user ?? null} />
+			</ErrorBoundaryDisplay>
 
 			<Section title="All articles by the author">
 				<VisuallyHiddenLoader
