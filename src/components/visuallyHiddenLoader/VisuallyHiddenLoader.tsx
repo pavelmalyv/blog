@@ -1,3 +1,5 @@
+import cl from './VisuallyHiddenLoader.module.scss';
+
 interface VisuallyHiddenLoaderProps {
 	isFetching: boolean;
 	children: React.ReactNode;
@@ -14,13 +16,13 @@ const VisuallyHiddenLoader = ({
 	id,
 }: VisuallyHiddenLoaderProps) => {
 	return (
-		<div id={id} aria-busy={isFetching}>
+		<span id={id} className={cl.body} aria-busy={isFetching}>
 			<span className="visually-hidden" role={isRoleStatus ? 'status' : undefined}>
 				{isFetching && hiddenMessage}
 			</span>
 
 			{children}
-		</div>
+		</span>
 	);
 };
 
