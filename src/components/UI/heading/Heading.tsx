@@ -58,29 +58,27 @@ const Heading = ({ title }: HeadingProps) => {
 	}, []);
 
 	return (
-		<>
-			<section className={cl.heading}>
-				<div className="container">
-					<h1 className={cl.title}>
-						<VisuallyHiddenLoader isFetching={isLoading} hiddenMessage={MESSAGES.titleLoading}>
-							<span className={cl['title-inner']} data-initialized={isInitialized}>
-								<span className={cl['title-body']} ref={titleRef}>
-									<span className={cl['title-text']} ref={titleTextRef}>
-										{title}
-									</span>
+		<div className={cl.heading}>
+			<div className="container">
+				<h1 className={cl.title}>
+					<VisuallyHiddenLoader isFetching={isLoading} hiddenMessage={MESSAGES.titleLoading}>
+						<span className={cl['title-inner']} data-initialized={isInitialized}>
+							<span className={cl['title-body']} ref={titleRef}>
+								<span className={cl['title-text']} ref={titleTextRef}>
+									{title}
 								</span>
 							</span>
+						</span>
 
-							{!title && (
-								<span className={cl['title-skeleton']}>
-									<Skeleton borderRadius={6} />
-								</span>
-							)}
-						</VisuallyHiddenLoader>
-					</h1>
-				</div>
-			</section>
-		</>
+						{!title && (
+							<span className={cl['title-skeleton']}>
+								<Skeleton borderRadius={6} />
+							</span>
+						)}
+					</VisuallyHiddenLoader>
+				</h1>
+			</div>
+		</div>
 	);
 };
 
