@@ -2,7 +2,7 @@ import Skeleton from 'react-loading-skeleton';
 import cl from './Heading.module.scss';
 import VisuallyHiddenLoader from '@components/visuallyHiddenLoader/VisuallyHiddenLoader';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { MESSAGES } from '@/constants/messages';
 
 interface HeadingProps {
@@ -10,6 +10,7 @@ interface HeadingProps {
 }
 
 const Heading = ({ title }: HeadingProps) => {
+	const [isInitialized, setIsInitialized] = useState(false);
 	const titleRef = useRef<HTMLHeadingElement>(null);
 	const titleTextRef = useRef<HTMLSpanElement>(null);
 	const isLoading = !title;
@@ -38,6 +39,7 @@ const Heading = ({ title }: HeadingProps) => {
 
 			requestAnimationFrame(() => {
 				titleTextElement.style.fontSize = scaleFontSize + 'px';
+				setIsInitialized(true);
 			});
 		};
 		setFontSize();
@@ -59,21 +61,23 @@ const Heading = ({ title }: HeadingProps) => {
 		<>
 			<section className={cl.heading}>
 				<div className="container">
-					<div className={cl.wrapper}>
+					<h1 className={cl.title}>
 						<VisuallyHiddenLoader isFetching={isLoading} hiddenMessage={MESSAGES.titleLoading}>
-							<h1 className={cl.title} ref={titleRef}>
-								<span className={cl.text} ref={titleTextRef}>
-									{title}
-								</span>
-
-								{!title && (
-									<span className={cl.skeleton}>
-										<Skeleton borderRadius={6} />
+							<span className={cl['title-inner']} data-initialized={isInitialized}>
+								<span className={cl['title-body']} ref={titleRef}>
+									<span className={cl['title-text']} ref={titleTextRef}>
+										{title}
 									</span>
-								)}
-							</h1>
+								</span>
+							</span>
+
+							{!title && (
+								<span className={cl['title-skeleton']}>
+									<Skeleton borderRadius={6} />
+								</span>
+							)}
 						</VisuallyHiddenLoader>
-					</div>
+					</h1>
 				</div>
 			</section>
 		</>
