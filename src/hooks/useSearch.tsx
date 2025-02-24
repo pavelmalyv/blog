@@ -5,9 +5,9 @@ import { useSearchParams } from 'react-router';
 const KEY_SEARCH = 'q';
 
 export const useSearch = (maxLength: number) => {
-	const [searchParams, setSearchParams] = useSearchParams();
+	const [setUrlParams, setSetUrlParams] = useSearchParams();
 
-	const searchQ = searchParams.get(KEY_SEARCH)?.slice(0, maxLength);
+	const searchQ = setUrlParams.get(KEY_SEARCH)?.slice(0, maxLength);
 	const [searchField, setSearchField] = useState(searchQ ?? '');
 	const [searchStateDebounced, setSearchStateDebounced] = useState(searchQ);
 	const setSearchDebounced = useMemo(() => debounce(setSearchStateDebounced, 300), []);
@@ -20,7 +20,7 @@ export const useSearch = (maxLength: number) => {
 		(e: React.ChangeEvent<HTMLInputElement>) => {
 			const value = e.target.value;
 
-			setSearchParams(
+			setSetUrlParams(
 				(prev) => {
 					if (value.length === 0) {
 						prev.delete(KEY_SEARCH);
@@ -35,7 +35,7 @@ export const useSearch = (maxLength: number) => {
 			setSearchField(value);
 			setSearchDebounced(value);
 		},
-		[setSearchParams, setSearchDebounced],
+		[setSetUrlParams, setSearchDebounced],
 	);
 
 	return {
