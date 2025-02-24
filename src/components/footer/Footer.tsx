@@ -1,9 +1,12 @@
 import cl from './Footer.module.scss';
 
-import { NavLink } from 'react-router';
-import { cookiesUrl, creditsUrl, newslettersUrl, policyUrl } from '@/routes/routes';
+import { Link, NavLink } from 'react-router';
+import { blogUrl, cookiesUrl, creditsUrl, newslettersUrl, policyUrl } from '@/routes/routes';
+import { useActiveNav } from '@hooks/useActiveNav';
 
 const Footer = () => {
+	const isBlogActive = useActiveNav(blogUrl.base, blogUrl.pagination(''));
+
 	return (
 		<footer className={cl.footer}>
 			<div className="container">
@@ -12,9 +15,13 @@ const Footer = () => {
 					<nav className={cl.nav}>
 						<ul className={cl.list}>
 							<li className={cl.item}>
-								<NavLink to="/" className={cl.link}>
+								<Link
+									to={blogUrl.base}
+									className={cl.link}
+									aria-current={isBlogActive ? 'page' : undefined}
+								>
 									Home
-								</NavLink>
+								</Link>
 							</li>
 							<li className={cl.item}>
 								<NavLink to={newslettersUrl} className={cl.link}>
