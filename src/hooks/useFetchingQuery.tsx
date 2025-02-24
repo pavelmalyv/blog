@@ -15,7 +15,9 @@ export const useFetchingQuery = <T extends string | number | boolean | undefined
 		setLastQuery(value);
 	}, [isFetching, value]);
 
-	const isFetchingQuery = lastQuery !== value;
+	const valueLength = value ? String(value).length : 0;
+	const lastQueryLength = lastQuery ? String(lastQuery).length : 0;
+	const isFetchingQuery = lastQuery !== value && (valueLength > 0 || lastQueryLength > 0);
 	const isLoadingDelay = useDelayedLoader(isFetchingQuery);
 
 	return { isFetching: isFetchingQuery, isLoadingDelay, lastQuery };
