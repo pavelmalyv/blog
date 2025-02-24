@@ -27,7 +27,7 @@ const Article = ({ post, labelledby = true }: ArticleProps) => {
 				</div>
 				<div className={cl.author}>
 					{post && <div className={cl['author-label']}>Author:</div>}
-					<Author id={post?.userId ?? null} />
+					<Author id={post?.userId ?? null} isUnderline={true} />
 				</div>
 			</div>
 			<h1 id={articleId} className={classNames('h1', cl.title)}>

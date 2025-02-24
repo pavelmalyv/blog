@@ -1,8 +1,18 @@
 @use '@styles/utils';
 
 .link {
+	text-decoration: none;
+	text-decoration-skip-ink: none;
+
 	@include utils.hover {
 		text-decoration: underline;
-		text-decoration-skip-ink: none;
+	}
+
+	&_underline {
+		text-decoration: underline;
+
+		@include utils.hover {
+			text-decoration: none;
+		}
 	}
 }

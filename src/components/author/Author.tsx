@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import cl from './Author.module.scss';
 import Skeleton from 'react-loading-skeleton';
 import VisuallyHiddenLoader from '@components/visuallyHiddenLoader/VisuallyHiddenLoader';
@@ -13,9 +14,10 @@ import { MESSAGES } from '@/constants/messages';
 interface AuthorProps {
 	id: string | null;
 	isCurrentPageAuthor?: boolean;
+	isUnderline?: boolean;
 }
 
-const Author = ({ id, isCurrentPageAuthor = false }: AuthorProps) => {
+const Author = ({ id, isCurrentPageAuthor = false, isUnderline = false }: AuthorProps) => {
 	const [getUserByIdQuery, { data, isLoading, isError }] = useLazyGetUserByIdQuery();
 
 	useEffect(() => {
@@ -32,7 +34,10 @@ const Author = ({ id, isCurrentPageAuthor = false }: AuthorProps) => {
 			author = data.firstName + ' ' + data.lastName;
 		} else {
 			author = (
-				<Link to={authorUrl.profile(data.id)} className={cl.link}>
+				<Link
+					to={authorUrl.profile(data.id)}
+					className={classNames(cl.link, { [cl['link_underline']]: isUnderline })}
+				>
 					{data.firstName + ' ' + data.lastName}
 				</Link>
 			);
