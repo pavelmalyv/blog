@@ -24,9 +24,10 @@ type FormSchema = InferType<typeof formSchema>;
 
 interface NewslettersProps {
 	titleLevel?: 1 | 2;
+	container?: boolean;
 }
 
-const Newsletters = ({ titleLevel }: NewslettersProps) => {
+const Newsletters = ({ titleLevel, container = true }: NewslettersProps) => {
 	const headId = useId();
 	const [isOpen, setIsOpen] = useState(false);
 
@@ -60,7 +61,7 @@ const Newsletters = ({ titleLevel }: NewslettersProps) => {
 				title="Stories and interviews"
 				subtitle="Newsletters"
 				description="Subscribe to learn about new product features, the latest in technology, solutions, and updates."
-				container={false}
+				container={container}
 				width="medium"
 				titleSize="h1"
 				titleLevel={titleLevel}

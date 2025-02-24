@@ -33,7 +33,7 @@ const PostPage = () => {
 					</ErrorBoundaryDisplay>
 				</VisuallyHiddenLoader>
 
-				<Newsletters />
+				<Newsletters container={false} />
 			</Sidebar.Main>
 
 			<Sidebar.Aside title="Recent blog posts">
