@@ -54,6 +54,7 @@
 
 .posts {
 	position: relative;
+	min-height: 300px;
 
 	&_is-animation-posts .overlay {
 		opacity: 0.3;
@@ -63,7 +64,6 @@
 .spinner-wrapper {
 	display: flex;
 	justify-content: center;
-	margin: 100px 0;
 }
 
 .spinner {
