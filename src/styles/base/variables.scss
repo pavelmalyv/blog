@@ -108,26 +108,22 @@
 	--color-skeleton-highlight: var(--color-skeleton-highlight-dark);
 }
 
-[data-theme='light'] {
+html[data-theme='light'] {
 	@include light-variables;
 }
 
-:not([data-theme='light']) {
-	@media (prefers-color-scheme: light) {
-		:root {
-			@include light-variables;
-		}
+@media (prefers-color-scheme: light) {
+	html:not([data-theme]) {
+		@include light-variables;
 	}
 }
 
-[data-theme='dark'] {
+html[data-theme='dark'] {
 	@include dark-variables;
 }
 
-:not([data-theme='dark']) {
-	@media (prefers-color-scheme: dark) {
-		:root {
-			@include dark-variables;
-		}
+@media (prefers-color-scheme: dark) {
+	html:not([data-theme]) {
+		@include dark-variables;
 	}
 }
