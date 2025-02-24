@@ -1,6 +1,6 @@
 import cl from './Navigation.module.scss';
 import classNames from 'classnames';
-import { NavLink } from 'react-router';
+import { Link, NavLink } from 'react-router';
 
 interface NavigationProps {
 	children: React.ReactNode;
@@ -22,16 +22,29 @@ const Navigation = ({ children, direction = 'horizontal' }: NavigationProps) => 
 interface ItemProps {
 	to: string;
 	target?: string;
+	isActive?: boolean;
 	children: React.ReactNode;
 	onClick?: React.MouseEventHandler<HTMLAnchorElement>;
 }
 
-const Item = ({ to, target = '_self', children, onClick }: ItemProps) => {
+const Item = ({ to, target = '_self', isActive, children, onClick }: ItemProps) => {
 	return (
 		<li className={cl.item}>
-			<NavLink to={to} target={target} className={cl.link} onClick={onClick}>
-				{children}
-			</NavLink>
+			{isActive === undefined ? (
+				<NavLink to={to} target={target} className={cl.link} onClick={onClick}>
+					{children}
+				</NavLink>
+			) : (
+				<Link
+					to={to}
+					target={target}
+					aria-current={isActive ? 'page' : undefined}
+					className={cl.link}
+					onClick={onClick}
+				>
+					{children}
+				</Link>
+			)}
 		</li>
 	);
 };

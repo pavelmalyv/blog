@@ -6,9 +6,11 @@ import ThemeSwitch from '@components/UI/themeSwitch/ThemeSwitch';
 import ButtonIcon from '@components/UI/buttonIcon/ButtonIcon';
 
 import { useState } from 'react';
-import { newslettersUrl } from '@/routes/routes';
+import { blogUrl, newslettersUrl } from '@/routes/routes';
+import { useActiveNav } from '@hooks/useActiveNav';
 
 const Header = () => {
+	const isBlogActive = useActiveNav(blogUrl.base, blogUrl.pagination(''));
 	const [isOpenMenu, setIsOpenMenu] = useState(false);
 
 	function handleMenuClose() {
@@ -21,7 +23,7 @@ const Header = () => {
 
 	const navigationItems = (
 		<>
-			<Navigation.Item to="/" onClick={handleMenuClose}>
+			<Navigation.Item to={blogUrl.base} isActive={isBlogActive} onClick={handleMenuClose}>
 				Home
 			</Navigation.Item>
 			<Navigation.Item to={newslettersUrl} onClick={handleMenuClose}>
