@@ -25,7 +25,7 @@ export const useSortBy = (optionsValue: string[]) => {
 
 				return prev;
 			},
-			{ replace: true },
+			{ replace: true, preventScrollReset: true },
 		);
 	}, [acceptableParam, setUrlParams]);
 
@@ -52,7 +52,7 @@ export const useSortBy = (optionsValue: string[]) => {
 
 					return prev;
 				},
-				{ replace: true },
+				{ replace: true, preventScrollReset: true },
 			);
 		},
 		[setUrlParams, optionsValue],

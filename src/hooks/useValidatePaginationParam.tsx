@@ -23,7 +23,7 @@ export const useValidatePaginationParam = (parameter: string | undefined, firstP
 
 	useEffect(() => {
 		if (!isValid) {
-			navigate(firstPageUrl + location.search, { replace: true });
+			navigate(firstPageUrl + location.search, { replace: true, preventScrollReset: true });
 		}
 	}, [isValid, navigate, firstPageUrl, location.search]);
 

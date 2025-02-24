@@ -29,7 +29,7 @@ export const useSearch = (maxLength: number) => {
 					}
 					return prev;
 				},
-				{ replace: true },
+				{ replace: true, preventScrollReset: true },
 			);
 
 			setSearchField(value);

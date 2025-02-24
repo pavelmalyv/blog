@@ -52,7 +52,9 @@ const Pagination = ({
 			return;
 		}
 
-		navigate(url);
+		navigate(url, {
+			preventScrollReset: true,
+		});
 	}, [navigate, urlCallback, urlBase, selectedPage, location.pathname, location.search]);
 
 	const handlePageChange = ({ selected }: { selected: number }) => {

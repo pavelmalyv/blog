@@ -34,7 +34,10 @@ export const useValidatePaginationTotal = ({
 			return;
 		}
 
-		navigate(paginationUrlCallback(totalPages + location.search), { replace: true });
+		navigate(paginationUrlCallback(totalPages + location.search), {
+			replace: true,
+			preventScrollReset: true,
+		});
 	}, [page, navigate, paginationUrlCallback, totalPages, location.search]);
 
 	return page;

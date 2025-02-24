@@ -21,7 +21,7 @@ export const useLimit = (optionsValue: number[]) => {
 
 				return prev;
 			},
-			{ replace: true },
+			{ replace: true, preventScrollReset: true },
 		);
 	}, [limit, setUrlParams]);
 
@@ -40,7 +40,7 @@ export const useLimit = (optionsValue: number[]) => {
 
 					return prev;
 				},
-				{ replace: true },
+				{ replace: true, preventScrollReset: true },
 			);
 		},
 		[setUrlParams, optionsValue],
