@@ -82,6 +82,7 @@
 .link {
 	--color: rgb(var(--color-text-secondary));
 	--background-color: transparent;
+	--border-radius: 8px;
 
 	@include utils.square(40px);
 	@include utils.flex-center(true);
@@ -94,7 +95,7 @@
 	line-height: 1.42;
 	text-align: center;
 	background-color: var(--background-color);
-	border-radius: 8px;
+	border-radius: var(--border-radius);
 	color: var(--color);
 
 	@include utils.hover {
@@ -121,6 +122,7 @@
 		height: 100%;
 		background-color: var(--background-color);
 		opacity: 0;
+		border-radius: var(--border-radius);
 	}
 
 	&::after {
