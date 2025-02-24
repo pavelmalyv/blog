@@ -17,6 +17,7 @@ import { useGetPostByIdUserQuery } from '@/api/postsSlice';
 import { useValidatePaginationTotal } from '@hooks/useValidatePaginationTotal';
 import { getSkip } from '@/utils/pagination';
 import { useFetchingQuery } from '@hooks/useFetchingQuery';
+import { useTitle } from '@hooks/useTitle';
 
 import { ERROR_MESSAGES } from '@/constants/error';
 import { MESSAGES } from '@/constants/messages';
@@ -36,6 +37,9 @@ const AuthorPage = () => {
 	let totalPosts: number | undefined;
 	const skipPosts = getSkip(paginationParam, LIMIT_POSTS);
 	let posts: Posts | null[] = Array(LIMIT_POSTS).fill(null);
+
+	const title = user ? `${user.firstName} ${user.firstName}` : undefined;
+	useTitle(title);
 
 	const {
 		data: dataPosts,

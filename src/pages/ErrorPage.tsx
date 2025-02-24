@@ -3,6 +3,7 @@ import ErrorScreen from '@/components/errorScreen/ErrorScreen';
 
 import { isRouteErrorResponse, useRouteError } from 'react-router';
 import { NotFoundError } from '@/utils/error';
+import { useTitle } from '@hooks/useTitle';
 
 const DESCRIPTION_NOT_FOUND =
 	'The page you are looking for does not exist or has been moved. Check the URL or return to the homepage';
@@ -34,6 +35,8 @@ const getErrorInfo = (error: unknown) => {
 const ErrorPage = () => {
 	const error = useRouteError();
 	const { title, description, isLink } = getErrorInfo(error);
+
+	useTitle(title);
 
 	return (
 		<Root>

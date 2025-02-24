@@ -2,11 +2,14 @@ import Heading from '@components/UI/heading/Heading';
 import Section from '@components/UI/section/Section';
 import Text from '@components/UI/text/Text';
 
+import { useTitle } from '@hooks/useTitle';
 import { SITE, SITE_NAME, SITE_URL } from '@/constants/config';
 
 export const EMAIL = 'pavelmalyv@gmail.com';
 
 const PolicyPage = () => {
+	useTitle('Privacy Policy');
+
 	return (
 		<>
 			<Heading title="Privacy Policy" />

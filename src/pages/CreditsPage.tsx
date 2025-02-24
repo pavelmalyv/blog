@@ -2,7 +2,11 @@ import Heading from '@components/UI/heading/Heading';
 import Section from '@components/UI/section/Section';
 import Text from '@components/UI/text/Text';
 
+import { useTitle } from '@hooks/useTitle';
+
 const CreditsPage = () => {
+	useTitle('Credits');
+
 	return (
 		<>
 			<Heading title="Credits" />

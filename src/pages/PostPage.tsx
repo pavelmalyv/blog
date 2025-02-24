@@ -8,6 +8,7 @@ import ErrorBoundaryDisplay from '@components/errorBoundaryDisplay/ErrorBoundary
 import { requiredParamOrThrow } from '@/utils/error';
 import { useParams } from 'react-router';
 import { useGetPostByIdQuery } from '@/api/postsSlice';
+import { useTitle } from '@hooks/useTitle';
 import { ERROR_MESSAGES } from '@/constants/error';
 import { MESSAGES } from '@/constants/messages';
 
@@ -16,6 +17,7 @@ const PostPage = () => {
 	const postId = requiredParamOrThrow(params.id);
 
 	const { data, isLoading, isError, error } = useGetPostByIdQuery(postId);
+	useTitle(data?.title);
 
 	return (
 		<Sidebar reverse={true}>
