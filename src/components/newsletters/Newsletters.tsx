@@ -10,7 +10,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { boolean, InferType, object, string } from 'yup';
 import { policyUrl } from '@/routes/routes';
-import { useId, useState } from 'react';
+import { useState } from 'react';
 import { useSendNewslettersMutation } from '@/api/formsSlice';
 import { showError } from '@/utils/notification';
 import { ERROR_MESSAGES } from '@/constants/error';
@@ -28,7 +28,6 @@ interface NewslettersProps {
 }
 
 const Newsletters = ({ titleLevel, container = true }: NewslettersProps) => {
-	const headId = useId();
 	const [isOpen, setIsOpen] = useState(false);
 
 	const { control, handleSubmit, reset } = useForm({
@@ -67,9 +66,8 @@ const Newsletters = ({ titleLevel, container = true }: NewslettersProps) => {
 				marginBottom="large"
 			>
 				<FormSmall
-					title="Subscribe to the newsletter"
-					aria-labelledby={headId}
 					noValidate={true}
+					aria-label="Subscribe to the newsletter"
 					onSubmit={handleSubmit(onSubmit)}
 				>
 					<Controller
