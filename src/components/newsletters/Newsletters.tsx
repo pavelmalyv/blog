@@ -11,9 +11,9 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { boolean, InferType, object, string } from 'yup';
 import { policyUrl } from '@/routes/routes';
 import { useId, useState } from 'react';
-import { ERROR_MESSAGES } from '@/constants/error';
 import { useSendNewslettersMutation } from '@/api/formsSlice';
-import { toast } from 'react-toastify';
+import { showError } from '@/utils/notification';
+import { ERROR_MESSAGES } from '@/constants/error';
 
 const formSchema = object({
 	email: string().email().required(),
@@ -41,8 +41,6 @@ const Newsletters = ({ titleLevel, container = true }: NewslettersProps) => {
 
 	const [sendNewsletters, { isLoading }] = useSendNewslettersMutation();
 
-	const showFormError = () => toast.error(ERROR_MESSAGES.form);
-
 	const onSubmit: SubmitHandler<FormSchema> = async () => {
 		try {
 			// не отправляем реальный email
@@ -50,7 +48,7 @@ const Newsletters = ({ titleLevel, container = true }: NewslettersProps) => {
 			setIsOpen(true);
 			reset();
 		} catch (error) {
-			showFormError();
+			showError(ERROR_MESSAGES.form);
 			console.error(error);
 		}
 	};
