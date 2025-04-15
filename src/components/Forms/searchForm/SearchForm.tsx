@@ -1,15 +1,15 @@
 import { useId } from 'react';
-import cl from './Search.module.scss';
+import cl from './SearchForm.module.scss';
 import classNames from 'classnames';
 
-interface SearchProps {
+interface SearchFormProps {
 	title: string;
 	isHiddenTitle?: boolean;
 	children: React.ReactNode;
 	onSubmit: React.FormEventHandler<HTMLFormElement>;
 }
 
-const Search = ({ title, isHiddenTitle = true, children, onSubmit }: SearchProps) => {
+const SearchForm = ({ title, isHiddenTitle = true, children, onSubmit }: SearchFormProps) => {
 	const headId = useId();
 
 	return (
@@ -22,4 +22,4 @@ const Search = ({ title, isHiddenTitle = true, children, onSubmit }: SearchProps
 	);
 };
 
-export default Search;
+export default SearchForm;

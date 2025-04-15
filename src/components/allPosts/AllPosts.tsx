@@ -2,7 +2,7 @@ import type { Posts } from '@/types/posts';
 
 import cl from './AllPosts.module.scss';
 import Filter from '@components/filter/Filter';
-import Search from '@components/Forms/search/Search';
+import SearchForm from '@components/Forms/searchForm/SearchForm';
 import Section from '@components/UI/section/Section';
 import Select from '@components/UI/select/Select';
 import Pagination from '@components/UI/pagination/Pagination';
@@ -84,7 +84,7 @@ const AllPosts = () => {
 	return (
 		<Section title="All blog posts">
 			<Filter>
-				<Search title="Blog search" onSubmit={(e) => e.preventDefault()}>
+				<SearchForm title="Blog search" onSubmit={(e) => e.preventDefault()}>
 					<Field
 						type="search"
 						icon="search"
@@ -97,7 +97,7 @@ const AllPosts = () => {
 						isLoading={isFetchingDelaySearch}
 						aria-controls={postsId}
 					/>
-				</Search>
+				</SearchForm>
 
 				<div className={cl['filter-select-group']}>
 					<Select
