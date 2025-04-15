@@ -1,5 +1,5 @@
 import cl from './ErrorScreen.module.scss';
-import LinkButton from '@components/UI/linkButton/LinkButton';
+import Button from '../UI/Buttons/button/Button';
 
 import { useId } from 'react';
 
@@ -21,7 +21,7 @@ const ErrorScreen = ({ title, description, isLink = true }: ErrorProps) => {
 					</h1>
 					<div className={cl.description}>{description}</div>
 
-					{isLink && <LinkButton to="/">Home</LinkButton>}
+					{isLink && <Button to="/">Home</Button>}
 				</div>
 			</div>
 		</section>

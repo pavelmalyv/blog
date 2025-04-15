@@ -3,7 +3,7 @@ import Logo from '@components/UI/logo/Logo';
 import Modal from '@components/UI/modal/Modal';
 import Navigation from '@components/UI/navigation/Navigation';
 import ThemeSwitch from '@components/UI/themeSwitch/ThemeSwitch';
-import ButtonIcon from '@components/UI/buttonIcon/ButtonIcon';
+import ButtonIcon from '@components/UI/Buttons/buttonIcon/ButtonIcon';
 
 import { useState } from 'react';
 import { blogUrl, newslettersUrl } from '@/routes/routes';

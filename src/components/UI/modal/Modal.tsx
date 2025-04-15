@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import cl from './Modal.module.scss';
 import ReactModal from 'react-modal';
-import ButtonIcon from '@components/UI/buttonIcon/ButtonIcon';
+import ButtonIcon from '@components/UI/Buttons/buttonIcon/ButtonIcon';
 import { createCompoundContext } from '@/context/createCompoundContext';
 
 interface createCompoundContextType {

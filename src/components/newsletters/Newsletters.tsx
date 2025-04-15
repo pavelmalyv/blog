@@ -1,7 +1,7 @@
 import Field from '@components/UI/field/Field';
 import Section from '@components/UI/section/Section';
 import Checkbox from '@components/UI/checkbox/Checkbox';
-import Button from '@components/UI/button/Button';
+import Button from '@components/UI/Buttons/button/Button';
 import FormSmall from '@components/Forms/formSmall/FormSmall';
 import SuccessModal from '../Modals/successModal/SuccessModal';
 

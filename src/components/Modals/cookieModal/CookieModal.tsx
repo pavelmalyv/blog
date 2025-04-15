@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import cl from './CookieModal.module.scss';
-import Button from '@components/UI/button/Button';
-import ButtonIcon from '@components/UI/buttonIcon/ButtonIcon';
+import Button from '@components/UI/Buttons/button/Button';
+import ButtonIcon from '@components/UI/Buttons/buttonIcon/ButtonIcon';
 import Modal from '@/components/UI/modal/Modal';
 
 import { useEffect, useId, useState } from 'react';
