@@ -22,25 +22,6 @@ interface PostCardProps {
 const PostCard = ({ post, isCurrentPageAuthor, styleCard = 'small' }: PostCardProps) => {
 	const titleId = useId();
 
-	let description: React.ReactNode;
-	if (post) {
-		const length = styleCard === 'large' ? 370 : 90;
-
-		description = truncate(post.excerpt, {
-			length,
-			separator: /,? +/,
-		});
-	} else {
-		description = <Skeleton count={2} />;
-	}
-
-	let createdAt: React.ReactNode;
-	if (post) {
-		createdAt = <span className={cl['about-date']}>• {getDisplayDate(post.createdAt)}</span>;
-	} else {
-		createdAt = <Skeleton width="6em" />;
-	}
-
 	return (
 		<article className={classNames(cl.card, cl[`card-${styleCard}`])} aria-labelledby={titleId}>
 			<div className={cl.image}>
@@ -63,7 +44,12 @@ const PostCard = ({ post, isCurrentPageAuthor, styleCard = 'small' }: PostCardPr
 			<div className={cl.body}>
 				<div className={classNames('date', cl.about)}>
 					<Author id={post?.userId ?? null} isCurrentPageAuthor={isCurrentPageAuthor} />
-					{createdAt}
+
+					{post ? (
+						<span className={cl['about-date']}>• {getDisplayDate(post.createdAt)}</span>
+					) : (
+						<Skeleton width="6em" />
+					)}
 				</div>
 				<div
 					className={classNames(cl.title, {
@@ -84,7 +70,18 @@ const PostCard = ({ post, isCurrentPageAuthor, styleCard = 'small' }: PostCardPr
 						<Skeleton />
 					)}
 				</div>
-				<div className={cl.description}>{description}</div>
+				<div className={cl.description}>
+					{post ? (
+						<>
+							{truncate(post.excerpt, {
+								length: styleCard === 'large' ? 370 : 90,
+								separator: /,? +/,
+							})}
+						</>
+					) : (
+						<Skeleton count={2} />
+					)}
+				</div>
 				<div className={cl.tags}>
 					<Tags tags={post ? post.tags : null} />
 				</div>
