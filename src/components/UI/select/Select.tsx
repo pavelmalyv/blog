@@ -1,25 +1,15 @@
-import Label from '@components/UI/label/Label';
 import cl from './Select.module.scss';
+import classNames from 'classnames';
+import Label from '@components/UI/label/Label';
 import Icon from '@components/UI/icon/Icon';
 import { useId } from 'react';
 
-interface SelectProps {
-	children: React.ReactNode;
+type SelectProps = Omit<React.ComponentProps<'select'>, 'id'> & {
 	label: string;
 	isLabelHidden?: boolean;
-	onChange?: React.ChangeEventHandler<HTMLSelectElement>;
-	value?: string;
-	'aria-controls'?: string;
-}
+};
 
-const Select = ({
-	label,
-	isLabelHidden,
-	children,
-	onChange,
-	value,
-	'aria-controls': ariaControls,
-}: SelectProps) => {
+const Select = ({ label, isLabelHidden, className, children, ...props }: SelectProps) => {
 	const selectId = useId();
 
 	return (
@@ -28,13 +18,7 @@ const Select = ({
 				{label}
 			</Label>
 			<div className={cl.body}>
-				<select
-					id={selectId}
-					className={cl.select}
-					value={value}
-					onChange={onChange}
-					aria-controls={ariaControls}
-				>
+				<select id={selectId} className={classNames(cl.select, className)} {...props}>
 					{children}
 				</select>
 				<div className={cl.icon}>
@@ -45,13 +29,12 @@ const Select = ({
 	);
 };
 
-interface OptionProps {
+type OptionProps = React.ComponentProps<'option'> & {
 	children: React.ReactNode;
-	value?: string;
-}
+};
 
-const Option = ({ children, value }: OptionProps) => {
-	return <option value={value}>{children}</option>;
+const Option = ({ children, ...props }: OptionProps) => {
+	return <option {...props}>{children}</option>;
 };
 
 Select.Option = Option;
