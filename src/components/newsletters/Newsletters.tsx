@@ -3,7 +3,7 @@ import Section from '@components/UI/section/Section';
 import Checkbox from '@components/UI/checkbox/Checkbox';
 import Button from '@components/UI/button/Button';
 import FormSmall from '@components/Forms/formSmall/FormSmall';
-import SuccessModal from '@components/Modals/successModal/successModal';
+import SuccessModal from '../Modals/successModal/SuccessModal';
 
 import { Link } from 'react-router';
 import { yupResolver } from '@hookform/resolvers/yup';
