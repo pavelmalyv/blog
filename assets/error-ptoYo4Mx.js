@@ -1,0 +1,1 @@
+import{a as o,f as e}from"./createCompoundContext-DqckTla5.js";class t extends Error{constructor(s="Not Found"){super(s),this.name="NotFoundError"}}const c=r=>{if(!r)throw new t;return r},a=o({status:e().required()}),u=r=>{if(a.isValidSync(r)&&(r.status===404||r.status===400))throw new t};export{t as N,u as c,c as r};
