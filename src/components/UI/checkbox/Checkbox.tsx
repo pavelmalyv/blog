@@ -5,58 +5,20 @@ import Icon from '@components/UI/icon/Icon';
 
 import { forwardRef, useId } from 'react';
 
-interface CheckboxProps {
+type CheckboxProps = Omit<React.ComponentProps<'input'>, 'type'> & {
 	label: React.ReactNode;
-	name?: string;
-	checked?: boolean;
-	disabled?: boolean;
 	errorMessage?: string;
-	autoComplete?: string;
 	center?: boolean;
-	onChange?: React.ChangeEventHandler<HTMLInputElement>;
-	onBlur?: React.FocusEventHandler<HTMLInputElement>;
-	'aria-controls'?: string;
-	'aria-invalid'?: boolean;
-	'aria-required'?: boolean;
-}
+};
 
 const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
-	(
-		{
-			label,
-			name,
-			checked,
-			disabled,
-			errorMessage,
-			autoComplete,
-			center = false,
-			onChange,
-			onBlur,
-			'aria-controls': ariaControls,
-			'aria-invalid': ariaInvalid,
-			'aria-required': ariaRequired,
-		},
-		ref,
-	) => {
+	({ label, errorMessage, center = false, className, ...props }, ref) => {
 		const errorMessageId = useId();
 
 		return (
 			<div className={classNames(cl.wrapper, { [cl['wrapper_center']]: center })}>
 				<label className={cl.label}>
-					<input
-						ref={ref}
-						type="checkbox"
-						className={cl.field}
-						name={name}
-						checked={checked}
-						disabled={disabled}
-						autoComplete={autoComplete}
-						onChange={onChange}
-						onBlur={onBlur}
-						aria-controls={ariaControls}
-						aria-invalid={ariaInvalid}
-						aria-required={ariaRequired}
-					/>
+					<input ref={ref} type="checkbox" className={classNames(cl.field, className)} {...props} />
 					<span className={cl.emulator}>
 						<span className={cl['emulator-marker']}>
 							<Icon>check</Icon>
