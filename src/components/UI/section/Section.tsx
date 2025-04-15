@@ -7,7 +7,6 @@ interface SectionProps {
 	subtitle?: string;
 	description?: string;
 	children: React.ReactNode;
-	isLabelledbyTitle?: boolean;
 	container?: boolean;
 	width?: 'medium' | 'full';
 	titleSize?: 'h1' | 'h2';
@@ -22,7 +21,6 @@ const Section = ({
 	subtitle,
 	description,
 	children,
-	isLabelledbyTitle = true,
 	container = true,
 	width = 'full',
 	titleSize = 'h2',
@@ -39,7 +37,7 @@ const Section = ({
 	let ariaLabelledby;
 	if (ariaLabelledbyProp) {
 		ariaLabelledby = ariaLabelledbyProp;
-	} else if (isLabelledbyTitle && title) {
+	} else if (title) {
 		ariaLabelledby = idTitle;
 	}
 
