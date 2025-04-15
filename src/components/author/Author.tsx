@@ -30,9 +30,9 @@ const Author = ({ id, isCurrentPageAuthor = false, isUnderline = false }: Author
 
 	let author: React.ReactNode;
 	if (data && id) {
-		if (isCurrentPageAuthor) {
-			author = data.firstName + ' ' + data.lastName;
-		} else {
+		author = data.firstName + ' ' + data.lastName;
+
+		if (!isCurrentPageAuthor) {
 			author = (
 				<Link
 					to={authorUrl.profile(data.id)}
