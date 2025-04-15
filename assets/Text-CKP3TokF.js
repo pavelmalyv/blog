@@ -1,0 +1,1 @@
+import{j as e}from"./index-DhMDqbIV.js";const o="_text_9oxdr_1",n="_skeleton_9oxdr_4",s={text:o,skeleton:n},x=({children:t})=>e.jsx("div",{className:s.text,children:t}),r=({children:t})=>e.jsx("div",{className:s.skeleton,children:t});x.Skeleton=r;export{x as T};
