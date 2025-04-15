@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import cl from './CookieModal.module.scss';
-import ReactModal from 'react-modal';
 import Button from '@components/UI/button/Button';
 import ButtonIcon from '@components/UI/buttonIcon/ButtonIcon';
+import Modal from '@/components/UI/modal/Modal';
 
 import { useEffect, useId, useState } from 'react';
 import { Link } from 'react-router';
@@ -72,20 +72,16 @@ const CookieModal = () => {
 	const titleId = useId();
 
 	return (
-		<ReactModal
-			role={'alertdialog'}
+		<Modal
+			type="dialog"
+			role="alertdialog"
 			isOpen={isOpen}
-			overlayClassName={{
-				base: cl.overlay,
-				afterOpen: cl['overlay_after-open'],
-				beforeClose: cl['overlay_before-close'],
-			}}
-			className={cl.body}
-			closeTimeoutMS={300}
+			onClose={handleClose}
 			aria={{ labelledby: titleId }}
-			ariaHideApp={false}
-			onRequestClose={handleClose}
-			shouldFocusAfterRender={false}
+			className={{
+				overlay: cl.overlay,
+				body: cl.body,
+			}}
 		>
 			<h2 id={titleId} className={classNames('h2', cl.title)}>
 				Cookie
@@ -106,7 +102,7 @@ const CookieModal = () => {
 
 				<Button onClick={handleClose}>Accept</Button>
 			</div>
-		</ReactModal>
+		</Modal>
 	);
 };
 

@@ -11,9 +11,14 @@ interface createCompoundContextType {
 const [useModalContext, ModalProvider] = createCompoundContext<createCompoundContextType>();
 
 interface ModalProps {
-	type?: 'full' | 'popup';
+	role?: string;
+	type?: 'full' | 'popup' | 'dialog';
 	isOpen: boolean;
 	children: React.ReactNode;
+	className?: {
+		overlay?: string;
+		body?: string;
+	};
 	aria?: {
 		label?: string;
 		labelledby?: string;
@@ -22,17 +27,27 @@ interface ModalProps {
 	onClose: () => void;
 }
 
-const Modal = ({ type = 'full', isOpen, children, aria, onClose }: ModalProps) => {
+const Modal = ({
+	role = 'dialog',
+	type = 'full',
+	isOpen,
+	children,
+	className,
+	aria,
+	onClose,
+}: ModalProps) => {
 	return (
 		<ModalProvider value={{ onClose: onClose }}>
 			<ReactModal
-				bodyOpenClassName={cl['body-open']}
+				role={role}
+				bodyOpenClassName={type !== 'dialog' ? cl['body-open'] : null}
+				shouldCloseOnOverlayClick={type !== 'dialog'}
 				overlayClassName={{
-					base: classNames(cl.overlay, cl[`overlay_${type}`]),
+					base: classNames(cl.overlay, cl[`overlay_${type}`], className?.overlay),
 					afterOpen: cl['overlay_after-open'],
 					beforeClose: cl['overlay_before-close'],
 				}}
-				className={cl.body}
+				className={classNames(cl.body, className?.body)}
 				isOpen={isOpen}
 				closeTimeoutMS={300}
 				onRequestClose={onClose}

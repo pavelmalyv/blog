@@ -1,28 +1,15 @@
 @use '@styles/utils';
-@use '@styles/shared/modal';
 
 .overlay {
-	@include modal.fade-animation;
-
-	position: fixed;
 	right: 0;
 	bottom: 20px;
 	padding: 0 20px;
-	z-index: 1000;
 	width: 100%;
 	max-width: 570px;
 
 	@include utils.tablet-l {
 		padding: 0 15px;
 		bottom: 15px;
-	}
-
-	&_after-open {
-		@include modal.fade-animation-open;
-	}
-
-	&_before-close {
-		@include modal.fade-animation-close;
 	}
 }
 
