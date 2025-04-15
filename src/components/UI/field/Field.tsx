@@ -6,47 +6,17 @@ import ErrorField from '@/components/UI/errorField/ErrorField';
 
 import { forwardRef, useId } from 'react';
 
-interface FieldProps {
+type FieldProps = Omit<React.ComponentProps<'input'>, 'id' | 'aria-describedby'> & {
+	icon?: string;
 	label: string;
 	isLabelHidden?: boolean;
-	type?: string;
-	name?: string;
-	placeholder?: string;
-	value?: string;
-	disabled?: boolean;
-	icon?: string;
-	maxLength?: number;
 	isLoading?: boolean;
 	errorMessage?: string;
-	autoComplete?: string;
-	onChange?: React.ChangeEventHandler<HTMLInputElement>;
-	onBlur?: React.FocusEventHandler<HTMLInputElement>;
-	'aria-controls'?: string;
-	'aria-invalid'?: boolean;
-	'aria-required'?: boolean;
-}
+};
 
 const Field = forwardRef<HTMLInputElement, FieldProps>(
 	(
-		{
-			label,
-			isLabelHidden = false,
-			type = 'text',
-			name,
-			placeholder,
-			value,
-			disabled,
-			icon,
-			maxLength,
-			isLoading = false,
-			errorMessage,
-			autoComplete,
-			onChange,
-			onBlur,
-			'aria-controls': ariaControls,
-			'aria-invalid': ariaInvalid,
-			'aria-required': ariaRequired,
-		},
+		{ icon, label, isLabelHidden = false, isLoading = false, errorMessage, className, ...props },
 		ref,
 	) => {
 		const fieldId = useId();
@@ -61,20 +31,9 @@ const Field = forwardRef<HTMLInputElement, FieldProps>(
 					<input
 						ref={ref}
 						id={fieldId}
-						className={classNames(cl.field, { [cl['field_icon']]: icon })}
-						type={type}
-						name={name}
-						placeholder={placeholder}
-						value={value}
-						disabled={disabled}
-						maxLength={maxLength}
-						onChange={onChange}
-						onBlur={onBlur}
-						autoComplete={autoComplete}
-						aria-controls={ariaControls}
-						aria-invalid={ariaInvalid}
+						className={classNames(cl.field, { [cl['field_icon']]: icon }, className)}
 						aria-describedby={errorMessageId}
-						aria-required={ariaRequired}
+						{...props}
 					/>
 					<div className={cl.icon}>
 						{isLoading ? <div className={cl.spinner}></div> : <Icon>{icon}</Icon>}
