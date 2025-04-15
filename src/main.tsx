@@ -1,12 +1,12 @@
 import App from '@/App.tsx';
 import Modal from 'react-modal';
+import ToastPortal from './components/toastPortal/ToastPortal';
 
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import { store } from '@/store/store.ts';
 import { SkeletonTheme } from 'react-loading-skeleton';
-import { Slide, ToastContainer } from 'react-toastify';
 
 import 'material-symbols';
 import '@fontsource/inter/400.css';
@@ -26,7 +26,7 @@ createRoot(document.getElementById('root')!).render(
 				highlightColor="rgb(var(--color-skeleton-highlight))"
 			>
 				<App />
-				<ToastContainer transition={Slide} />
+				<ToastPortal />
 			</SkeletonTheme>
 		</Provider>
 	</StrictMode>,
