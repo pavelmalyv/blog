@@ -84,7 +84,7 @@ const AllPosts = () => {
 	return (
 		<Section title="All blog posts">
 			<Filter>
-				<SearchForm title="Blog search" onSubmit={(e) => e.preventDefault()}>
+				<SearchForm aria-label="Blog search" onSubmit={(e) => e.preventDefault()}>
 					<Field
 						type="search"
 						icon="search"
