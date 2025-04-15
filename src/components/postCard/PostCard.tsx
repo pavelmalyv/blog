@@ -23,7 +23,10 @@ const PostCard = ({ post, isCurrentPageAuthor, styleCard = 'small' }: PostCardPr
 	const titleId = useId();
 
 	return (
-		<article className={classNames(cl.card, cl[`card-${styleCard}`])} aria-labelledby={titleId}>
+		<article
+			className={classNames(cl.card, cl[`card-${styleCard}`])}
+			aria-labelledby={post ? titleId : undefined}
+		>
 			<div className={cl.image}>
 				{post ? (
 					<picture>
